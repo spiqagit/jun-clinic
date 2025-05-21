@@ -1,0 +1,128 @@
+@use '../foundation/function/index' as *;
+
+.ly_commonFooter {
+
+    .ly_commonFooterUpper {
+        padding-block: vwmin(40, pc);
+        padding-inline: vwmin(20, pc);
+        box-sizing: border-box;
+
+        @include underTB {
+            padding-block: vwmin(40, sp);
+            padding-inline: vwmin(20, sp);
+        }
+
+        .bl_commonFooterUpper_inner_ttl {
+            max-width: vwmin(180, pc);
+            width: 100%;
+            margin-inline: auto;
+            margin-bottom: vwmin(32, pc);
+
+            @include underTB {
+                margin-right: auto;
+                margin-left: 0;
+                max-width: vwmin(180, sp);
+                margin-bottom: vwmin(32, sp);
+            }
+
+            img {
+                display: block;
+                width: 100%;
+            }
+        }
+
+        .bl_topPageFooterLinkNav {
+
+            .bl_topPageFooterLinkNav_list {
+                display: flex;
+                justify-content: center;
+                align-items: baseline;
+                gap: vwmin(16, pc);
+                padding-left: 0;
+                margin-block: 0;
+                list-style: none;
+                margin-bottom: vwmin(32, pc);
+
+                @include underTB {
+                    flex-flow: column;  
+                    gap: vwmin(16, sp);
+                    margin-bottom: vwmin(40, sp);
+                }
+
+                .el_header_naviList_item_btn {
+                    color: var(--baseFontColor);
+                    font-size: vwmin(14, pc);
+                    font-weight: 600;
+                    text-decoration: none;
+
+                    @include underTB {
+                        font-size: vwmin(12, sp);
+                    }
+                }
+            }
+        }
+
+        .bl_topGlobalFooterLink_list {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: vwmin(16, pc);
+            list-style: none;
+            padding-left: 0;
+            margin-block: 0;
+
+            @include underTB {
+                flex-flow: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                gap: vwmin(16, sp);
+            }
+
+            .bl_topGlobalFooterLink_list_item_link {
+                width: fit-content;
+                display: grid;
+                grid-template-columns: vwmin(14, pc) auto;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                color: var(--baseFontColor);
+                gap: vwmin(4, pc);
+                font-size: vwmin(12, pc);
+                font-weight: 400;
+                line-height: 1.5;
+                transition: all .3s ease;
+
+                @include underTB {
+                    grid-template-columns: vwmin(14, sp) auto;
+                    font-size: vwmin(12, sp);
+                }   
+
+                @media (hover : hover) {
+                    &:hover {
+                        opacity: .5;
+                        transition: all .3s ease;
+                    }
+                }
+
+                p {
+                    margin-block: 0;
+                }
+            }
+        }
+    }
+
+    .ly_commonFooterLower {
+        background-color: var(--baseFontColor);
+        padding-block: vwmin(24, pc);
+        padding-inline: vwmin(20, pc);
+
+        small {
+            display: block;
+            width: fit-content;
+            margin-inline: auto;
+            text-align: center;
+            color: #fff;
+            text-align: center;
+        }
+    }
+}

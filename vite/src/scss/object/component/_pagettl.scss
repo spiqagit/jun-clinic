@@ -1,0 +1,47 @@
+@use '../../foundation/function/index' as *;
+
+
+.bl_commonSectionTtl {
+    width: fit-content;
+    display: flex;
+    flex-flow: column;
+    gap: vwmin(16, pc);
+    align-items: center;
+
+    .el_commonSectionTtl_ttl {
+        position: relative;
+        padding-bottom: vwmin(9, pc);
+        color: var(--lineText);
+        font-family: Marcellus;
+        font-size: vwmin(20, pc);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: calc(0.4px / 20);
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            translate: -50% 0;
+            display: block;
+            width: 100%;
+            max-width: vwmin(70, pc);
+            background-image: url("img/common/ttl-line.svg");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            min-height: vwmin(5, pc);
+        }
+    }
+
+    .el_commonSectionTtl_ttl_ttl {
+        font-family: "Shippori Mincho";
+        font-size: vwmin(26, pc);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5;
+        letter-spacing: calc(1.04px / 26);
+    }
+}

@@ -1,0 +1,88 @@
+@use '../../foundation/function/index' as *;
+
+.bl_commonlineReserveBtn {
+    width: 100%;
+    display: flex;
+    border-radius: vwmin(50, pc);
+    padding-top: vwmin(12, pc);
+    padding-bottom: vwmin(14, pc);
+    justify-content: center;
+    align-items: center;
+    color: var(--accentColor);
+    font-size: vwmin(20, pc);
+    font-weight: 600;
+    ;
+    font-style: normal;
+    line-height: 1.5;
+    text-align: center;
+    background-color: #fff;
+}
+
+
+.bl_commonBorderRadialArrowBtn {
+    display: grid;
+    grid-template-columns: 1fr vwmin(32, pc);
+    gap: vwmin(12, pc);
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: vwmin(1, pc) solid var(--line);
+    padding-bottom: vwmin(12, pc);
+    transition: all 0.3s var(--reverseTransition);
+
+
+    .el_commonBorderRadialArrowBtn_txt {
+        font-family: "Shippori Mincho";
+        font-size: vwmin(16, pc);
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: calc(0.64px / 16);
+        transition: all 0.3s var(--reverseTransition);
+
+    }
+
+    .el_commonBorderRadialArrowBtn_arrowContainer {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        grid-template-columns: vwmin(10, pc);
+        aspect-ratio: 1/1;
+        width: 100%;
+        height: auto;
+        border-radius: 100%;
+        transition: all 0.3s var(--reverseTransition);
+        background-color: var(--baseFontColor);
+        border: vwmin(1, pc) solid transparent;
+
+
+        svg {
+            width: 100%;
+            height: auto;
+            fill: #fff;
+        }
+    }
+
+    @media (hover :hover) {
+        &:hover {
+            transition: all 0.3s var(--reverseTransition);
+            border-bottom: vwmin(1, pc) solid var(--accentColor);
+
+
+            .el_commonBorderRadialArrowBtn_txt {
+                color: var(--accentColor);
+                transition: all 0.3s var(--reverseTransition);
+            }
+
+            .el_commonBorderRadialArrowBtn_arrowContainer {
+                transition: all 0.3s var(--reverseTransition);
+                background-color: #fff;
+                border: vwmin(1, pc) solid var(--accentColor);
+
+                svg {
+                    transition: all 0.3s var(--reverseTransition);
+                    fill: var(--accentColor);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,348 @@
+@use '../foundation/function/index' as *;
+
+/* ===================================
+header
+=================================== */
+.ly_header {
+
+    .ly_header_conatiner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        padding-inline: vwmin(20, pc);
+        padding-top: vwmin(24, pc);
+        box-sizing: border-box;
+        z-index: 100;
+        background-color: transparent;
+        mix-blend-mode: exclusion;
+
+        .ly_header_inner {
+            position: relative;
+            display: grid;
+            grid-template-columns: vwmin(155, pc) vwmin(36, pc);
+            justify-content: space-between;
+            align-items: center;
+
+            @include underTB {
+                grid-template-columns: vwmin(155, sp) vwmin(36, sp);
+            }
+
+            .bl_header_inner_logo {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 100%;
+                isolation: isolate; // 追加推奨
+            }
+
+
+            .bl_header_menu {
+                @include underTB {
+                    grid-template-columns: vwmin(168, sp) vwmin(36, sp);
+                    gap: vwmin(30, sp);
+                }
+            }
+        }
+    }
+
+    .el_header_menu_btn {
+        cursor: pointer;
+        position: fixed;
+        top: vwmin(24, pc);
+        right: vwmin(20, pc);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: auto;
+        max-width: vwmin(36, pc);
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        aspect-ratio: 36/46;
+        padding: 0;
+        z-index: 120;
+        mix-blend-mode: exclusion;
+
+        .bl_header_menu_btn_lineContainer {
+            position: relative;
+            height: vwmin(6, pc);
+            width: 100%;
+            display: block;
+            width: 100%;
+            min-height: vwmin(6, pc);
+
+            .el_header_menu_btn_lineContainer_line {
+                position: absolute;
+                display: block;
+                height: vwmin(1, pc);
+                background-color: #fff;
+                transition: transform 0.3s var(--reverseTransition);
+
+                &:nth-child(1) {
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    transition: all 0.3s var(--reverseTransition);
+
+                }
+
+                &:nth-child(2) {
+                    top: vwmin(5, pc);
+                    right: 0;
+                    left: auto;
+                    width: 100%;
+                    max-width: vwmin(24, pc);
+                    transition: all 0.3s var(--reverseTransition);
+
+                }
+            }
+        }
+    }
+
+    .el_header_menu_btn.is_active {
+        .bl_header_menu_btn_lineContainer {
+            height: vwmin(14, pc);
+            transition: all 0.3s var(--reverseTransition);
+
+
+            .el_header_menu_btn_lineContainer_line {
+                transition: transform 0.3s var(--reverseTransition);
+
+                &:nth-child(1) {
+                    top: 50%;
+                    left: 50%;
+                    rotate: -20deg;
+                    translate: -50% -50%;
+                    max-width: 100%;
+                    transition: all .3s var(--reverseTransition);
+                }
+
+                &:nth-child(2) {
+                    top: 50%;
+                    rotate: 20deg;
+                    right: -50%;
+                    left: auto;
+                    translate: -50% -50%;
+                    max-width: 100%;
+                    transition: all .3s var(--reverseTransition);
+                }
+            }
+        }
+    }
+
+
+
+
+    .bl_header_menu_lineReserveBtn {
+        position: fixed;
+        top: vwmin(24, pc);
+        right: vwmin(106, pc);
+        width: 100%;
+        max-width: vwmin(168, pc);
+        display: flex;
+        padding-top: vwmin(10, pc);
+        padding-bottom: vwmin(12, pc);
+        justify-content: center;
+        align-items: center;
+        background-color: var(--accentColor);
+        border-radius: vwmin(10, pc);
+        font-size: vwmin(14, pc);
+        font-weight: 500;
+        font-size: vwmin(16, pc);
+        font-style: normal;
+        color: #fff;
+        font-weight: 600;
+        line-height: 1.4;
+        border-radius: vwmin(50, pc);
+        border: vwmin(1, pc) solid transparent;
+        mix-blend-mode: normal;
+        isolation: isolate;
+        transition: background-color .3s cubic-bezier(0, 0, 0.46, 1), color .3s cubic-bezier(0, 0, 0.46, 1);
+        z-index: 110;
+
+        @media (hover: hover) {
+            &:hover {
+                background-color: #fff;
+                color: var(--accentColor);
+                border: 1px solid var(--accentColor);
+                transition: background-color .3s var(--reverseTransition), color .3s var(--reverseTransition);
+            }
+        }
+    }
+}
+
+
+/*
+navi
+=================================== */
+
+.bl_header_nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100lvh;
+    z-index: 110;
+    background-color: #EBE9DF;
+
+    .bl_header_nav_bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+
+    .bl_header_nav_inner {
+        display: grid;
+        grid-template-columns: vwmin(480, pc) 1fr;
+        height: 100%;
+
+
+        .bl_header_nav_inner_ctaContainer {
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url(assets/img/common/bg.png);
+                background-size: cover;
+                background-position: center;
+                z-index: -1;
+            }
+
+            .bl_header_nav_inner_ctaContainer_inner {
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                align-items: center;
+                gap: vwmin(60, pc);
+                height: 100%;
+                padding-inline: vwmin(60, pc);
+                padding-block: vwmin(60, pc);
+                background-color: var(--accentColor);
+
+                .bl_header_nav_inner_ctaContainer_inner_lineReserveBtn {
+                    width: 100%;
+                    max-width: vwmin(285, pc);
+                }
+            }
+        }
+
+
+        .bl_header_nav_inner_menu {
+            display: flex;
+            flex-flow: column;
+            gap: vwmin(80, pc);
+            overflow-y: auto;
+            padding-inline: vwmin(80, pc);
+            padding-top: vwmin(100, pc);
+            padding-bottom: vwmin(80, pc);
+
+            .bl_header_nav_inner_menu_conatainer {
+                display: flex;
+                flex-flow: column;
+                gap: vwmin(20, pc);
+
+                .bl_header_nav_inner_menu_conatainer_titleWrapper {
+                    display: grid;
+                    grid-template-columns: auto 1fr;
+                    gap: vwmin(16, pc);
+                    align-items: center;
+
+                    &::after {
+                        content: '';
+                        display: block;
+                        width: 100%;
+                        height: vwmin(1, pc);
+                        background-color: #CCC8B9;
+                    }
+
+                    .bl_header_nav_inner_menu_conatainer_title {
+                        color: var(--black, #333);
+                        font-family: "Shippori Mincho";
+                        font-size: vwmin(18, pc);
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.72px / 18px);
+                    }
+                }
+
+                .bl_header_nav_inner_menu_conatainer_listWrapper {
+
+                    .bl_globalNaviList {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        row-gap: vwmin(16, pc);
+                        column-gap: vwmin(64, pc);
+
+                        .bl_globalNaviList_item_link {
+                            display: grid;
+                            grid-template-columns: 1fr vwmin(10, pc);
+                            gap: vwmin(10, pc);
+                            align-items: baseline;
+                            padding-bottom: vwmin(16, pc);
+                            border-bottom: vwmin(1, pc) solid #fff;
+                            border-bottom: vwmin(1, pc) solid #CCC8B9;
+
+                            .el_globalNaviList_item_link_text {
+                                font-size: vwmin(16, pc);
+                                font-style: normal;
+                                font-weight: 400;
+                                line-height: 150%;
+                                letter-spacing: calc(0.32px / 16px);
+                            }
+                        }
+                    }
+
+
+                    .bl_globalMenuList {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        row-gap: vwmin(10, pc);
+                        column-gap: vwmin(22, pc);
+
+
+                        .bl_globalMenuList_item_link {
+                            display: grid;
+                            grid-template-columns: vwmin(10, pc) 1fr;
+                            gap: vwmin(10, pc);
+                            align-items: flex-start;
+                            font-size: vwmin(14, pc);
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 1.5;
+                            letter-spacing: calc(0.28px / 14px);
+
+                            &::before {
+                                content: '';
+                                position: relative;
+                                display: block;
+                                width: 100%;
+                                height: vwmin(1, pc);
+                                background-color: #CCC8B9;
+                                margin-top: vwmin(12, pc);
+                            }
+
+                        }
+                    }
+
+
+                }
+
+            }
+        }
+    }
+}

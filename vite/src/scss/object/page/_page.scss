@@ -1,0 +1,218 @@
+@use '../../foundation/function/index' as *;
+
+
+
+.bl_commonPageMain {
+    color: var(--baseFontColor);
+    padding-top: vwmin(130, pc);
+}
+
+.bl_commonPageContents {
+    position: relative;
+    padding-inline: vwmin(20, pc);
+    padding-top: vwmin(40, pc);
+    padding-bottom: vwmin(80, pc);
+    z-index: 1;
+
+    @include underTB {
+        padding-inline: vwmin(20, sp);
+        padding-top: vwmin(40, sp);
+        padding-bottom: vwmin(40, sp);
+    }
+
+    .bl_commonPageContents_inner {
+        max-width: vwmin(1000, pc);
+        margin-inline: auto;
+
+        @include underTB {
+            max-width: 100%;
+        }
+    }
+}
+
+.bl_commonPageMain_ttl {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    gap: vwmin(16, pc);
+    background-color: #fafafa;
+    padding-inline: vwmin(20, pc);
+    padding-top: vwmin(56, pc);
+    padding-bottom: vwmin(40, pc);
+    box-sizing: border-box;
+
+    @include underTB {
+        padding-inline: vwmin(20, sp);
+        padding-top: vwmin(56, sp);
+        padding-bottom: vwmin(40, sp);
+    }
+
+    h1 {
+        margin-block: 0;
+
+        @include underTB {
+            font-size: vwmin(24, sp);
+        }
+    }
+
+    .el_commonPageMain_ttl_en {
+        margin-block: 0;
+        color: var(--green);
+
+        @include underTB {
+            font-size: vwmin(16, sp);
+        }
+    }
+}
+
+.bl_lowPage_ttlContainer {
+    position: relative;
+
+    .bl_commonPageMain_ttl {
+
+        h1 {
+            z-index: 1;
+        }
+
+        .el_commonPageMain_ttl_en {
+            z-index: 1;
+        }
+    }
+
+    .el_lowPage_ttlContainer_img {
+        position: absolute;
+        left: 0;
+        top: vwmin(56, pc);
+        width: 100%;
+        height: auto;
+
+        @include underTB {
+            top: vwmin(56, sp);
+        }
+    }
+}
+
+
+.is-style-bl_pageTable-underline {
+    table {
+        tbody {
+
+            tr {
+                display: grid;
+                grid-template-columns: vwmin(400, pc) 1fr;
+                border-bottom: vwmin(1, pc) #dfdfdf solid;
+
+                @include underTB {
+                    grid-template-columns: vwmin(200, sp) 1fr;
+
+                    border-bottom: vwmin(1, sp) #dfdfdf solid;
+                }
+            }
+
+            td {
+                padding: vwmin(32, pc);
+                border: 0px none;
+
+                @include underTB {
+                    padding: vwmin(10, sp);
+                }
+
+                &:first-child {
+                    vertical-align: middle;
+                }
+            }
+
+        }
+    }
+
+}
+
+
+/* 404 */
+.bl_page404Main {
+    padding-inline: vwmin(20, pc) ;
+    padding-top: vwmin(130, pc);
+
+    @include underTB {
+        padding-top: vwmin(80, sp);
+        padding-inline: vwmin(20, sp);
+    }
+
+    .bl_page404Main_inner {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        justify-content: center;
+        gap: vwmin(48, pc);
+        height: 80lvh;
+
+        @include underTB {
+            gap: vwmin(24, sp);
+        }
+
+        .bl_page404Main_inner_ttl {
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+
+            h1 {
+                font-size: vwmin(100, pc);
+                margin-block: 0;
+
+                @include underTB {
+                    font-size: vwmin(80, sp);
+                }
+            }
+
+            .bl_page404Main_inner_ttl_sub {
+                margin-block: 0;
+                font-size: vwmin(16, pc);
+
+                @include underTB {
+                    font-size: vwmin(14, sp);
+                }
+            }
+        }
+
+        .bl_page404Main_inner_txt {
+            margin-block: 0;
+            padding-top: vwmin(24, pc);
+            font-size: vwmin(16, pc);
+            text-align: center;
+
+            br {
+                @include underTB {
+                    display: none;
+                }   
+            }
+
+            @include underTB {
+                font-size: vwmin(14, sp);
+                text-align: left;
+            }
+        }
+
+        .bl_page404Main_inner_btn {
+            display: inline-block;
+            padding: vwmin(16, pc) vwmin(24, pc);
+            background-color: var(--baseFontColor);
+            color: #fff;
+            border-radius: vwmin(100, pc);
+            text-decoration: none;
+            transition: opacity 0.3s ease-in-out;
+
+            @include underTB {
+                padding: vwmin(16, sp) vwmin(24, sp);
+                border-radius: vwmin(100, sp);
+            }
+
+            @media (hover: hover) {
+                &:hover {
+                    opacity: 0.5;
+                    transition: opacity 0.3s ease-in-out;
+                }
+            }
+        }
+    }
+}

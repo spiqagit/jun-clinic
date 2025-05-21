@@ -1,0 +1,7 @@
+@use 'size' as *;
+@mixin hover_nomal {
+  transition: 0.5s;
+  &:hover{
+      opacity: 0.5;
+  }
+}

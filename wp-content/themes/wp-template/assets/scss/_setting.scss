@@ -1,0 +1,38 @@
+// - - - - - 
+// font sertting
+// - - - - - 
+//Zen Kaku Gothic New Regular400 Medium500 Bold700
+$font_jp:"Zen Kaku Gothic New", sans-serif;
+//Montserrat Variable
+$font_en:"Montserrat", sans-serif;
+
+// - - - - - 
+// color sertting
+// - - - - - 
+$color_black:#323232;
+$color_white:#FFFFFF;
+
+// - - - - - 
+// mixin sertting
+// - - - - - 
+@mixin hover_nomal {
+    transition: 0.5s;
+    &:hover{
+        opacity: 0.5;
+    }
+}
+// - - - - - 
+// breakpoint
+// - - - - - 
+$breakpoints: (
+  "min-sp": "screen and (max-width: 374px)",
+  "sp": "screen and (max-width: 600px)",
+  "min-tab": "screen and (max-width: 767px)",
+  "tab": "screen and (max-width: 1024px)",
+) !default;
+
+@mixin media($breakpoint: min-sp) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
+}

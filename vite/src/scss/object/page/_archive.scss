@@ -1,0 +1,165 @@
+@use '../../foundation/function/index' as *;
+
+
+.ly_commonArchiveMain {
+
+    padding-top: vwmin(130, pc);
+
+    @include underTB {
+        padding-top: vwmin(60, sp);
+    }
+
+    .ly_commonArchiveMainContainer{
+        padding-inline: vwmin(20, pc);
+
+        @include underTB {
+            padding-inline: vwmin(20, sp);
+        }
+    }
+
+    .ly_commonArchiveMain_inner {
+        padding-top: vwmin(40, pc);
+        padding-bottom: vwmin(80, pc);
+        max-width: vwmin(1100, pc);
+        margin-inline: auto;
+
+        @include underTB {
+            padding-top: vwmin(40, sp);
+            padding-bottom: vwmin(80, sp);
+            max-width: 100%;
+        }
+    }
+}
+
+
+.bl_commonArchiveMain_ttl {
+    font-size: vwmin(40, pc);
+    margin-bottom: vwmin(48, pc);
+    margin-top: 0;
+
+    @include underTB {
+        font-size: vwmin(24, sp);
+        margin-bottom: vwmin(48, sp);
+    }
+}
+
+
+.bl_commonArchiveMain_list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: vwmin(16, pc);
+    padding-left: 0;
+    margin-block: 0;
+
+    @include underTB {
+        grid-template-columns: 1fr;
+        gap: vwmin(16, sp);
+    }
+
+    .bl_commonArchiveMain_list_item {
+        display: contents;
+
+        .bl_commonArchiveMain_list_card {
+            display: grid;
+            grid-template-rows: subgrid;
+            grid-row: 2 span;
+            gap: vwmin(12, pc);
+            border: vwmin(1, pc) solid #dfdfdf;
+            text-decoration: none;
+            color: var(--baseFontColor);
+            transition: all .3s ease;
+            overflow: hidden;
+
+            @include underTB {
+                gap: vwmin(12, sp);
+                border: vwmin(1, sp) solid #dfdfdf;
+            }
+
+
+            @media (hover :hover) {
+                &:hover {
+                    opacity: .5;
+                    transition: all .3s ease;
+                }
+            }
+
+            .bl_commonArchiveMain_list_card_img {
+                aspect-ratio: 16/9;
+                height: 100%;
+                border-bottom: vwmin(1, pc) solid #dfdfdf;
+
+                @include underTB {
+                    border-bottom: vwmin(1, sp) solid #dfdfdf;
+                }
+
+                .el_commonArchiveMain_list_card_img_img {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+
+                .el_commonArchiveMain_list_card_img_noImg {
+                    height: 100%;
+                    width: 100%;
+                    object-fit: contain;
+                    object-position: center;
+                    padding: vwmin(32, pc);
+                    box-sizing: border-box;
+
+                    @include underTB {
+                        padding: vwmin(32, sp);
+                    }
+                }
+            }
+
+            .bl_commonArchiveMain_list_card_txt {
+                box-sizing: border-box;
+                padding-inline: vwmin(16, pc);
+                padding-bottom: vwmin(24, pc);
+
+                @include underTB {
+                    padding-inline: vwmin(16, sp);
+                    padding-bottom: vwmin(24, sp);
+                }
+
+                .el_commonArchiveMain_list_card_txt_date {
+                    font-size: vwmin(10, pc);
+                    margin-block: 0;
+                    margin-bottom: vwmin(6, pc);
+
+                    @include underTB {
+                        margin-bottom: vwmin(6, sp);
+                        font-size: vwmin(10, sp);
+                        line-height: 1.5;
+                    }
+                }
+
+                .bl_commonArchiveMain_list_card_txt_ttl {
+
+                    .el_commonArchiveMain_list_card_txt_ttl_main {
+                        margin-block: 0;
+                        font-size: vwmin(18, pc);
+                        line-height: 1.5;
+                        margin-bottom: vwmin(16, pc);
+
+                        @include underTB {
+                            margin-bottom: vwmin(16, sp);
+                            font-size: vwmin(18, sp);
+                        }
+                    }
+
+                    .el_commonArchiveMain_list_card_txt_ttl_txt {
+                        margin-block: 0;
+                        font-size: vwmin(12, pc);
+
+                        @include underTB {
+                            font-size: vwmin(12, sp);
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+}
