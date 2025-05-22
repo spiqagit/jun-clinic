@@ -3,13 +3,13 @@
 .bl_commonlineReserveBtn {
     width: 100%;
     display: flex;
-    border-radius: vwmin(50, pc);
-    padding-top: vwmin(12, pc);
-    padding-bottom: vwmin(14, pc);
+    border-radius: vwmin(50, pc, 50);
+    padding-top: vwmin(12, pc, 12);
+    padding-bottom: vwmin(14, pc, 14);
     justify-content: center;
     align-items: center;
     color: var(--accentColor);
-    font-size: vwmin(20, pc);
+    font-size: vwmin(20, pc, 20);
     font-weight: 600;
     ;
     font-style: normal;
@@ -21,18 +21,18 @@
 
 .bl_commonBorderRadialArrowBtn {
     display: grid;
-    grid-template-columns: 1fr vwmin(32, pc);
-    gap: vwmin(12, pc);
+    grid-template-columns: 1fr vwmin(32, pc, 32);
+    gap: vwmin(12, pc, 12);
     align-items: center;
     justify-content: space-between;
-    border-bottom: vwmin(1, pc) solid var(--line);
-    padding-bottom: vwmin(12, pc);
+    border-bottom: vwmin(1, pc, 1) solid var(--line);
+    padding-bottom: vwmin(12, pc, 12);
     transition: all 0.3s var(--reverseTransition);
 
 
     .el_commonBorderRadialArrowBtn_txt {
         font-family: "Shippori Mincho";
-        font-size: vwmin(16, pc);
+        font-size: vwmin(16, pc, 16);
         font-style: normal;
         font-weight: 600;
         line-height: 1.5;
@@ -45,14 +45,14 @@
         display: grid;
         align-items: center;
         justify-content: center;
-        grid-template-columns: vwmin(10, pc);
+        grid-template-columns: vwmin(10, pc, 10);
         aspect-ratio: 1/1;
         width: 100%;
         height: auto;
         border-radius: 100%;
         transition: all 0.3s var(--reverseTransition);
         background-color: var(--baseFontColor);
-        border: vwmin(1, pc) solid transparent;
+        border: vwmin(1, pc, 1) solid transparent;
 
 
         svg {
@@ -65,7 +65,7 @@
     @media (hover :hover) {
         &:hover {
             transition: all 0.3s var(--reverseTransition);
-            border-bottom: vwmin(1, pc) solid var(--accentColor);
+            border-bottom: vwmin(1, pc, 1) solid var(--accentColor);
 
 
             .el_commonBorderRadialArrowBtn_txt {
@@ -76,7 +76,7 @@
             .el_commonBorderRadialArrowBtn_arrowContainer {
                 transition: all 0.3s var(--reverseTransition);
                 background-color: #fff;
-                border: vwmin(1, pc) solid var(--accentColor);
+                border: vwmin(1, pc, 1) solid var(--accentColor);
 
                 svg {
                     transition: all 0.3s var(--reverseTransition);
@@ -95,20 +95,20 @@
 .bl_recommendBannerList {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: vwmin(20, pc);
+    gap: vwmin(20, pc, 20);
 
     .bl_recommendBannerList_item {
 
         .bl_recommendBannerList_item_btn {
             position: relative;
             display: grid;
-            grid-template-columns: vwmin(290, pc) 1fr;
+            grid-template-columns: vwmin(290, pc, 290) 1fr;
             align-items: center;
-            padding-inline: vwmin(30, pc);
-            padding-block: vwmin(35, pc);
-            border-radius: vwmin(10, pc);
+            padding-inline: vwmin(30, pc, 30);
+            padding-block: vwmin(35, pc, 35);
+            border-radius: vwmin(10, pc, 10);
             overflow: hidden;
-            box-shadow: 0px 0px vwmin(6, pc) 0px rgba(41, 25, 10, 0.10);
+            box-shadow: 0px 0px vwmin(6, pc, 6) 0px rgba(41, 25, 10, 0.10);
 
             .bl_recommendBannerList_item_bg {
                 position: absolute;
@@ -124,12 +124,12 @@
                 position: relative;
                 display: flex;
                 flex-flow: column;
-                gap: vwmin(24, pc);
+                gap: vwmin(24, pc, 24);
                 z-index: 1;
 
                 .bl_recommendBannerList_item_txtContainer_ttl {
                     font-family: "Shippori Mincho";
-                    font-size: vwmin(20, pc);
+                    font-size: vwmin(20, pc, 20);
                     font-style: normal;
                     font-weight: 500;
                     line-height: 1.5;
@@ -137,7 +137,7 @@
                 }
 
                 .bl_recommendBannerList_item_txtContainer_txt {
-                    font-size: vwmin(14, pc);
+                    font-size: vwmin(14, pc, 14);
                     font-style: normal;
                     font-weight: 400;
                     line-height: 1.8;
@@ -156,7 +156,7 @@
 .bl_caseList {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: vwmin(20, pc);
+    gap: vwmin(20, pc, 20);
 
     .bl_caseList_item {
         display: contents;
@@ -166,19 +166,19 @@
             grid-template-rows: subgrid;
             grid-row: span 3;
             grid-template-columns: 1fr;
-            gap: vwmin(20, pc);
-            border-radius: vwmin(16, pc);
+            gap: vwmin(20, pc, 20);
+            border-radius: vwmin(16, pc, 16);
             overflow: hidden;
-            padding: vwmin(20, pc);
+            padding: vwmin(20, pc, 20);
             background-color: var(--white-bg);
-            box-shadow: 0px 0px vwmin(6, pc) 0px rgba(41, 25, 10, 0.10);
-            border: vwmin(3, pc) solid transparent;
+            box-shadow: 0px 0px vwmin(6, pc, 6) 0px rgba(41, 25, 10, 0.10);
+            border: vwmin(3, pc, 3) solid transparent;
             transition: all 0.3s var(--reverseTransition);
 
             @media (hover :hover) {
                 &:hover {
                     transition: all 0.3s var(--reverseTransition);
-                    border: vwmin(3, pc) solid var(--accentColor);
+                    border: vwmin(3, pc, 3) solid var(--accentColor);
                 }
             }
 
@@ -200,12 +200,12 @@
                 .bl_bl_caseList_item_txtContainer_tagList {
                     display: flex;
                     flex-wrap: wrap;
-                    gap: vwmin(8, pc);
-                    margin-bottom: vwmin(4, pc);
+                    gap: vwmin(8, pc, 8);
+                    margin-bottom: vwmin(4, pc, 4);
 
                     .el_caseList_item_txtContainer_tagList_item {
                         color: #999;
-                        font-size: vwmin(12, pc);
+                        font-size: vwmin(12, pc, 12);
                         font-style: normal;
                         font-weight: 400;
                         line-height: 1.5;
@@ -215,7 +215,7 @@
 
                 .bl_caseList_item_txtContainer_ttl {
                     font-family: "Shippori Mincho";
-                    font-size: vwmin(20, pc);
+                    font-size: vwmin(20, pc, 20);
                     font-style: normal;
                     font-weight: 500;
                     line-height: 1.5;
@@ -227,35 +227,230 @@
             .bl_caseList_item_caseInfo {
                 display: flex;
                 flex-flow: column;
-                gap: vwmin(10, pc);
+                gap: vwmin(10, pc, 10);
 
                 .bl_caseList_item_caseInfo_item {
                     display: grid;
-                    grid-template-columns: vwmin(100, pc) 1fr;
-                    gap: vwmin(10, pc);
+                    grid-template-columns: vwmin(100, pc, 100) 1fr;
+                    gap: vwmin(10, pc, 10);
                     align-items: baseline;
 
                     .bl_caseList_item_caseInfo_item_dt {
                         color: #333;
-                        font-size: vwmin(12, pc);
+                        font-size: vwmin(12, pc, 12);
                         font-style: normal;
                         font-weight: 400;
                         line-height: 1.5;
                         letter-spacing: calc(0.24px / 12);
-                        padding-block: vwmin(3, pc);
-                        padding-inline: vwmin(3, pc);
-                        border-radius: vwmin(2, pc);
+                        padding-block: vwmin(3, pc, 3);
+                        padding-inline: vwmin(3, pc, 3);
+                        border-radius: vwmin(2, pc, 2);
                         background-color: #EBE9DF;
                         text-align: center;
                     }
 
                     .bl_caseList_item_caseInfo_item_dd {
-                        font-size: vwmin(12, pc);
+                        font-size: vwmin(12, pc, 12);
                         font-style: normal;
                         font-weight: 400;
                         line-height: 1.5;
                         letter-spacing: calc(0.28px / 14);
                     }
+                }
+            }
+        }
+    }
+}
+
+
+
+/* ------------------------------------------------------------
+お悩みから探す
+------------------------------------------------------------ */
+
+//お悩みから探す
+.bl_topMenuSec_problemContainer {
+
+    .bl_topMenuSec_problemContainer_ttlContainer {
+        border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
+        padding-bottom: vwmin(20, pc, 20);
+        margin-bottom: vwmin(40, pc, 40);
+
+        .el_topMenuSec_problemContainer_ttl {
+            font-family: "Shippori Mincho";
+            font-size: vwmin(20, pc, 20);
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: calc(0.8px / 20);
+        }
+    }
+
+    .bl_topMenuSec_problemContainer_problemList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(vwmin(340, pc, 340), 1fr));
+        gap: vwmin(20, pc, 20);
+
+        .bl_topMenuSec_problemContainer_problemList_item {
+            display: contents;
+        }
+
+        .bl_topMenuSec_problemContainer_problemList_item_btn {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: vwmin(16, pc, 16);
+            border-radius: vwmin(12, pc, 12);
+            background-color: var(--white-bg);
+            box-shadow: 0px 0px 6px 0px rgba(41, 25, 10, 0.10);
+            aspect-ratio: 340 / 235;
+            height: auto;
+            padding: vwmin(20, pc, 20);
+            min-height: vwmin(235, pc, 235);
+            transition: all 0.3s var(--reverseTransition);
+
+            .bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer {
+                display: grid;
+                grid-template-columns: vwmin(80, pc, 80) 1fr;
+                align-items: center;
+                gap: vwmin(16, pc, 16);
+
+                .bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer_img {
+                    width: 100%;
+                    height: auto;
+                    object-fit: cover;
+                    aspect-ratio: 1/1;
+                    border-radius: vwmin(8, pc, 8);
+                }
+
+                .bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer_ttl {
+                    color: var(--black);
+                    font-family: "Shippori Mincho";
+                    font-size: vwmin(16, pc, 16);
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5;
+                    transition: all 0.3s var(--reverseTransition);
+                    letter-spacing: calc(0.64px / 16);
+                }
+            }
+
+            .bl_topMenuSec_problemContainer_problemList_item_btn_txt {
+                font-size: vwmin(14, pc, 14);
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.8;
+                letter-spacing: calc(0.28px / 14);
+            }
+
+            @media (hover: hover) {
+                &:hover {
+                    background-color: #EBE9DF;
+                    transition: all 0.3s var(--reverseTransition);
+
+                    .bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer_ttl {
+                        color: var(--accentColor);
+                        transition: all 0.3s var(--reverseTransition);
+                    }
+
+                    .bl_topMenuSec_problemContainer_problemList_item_btn_txt {
+                        color: var(--accentColor);
+                        transition: all 0.3s var(--reverseTransition);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* ------------------------------------------------------------
+施術メニュー
+------------------------------------------------------------ */
+
+.bl_menuListContainer {
+
+    .bl_menuListContainer_tabContainer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        background-color: #F2F1EC;
+        padding: vwmin(6, pc, 6);
+        border-radius: vwmin(8, pc, 8);
+        margin-bottom: vwmin(56, pc, 56);
+
+        .bl_menuListContainer_tabContainer_btn {
+            color: var(--gray-txt, #999);
+            text-align: center;
+            font-family: "Shippori Mincho";
+            font-size: vwmin(20, pc, 20);
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: calc(0.8px / 20);
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            transition: all 0.3s var(--reverseTransition);
+            z-index: 1;
+            padding-top: vwmin(14, pc, 14);
+            padding-bottom: vwmin(16, pc, 16);
+            border-radius: vwmin(6, pc, 6);
+        }
+
+        .is_active {
+            position: relative;
+            color: #fff;
+            transition: all 0.3s var(--reverseTransition);
+
+            &::after {
+                content: "";
+                position: absolute;
+                border-radius: vwmin(6, pc, 6);
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: var(--accentColor);
+                z-index: -1;
+                transition: all 0.4s var(--reverseTransition);
+            }
+        }
+    }
+
+
+    .bl_menuListContainer_menuList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(vwmin(235, pc, 235), 100%), 1fr));
+        column-gap: vwmin(40, pc, 40);
+        row-gap: vwmin(20, pc, 20);
+
+        .bl_menuListContainer_menuList_item {
+            display: contents;
+
+            .bl_menuListContainer_menuList_item_link {
+                display: grid;
+                grid-template-columns: 1fr vwmin(5, pc, 5);
+                align-items: baseline;
+                gap: vwmin(20, pc, 20);
+                padding-bottom: vwmin(10, pc, 10);
+                border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
+                transition: all 0.3s var(--reverseTransition);
+
+                @media (hover: hover) {
+                    &:hover {
+                        opacity: 0.5;
+                        transition: all 0.3s var(--reverseTransition);
+                    }
+                }
+
+                .bl_menuListContainer_menuList_item_link_ttl {
+                    font-size: vwmin(14, pc, 14);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    letter-spacing: 0.28px;
                 }
             }
         }

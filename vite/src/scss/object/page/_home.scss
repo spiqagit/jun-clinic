@@ -6,8 +6,8 @@ FV Slide
 ------------------------------------------------------------ */
 .bl_fvSlideContainer {
     position: relative;
-    padding-top: vwmin(144, pc);
-    padding-bottom: vwmin(140, pc);
+    padding-top: vwmin(144, pc, 144);
+    padding-bottom: vwmin(140, pc, 140);
     overflow: hidden;
 
     &::before {
@@ -17,17 +17,17 @@ FV Slide
         left: 0;
         display: block;
         width: 100%;
-        min-height: vwmin(400, pc);
+        min-height: vwmin(400, pc, 400);
         background: linear-gradient(180deg, #ece7cec0 0%, rgba(220, 215, 191, 0.00) 100%);
         z-index: 0;
     }
 
     .fvSlide {
         background-color: transparent;
-        max-width: vwmin(1120, pc);
+        max-width: vwmin(1120, pc, 1120);
         overflow: visible;
         margin-inline: auto;
-        padding-bottom: vwmin(30, pc);
+        padding-bottom: vwmin(30, pc, 30);
 
 
         .splide__track {
@@ -44,7 +44,7 @@ FV Slide
                 mask-image: url("img/top/fv-slide-mask.svg");
                 mask-repeat: no-repeat;
                 mask-position: 0 0;
-                max-width: vwmin(1120, pc);
+                max-width: vwmin(1120, pc, 1120);
                 mask-size: 100%;
                 width: 100%;
                 margin-inline: auto;
@@ -80,9 +80,9 @@ FV Slide
             left: 50%;
             translate: -50% 0;
             display: grid;
-            grid-template-columns: repeat(2, vwmin(54, pc));
+            grid-template-columns: repeat(2, vwmin(54, pc, 54));
             align-self: center;
-            gap: vwmin(20, pc);
+            gap: vwmin(20, pc, 20);
             opacity: 1 !important;
             width: 100%;
             z-index: 2;
@@ -101,12 +101,12 @@ FV Slide
                 right: auto !important;
                 align-items: center;
                 justify-content: center;
-                border-radius: vwmin(50, pc);
+                border-radius: vwmin(50, pc, 50);
                 transform: translate(0, 0) !important;
                 box-sizing: border-box;
 
                 img {
-                    width: vwmin(14, pc);
+                    width: vwmin(14, pc, 14);
                 }
             }
 
@@ -124,12 +124,12 @@ About
 ------------------------------------------------------------ */
 .ly_topAboutSec {
     background-color: var(--white-bg);
-    padding-block: vwmin(100, pc);
+    padding-block: vwmin(100, pc, 100);
 
     .bl_topAboutSec_inner {
         display: grid;
-        grid-template-columns: vwmin(336, pc) vwmin(520, pc);
-        gap: vwmin(20, pc);
+        grid-template-columns: vwmin(336, pc, 336) vwmin(520, pc, 100);
+        gap: vwmin(20, pc, 20);
         justify-content: space-between;
     }
 
@@ -137,16 +137,16 @@ About
     .bl_topAboutSec_leftSide {
         display: flex;
         flex-flow: column;
-        gap: vwmin(16, pc);
+        gap: vwmin(16, pc, 16);
 
         .bl_topAboutSec_leftSide_ttl {
-            max-width: vwmin(72, pc);
+            max-width: vwmin(72, pc, 72);
             width: 100%;
 
             .bl_topAboutSec_leftSide_ttl_ttl {
                 color: var(--lineText);
                 font-family: Marcellus;
-                font-size: vwmin(22, pc);
+                font-size: vwmin(22, pc, 22);
                 font-style: normal;
                 font-weight: 400;
                 line-height: 1;
@@ -162,7 +162,7 @@ About
 
         .bl_topAboutSec_leftSide_txt {
             font-family: "Shippori Mincho";
-            font-size: vwmin(36, pc);
+            font-size: vwmin(36, pc, 36);
             font-style: normal;
             font-weight: 500;
             line-height: 1.5;
@@ -174,15 +174,15 @@ About
     .bl_topAboutSec_rightSide {
         display: flex;
         flex-flow: column;
-        gap: vwmin(60, pc);
+        gap: vwmin(60, pc, 60);
 
         .bl_topAboutSec_rightSide_txtContainer {
             display: flex;
             flex-flow: column;
-            gap: vwmin(16, pc);
+            gap: vwmin(16, pc, 16);
 
             .el_topAboutSec_rightSide_txtContainer_txt {
-                font-size: vwmin(16, pc);
+                font-size: vwmin(16, pc, 16);
                 font-style: normal;
                 font-weight: 400;
                 line-height: 2;
@@ -193,10 +193,10 @@ About
         .bl_topAboutSec_rightSide_btnContainer {
             display: flex;
             flex-flow: column;
-            gap: vwmin(24, pc);
+            gap: vwmin(24, pc, 24);
 
             .bl_commonBorderRadialArrowBtn {
-                padding-bottom: vwmin(24, pc);
+                padding-bottom: vwmin(24, pc, 24);
             }
         }
     }
@@ -208,15 +208,15 @@ About
 Feature
 ------------------------------------------------------------ */
 .ly_topFeatureSec {
-    padding-top: vwmin(120, pc);
-    padding-bottom: vwmin(100, pc);
+    padding-top: vwmin(120, pc, 120);
+    padding-bottom: vwmin(100, pc, 100);
 
 
     .bl_topFeatureSec_inner {
 
         .bl_topFeatureSec_ttl {
             margin-inline: auto;
-            margin-bottom: vwmin(60, pc);
+            margin-bottom: vwmin(60, pc, 60);
         }
 
         .el_featuer_boldTxt {
@@ -226,39 +226,40 @@ Feature
         .bl_topFeatureSec_featureContainer {
             display: flex;
             flex-flow: column;
-            gap: vwmin(100, pc);
+            gap: vwmin(100, pc, 100);
 
             .bl_topFeatureSec_featureContainer_item {
-                padding-inline: vwmin(20, pc);
+                padding-inline: vwmin(20, pc, 20);
 
                 &:nth-child(2) {
-                    padding-top: vwmin(100, pc);
-                    border-top: vwmin(1, pc) solid var(--line);
+                    padding-top: vwmin(100, pc, 100);
+                    border-top: vwmin(1, pc, 1) solid var(--line);
                 }
 
                 .bl_topFeatureSec_featureContainer_item_inner {
                     display: grid;
-                    grid-template-columns: vwmin(530, pc) 1fr;
-                    gap: vwmin(61, pc);
+                    grid-template-columns: 1fr vwmin(469, pc, 469);
+                    justify-content: space-between;
                     align-items: center;
-                    max-width: vwmin(1060, pc);
+                    gap: vwmin(60, pc, null, 60);
+                    max-width: vwmin(1060, pc, 1060);
                     margin-inline: auto;
 
                     .bl_topFeatureSec_featureContainer_item_leftSide {
                         display: flex;
                         flex-flow: column;
-                        gap: vwmin(60, pc);
+                        gap: vwmin(60, pc, 60);
                     }
 
                     .bl_topFeatureSec_featureContainer_item_ttl_ttlContainer {
                         display: flex;
                         flex-flow: column;
-                        gap: vwmin(16, pc);
+                        gap: vwmin(16, pc, 16);
 
                         .el_topFeatureSec_featureContainer_item_ttl_ttl {
                             color: var(--lineText);
                             font-family: "Shippori Mincho";
-                            font-size: vwmin(14, pc);
+                            font-size: vwmin(14, pc, 14);
                             font-style: normal;
                             font-weight: 400;
                             line-height: 1;
@@ -267,7 +268,7 @@ Feature
 
                         .el_topFeatureSec_featureContainer_item_ttl_ttl_txt {
                             font-family: "Shippori Mincho";
-                            font-size: vwmin(36, pc);
+                            font-size: vwmin(36, pc, 36);
                             font-style: normal;
                             font-weight: 500;
                             line-height: 1.5;
@@ -279,10 +280,10 @@ Feature
                     .bl_featureSec_featureContainer_item_txtContainer {
                         display: flex;
                         flex-flow: column;
-                        gap: vwmin(24, pc);
+                        gap: vwmin(24, pc, 24);
 
                         .el_featureSec_featureContainer_item_txtContainer_txt {
-                            font-size: vwmin(16, pc);
+                            font-size: vwmin(16, pc, 16);
                             font-style: normal;
                             font-weight: 400;
                             line-height: 2;
@@ -294,12 +295,12 @@ Feature
                             counter-reset: my-counter;
 
                             li {
-                                font-size: vwmin(16, pc);
+                                font-size: vwmin(16, pc, 16);
                                 font-style: normal;
                                 font-weight: 400;
                                 line-height: 2;
                                 letter-spacing: calc(0.32px / 16);
-                                padding-left: vwmin(18, pc);
+                                padding-left: vwmin(18, pc, 18);
                                 position: relative;
 
 
@@ -309,7 +310,7 @@ Feature
                                     position: absolute;
                                     left: 0;
                                     top: 0;
-                                    font-size: vwmin(16, pc);
+                                    font-size: vwmin(16, pc, 16);
                                     font-style: normal;
                                     font-weight: 400;
                                     line-height: 2;
@@ -323,16 +324,16 @@ Feature
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            gap: vwmin(10, pc);
-                            border: vwmin(1, pc) solid var(--line);
-                            border-radius: vwmin(6, pc);
-                            padding-top: vwmin(14, pc);
-                            padding-bottom: vwmin(16, pc);
-                            padding-inline: vwmin(20, pc);
-                            margin-bottom: vwmin(calc(30 - 16), pc);
+                            gap: vwmin(10, pc, 10);
+                            border: vwmin(1, pc, 1) solid var(--line);
+                            border-radius: vwmin(6, pc, 6);
+                            padding-top: vwmin(14, pc, 14);
+                            padding-bottom: vwmin(16, pc, 16);
+                            padding-inline: vwmin(20, pc, 20);
+                            margin-bottom: vwmin(calc(30 - 16), pc, calc(30 - 16));
 
                             .bl_featureSec_featureContainer_txtBox_txt {
-                                font-size: vwmin(14, pc);
+                                font-size: vwmin(14, pc, 14);
                                 font-style: normal;
                                 font-weight: 700;
                                 line-height: 1.5;
@@ -344,19 +345,19 @@ Feature
                     .bl_topFeatureSec_featureContainer_item_rightSide {
                         display: flex;
                         flex-flow: column;
-                        gap: vwmin(40, pc);
+                        gap: vwmin(40, pc, 40);
 
                         .bl_topFeatureSec_featureContainer_item_rightSide_img {
-                            border-radius: vwmin(12, pc);
+                            border-radius: vwmin(12, pc, 12);
                             overflow: hidden;
                         }
 
                         .bl_topFeatureSec_featureContainer_item_rightSide_img_01 {
-                            max-width: vwmin(380, pc);
+                            max-width: vwmin(380, pc, 380);
                         }
 
                         .bl_topFeatureSec_featureContainer_item_rightSide_img_02 {
-                            max-width: vwmin(270, pc);
+                            max-width: vwmin(270, pc, 270);
                             margin-left: auto;
                         }
 
@@ -368,7 +369,7 @@ Feature
 
                     .bl_topFeatureSec_featureContainer_item_inner {
                         .bl_featureSec_featureContainer_item_txtContainer {
-                            gap: vwmin(16, pc);
+                            gap: vwmin(16, pc, 16);
                         }
                     }
 
@@ -384,33 +385,33 @@ Seminor
 ------------------------------------------------------------ */
 .bl_topSeminorContainer {
     position: relative;
-    padding-inline: vwmin(20, pc);
+    padding-inline: vwmin(20, pc, 20);
     z-index: 1;
 
     .bl_topSeminorContainer_inner {
         display: grid;
-        grid-template-columns: vwmin(270, pc) 1fr;
+        grid-template-columns: vwmin(270, pc, 270) 1fr;
         align-items: center;
-        gap: vwmin(30, pc);
-        max-width: vwmin(1060, pc);
+        gap: vwmin(30, pc, 30);
+        max-width: vwmin(1060, pc, 1060);
         margin-inline: auto;
-        border-radius: vwmin(20, pc);
+        border-radius: vwmin(20, pc, 20);
         overflow: hidden;
-        padding: vwmin(40, pc);
+        padding: vwmin(40, pc, 40);
         background-color: var(--white-bg);
 
         .bl_topSeminorContainer_img {
-            border-radius: vwmin(12, pc);
+            border-radius: vwmin(12, pc, 12);
             overflow: hidden;
         }
 
         .bl_commonBgContainer_txtContainer_txt {
-            font-size: vwmin(16, pc);
+            font-size: vwmin(16, pc, 16);
             font-style: normal;
             font-weight: 400;
             line-height: 2;
             letter-spacing: calc(0.32px / 16);
-            margin-bottom: vwmin(24, pc);
+            margin-bottom: vwmin(24, pc, 24);
         }
 
         .bl_commonBgContainer_txtContainer_btnContainer {
@@ -428,10 +429,10 @@ Site Info
     position: relative;
     z-index: -1;
     background-color: var(--bg02);
-    padding-top: vwmin(210, pc);
-    padding-bottom: vwmin(140, pc);
-    margin-top: vwmin(-130, pc);
-    margin-bottom: vwmin(-40, pc);
+    padding-top: vwmin(210, pc, 210);
+    padding-bottom: vwmin(140, pc, 140);
+    margin-top: vwmin(-130, pc, -130);
+    margin-bottom: vwmin(-40, pc, -40);
 
     @media (min-width: 1440px) {
         margin-top: -130px;
@@ -442,37 +443,37 @@ Site Info
     }
 
     .ly_commonContantsOuter_inner {
-        max-width: vwmin(940, pc);
+        max-width: vwmin(940, pc, 940);
         margin-inline: auto;
     }
 
     .bl_topSiteInfo_ttlContainer {
         width: fit-content;
         margin-inline: auto;
-        margin-bottom: vwmin(40, pc);
+        margin-bottom: vwmin(40, pc, 40);
     }
 
 
     .bl_topSiteInfo_siteList {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: vwmin(20, pc);
+        gap: vwmin(20, pc, 20);
 
         .bl_topSiteInfo_siteList_item_btn {
             display: grid;
-            grid-template-columns: auto vwmin(14, pc);
+            grid-template-columns: auto vwmin(14, pc, 14);
             align-items: center;
             justify-content: center;
-            gap: vwmin(8, pc);
-            border-radius: vwmin(8, pc);
+            gap: vwmin(8, pc, 8);
+            border-radius: vwmin(8, pc, 8);
             background-color: var(--white-bg);
-            box-shadow: 0px 0px vwmin(6, pc) 0px rgba(41, 25, 10, 0.10);
-            font-size: vwmin(16, pc);
+            box-shadow: 0px 0px vwmin(6, pc, 6) 0px rgba(41, 25, 10, 0.10);
+            font-size: vwmin(16, pc, 16);
             font-style: normal;
             font-weight: 400;
             line-height: 1.5;
             letter-spacing: 0.64px;
-            padding-block: vwmin(16, pc);
+            padding-block: vwmin(16, pc, 16);
             transition: all 0.3s var(--reverseTransition);
 
             @media (hover: hover) {
@@ -507,11 +508,11 @@ Recommend
 
 .ly_topRecommendSec {
     background-color: var(--white-bg);
-    padding-top: vwmin(80, pc);
-    padding-bottom: vwmin(100, pc);
+    padding-top: vwmin(80, pc, 80);
+    padding-bottom: vwmin(100, pc, 100);
 
     .bl_topRecommendSec_ttlContainer {
-        margin-bottom: vwmin(60, pc);
+        margin-bottom: vwmin(60, pc, 60);
         width: fit-content;
         margin-inline: auto;
     }
@@ -523,21 +524,93 @@ Recommend
 症例
 ------------------------------------------------------------ */
 
-.ly_topCaseSec{
-    padding-block: vwmin(120, pc);
+.ly_topCaseSec {
+    padding-block: vwmin(120, pc, 120);
 
-    .bl_topCaseSec_ttlContainer{
+    .bl_topCaseSec_ttlContainer {
         width: fit-content;
         margin-inline: auto;
-        margin-bottom: vwmin(60, pc);
+        margin-bottom: vwmin(60, pc, 60);
     }
 
-    .bl_topCaseSec_caseListContainer{
-        margin-bottom: vwmin(60, pc);
+    .bl_topCaseSec_caseListContainer {
+        margin-bottom: vwmin(60, pc, 60);
     }
 
     .bl_topCaseSec_btnContainer {
         width: fit-content;
         margin-inline: auto;
+    }
+}
+
+
+/* ------------------------------------------------------------
+施術メニュー
+------------------------------------------------------------ */
+
+.ly_topMenuSec {
+    padding-top: vwmin(80, pc, 80);
+    padding-bottom: vwmin(100, pc, 100);
+    background-color: var(--white-bg);
+
+    .bl_topMenuSec_ttlContainer {
+        width: fit-content;
+        margin-inline: auto;
+        margin-bottom: vwmin(60, pc, 60);
+    }
+
+    //お悩みから探す
+    .bl_topMenuSec_problemContainer {
+        margin-bottom: vwmin(120, pc, 120);
+    }
+
+    .bl_menuListContainer_content {
+        margin-bottom: vwmin(60, pc, 60);
+    }
+
+    .bl_topMenuSec_btnContainer {
+        width: fit-content;
+        margin-inline: auto;
+    }
+}
+
+
+/* ------------------------------------------------------------
+ドクター紹介
+------------------------------------------------------------ */
+.ly_topDoctorSec {
+
+    .topDoctorSplide {
+
+        .splide__slide {
+
+            .bl_topDoctorCard {
+                max-width: vwmin(800, pc, 800);
+                width: 100%;
+                margin-inline: auto;
+                display: grid;
+                grid-template-columns: vwmin(240, pc, 240) 1fr;
+                align-items: center;
+                gap: vwmin(30, pc, 30);
+
+                .el_topDoctorCard_img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: vwmin(10, pc, 10);
+                    aspect-ratio: 240/300;
+                    object-fit: cover;
+                }
+
+                .bl_topDoctorCard_txtContainer {
+                    .el_topDoctorCard_txtContainer_ttlContainer_job{
+                        font-size: vwmin(14, pc, 14);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.28px / 14); 
+                    }
+                }
+            }
+        }
     }
 }

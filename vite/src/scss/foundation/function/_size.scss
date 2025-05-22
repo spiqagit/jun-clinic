@@ -1,36 +1,34 @@
 @use 'sass:math';
 @use 'sass:string';
 @use 'sass:meta';
-@function vw($px, $reference) {
-  @if $reference == 'pc' {
-    @return math.div($px, 1280) * 100vw;
-  } @else if $reference == 'tb' {
-    @return math.div($px, 1024) * 100vw;
-  } @else if $reference == 'sp' {
-    @return math.div($px, 375) * 100vw;
-  } @else {
-    @return math.div($px, $reference) * 100vw;
-  }
-}
 
-@function vwmin($pxValue, $reference, $base: null) {
+/// レスポンシブなサイズ指定（min/max省略可）
+/// @param {Number} $fluid - 可変値(px)
+/// @param {String|Number} $reference - 'pc'|'tb'|'sp' or 任意の数値
+/// @param {Number|null} $min - 最小値(px)（省略可）
+/// @param {Number|null} $max - 最大値(px)（省略可）
+/// @param {Number|null} $base - 基準幅（省略可）
+@function vwmin($fluid, $reference, $min: null, $max: null, $base: null) {
   @if $reference == 'sp' {
-    @if not $base {
-      $base: 375;
-    }
+    @if not $base { $base: 375; }
   } @else if $reference == 'pc' {
-    @if not $base {
-      $base: 1440;
-    }
+    @if not $base { $base: 1440; }
   } @else if $reference == 'tb' {
-    @if not $base {
-      $base: 1024;
-    }
+    @if not $base { $base: 1024; }
+  } @else {
+    @if not $base { $base: $reference; }
   }
+  $vwValue: calc($fluid / $base * 100vw);
 
-  $vwValue: calc(math.round(calc($pxValue / $base) * 10000) / 100 * 1vw);
-
-  @return string.unquote('min(#{$vwValue}, #{$pxValue}px)');
+  @if $min != null and $max != null {
+    @return clamp(#{$min}px, #{$vwValue}, #{$max}px);
+  } @else if $min != null {
+    @return max(#{$min}px, #{$vwValue});
+  } @else if $max != null {
+    @return min(#{$vwValue}, #{$max}px);
+  } @else {
+    @return $vwValue;
+  }
 }
 
 /* -------------------------

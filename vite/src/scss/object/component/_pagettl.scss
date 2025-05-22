@@ -5,15 +5,16 @@
     width: fit-content;
     display: flex;
     flex-flow: column;
-    gap: vwmin(16, pc);
+    gap: vwmin(16, pc, 16);
     align-items: center;
 
     .el_commonSectionTtl_ttl {
         position: relative;
-        padding-bottom: vwmin(9, pc);
+        padding-bottom: vwmin(9, pc, 9);
         color: var(--lineText);
         font-family: Marcellus;
-        font-size: vwmin(20, pc);
+        font-size: vwmin(20, pc, 20) ;
+        
         font-style: normal;
         font-weight: 400;
         line-height: 1;
@@ -27,18 +28,18 @@
             translate: -50% 0;
             display: block;
             width: 100%;
-            max-width: vwmin(70, pc);
+            max-width: vwmin(70, pc, 70);
             background-image: url("img/common/ttl-line.svg");
             background-size: 100% 100%;
             background-repeat: no-repeat;
             background-position: center;
-            min-height: vwmin(5, pc);
+            min-height: vwmin(5, pc, 5);
         }
     }
 
     .el_commonSectionTtl_ttl_ttl {
         font-family: "Shippori Mincho";
-        font-size: vwmin(26, pc);
+        font-size: vwmin(26, pc, 26);
         font-style: normal;
         font-weight: 500;
         line-height: 1.5;

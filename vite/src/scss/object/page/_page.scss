@@ -4,14 +4,14 @@
 
 .bl_commonPageMain {
     color: var(--baseFontColor);
-    padding-top: vwmin(130, pc);
+    padding-top: vwmin(130, pc, 130);
 }
 
 .bl_commonPageContents {
     position: relative;
-    padding-inline: vwmin(20, pc);
-    padding-top: vwmin(40, pc);
-    padding-bottom: vwmin(80, pc);
+    padding-inline: vwmin(20, pc, 20);
+    padding-top: vwmin(40, pc, 40);
+    padding-bottom: vwmin(80, pc, 80);
     z-index: 1;
 
     @include underTB {
@@ -21,7 +21,7 @@
     }
 
     .bl_commonPageContents_inner {
-        max-width: vwmin(1000, pc);
+        max-width: vwmin(1000, pc, 1000);
         margin-inline: auto;
 
         @include underTB {
@@ -35,11 +35,11 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    gap: vwmin(16, pc);
+    gap: vwmin(16, pc, 16);
     background-color: #fafafa;
-    padding-inline: vwmin(20, pc);
-    padding-top: vwmin(56, pc);
-    padding-bottom: vwmin(40, pc);
+    padding-inline: vwmin(20, pc, 20);
+    padding-top: vwmin(56, pc, 56);
+    padding-bottom: vwmin(40, pc, 40);
     box-sizing: border-box;
 
     @include underTB {
@@ -100,8 +100,8 @@
 
             tr {
                 display: grid;
-                grid-template-columns: vwmin(400, pc) 1fr;
-                border-bottom: vwmin(1, pc) #dfdfdf solid;
+                grid-template-columns: vwmin(400, pc, 400) 1fr;
+                border-bottom: vwmin(1, pc, 1) #dfdfdf solid;
 
                 @include underTB {
                     grid-template-columns: vwmin(200, sp) 1fr;
@@ -111,7 +111,7 @@
             }
 
             td {
-                padding: vwmin(32, pc);
+                padding: vwmin(32, pc, 32);
                 border: 0px none;
 
                 @include underTB {
@@ -131,8 +131,8 @@
 
 /* 404 */
 .bl_page404Main {
-    padding-inline: vwmin(20, pc) ;
-    padding-top: vwmin(130, pc);
+    padding-inline: vwmin(20, pc, 20) ;
+    padding-top: vwmin(130, pc, 130);
 
     @include underTB {
         padding-top: vwmin(80, sp);
@@ -144,7 +144,7 @@
         flex-flow: column;
         align-items: center;
         justify-content: center;
-        gap: vwmin(48, pc);
+        gap: vwmin(48, pc, 48);
         height: 80lvh;
 
         @include underTB {
@@ -157,7 +157,7 @@
             align-items: center;
 
             h1 {
-                font-size: vwmin(100, pc);
+                font-size: vwmin(100, pc, 100);
                 margin-block: 0;
 
                 @include underTB {
@@ -167,7 +167,7 @@
 
             .bl_page404Main_inner_ttl_sub {
                 margin-block: 0;
-                font-size: vwmin(16, pc);
+                font-size: vwmin(16, pc, 16);
 
                 @include underTB {
                     font-size: vwmin(14, sp);
@@ -177,8 +177,8 @@
 
         .bl_page404Main_inner_txt {
             margin-block: 0;
-            padding-top: vwmin(24, pc);
-            font-size: vwmin(16, pc);
+            padding-top: vwmin(24, pc, 24);
+            font-size: vwmin(16, pc, 16);
             text-align: center;
 
             br {
@@ -195,10 +195,10 @@
 
         .bl_page404Main_inner_btn {
             display: inline-block;
-            padding: vwmin(16, pc) vwmin(24, pc);
+            padding: vwmin(16, pc, 16) vwmin(24, pc, 24);
             background-color: var(--baseFontColor);
             color: #fff;
-            border-radius: vwmin(100, pc);
+            border-radius: vwmin(100, pc, 100);
             text-decoration: none;
             transition: opacity 0.3s ease-in-out;
 

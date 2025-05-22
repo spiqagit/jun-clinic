@@ -2,11 +2,11 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: vwmin(128, pc);
+  scroll-padding-top: vwmin(128, pc, 128);
   background-color: #EBE9DF;
 
   @include underTB {
-    scroll-padding-top: vwmin(80, sp);
+    scroll-padding-top: vwmin(80, sp, 80);
   }
 }
 
@@ -34,7 +34,7 @@ body {
   color: var(--baseFontColor);
   overscroll-behavior: none;
   scroll-behavior: smooth;
-  font-size: vwmin(16, pc);
+  font-size: vwmin(16, pc, 16);
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -44,21 +44,19 @@ body {
   letter-spacing: 0.02em;
 
   @include underTB {
-    font-size: vwmin(16, sp);
+    font-size: vwmin(16, sp, 16);
   }
 }
 
-
-
 .ly_commonContantsOuter {
-  padding-inline: vwmin(20, pc);
+  padding-inline: vwmin(20, pc, 20);
 
   @include underTB {
-    padding-inline: vwmin(20, sp);
+    padding-inline: vwmin(20, sp, 20);
   }
 
   .ly_commonContantsOuter_inner {
-    max-width: vwmin(1060, pc);
+    max-width: vwmin(1060, pc, 1060);
     margin-inline: auto;
 
     @include underTB {
@@ -72,10 +70,7 @@ body {
   z-index: 1;
 }
 
-
 .ly_commonContantsBgItemContainer {
-
-
   .ly_commonContantsBgItemContainer_item {
     display: block;
     width: 100%;

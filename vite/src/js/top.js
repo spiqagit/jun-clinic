@@ -15,4 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
         autoWidth: true,
     });
     fvSlide.mount();
+
+
+    const topDoctorSplide = new Splide('.topDoctorSplide', {
+        type: 'loop',
+        perPage: 1,
+        perMove: 1,
+        pagination: false,
+        arrows: true,
+    });
+    topDoctorSplide.mount();
 });     

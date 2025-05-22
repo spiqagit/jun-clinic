@@ -397,6 +397,162 @@
             </div>
         </section>
 
+        <!-- 施術メニュー -->
+        <div class="ly_commonContantsBgItemContainer">
+            <picture class="ly_commonContantsBgItemContainer_item">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-sp.svg" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave.svg" alt="">
+            </picture>
+            <section class="ly_commonContantsOuter ly_topMenuSec">
+                <div class="ly_commonContantsOuter_inner">
+                    <div class="bl_topRecommendSec_ttlContainer">
+                        <hgroup class="bl_commonSectionTtl bl_topMenuSec_ttlContainer">
+                            <p class="el_commonSectionTtl_ttl">Menu</p>
+                            <h2 class="el_commonSectionTtl_ttl_ttl">施術メニュー</h2>
+                        </hgroup>
+                    </div>
+
+                    <!-- お悩みから探す -->
+                    <div class="bl_topMenuSec_problemContainer">
+                        <div class="bl_topMenuSec_problemContainer_ttlContainer">
+                            <h3 class="el_topMenuSec_problemContainer_ttl">お悩みから探す</h3>
+                        </div>
+                        <?php
+                        $problems = get_terms(array(
+                            'taxonomy' => 'menu-problem',
+                            'hide_empty' => true,
+                        )); ?>
+                        <ul class="bl_topMenuSec_problemContainer_problemList">
+                            <?php foreach ($problems as $problem) : ?>
+                                <li class="bl_topMenuSec_problemContainer_problemList_item">
+                                    <a href="#<?php echo $problem->slug; ?>" class="bl_topMenuSec_problemContainer_problemList_item_btn">
+                                        <div class="bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer">
+                                            <?php $problemCatImg = get_field('problemCat-img', $problem); ?>
+                                            <?php if ($problemCatImg) : ?>
+                                                <img class="bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer_img" src="<?php echo $problemCatImg; ?>" alt="<?php echo $problem->name; ?>">
+                                            <?php endif; ?>
+                                            <p class="bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer_ttl"><?php echo $problem->name; ?></p>
+                                        </div>
+                                        <p class="bl_topMenuSec_problemContainer_problemList_item_btn_txt">
+                                            <?php echo $problem->description; ?>
+                                        </p>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div class="bl_menuListContainer">
+                        <div class="bl_menuListContainer_tabContainer">
+                            <button class="bl_menuListContainer_tabContainer_btn is_active" type="button">美容皮膚科</button>
+                            <button class="bl_menuListContainer_tabContainer_btn" type="button">美容外科</button>
+                        </div>
+
+                        <div class="bl_menuListContainer_content">
+                            <?php
+                            $args = array(
+                                'post_type' => 'menu',
+                                'posts_per_page' => -1,
+                            );
+                            $menuItems = new WP_Query($args);
+                            if ($menuItems->have_posts()) : ?>
+                                <ul class="bl_menuListContainer_menuList">
+                                    <?php while ($menuItems->have_posts()) : $menuItems->the_post(); ?>
+                                        <li class="bl_menuListContainer_menuList_item">
+                                            <a href="<?php the_permalink(); ?>" class="bl_menuListContainer_menuList_item_link">
+                                                <p class="bl_menuListContainer_menuList_item_link_ttl"><?php the_title(); ?></p>
+                                                <div>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 7 10" fill="none">
+                                                        <path d="M0.999999 8.51074L6 4.51074L1 0.510742" stroke="#333333" stroke-linecap="round" />
+                                                    </svg>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    <?php endwhile;
+                                    wp_reset_postdata(); ?>
+                                </ul>
+                            <?php else: ?>
+                                <p>施術メニューはありません</p>
+                            <?php endif; ?>
+                        </div>
+
+                        <div class="bl_topMenuSec_btnContainer">
+                            <a href="#" class="bl_commonBorderRadialArrowBtn">
+                                <p class="el_commonBorderRadialArrowBtn_txt">料金表を見る</p>
+                                <div class="el_commonBorderRadialArrowBtn_arrowContainer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8">
+                                        <path d="M7.46484 0.464844C7.66011 0.269582 7.97661 0.269582 8.17188 0.464844L11.3535 3.64648C11.5488 3.84175 11.5488 4.15825 11.3535 4.35352L8.17188 7.53516C7.97661 7.73042 7.66011 7.73042 7.46484 7.53516C7.26958 7.33989 7.26958 7.02339 7.46484 6.82813L9.79297 4.5H1C0.723858 4.5 0.5 4.27614 0.5 4C0.5 3.72386 0.723858 3.5 1 3.5H9.79297L7.46484 1.17188C7.26958 0.976613 7.26958 0.660106 7.46484 0.464844Z" />
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <picture class="ly_commonContantsBgItemContainer_item">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-bottom-sp.svg" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-bottom.svg" alt="">
+            </picture>
+        </div>
+
+        <section class="ly_commonContantsOuter ly_topDoctorSec">
+            <div class="ly_commonContantsOuter_inner">
+                <div class="bl_topMenuSec_ttlContainer">
+                    <hgroup class="bl_commonSectionTtl ly_topDoctorSec">
+                        <p class="el_commonSectionTtl_ttl">Doctor</p>
+                        <h2 class="el_commonSectionTtl_ttl_ttl">ドクター紹介</h2>
+                    </hgroup>
+                </div>
+                <div class="bl_topDoctorSec_doctorListContainer">
+                    <div class="splide topDoctorSplide">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                                <?php
+                                $doctors = new WP_Query(array(
+                                    'post_type' => 'doctor',
+                                    'posts_per_page' => -1,
+                                    'meta_query' => array(
+                                        array(
+                                            'key'     => 'doctor-top',
+                                            'value'   => '1',
+                                            'compare' => 'LIKE'
+                                        ),
+                                    ),
+                                ));
+                                if ($doctors->have_posts()) {
+                                    while ($doctors->have_posts()) {
+                                        $doctors->the_post();
+                                ?>
+                                        <li class="splide__slide">
+                                            <a href="<?php the_permalink(); ?>" class="bl_topDoctorCard">
+                                                <img class="el_topDoctorCard_img" src="<?php echo get_field('img'); ?>" alt="<?php the_title(); ?>">
+                                                <div class="bl_topDoctorCard_txtContainer">
+                                                    <div class="bl_topDoctorCard_txtContainer_ttlContainer">
+                                                        <p class="el_topDoctorCard_txtContainer_ttlContainer_job"><?php echo get_field('job'); ?></p>
+                                                        <p class="el_topDoctorCard_txtContainer_ttlContainer_ttl"><?php the_title(); ?></p>
+                                                    </div>
+                                                    <p class="bl_topDoctorCard_txtContainer_txt"><?php echo get_field('doctor-top-message'); ?></p>
+                                                </div>
+                                            </a>
+
+                                        </li>
+                                    <?php
+                                    }
+                                    wp_reset_postdata(); ?>
+                                <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+
+                        <div class="splide__arrows">
+                            <button class="splide__arrow splide__arrow--prev">前へ</button>
+                            <button class="splide__arrow splide__arrow--next">次へ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
     <?php get_footer(); ?>
 </body>
