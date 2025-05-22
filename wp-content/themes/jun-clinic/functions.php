@@ -7,19 +7,20 @@ add_post_type_support('page', 'excerpt');
 // アイキャッチ画像を有効化
 add_theme_support('post-thumbnails');
 //自動更新を無効化
-add_filter( 'automatic_updater_disabled', '__return_true' );
+add_filter('automatic_updater_disabled', '__return_true');
 
 /* ---------- 管理画面 ---------- */
 // サイドメニューを非表示
-function remove_menus() {
-    remove_menu_page( 'edit.php' ); // 投稿
-    remove_menu_page( 'edit-comments.php' ); // コメント
+function remove_menus()
+{
+    remove_menu_page('edit.php'); // 投稿
+    remove_menu_page('edit-comments.php'); // コメント
 }
-add_action( 'admin_menu', 'remove_menus', 999 );
+add_action('admin_menu', 'remove_menus', 999);
 
 /* ---------- 投稿関連 ---------- */
 // single生成制御
-add_filter( 'doctor_rewrite_rules', '__return_empty_array');
+add_filter('doctor_rewrite_rules', '__return_empty_array');
 // アーカイブの表示条件
 function change_posts_per_page($query)
 {
@@ -70,7 +71,8 @@ add_filter('get_the_archive_title', function ($title) {
 });
 
 // 一覧・single生成制御
-function disable_faq_pages() {
+function disable_faq_pages()
+{
     if (is_singular('faq') || is_tax('faq-cat')) {
         global $wp_query;
         $wp_query->set_404();
@@ -82,30 +84,32 @@ function disable_faq_pages() {
 add_action('template_redirect', 'disable_faq_pages');
 
 /* ---------- 検索機能 ---------- */
-add_filter('template_include','searchform_recruit');
-function searchform_recruit($template){
-    if ( is_search() ){
+add_filter('template_include', 'searchform_recruit');
+function searchform_recruit($template)
+{
+    if (is_search()) {
         $post_types = get_query_var('post_type');
-        foreach ( (array) $post_types as $post_type )
-        $templates[] = "search-{$post_type}.php";
+        foreach ((array) $post_types as $post_type)
+            $templates[] = "search-{$post_type}.php";
         $templates[] = 'search.php';
-        $template = get_query_template('search',$templates);
+        $template = get_query_template('search', $templates);
     }
     return $template;
 }
 
-function my_custom_search($search, $wp_query) {
+function my_custom_search($search, $wp_query)
+{
     global $wpdb;
     if (!$wp_query->is_search)
         return $search;
     if (!isset($wp_query->query_vars))
         return $search;
     $search_words = explode(' ', isset($wp_query->query_vars['s']) ? $wp_query->query_vars['s'] : '');
-    if ( count($search_words) > 0 ) {
+    if (count($search_words) > 0) {
         $search = '';
-        foreach ( $search_words as $word ) {
-            if ( !empty($word) ) {
-                $search_word = '%' . esc_sql( $word ) . '%';
+        foreach ($search_words as $word) {
+            if (!empty($word)) {
+                $search_word = '%' . esc_sql($word) . '%';
                 $search .= " AND (
                     {$wpdb->posts}.post_title LIKE '{$search_word}'
                     OR {$wpdb->posts}.post_content LIKE '{$search_word}'
@@ -129,5 +133,7 @@ function my_custom_search($search, $wp_query) {
     }
     return $search;
 }
-add_filter('posts_search','my_custom_search', 10, 2);
-if(isset($_GET['s'])) $_GET['s']=mb_convert_kana($_GET['s'],'s','UTF-8');
+add_filter('posts_search', 'my_custom_search', 10, 2);
+if (isset($_GET['s'])) $_GET['s'] = mb_convert_kana($_GET['s'], 's', 'UTF-8');
+
+

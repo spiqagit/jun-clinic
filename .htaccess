@@ -1,3 +1,16 @@
+
+#SITEGUARD_PLUGIN_SETTINGS_START
+#==== SITEGUARD_RENAME_LOGIN_SETTINGS_START
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteBase /
+    RewriteRule ^wp-signup\.php 404-siteguard [L]
+    RewriteRule ^wp-activate\.php 404-siteguard [L]
+    RewriteRule ^login_50651(.*)$ wp-login.php$1 [L]
+</IfModule>
+#==== SITEGUARD_RENAME_LOGIN_SETTINGS_END
+#SITEGUARD_PLUGIN_SETTINGS_END
+
 # BEGIN WordPress
 # "BEGIN WordPress" から "END WordPress" までのディレクティブ (行) は
 # 動的に生成され、WordPress フィルターによってのみ修正が可能です。
@@ -13,3 +26,4 @@ RewriteRule . /index.php [L]
 </IfModule>
 
 # END WordPress
+

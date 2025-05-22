@@ -86,3 +86,178 @@
         }
     }
 }
+
+
+/* ------------------------------------------------------------
+おすすめバナー
+------------------------------------------------------------ */
+
+.bl_recommendBannerList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: vwmin(20, pc);
+
+    .bl_recommendBannerList_item {
+
+        .bl_recommendBannerList_item_btn {
+            position: relative;
+            display: grid;
+            grid-template-columns: vwmin(290, pc) 1fr;
+            align-items: center;
+            padding-inline: vwmin(30, pc);
+            padding-block: vwmin(35, pc);
+            border-radius: vwmin(10, pc);
+            overflow: hidden;
+            box-shadow: 0px 0px vwmin(6, pc) 0px rgba(41, 25, 10, 0.10);
+
+            .bl_recommendBannerList_item_bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 0;
+            }
+
+            .bl_recommendBannerList_item_txtContainer {
+                position: relative;
+                display: flex;
+                flex-flow: column;
+                gap: vwmin(24, pc);
+                z-index: 1;
+
+                .bl_recommendBannerList_item_txtContainer_ttl {
+                    font-family: "Shippori Mincho";
+                    font-size: vwmin(20, pc);
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5;
+                    letter-spacing: calc(0.8px / 20);
+                }
+
+                .bl_recommendBannerList_item_txtContainer_txt {
+                    font-size: vwmin(14, pc);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.8;
+                    letter-spacing: calc(0.28px / 14);
+                }
+            }
+        }
+    }
+}
+
+
+/* ------------------------------------------------------------
+症例
+------------------------------------------------------------ */
+
+.bl_caseList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: vwmin(20, pc);
+
+    .bl_caseList_item {
+        display: contents;
+
+        .bl_caseList_item_btn {
+            display: grid;
+            grid-template-rows: subgrid;
+            grid-row: span 3;
+            grid-template-columns: 1fr;
+            gap: vwmin(20, pc);
+            border-radius: vwmin(16, pc);
+            overflow: hidden;
+            padding: vwmin(20, pc);
+            background-color: var(--white-bg);
+            box-shadow: 0px 0px vwmin(6, pc) 0px rgba(41, 25, 10, 0.10);
+            border: vwmin(3, pc) solid transparent;
+            transition: all 0.3s var(--reverseTransition);
+
+            @media (hover :hover) {
+                &:hover {
+                    transition: all 0.3s var(--reverseTransition);
+                    border: vwmin(3, pc) solid var(--accentColor);
+                }
+            }
+
+            //画像
+            .bl_caseList_item_imgContainer {
+                width: 100%;
+                aspect-ratio: 1/1;
+
+                .bl_caseList_item_imgContainer_img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            //タイトル
+            .bl_caseList_item_txtContainer {
+
+                .bl_bl_caseList_item_txtContainer_tagList {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: vwmin(8, pc);
+                    margin-bottom: vwmin(4, pc);
+
+                    .el_caseList_item_txtContainer_tagList_item {
+                        color: #999;
+                        font-size: vwmin(12, pc);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.24px / 12);
+                    }
+                }
+
+                .bl_caseList_item_txtContainer_ttl {
+                    font-family: "Shippori Mincho";
+                    font-size: vwmin(20, pc);
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5;
+                    letter-spacing: calc(0.8px / 20);
+                }
+            }
+
+            //症例情報
+            .bl_caseList_item_caseInfo {
+                display: flex;
+                flex-flow: column;
+                gap: vwmin(10, pc);
+
+                .bl_caseList_item_caseInfo_item {
+                    display: grid;
+                    grid-template-columns: vwmin(100, pc) 1fr;
+                    gap: vwmin(10, pc);
+                    align-items: baseline;
+
+                    .bl_caseList_item_caseInfo_item_dt {
+                        color: #333;
+                        font-size: vwmin(12, pc);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.24px / 12);
+                        padding-block: vwmin(3, pc);
+                        padding-inline: vwmin(3, pc);
+                        border-radius: vwmin(2, pc);
+                        background-color: #EBE9DF;
+                        text-align: center;
+                    }
+
+                    .bl_caseList_item_caseInfo_item_dd {
+                        font-size: vwmin(12, pc);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.28px / 14);
+                    }
+                }
+            }
+        }
+    }
+}

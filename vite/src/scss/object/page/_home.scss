@@ -383,7 +383,9 @@ Feature
 Seminor
 ------------------------------------------------------------ */
 .bl_topSeminorContainer {
+    position: relative;
     padding-inline: vwmin(20, pc);
+    z-index: 1;
 
     .bl_topSeminorContainer_inner {
         display: grid;
@@ -415,5 +417,127 @@ Seminor
             width: fit-content;
             margin-left: auto;
         }
+    }
+}
+
+
+/* ------------------------------------------------------------
+Site Info
+------------------------------------------------------------ */
+.ly_topSiteInfo {
+    position: relative;
+    z-index: -1;
+    background-color: var(--bg02);
+    padding-top: vwmin(210, pc);
+    padding-bottom: vwmin(140, pc);
+    margin-top: vwmin(-130, pc);
+    margin-bottom: vwmin(-40, pc);
+
+    @media (min-width: 1440px) {
+        margin-top: -130px;
+    }
+
+    @media (max-width: 1440px) {
+        margin-top: -9vw;
+    }
+
+    .ly_commonContantsOuter_inner {
+        max-width: vwmin(940, pc);
+        margin-inline: auto;
+    }
+
+    .bl_topSiteInfo_ttlContainer {
+        width: fit-content;
+        margin-inline: auto;
+        margin-bottom: vwmin(40, pc);
+    }
+
+
+    .bl_topSiteInfo_siteList {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: vwmin(20, pc);
+
+        .bl_topSiteInfo_siteList_item_btn {
+            display: grid;
+            grid-template-columns: auto vwmin(14, pc);
+            align-items: center;
+            justify-content: center;
+            gap: vwmin(8, pc);
+            border-radius: vwmin(8, pc);
+            background-color: var(--white-bg);
+            box-shadow: 0px 0px vwmin(6, pc) 0px rgba(41, 25, 10, 0.10);
+            font-size: vwmin(16, pc);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.5;
+            letter-spacing: 0.64px;
+            padding-block: vwmin(16, pc);
+            transition: all 0.3s var(--reverseTransition);
+
+            @media (hover: hover) {
+                &:hover {
+                    color: var(--accentColor);
+                    background-color: var(--bg02);
+                    transition: all 0.3s var(--reverseTransition);
+
+                    .bl_topSiteInfo_siteList_item_btn_icon {
+                        svg {
+                            path {
+                                stroke: var(--accentColor);
+                            }
+
+                            rect {
+                                stroke: var(--accentColor);
+                            }
+
+                            transition: all 0.3s var(--reverseTransition);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* ------------------------------------------------------------
+Recommend
+------------------------------------------------------------ */
+
+.ly_topRecommendSec {
+    background-color: var(--white-bg);
+    padding-top: vwmin(80, pc);
+    padding-bottom: vwmin(100, pc);
+
+    .bl_topRecommendSec_ttlContainer {
+        margin-bottom: vwmin(60, pc);
+        width: fit-content;
+        margin-inline: auto;
+    }
+}
+
+
+
+/* ------------------------------------------------------------
+症例
+------------------------------------------------------------ */
+
+.ly_topCaseSec{
+    padding-block: vwmin(120, pc);
+
+    .bl_topCaseSec_ttlContainer{
+        width: fit-content;
+        margin-inline: auto;
+        margin-bottom: vwmin(60, pc);
+    }
+
+    .bl_topCaseSec_caseListContainer{
+        margin-bottom: vwmin(60, pc);
+    }
+
+    .bl_topCaseSec_btnContainer {
+        width: fit-content;
+        margin-inline: auto;
     }
 }

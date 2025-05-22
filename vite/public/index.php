@@ -48,7 +48,7 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/about/top-about-curve.svg" alt="">
             </picture>
             <section class="ly_commonContantsOuter ly_topAboutSec">
-                <div class="ly_commonContantsInner bl_topAboutSec_inner">
+                <div class="ly_commonContantsOuter_inner bl_topAboutSec_inner">
                     <div class="bl_topAboutSec_leftSide">
                         <div class="bl_topAboutSec_leftSide_ttl">
                             <h2 class="bl_topAboutSec_leftSide_ttl_ttl">About</h2>
@@ -107,9 +107,9 @@
                                 <div class="bl_featureSec_featureContainer_item_txtContainer">
                                     <p class="el_featureSec_featureContainer_item_txtContainer_txt">シミやたるみ、毛穴などお肌の悩みは多岐にわたります。</p>
                                     <ol class="el_featureSec_featureContainer_item_txtContainer_ol">
-                                        <li>お一人おひとりの悩みに応じてレーザーの組み合わせやフルエンスを調整して行うオーダーメイド型の<span class="el_featuer_boldTxt">“カスタマイズレーザー治療”</span></li>
-                                        <li>肌の再生力を上げ、レーザーの効果をさらに高める<span class="el_featuer_boldTxt">“肌育治療”</span></li>
-                                        <li>骨格・脂肪・筋膜まで考慮した<span class="el_featuer_boldTxt">“たるみ治療”</span></li>
+                                        <li>お一人おひとりの悩みに応じてレーザーの組み合わせやフルエンスを調整して行うオーダーメイド型の<span class="el_featuer_boldTxt">"カスタマイズレーザー治療"</span></li>
+                                        <li>肌の再生力を上げ、レーザーの効果をさらに高める<span class="el_featuer_boldTxt">"肌育治療"</span></li>
+                                        <li>骨格・脂肪・筋膜まで考慮した<span class="el_featuer_boldTxt">"たるみ治療"</span></li>
                                     </ol>
                                     <p class="el_featureSec_featureContainer_item_txtContainer_txt">顔を構造的にとらえ、<span class="el_featuer_boldTxt">皮から真皮、脂肪層、筋膜まで</span>表顔の全層にアプローチ。<br>外側からの照射や注入だけでなく、自らの再生力も引き出すことで、<span class="el_featuer_boldTxt">より自然に、そして効率よく結果へと導くための治療</span>を提供しています。</p>
                                 </div>
@@ -137,7 +137,7 @@
                                     </div>
                                     <p class="el_featureSec_featureContainer_item_txtContainer_txt">
                                         JUNCLINICでは、2017年の開院からこれまでシミやくすみ、毛穴などのお悩みに対し、肌状態に合わせて複数の機器を組み合わせる<span class="el_featuer_boldTxt">カスタマイズレーザー治療</span>を軸に、確かな結果を積み重ねてきました。<br>近年ではさらに、<span class="el_featuer_boldTxt">肌育治療や高周波によるたるみ治療</span>といったアプローチも積極的に取り入れ、より効率的に、より自然で美しい素肌へと導く治療体制を整えています。<br>
-                                        一人ひとりの肌と丁寧に向き合い、<span class="el_featuer_boldTxt">“あなたの肌”に必要なものだけを見極めて</span>ご提案する。<br>
+                                        一人ひとりの肌と丁寧に向き合い、<span class="el_featuer_boldTxt">"あなたの肌"に必要なものだけを見極めて</span>ご提案する。<br>
                                         そのために私たちは、効果を裏づけるデータや症例をもとに、常に検証と改良を重ねています。
                                     </p>
                                 </div>
@@ -171,7 +171,232 @@
             </div>
         </div>
 
-        
+        <section class="ly_commonContantsOuter ly_topSiteInfo">
+            <div class="ly_commonContantsOuter_inner">
+                <div class="bl_topSiteInfo_ttlContainer">
+                    <hgroup class="bl_commonSectionTtl bl_topFeatureSec_ttl">
+                        <p class="el_commonSectionTtl_ttl">Feature</p>
+                        <h2 class="el_commonSectionTtl_ttl_ttl">JUN CLINICの特徴</h2>
+                    </hgroup>
+                </div>
+                <ul class="bl_topSiteInfo_siteList">
+                    <li class="bl_topSiteInfo_siteList_item">
+                        <a href="https://junclinic.tokyo/" class="bl_topSiteInfo_siteList_item_btn" target="_blank">
+                            <p>白金院</p>
+                            <div class="bl_topSiteInfo_siteList_item_btn_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14">
+                                    <rect x="3.5" y="1.89697" width="11" height="8" stroke="#333333" fill="none" />
+                                    <path d="M1 4.604V12.604H12" stroke="#333333" fill="none" />
+                                </svg>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="bl_topSiteInfo_siteList_item">
+                        <a href="https://jun-clinic-ginza.jp/" class="bl_topSiteInfo_siteList_item_btn" target="_blank">
+                            <p>銀座院</p>
+                            <div class="bl_topSiteInfo_siteList_item_btn_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14">
+                                    <rect x="3.5" y="1.89697" width="11" height="8" stroke="#333333" fill="none" />
+                                    <path d="M1 4.604V12.604H12" stroke="#333333" fill="none" />
+                                </svg>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="bl_topSiteInfo_siteList_item">
+                        <a href="https://jun-clinic-yokohama.jp/" class="bl_topSiteInfo_siteList_item_btn" target="_blank">
+                            <p>横浜院</p>
+                            <div class="bl_topSiteInfo_siteList_item_btn_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14">
+                                    <rect x="3.5" y="1.89697" width="11" height="8" stroke="#333333" fill="none" />
+                                    <path d="M1 4.604V12.604H12" stroke="#333333" fill="none" />
+                                </svg>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="bl_topSiteInfo_siteList_item">
+                        <a href="https://junclinic-tamaplaza.jp/" class="bl_topSiteInfo_siteList_item_btn" target="_blank">
+                            <p>たまプラーザ院</p>
+                            <div class="bl_topSiteInfo_siteList_item_btn_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14">
+                                    <rect x="3.5" y="1.89697" width="11" height="8" stroke="#333333" fill="none" />
+                                    <path d="M1 4.604V12.604H12" stroke="#333333" fill="none" />
+                                </svg>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="bl_topSiteInfo_siteList_item">
+                        <a href="https://www.jun-clinic.jp/" class="bl_topSiteInfo_siteList_item_btn" target="_blank">
+                            <p>長野院</p>
+                            <div class="bl_topSiteInfo_siteList_item_btn_icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="14" viewBox="0 0 15 14">
+                                    <rect x="3.5" y="1.89697" width="11" height="8" stroke="#333333" fill="none" />
+                                    <path d="M1 4.604V12.604H12" stroke="#333333" fill="none" />
+                                </svg>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="ly_commonContantsBgItemContainer">
+            <picture class="ly_commonContantsBgItemContainer_item">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave-sp.svg" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave.svg" alt="">
+            </picture>
+            <section class="ly_commonContantsOuter ly_topRecommendSec">
+                <div class="ly_commonContantsOuter_inner">
+                    <div class="bl_topRecommendSec_ttlContainer">
+                        <hgroup class="bl_commonSectionTtl bl_topFeatureSec_ttl">
+                            <p class="el_commonSectionTtl_ttl">Recommend</p>
+                            <h2 class="el_commonSectionTtl_ttl_ttl">おすすめ治療</h2>
+                        </hgroup>
+                    </div>
+                    <ul class="bl_recommendBannerList">
+                        <li class="bl_recommendBannerList_item">
+                            <a href="" class="bl_recommendBannerList_item_btn">
+                                <img class="bl_recommendBannerList_item_bg" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/banner-item.jpg" alt="カスタマイズレーザー治療">
+                                <div class="bl_recommendBannerList_item_txtContainer">
+                                    <p class="bl_recommendBannerList_item_txtContainer_ttl">カスタマイズレーザー治療</p>
+                                    <p class="bl_recommendBannerList_item_txtContainer_txt">様々な悩みに同時にアプローチするオーダーメイドなレーザー治療です。</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="bl_recommendBannerList_item">
+                            <a href="" class="bl_recommendBannerList_item_btn">
+                                <img class="bl_recommendBannerList_item_bg" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/banner-item.jpg" alt="カスタマイズレーザー治療">
+                                <div class="bl_recommendBannerList_item_txtContainer">
+                                    <p class="bl_recommendBannerList_item_txtContainer_ttl">カスタマイズレーザー治療</p>
+                                    <p class="bl_recommendBannerList_item_txtContainer_txt">様々な悩みに同時にアプローチするオーダーメイドなレーザー治療です。</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="bl_recommendBannerList_item">
+                            <a href="" class="bl_recommendBannerList_item_btn">
+                                <img class="bl_recommendBannerList_item_bg" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/banner-item.jpg" alt="カスタマイズレーザー治療">
+                                <div class="bl_recommendBannerList_item_txtContainer">
+                                    <p class="bl_recommendBannerList_item_txtContainer_ttl">カスタマイズレーザー治療</p>
+                                    <p class="bl_recommendBannerList_item_txtContainer_txt">様々な悩みに同時にアプローチするオーダーメイドなレーザー治療です。</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="bl_recommendBannerList_item">
+                            <a href="" class="bl_recommendBannerList_item_btn">
+                                <img class="bl_recommendBannerList_item_bg" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/banner-item.jpg" alt="カスタマイズレーザー治療">
+                                <div class="bl_recommendBannerList_item_txtContainer">
+                                    <p class="bl_recommendBannerList_item_txtContainer_ttl">カスタマイズレーザー治療</p>
+                                    <p class="bl_recommendBannerList_item_txtContainer_txt">様々な悩みに同時にアプローチするオーダーメイドなレーザー治療です。</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <picture class="ly_commonContantsBgItemContainer_item">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave-bottom-sp.svg" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave-bottom.svg" alt="">
+            </picture>
+        </div>
+
+
+        <!-- 症例 -->
+        <section class="ly_commonContantsOuter ly_topCaseSec">
+            <div class="ly_commonContantsOuter_inner">
+                <div class="bl_topCaseSec_ttlContainer">
+                    <hgroup class="bl_commonSectionTtl">
+                        <p class="el_commonSectionTtl_ttl">Case</p>
+                        <h2 class="el_commonSectionTtl_ttl_ttl">症例</h2>
+                    </hgroup>
+                </div>
+                <div class="bl_caseListContainer bl_topCaseSec_caseListContainer">
+                    <?php
+                    $args = array(
+                        'post_type' => 'case',
+                        'posts_per_page' => -1,
+                        'orderby' => 'date',
+                        'order' => 'DESC',
+                    );
+                    $case_query = new WP_Query($args);
+                    if ($case_query->have_posts()) : ?>
+
+                        <ul class="bl_caseList">
+
+                            <?php while ($case_query->have_posts()) : $case_query->the_post(); ?>
+                                <li class="bl_caseList_item">
+                                    <a href="<?php the_permalink(); ?>" class="bl_caseList_item_btn">
+                                        <div class="bl_caseList_item_imgContainer">
+                                            <?php if (have_rows('slide')): ?>
+
+                                                <?php
+                                                $i = 0;
+                                                ?>
+                                                <?php while (have_rows('slide')): the_row(); ?>
+                                                    <?php if ($i == 0): ?>
+                                                        <img class="bl_caseList_item_imgContainer_img" src="<?php the_sub_field('img'); ?>" alt="<?php the_title(); ?>">
+                                                    <?php endif; ?>
+                                                    <?php $i++; ?>
+                                                <?php endwhile; ?>
+
+                                            <?php else : ?>
+
+                                                <img class="bl_caseList_item_imgContainer_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/common/no-post.jpg" alt="<?php the_title(); ?>">
+
+                                            <?php endif; ?>
+                                        </div>
+
+                                        <div class="bl_caseList_item_txtContainer">
+                                            <div class="bl_bl_caseList_item_txtContainer_tagList">
+                                                <?php
+                                                $menu_select = get_field('menu_select');
+                                                ?>
+                                                <?php if (is_array($menu_select)) : ?>
+                                                    <?php foreach ($menu_select as $menu) : ?>
+                                                        <p class="el_caseList_item_txtContainer_tagList_item">#<?php echo esc_html($menu->post_title); ?></p>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+                                            </div>
+                                            <p class="bl_caseList_item_txtContainer_ttl"><?php the_title(); ?></p>
+                                        </div>
+
+                                        <dl class="bl_caseList_item_caseInfo">
+                                            <?php
+                                            $caseInfoSlugList  = ["case-price", "case-time", "case-downtime", "case-makeup", "case-risk"];
+                                            ?>
+                                            <?php foreach ($caseInfoSlugList as $caseInfoSlug) : ?>
+                                                <?php
+                                                $field_object = get_field_object($caseInfoSlug);
+                                                $price = get_field($caseInfoSlug);
+                                                ?>
+                                                <div class="bl_caseList_item_caseInfo_item">
+                                                    <dt class="bl_caseList_item_caseInfo_item_dt">
+                                                        <?php echo esc_html($field_object['label']); ?>
+                                                    </dt>
+                                                    <dd class="bl_caseList_item_caseInfo_item_dd">
+                                                        <?php echo esc_html($price); ?>
+                                                    </dd>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </dl>
+                                    </a>
+                                </li>
+                            <?php endwhile; ?>
+                            <?php wp_reset_postdata(); ?>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+                <div class="bl_topCaseSec_btnContainer">
+                    <a href="#" class="bl_commonBorderRadialArrowBtn">
+                        <p class="el_commonBorderRadialArrowBtn_txt">症例一覧</p>
+                        <div class="el_commonBorderRadialArrowBtn_arrowContainer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8">
+                                <path d="M7.46484 0.464844C7.66011 0.269582 7.97661 0.269582 8.17188 0.464844L11.3535 3.64648C11.5488 3.84175 11.5488 4.15825 11.3535 4.35352L8.17188 7.53516C7.97661 7.73042 7.66011 7.73042 7.46484 7.53516C7.26958 7.33989 7.26958 7.02339 7.46484 6.82813L9.79297 4.5H1C0.723858 4.5 0.5 4.27614 0.5 4C0.5 3.72386 0.723858 3.5 1 3.5H9.79297L7.46484 1.17188C7.26958 0.976613 7.26958 0.660106 7.46484 0.464844Z" />
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
     </main>
     <?php get_footer(); ?>
 </body>
