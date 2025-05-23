@@ -32,10 +32,14 @@
                 </div>
                 <div class="splide__arrows">
                     <button class="splide__arrow splide__arrow--prev">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/white-arrow.svg" alt="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
+                            <path d="M6.30371 0.706975C6.01082 0.414081 5.53508 0.414081 5.24219 0.706975L0.469727 5.48041C0.176833 5.77331 0.176833 6.24807 0.469727 6.54096L5.24219 11.3144C5.53508 11.6073 6.01082 11.6073 6.30371 11.3144C6.5966 11.0215 6.5966 10.5458 6.30371 10.2529L2.81055 6.76069H17C17.4142 6.76069 17.75 6.4249 17.75 6.01069C17.75 5.59647 17.4142 5.26069 17 5.26069H2.81055L6.30371 1.7685C6.5966 1.4756 6.5966 0.999868 6.30371 0.706975Z" fill="white" />
+                        </svg>
                     </button>
                     <button class="splide__arrow splide__arrow--next">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/white-arrow.svg" alt="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
+                            <path d="M11.6963 0.706975C11.9892 0.414081 12.4649 0.414081 12.7578 0.706975L17.5303 5.48041C17.8232 5.77331 17.8232 6.24807 17.5303 6.54096L12.7578 11.3144C12.4649 11.6073 11.9892 11.6073 11.6963 11.3144C11.4034 11.0215 11.4034 10.5458 11.6963 10.2529L15.1895 6.76069H1C0.585786 6.76069 0.25 6.4249 0.25 6.01069C0.25 5.59647 0.585786 5.26069 1 5.26069H15.1895L11.6963 1.7685C11.4034 1.4756 11.4034 0.999868 11.6963 0.706975Z" fill="white" />
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -497,7 +501,7 @@
         <section class="ly_commonContantsOuter ly_topDoctorSec">
             <div class="ly_commonContantsOuter_inner">
                 <div class="bl_topMenuSec_ttlContainer">
-                    <hgroup class="bl_commonSectionTtl ly_topDoctorSec">
+                    <hgroup class="bl_commonSectionTtl bl_topDoctorSec_ttlContainer">
                         <p class="el_commonSectionTtl_ttl">Doctor</p>
                         <h2 class="el_commonSectionTtl_ttl_ttl">ドクター紹介</h2>
                     </hgroup>
@@ -543,18 +547,184 @@
                                 ?>
                             </ul>
                         </div>
-
                         <div class="splide__arrows">
-                            <button class="splide__arrow splide__arrow--prev">前へ</button>
-                            <button class="splide__arrow splide__arrow--next">次へ</button>
+                            <button class="splide__arrow splide__arrow--prev">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
+                                    <path d="M6.30371 0.706975C6.01082 0.414081 5.53508 0.414081 5.24219 0.706975L0.469727 5.48041C0.176833 5.77331 0.176833 6.24807 0.469727 6.54096L5.24219 11.3144C5.53508 11.6073 6.01082 11.6073 6.30371 11.3144C6.5966 11.0215 6.5966 10.5458 6.30371 10.2529L2.81055 6.76069H17C17.4142 6.76069 17.75 6.4249 17.75 6.01069C17.75 5.59647 17.4142 5.26069 17 5.26069H2.81055L6.30371 1.7685C6.5966 1.4756 6.5966 0.999868 6.30371 0.706975Z" fill="white" />
+                                </svg>
+                            </button>
+                            <button class="splide__arrow splide__arrow--next">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
+                                    <path d="M11.6963 0.706975C11.9892 0.414081 12.4649 0.414081 12.7578 0.706975L17.5303 5.48041C17.8232 5.77331 17.8232 6.24807 17.5303 6.54096L12.7578 11.3144C12.4649 11.6073 11.9892 11.6073 11.6963 11.3144C11.4034 11.0215 11.4034 10.5458 11.6963 10.2529L15.1895 6.76069H1C0.585786 6.76069 0.25 6.4249 0.25 6.01069C0.25 5.59647 0.585786 5.26069 1 5.26069H15.1895L11.6963 1.7685C11.4034 1.4756 11.4034 0.999868 11.6963 0.706975Z" fill="white" />
+                                </svg>
+                            </button>
                         </div>
+                    </div>
+                    <div class="bl_topDoctorSec_btnContainer">
+                        <a href="#" class="bl_commonBorderRadialArrowBtn">
+                            <p class="el_commonBorderRadialArrowBtn_txt">ドクター一覧</p>
+                            <div class="el_commonBorderRadialArrowBtn_arrowContainer">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8">
+                                    <path d="M7.46484 0.464844C7.66011 0.269582 7.97661 0.269582 8.17188 0.464844L11.3535 3.64648C11.5488 3.84175 11.5488 4.15825 11.3535 4.35352L8.17188 7.53516C7.97661 7.73042 7.66011 7.73042 7.46484 7.53516C7.26958 7.33989 7.26958 7.02339 7.46484 6.82813L9.79297 4.5H1C0.723858 4.5 0.5 4.27614 0.5 4C0.5 3.72386 0.723858 3.5 1 3.5H9.79297L7.46484 1.17188C7.26958 0.976613 7.26958 0.660106 7.46484 0.464844Z" />
+                                </svg>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
+
+        <!-- お知らせ -->
+        <div class="ly_commonContantsBgItemContainer">
+            <picture class="ly_commonContantsBgItemContainer_item">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-wave-sp.svg" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-wave.svg" alt="">
+            </picture>
+            <section class="ly_commonContantsOuter ly_topNewsSec">
+                <div class="ly_commonContantsOuter_inner bl_topNewsSec_inner">
+                    <div class="bl_topNewsSec_ttlContainer">
+                        <div class="bl_topRecommendSec_ttlContainer">
+                            <hgroup class="bl_commonSectionTtl bl_topNewsSec_ttlContainer">
+                                <p class="el_commonSectionTtl_ttl">News</p>
+                                <h2 class="el_commonSectionTtl_ttl_ttl">お知らせ</h2>
+                            </hgroup>
+                        </div>
+                        <div class="bl_topDoctorSec_btnContainer">
+                            <a href="#" class="bl_commonBorderRadialArrowBtn">
+                                <p class="el_commonBorderRadialArrowBtn_txt">お知らせ一覧</p>
+                                <div class="el_commonBorderRadialArrowBtn_arrowContainer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8">
+                                        <path d="M7.46484 0.464844C7.66011 0.269582 7.97661 0.269582 8.17188 0.464844L11.3535 3.64648C11.5488 3.84175 11.5488 4.15825 11.3535 4.35352L8.17188 7.53516C7.97661 7.73042 7.66011 7.73042 7.46484 7.53516C7.26958 7.33989 7.26958 7.02339 7.46484 6.82813L9.79297 4.5H1C0.723858 4.5 0.5 4.27614 0.5 4C0.5 3.72386 0.723858 3.5 1 3.5H9.79297L7.46484 1.17188C7.26958 0.976613 7.26958 0.660106 7.46484 0.464844Z" />
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="bl_topNewsSec_newsListContainer">
+                        <?php
+                        $args = array(
+                            'post_type' => 'news',
+                            'posts_per_page' => -1,
+                        );
+                        $newsItems = new WP_Query($args);
+                        if ($newsItems->have_posts()) : ?>
+                            <ul class="bl_newsList">
+                                <?php while ($newsItems->have_posts()) : $newsItems->the_post(); ?>
+
+                                    <?php
+                                    $terms = get_the_terms(get_the_ID(), 'clinic-cat');
+                                    $clinic_name = '';
+                                    if ($terms && !is_wp_error($terms) && !empty($terms)) {
+                                        $clinic_name = $terms[0]->name;
+                                    }
+                                    ?>
+
+                                    <li class="bl_newsList_item">
+                                        <a href="<?php the_permalink(); ?>" class="bl_newsList_item_link">
+                                            <div class="bl_newsList_item_link_infoContainer">
+                                                <p class="bl_newsList_item_link_infoContainer_date"><?php the_date('Y.m.d'); ?></p>
+                                                <?php if (!empty($clinic_name)) : ?>
+                                                    <p class="bl_newsList_item_link_infoContainer_clinic"><?php echo esc_html($clinic_name); ?></p>
+                                                <?php endif; ?>
+                                            </div>
+                                            <p class="bl_newsList_item_link_ttl"><?php the_title(); ?></p>
+                                        </a>
+                                    </li>
+
+                                <?php endwhile;
+                                wp_reset_postdata(); ?>
+                            </ul>
+
+                        <?php else: ?>
+                            <div class="bl_topNewsSec_noNewsContainer">
+                                <p class="bl_topNewsSec_noNewsContainer_txt">お知らせはありません</p>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </section>
+            <picture class="ly_commonContantsBgItemContainer_item">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-wave-bottom-sp.svg" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-bottom.svg" alt="">
+            </picture>
+        </div>
+
+        <!-- トピックス -->
+        <section class="ly_commonContantsOuter ly_topTopicSec">
+            <div class="ly_commonContantsOuter_inner">
+                <div class="bl_topRecommendSec_ttlContainer">
+                    <hgroup class="bl_commonSectionTtl bl_topTopicSec_ttlContainer">
+                        <p class="el_commonSectionTtl_ttl">Topics</p>
+                        <h2 class="el_commonSectionTtl_ttl_ttl">トピックス</h2>
+                    </hgroup>
+                </div>
+                <div class="bl_topTopicSec_topicsContainer">
+                    <?php
+                    $subLoop = new WP_Query(array(
+                        'post_type' => 'topics',
+                        'posts_per_page' => 3,
+                    ));
+                    if ($subLoop->have_posts()) : ?>
+
+                        <ul class="bl_topicsList">
+                            <?php while ($subLoop->have_posts()) : $subLoop->the_post(); ?>
+                                <li class="bl_topicsList_item">
+                                    <a href="<?php the_permalink(); ?>" class="bl_topicsList_item_link">
+                                        <div class="bl_topicsList_item_link_imgContainer">
+                                            <?php if (has_post_thumbnail()) : ?>
+                                                <img class="bl_topicsList_item_link_img" src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                                            <?php else: ?>
+                                                <img class="bl_topicsList_item_link_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/common/no-post.jpg" alt="<?php the_title(); ?>">
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="bl_topicsList_item_link_infoContainer">
+                                            <div class="bl_topicsList_item_link_info">
+                                                <p class="bl_topicsList_item_link_info_date"><?php the_date('Y.m.d'); ?></p>
+                                                <?php
+                                                $taxonomies = array('clinic-cat',  'topics-cat');
+                                                $terms_list = array();
+                                                foreach ($taxonomies as $taxonomy) {
+                                                    $terms = get_the_terms(get_the_ID(), $taxonomy);
+                                                    if ($terms && !is_wp_error($terms)) {
+                                                        foreach ($terms as $term) {
+                                                            $terms_list[] = $term->name;
+                                                        }
+                                                    }
+                                                }
+                                                if (!empty($terms_list)) : ?>
+                                                    <div class="bl_topicsList_item_link_info_termContainer">
+                                                        <?php foreach ($terms_list as $term): ?>
+                                                            <p class="bl_topicsList_item_link_info_term"><?php echo esc_html($term); ?></p>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                            <p class="el_topicsList_item_link_ttl"><?php the_title(); ?></p>
+                                        </div>
+                                    </a>
+                                </li>
+                            <?php endwhile; ?>
+                        </ul>
+
+                    <?php endif;
+                    wp_reset_postdata(); ?>
+                </div>
+                <div class="bl_topTopicSec_btnContainer">
+                    <a href="#" class="bl_commonBorderRadialArrowBtn">
+                        <p class="el_commonBorderRadialArrowBtn_txt">トピックス一覧</p>
+                        <div class="el_commonBorderRadialArrowBtn_arrowContainer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8">
+                                <path d="M7.46484 0.464844C7.66011 0.269582 7.97661 0.269582 8.17188 0.464844L11.3535 3.64648C11.5488 3.84175 11.5488 4.15825 11.3535 4.35352L8.17188 7.53516C7.97661 7.73042 7.66011 7.73042 7.46484 7.53516C7.26958 7.33989 7.26958 7.02339 7.46484 6.82813L9.79297 4.5H1C0.723858 4.5 0.5 4.27614 0.5 4C0.5 3.72386 0.723858 3.5 1 3.5H9.79297L7.46484 1.17188C7.26958 0.976613 7.26958 0.660106 7.46484 0.464844Z" />
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
     <?php get_footer(); ?>
+    <?php wp_footer(); ?>
 </body>
 
 </html>

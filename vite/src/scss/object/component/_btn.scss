@@ -456,3 +456,452 @@
         }
     }
 }
+
+
+/* ------------------------------------------------------------
+お知らせ
+------------------------------------------------------------ */
+
+.bl_newsList {
+    display: flex;
+    flex-flow: column;
+    gap: vwmin(24, pc, 24);
+
+    .bl_newsList_item {
+
+        .bl_newsList_item_link {
+            display: block;
+            padding-bottom: vwmin(24, pc, 24);
+            border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
+            transition: all 0.3s var(--reverseTransition);
+
+
+            .bl_newsList_item_link_infoContainer {
+                display: grid;
+                grid-template-columns: max-content max-content;
+                gap: vwmin(12, pc, 12);
+                align-items: center;
+                margin-bottom: vwmin(12, pc, 12);
+                transition: all 0.3s var(--reverseTransition);
+
+
+                .bl_newsList_item_link_infoContainer_date {
+                    font-family: "Shippori Mincho";
+                    font-size: vwmin(14, pc, 14);
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 100%;
+                    letter-spacing: calc(0.56px / 14);
+                }
+
+                .bl_newsList_item_link_infoContainer_clinic {
+                    font-size: vwmin(12, pc, 12);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    letter-spacing: calc(0.48px / 12);
+                    padding-inline: vwmin(8, pc, 8);
+                    padding-top: vwmin(2, pc, 2);
+                    padding-bottom: vwmin(3, pc, 3);
+                    background-color: #E0DDD0;
+                    border-radius: vwmin(2, pc, 2);
+                }
+            }
+
+            .bl_newsList_item_link_ttl {
+                font-size: vwmin(16, pc, 16);
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.8;
+                letter-spacing: calc(0.32px / 16);
+            }
+
+
+            @media (hover: hover) {
+                &:hover {
+                    transition: all 0.3s var(--reverseTransition);
+                    border-bottom: vwmin(1, pc, 1) solid var(--baseFontColor);
+
+                    .bl_newsList_item_link_infoContainer_date {
+                        color: var(--accentColor);
+                        transition: all 0.3s var(--reverseTransition);
+
+                    }
+
+                    .bl_newsList_item_link_ttl {
+                        transition: all 0.3s var(--reverseTransition);
+                        color: var(--accentColor);
+                    }
+
+                }
+            }
+        }
+    }
+}
+
+.bl_topNewsSec_noNewsContainer {
+    display: grid;
+    place-items: center;
+    height: 100%;
+
+    .bl_topNewsSec_noNewsContainer_txt {
+        font-size: vwmin(16, pc, 16);
+        font-style: normal;
+        font-weight: 400;
+    }
+}
+
+
+/* ------------------------------------------------------------
+トピックス
+------------------------------------------------------------ */
+
+.bl_topicsList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: vwmin(20, pc, 20);
+
+    .bl_topicsList_item {
+        display: contents;
+    }
+
+    .bl_topicsList_item_link {
+        display: grid;
+        grid-template-rows: subgrid;
+        grid-row: span 2;
+        grid-template-columns: 1fr;
+        gap: vwmin(24, pc, 24);
+        overflow: hidden;
+        border-radius: vwmin(12, pc, 12);
+
+
+        .bl_topicsList_item_link_imgContainer {
+            width: 100%;
+            aspect-ratio: 340/227;
+            object-fit: cover;
+            overflow: hidden;
+            border-radius: vwmin(12, pc, 12);
+
+            .bl_topicsList_item_link_img {
+                height: auto;
+                width: 100%;
+                aspect-ratio: 340/227;
+                object-fit: cover;
+                transition: all 0.4s var(--reverseTransition);
+            }
+        }
+
+
+        .bl_topicsList_item_link_infoContainer {
+
+            .bl_topicsList_item_link_info {
+                display: grid;
+                grid-template-columns: max-content 1fr;
+                gap: vwmin(12, pc, 12);
+                align-items: baseline;
+                margin-bottom: vwmin(12, pc, 12);
+
+                .bl_topicsList_item_link_info_date {
+                    font-family: "Shippori Mincho";
+                    font-size: vwmin(14, pc, 14);
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 1;
+                    letter-spacing: calc(0.56px / 14);
+                }
+
+                .bl_topicsList_item_link_info_termContainer {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: vwmin(6, pc, 6);
+
+                    .bl_topicsList_item_link_info_term {
+                        width: fit-content;
+                        font-size: vwmin(12, pc, 12);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.48px / 12);
+                        background-color: var(--white-bg);
+                        padding-inline: vwmin(8, pc, 8);
+                        padding-top: vwmin(2, pc, 2);
+                        padding-bottom: vwmin(3, pc, 3);
+                        border-radius: vwmin(2, pc, 2);
+                    }
+                }
+            }
+
+            .el_topicsList_item_link_ttl {
+                font-size: vwmin(16, pc, 16);
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.8;
+                letter-spacing: calc(0.32px / 16);
+            }
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                transition: all 0.4s var(--reverseTransition);
+
+                .bl_topicsList_item_link_img {
+                    transform: scale(1.08);
+                    transition: all 0.4s var(--reverseTransition);
+                }
+            }
+        }
+    }
+}
+
+
+/* ------------------------------------------------------------
+クリニック案内
+------------------------------------------------------------ */
+
+
+
+
+.bl_clinicList {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: vwmin(20, pc, 20);
+
+
+    .bl_clinicList_item {
+        background-color: var(--white-bg);
+        border-radius: vwmin(12, pc, 12);
+        padding: vwmin(20, pc, 20);
+        display: flex;
+        flex-direction: column;
+        gap: vwmin(20, pc, 20);
+        box-shadow: 0px 0px vwmin(6, pc, 6) 0px rgba(41, 25, 10, 0.10);
+
+    }
+
+    .bl_clinicList_item_upper {
+        display: flex;
+        gap: vwmin(8, pc, 8);
+        align-items: center;
+        justify-content: space-between;
+
+        .bl_clinicList_item_ttl {
+            font-family: "Shippori Mincho";
+            font-size: vwmin(18, pc, 18);
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: calc(0.72px / 18);
+        }
+
+        .bl_clinicSnsContainer {
+            width: fit-content;
+            display: flex;
+            gap: vwmin(12, pc, 12);
+            align-items: center;
+            justify-content: flex-end;
+
+            .bl_clinicSnsContainer_btn {
+                display: grid;
+                place-items: center;
+                grid-template-columns: vwmin(18, pc, 18);
+                justify-content: center;
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+                border-radius: 100%;
+                background-color: #E0DDD0;
+                transition: all 0.3s var(--reverseTransition);
+                padding: vwmin(10, pc, 10);
+
+                svg {
+                    display: grid;
+                    place-items: center;
+                    width: 100%;
+                    height: auto;
+                    aspect-ratio: 1/1;
+                    object-fit: contain;
+                }
+
+                @media (hover: hover) {
+                    &:hover {
+                        background-color: var(--accentColor);
+                        transition: all 0.3s var(--reverseTransition);
+
+                        svg {
+                            transition: all 0.3s var(--reverseTransition);
+                            fill: #fff;
+
+                            path {
+                                transition: all 0.3s var(--reverseTransition);
+                                fill: #fff;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .bl_clinicList_item_lower {
+        display: grid;
+        grid-template-columns: vwmin(190, pc, 190) 1fr;
+        gap: vwmin(16, pc, 16);
+
+
+        .bl_clinicList_item_imgContainer {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/1;
+            object-fit: contain;
+            border-radius: vwmin(10, pc, 10);
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .bl_clinicList_item_infoContainer {
+            display: flex;
+            flex-direction: column;
+            gap: vwmin(14, pc, 14);
+            margin-bottom: vwmin(14, pc, 14);
+
+            .bl_clinicList_item_infoContainer_item {
+                display: grid;
+                align-items: flex-start;
+                grid-template-columns: vwmin(16, pc, 16) 1fr;
+                gap: vwmin(6, pc, 6);
+
+                .el_clinicList_item_infoContainer_item_icon {
+                    display: block;
+                    width: 100%;
+                    padding-top: vwmin(2, pc, 2);
+                }
+
+                .bl_clinicList_item_infoContainer_item_content {
+                    display: flex;
+                    flex-direction: column;
+                    gap: vwmin(6, pc, 6);
+
+                    .el_clinicList_item_infoContainer_item_txt {
+                        font-size: vwmin(14, pc, 14);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.28px / 14);
+                    }
+
+                    .el_clinicList_item_infoContainer_item_tell {
+                        transition: all 0.3s var(--reverseTransition);
+
+                        @media (hover: hover) {
+                            &:hover {
+                                opacity: 0.5;
+                            }
+                        }
+                    }
+                }
+
+
+                //googlemap
+                .bl_clinicList_item_infoContainer_item_link {
+                    display: grid;
+                    grid-template-columns: max-content vwmin(4, pc, 14);
+                    align-items: center;
+                    transition: all 0.3s var(--reverseTransition);
+                    gap: vwmin(8, pc, 8);
+
+
+                    .el_clinicList_item_infoContainer_item_link_txt {
+                        width: fit-content;
+                        color: #999;
+                        font-size: vwmin(14, pc, 14);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.28px / 14);
+                    }
+
+                    .el_clinicList_item_infoContainer_item_link_icon {
+                        display: block;
+                        padding-top: vwmin(4, pc, 4);
+                    }
+
+                    @media (hover: hover) {
+                        &:hover {
+                            opacity: 0.5;
+                            transition: all 0.3s var(--reverseTransition);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .bl_clinicList_item_link {
+        display: grid;
+        grid-template-columns: auto vwmin(26, pc, 26);
+        align-items: center;
+        gap: vwmin(8, pc, 8);
+        width: fit-content;
+        margin-left: auto;
+
+        .el_clinicList_item_link_txt {
+            width: fit-content;
+            font-size: vwmin(14, pc, 14);
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.5;
+            letter-spacing: calc(0.56px / 14);
+        }
+
+        .el_clinicList_item_link_icon {
+            background-color: var(--accentColor);
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/1;
+            border-radius: 100%;
+            display: grid;
+            grid-template-columns: vwmin(10, pc, 10);
+            align-items: center;
+            justify-content: center;
+            border: vwmin(1, pc, 1) solid transparent;
+            transition: all 0.3s var(--reverseTransition);
+
+
+            svg {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+                object-fit: contain;
+                transition: all 0.3s var(--reverseTransition);
+
+            }
+        }
+
+
+        @media (hover: hover) {
+            &:hover {
+                transition: all 0.3s var(--reverseTransition);
+                color: var(--accentColor);
+
+                .el_clinicList_item_link_icon {
+                    background-color: #fff;
+                    transition: all 0.3s var(--reverseTransition);
+                    border: vwmin(1, pc, 1) solid var(--accentColor);
+
+                    svg {
+                        path {
+                            transition: all 0.3s var(--reverseTransition);
+                            fill: var(--accentColor);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

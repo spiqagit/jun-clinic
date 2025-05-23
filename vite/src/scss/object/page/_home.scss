@@ -110,8 +110,8 @@ FV Slide
                 }
             }
 
-            .splide__arrow--prev img {
-                transform: rotate(180deg);
+            .splide__arrow--prev svg {
+                transform: rotate(0);
             }
 
         }
@@ -579,19 +579,102 @@ Recommend
 ドクター紹介
 ------------------------------------------------------------ */
 .ly_topDoctorSec {
+    overflow: hidden;
+    padding-block: vwmin(120, pc, 120);
+
+    .bl_topDoctorSec_ttlContainer {
+        width: fit-content;
+        margin-inline: auto;
+        margin-bottom: vwmin(60, pc, 60);
+    }
 
     .topDoctorSplide {
+        position: relative;
+        margin-bottom: vwmin(60, pc, 60);
+
+        .splide__track {
+            overflow: visible !important;
+        }
+
+        .splide__arrows {
+            position: absolute;
+            width: 100%;
+            max-width: vwmin(930, pc, 930);
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 vwmin(20, pc, 20);
+            pointer-events: none;
+        }
+
+        .splide__arrow {
+            position: relative;
+            background: var(--baseFontColor);
+            border-radius: 50%;
+            width: vwmin(40, pc, 40);
+            height: vwmin(40, pc, 40);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: all 0.3s var(--reverseTransition);
+            pointer-events: auto;
+            cursor: pointer;
+            border: none;
+            color: #fff;
+            font-size: vwmin(14, pc, 14);
+            transform: none !important;
+            border: vwmin(1, pc, 1) solid transparent;
+
+            @media (hover: hover) {
+                &:hover {
+                    background-color: #EBE9DF;
+                    border: vwmin(1, pc, 1) solid var(--accentColor);
+
+                    svg {
+                        path {
+                            fill: var(--accentColor);
+                        }
+                    }
+                }
+            }
+        }
+
+        .splide__arrow--prev {
+            left: 0;
+
+            svg {
+                transform: rotate(0deg);
+            }
+        }
+
+        .splide__arrow--next {
+            right: 0;
+        }
 
         .splide__slide {
+            max-width: vwmin(800, pc, 800);
+            width: 100%;
 
             .bl_topDoctorCard {
-                max-width: vwmin(800, pc, 800);
                 width: 100%;
                 margin-inline: auto;
                 display: grid;
                 grid-template-columns: vwmin(240, pc, 240) 1fr;
                 align-items: center;
                 gap: vwmin(30, pc, 30);
+                padding: vwmin(30, pc, 30);
+                border-radius: vwmin(20, pc, 20);
+                background-color: var(--white-bg);
+                opacity: 1;
+                transition: all 0.3s var(--reverseTransition);
+
+                &:hover {
+                    opacity: 0.9;
+                }
 
                 .el_topDoctorCard_img {
                     width: 100%;
@@ -602,15 +685,102 @@ Recommend
                 }
 
                 .bl_topDoctorCard_txtContainer {
-                    .el_topDoctorCard_txtContainer_ttlContainer_job{
-                        font-size: vwmin(14, pc, 14);
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 1.5;
-                        letter-spacing: calc(0.28px / 14); 
+
+                    .bl_topDoctorCard_txtContainer_ttlContainer {
+                        margin-bottom: vwmin(20, pc, 20);
+
+                        .el_topDoctorCard_txtContainer_ttlContainer_job {
+                            font-size: vwmin(14, pc, 14);
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: 1.5;
+                            letter-spacing: calc(0.28px / 14);
+                            margin-bottom: vwmin(4, pc, 4);
+                        }
+
+                        .el_topDoctorCard_txtContainer_ttlContainer_ttl {
+                            font-family: "Shippori Mincho";
+                            font-size: vwmin(20, pc, 20);
+                            font-style: normal;
+                            font-weight: 500;
+                            line-height: 1.5;
+                            letter-spacing: calc(0.8px / 20);
+                            padding-bottom: vwmin(16, pc, 16);
+                            border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
+                        }
                     }
+                }
+
+
+                .bl_topDoctorCard_txtContainer_txt {
+                    font-size: vwmin(14, pc, 14);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.8;
+                    letter-spacing: calc(0.28px / 14);
                 }
             }
         }
+    }
+
+    .bl_topDoctorSec_btnContainer {
+        width: fit-content;
+        margin-inline: auto;
+    }
+}
+
+/* ------------------------------------------------------------
+お知らせ
+------------------------------------------------------------ */
+
+.ly_topNewsSec {
+    background-color: var(--white-bg);
+    padding-top: vwmin(80, pc, 80);
+    padding-bottom: vwmin(100, pc, 100);
+
+    .bl_topNewsSec_inner{
+        display: grid;
+        grid-template-columns: vwmin(143, pc, 143) 1fr;
+        gap: vwmin(177, pc , null ,177);
+    }
+
+    .bl_topNewsSec_ttlContainer{
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .bl_topNewsSec_ttlContainer {
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        align-items: left;
+    }
+
+    .bl_topNewsSec_newsListContainer{
+        min-height: vwmin(321, pc, 321);
+    }
+}
+
+/* ------------------------------------------------------------
+トピックス
+------------------------------------------------------------ */
+
+.ly_topTopicSec{
+    padding-top: vwmin(80, pc, 80);
+    padding-bottom: vwmin(100, pc, 100);
+
+    .bl_topTopicSec_ttlContainer{
+        width: fit-content;
+        margin-inline: auto;
+        margin-bottom: vwmin(60, pc, 60);
+    }
+
+    .bl_topTopicSec_btnContainer{
+        width: fit-content;
+        margin-inline: auto;
+    }
+
+    .bl_topTopicSec_topicsContainer{
+        margin-bottom: vwmin(60, pc, 60);
     }
 }

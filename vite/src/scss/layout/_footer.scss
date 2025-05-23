@@ -1,128 +1,322 @@
 @use '../foundation/function/index' as *;
 
-.ly_commonFooter {
+.bl_footerReserveSec {
+    position: relative;
+    padding-inline: vwmin(20, pc, 20);
+    z-index: 10;
 
-    .ly_commonFooterUpper {
-        padding-block: vwmin(40, pc);
-        padding-inline: vwmin(20, pc);
-        box-sizing: border-box;
+    .bl_footer_reserveContainer {
+        position: relative;
+        width: 100%;
+        background-color: var(--accentColor);
+        padding-block: vwmin(60, pc, 60);
+        border-radius: vwmin(50, pc, 50);
+        max-width: vwmin(1060, pc, 1060);
+        margin-inline: auto;
 
-        @include underTB {
-            padding-block: vwmin(40, sp);
-            padding-inline: vwmin(20, sp);
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background-image: url("img/common/bg.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 0;
         }
 
-        .bl_commonFooterUpper_inner_ttl {
-            max-width: vwmin(180, pc);
+        .bl_footer_reserveContainer_inner {
             width: 100%;
             margin-inline: auto;
-            margin-bottom: vwmin(32, pc);
-
-            @include underTB {
-                margin-right: auto;
-                margin-left: 0;
-                max-width: vwmin(180, sp);
-                margin-bottom: vwmin(32, sp);
-            }
-
-            img {
-                display: block;
-                width: 100%;
-            }
-        }
-
-        .bl_topPageFooterLinkNav {
-
-            .bl_topPageFooterLinkNav_list {
-                display: flex;
-                justify-content: center;
-                align-items: baseline;
-                gap: vwmin(16, pc);
-                padding-left: 0;
-                margin-block: 0;
-                list-style: none;
-                margin-bottom: vwmin(32, pc);
-
-                @include underTB {
-                    flex-flow: column;  
-                    gap: vwmin(16, sp);
-                    margin-bottom: vwmin(40, sp);
-                }
-
-                .el_header_naviList_item_btn {
-                    color: var(--baseFontColor);
-                    font-size: vwmin(14, pc);
-                    font-weight: 600;
-                    text-decoration: none;
-
-                    @include underTB {
-                        font-size: vwmin(12, sp);
-                    }
-                }
-            }
-        }
-
-        .bl_topGlobalFooterLink_list {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             align-items: center;
-            gap: vwmin(16, pc);
-            list-style: none;
-            padding-left: 0;
-            margin-block: 0;
+        }
 
-            @include underTB {
-                flex-flow: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                gap: vwmin(16, sp);
+        &::after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: vwmin(1, pc, 1);
+            height: calc(100% - vwmin(120, pc, 120));
+            background-color: #9E586C;
+            order: 2;
+        }
+
+        .bl_footer_reserveContainer_ttlContainer {
+            width: fit-content;
+            order: 1;
+            margin-inline: auto;
+
+            .el_footer_reserveContainer_ttl_sub {
+                width: fit-content;
+                display: flex;
+                flex-direction: column;
+                gap: vwmin(6, pc, 6);
+                color: var(--white-txt, #FFF);
+                font-family: "Marcellus";
+                font-size: vwmin(28, pc, 28);
+                font-style: normal;
+                font-weight: 400;
+                line-height: 100%;
+                letter-spacing: calc(0.56px / 28);
+                margin-bottom: vwmin(8, pc, 8);
+
+                &::after {
+                    content: "";
+                    display: block;
+                    position: relative;
+                    width: 100%;
+                    height: vwmin(8, pc, 8);
+                    background-image: url("img/common/footer-reserve-ttl.svg");
+                    background-size: 100%;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
             }
 
-            .bl_topGlobalFooterLink_list_item_link {
-                width: fit-content;
-                display: grid;
-                grid-template-columns: vwmin(14, pc) auto;
-                align-items: center;
-                justify-content: center;
-                text-decoration: none;
-                color: var(--baseFontColor);
-                gap: vwmin(4, pc);
-                font-size: vwmin(12, pc);
-                font-weight: 400;
+            .el_footer_reserveContainer_ttl {
+                color: var(--white-txt, #FFF);
+                font-family: "Shippori Mincho";
+                font-size: vwmin(40, pc, 40);
+                font-style: normal;
+                font-weight: 500;
                 line-height: 1.5;
-                transition: all .3s ease;
+                letter-spacing: calc(1.6px / 40);
+            }
+        }
 
-                @include underTB {
-                    grid-template-columns: vwmin(14, sp) auto;
-                    font-size: vwmin(12, sp);
-                }   
+        .bl_footer_reserveContainer_btnContainer {
+            width: 100%;
+            max-width: vwmin(302, pc, 302);
+            order: 3;
+            margin-inline: auto;
 
-                @media (hover : hover) {
+            .el_footer_reserveContainer_btn {
+                cursor: pointer;
+                position: relative;
+                display: block;
+                background-color: var(--white-txt);
+                color: var(--accentColor);
+                font-size: vwmin(24, pc, 24);
+                font-style: normal;
+                font-weight: 600;
+                line-height: 1.5;
+                letter-spacing: calc(0.48px / 24);
+                border-radius: vwmin(50, pc);
+                padding-top: vwmin(12, pc, 12);
+                padding-bottom: vwmin(14, pc, 14);
+                border: vwmin(1, pc, 1) solid transparent;
+                width: 100%;
+                background-color: var(--white-bg);
+                z-index: 1;
+                margin-inline: auto;
+                transition: all 0.3s var(--reverseTransition);
+
+                @media (hover: hover) {
                     &:hover {
-                        opacity: .5;
-                        transition: all .3s ease;
+                        background-color: var(--accentColor);
+                        color: #fff;
+                        border: vwmin(1, pc, 1) solid #fff;
+                        transition: all 0.3s var(--reverseTransition);
                     }
                 }
+            }
+        }
+    }
+}
 
-                p {
-                    margin-block: 0;
+/* -------------------------------------------------------------- */
+/* クリニック案内
+/* -------------------------------------------------------------- */
+.ly_footerBg {
+    position: relative;
+    z-index: 0;
+    background-color: #E0DDD0;
+}
+
+
+.ly_footerClinicSec {
+    position: relative;
+    z-index: 0;
+    padding-top: vwmin(230, pc, 230);
+    padding-bottom: vwmin(100, pc, 100);
+    margin-top: -8vw;
+
+
+    .bl_footerClinicSec_ttlContainer {
+        width: fit-content;
+        margin-inline: auto;
+        margin-bottom: vwmin(60, pc, 60);
+    }
+
+    .bl_clinicList {
+        grid-template-columns: repeat(2, 1fr);
+        gap: vwmin(20, pc, 20);
+    }
+}
+
+
+.ly_footerBg_inner {
+    position: relative;
+    z-index: 0;
+
+    .ly_commonContantsBgItemContainer_item {
+        display: block;
+        width: 100%;
+        translate: 0 vwmin(2, pc, 2);
+
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+}
+
+
+/* -------------------------------------------------------------- */
+/* フッター
+/* -------------------------------------------------------------- */
+.ly_footer {
+    position: relative;
+    z-index: 0;
+
+    .ly_footer_upper {
+        position: relative;
+        background-color: var(--baseFontColor);
+        padding-block: vwmin(60, pc, 60);
+        padding-inline: vwmin(20, pc, 20);
+
+
+        .ly_footer_upper_inner {
+            max-width: vwmin(1060, pc, 1060);
+            margin-inline: auto;
+        }
+
+        .bl_header_nav_inner_menu {
+            color: #fff;
+            padding: 0;
+        }
+
+        .bl_header_nav_inner_menu_conatainer {
+            .bl_header_nav_inner_menu_conatainer_titleWrapper {
+                .bl_header_nav_inner_menu_conatainer_title {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+.ly_footer_lower {
+    background-color: #222222;
+    padding-inline: vwmin(20, pc, 20);
+    padding-top: vwmin(60, pc, 60);
+    padding-bottom: vwmin(30, pc, 30);
+
+    .ly_footer_lower_inner {
+        max-width: vwmin(1060, pc, 1060);
+        margin-inline: auto;
+    }
+
+
+    .bl_footerGlobalNavi {
+        display: grid;
+        grid-template-columns: vwmin(220, pc, 220) auto;
+        gap: vwmin(20, pc, 20);
+        align-items: flex-start;
+        justify-content: space-between;
+        margin-bottom: vwmin(40, pc, 40);
+
+        .bl_footerGlobalNavi_logo {
+            display: block;
+            width: 100%;
+            transition: all 0.3s var(--reverseTransition);
+
+            @media (hover: hover) {
+                &:hover {
+                    opacity: 0.5;
+                    transition: all 0.3s var(--reverseTransition);
+                }
+            }
+        }
+
+
+        .bl_footerGlobalNavi_list {
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            row-gap: vwmin(20, pc, 20);
+            column-gap: vwmin(40, pc, 40);
+            width: fit-content;
+            justify-content: space-between;
+
+            .bl_footerGlobalNavi_list_item {
+
+                .bl_footerGlobalNavi_list_item_link {
+                    color: #FFF;
+                    font-size: vwmin(14, pc, 14);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    letter-spacing: calc(0.28px / 14);
+                    transition: all 0.3s var(--reverseTransition);
+
+                    @media (hover: hover) {
+                        &:hover {
+                            opacity: 0.5;
+                            transition: all 0.3s var(--reverseTransition);
+                        }
+                    }   
+                }
+            }
+        }
+    }
+}
+
+.bl_footerGlobalNavi_copyContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: vwmin(30, pc, 30);
+    border-top: vwmin(1, pc, 1) solid #333;
+
+    .bl_footerGlobalNavi_copyContainer_list {
+        display: flex;
+        align-items: center;
+        gap: vwmin(20, pc, 20);
+
+        .bl_footerGlobalNavi_copyContainer_list_item {
+            color: var(--gray-txt, #999);
+            font-size: vwmin(12, pc, 12);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.5;
+            letter-spacing: calc(0.24px / 12);
+            transition: all 0.3s var(--reverseTransition);
+
+            @media (hover: hover) {
+                &:hover {
+                    opacity: 0.5;
+                    transition: all 0.3s var(--reverseTransition);
                 }
             }
         }
     }
 
-    .ly_commonFooterLower {
-        background-color: var(--baseFontColor);
-        padding-block: vwmin(24, pc);
-        padding-inline: vwmin(20, pc);
-
-        small {
-            display: block;
-            width: fit-content;
-            margin-inline: auto;
-            text-align: center;
-            color: #fff;
-            text-align: center;
-        }
+    .el_footerGlobalNavi_copyright_txt {
+        color: var(--gray-txt, #999);
+        font-size: vwmin(12, pc, 12);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1;
+        letter-spacing: calc(0.24px / 12);
     }
 }

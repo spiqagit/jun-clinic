@@ -239,110 +239,108 @@ navi
                 }
             }
         }
+    }
+}
 
 
-        .bl_header_nav_inner_menu {
-            display: flex;
-            flex-flow: column;
-            gap: vwmin(80, pc);
-            overflow-y: auto;
-            padding-inline: vwmin(80, pc);
-            padding-top: vwmin(100, pc);
-            padding-bottom: vwmin(80, pc);
+.bl_header_nav_inner_menu {
+    display: flex;
+    flex-flow: column;
+    gap: vwmin(80, pc);
+    overflow-y: auto;
+    padding-inline: vwmin(80, pc);
+    padding-top: vwmin(100, pc);
+    padding-bottom: vwmin(80, pc);
 
-            .bl_header_nav_inner_menu_conatainer {
-                display: flex;
-                flex-flow: column;
-                gap: vwmin(20, pc);
+    .bl_header_nav_inner_menu_conatainer {
+        display: flex;
+        flex-flow: column;
+        gap: vwmin(20, pc);
 
-                .bl_header_nav_inner_menu_conatainer_titleWrapper {
+        .bl_header_nav_inner_menu_conatainer_titleWrapper {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: vwmin(16, pc);
+            align-items: center;
+
+            &::after {
+                content: '';
+                display: block;
+                width: 100%;
+                height: vwmin(1, pc);
+                background-color: #CCC8B9;
+            }
+
+            .bl_header_nav_inner_menu_conatainer_title {
+                color: var(--black, #333);
+                font-family: "Shippori Mincho";
+                font-size: vwmin(18, pc);
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.5;
+                letter-spacing: calc(0.72px / 18px);
+            }
+        }
+
+        .bl_header_nav_inner_menu_conatainer_listWrapper {
+
+            .bl_globalNaviList {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                row-gap: vwmin(16, pc);
+                column-gap: vwmin(64, pc);
+
+                .bl_globalNaviList_item_link {
                     display: grid;
-                    grid-template-columns: auto 1fr;
-                    gap: vwmin(16, pc);
-                    align-items: center;
+                    grid-template-columns: 1fr vwmin(10, pc);
+                    gap: vwmin(10, pc);
+                    align-items: baseline;
+                    padding-bottom: vwmin(16, pc);
+                    border-bottom: vwmin(1, pc) solid #fff;
+                    border-bottom: vwmin(1, pc) solid #CCC8B9;
 
-                    &::after {
+                    .el_globalNaviList_item_link_text {
+                        font-size: vwmin(16, pc);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 150%;
+                        letter-spacing: calc(0.32px / 16px);
+                    }
+                }
+            }
+
+
+            .bl_globalMenuList {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                row-gap: vwmin(10, pc);
+                column-gap: vwmin(22, pc);
+
+
+                .bl_globalMenuList_item_link {
+                    display: grid;
+                    grid-template-columns: vwmin(10, pc) 1fr;
+                    gap: vwmin(10, pc);
+                    align-items: flex-start;
+                    font-size: vwmin(14, pc);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    letter-spacing: calc(0.28px / 14px);
+
+                    &::before {
                         content: '';
+                        position: relative;
                         display: block;
                         width: 100%;
                         height: vwmin(1, pc);
                         background-color: #CCC8B9;
+                        margin-top: vwmin(12, pc);
                     }
-
-                    .bl_header_nav_inner_menu_conatainer_title {
-                        color: var(--black, #333);
-                        font-family: "Shippori Mincho";
-                        font-size: vwmin(18, pc);
-                        font-style: normal;
-                        font-weight: 500;
-                        line-height: 1.5;
-                        letter-spacing: calc(0.72px / 18px);
-                    }
-                }
-
-                .bl_header_nav_inner_menu_conatainer_listWrapper {
-
-                    .bl_globalNaviList {
-                        display: grid;
-                        grid-template-columns: repeat(3, 1fr);
-                        row-gap: vwmin(16, pc);
-                        column-gap: vwmin(64, pc);
-
-                        .bl_globalNaviList_item_link {
-                            display: grid;
-                            grid-template-columns: 1fr vwmin(10, pc);
-                            gap: vwmin(10, pc);
-                            align-items: baseline;
-                            padding-bottom: vwmin(16, pc);
-                            border-bottom: vwmin(1, pc) solid #fff;
-                            border-bottom: vwmin(1, pc) solid #CCC8B9;
-
-                            .el_globalNaviList_item_link_text {
-                                font-size: vwmin(16, pc);
-                                font-style: normal;
-                                font-weight: 400;
-                                line-height: 150%;
-                                letter-spacing: calc(0.32px / 16px);
-                            }
-                        }
-                    }
-
-
-                    .bl_globalMenuList {
-                        display: grid;
-                        grid-template-columns: repeat(3, 1fr);
-                        row-gap: vwmin(10, pc);
-                        column-gap: vwmin(22, pc);
-
-
-                        .bl_globalMenuList_item_link {
-                            display: grid;
-                            grid-template-columns: vwmin(10, pc) 1fr;
-                            gap: vwmin(10, pc);
-                            align-items: flex-start;
-                            font-size: vwmin(14, pc);
-                            font-style: normal;
-                            font-weight: 400;
-                            line-height: 1.5;
-                            letter-spacing: calc(0.28px / 14px);
-
-                            &::before {
-                                content: '';
-                                position: relative;
-                                display: block;
-                                width: 100%;
-                                height: vwmin(1, pc);
-                                background-color: #CCC8B9;
-                                margin-top: vwmin(12, pc);
-                            }
-
-                        }
-                    }
-
 
                 }
-
             }
         }
+
     }
 }

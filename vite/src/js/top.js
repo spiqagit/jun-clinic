@@ -2,6 +2,7 @@ import Splide from '@splidejs/splide';
 import '@splidejs/splide/css';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // FVスライダー
     const fvSlide = new Splide('.fvSlide', {
         type: 'loop',
         perPage: 1,         // 1枚表示
@@ -16,13 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     fvSlide.mount();
 
-
+    // ドクター紹介スライダー
     const topDoctorSplide = new Splide('.topDoctorSplide', {
         type: 'loop',
-        perPage: 1,
-        perMove: 1,
         pagination: false,
         arrows: true,
+        autoplay: false,    // 自動再生なし
+        rewind: true,
+        focus: 'center',    // 中央揃え
+        updateOnMove: true,
+        gap: 40,
     });
     topDoctorSplide.mount();
 });     

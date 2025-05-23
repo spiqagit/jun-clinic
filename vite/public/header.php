@@ -84,80 +84,94 @@
                     </div>
                 </div>
 
+
+                <!-- お悩みから探す -->
                 <div class="bl_header_nav_inner_menu_conatainer">
                     <div class="bl_header_nav_inner_menu_conatainer_titleWrapper">
                         <p class="bl_header_nav_inner_menu_conatainer_title">お悩みから探す</p>
                     </div>
                     <div class="bl_header_nav_inner_menu_conatainer_listWrapper">
                         <ul class="bl_globalMenuList">
-                            <li class="bl_globalMenuList_item">
-                                <a class="bl_globalMenuList_item_link" href="#">
-                                    <p class="el_globalMenuList_item_link_text">目の下のくま・たるみ</p>
-                                </a>
-                            </li>
-                            <li class="bl_globalMenuList_item">
-                                <a class="bl_globalMenuList_item_link" href="#">
-                                    <p class="el_globalMenuList_item_link_text">目の下のくま・たるみ</p>
-                                </a>
-                            </li>
-                            <li class="bl_globalMenuList_item">
-                                <a class="bl_globalMenuList_item_link" href="#">
-                                    <p class="el_globalMenuList_item_link_text">目の下のくま・たるみ</p>
-                                </a>
-                            </li>
+                            <?php
+                            $terms = get_terms(array(
+                                'taxonomy' => 'menu-problem',
+                                'hide_empty' => true,
+                            ));
+                            if (!empty($terms) && !is_wp_error($terms)) :
+                                foreach ($terms as $term) : ?>
+                                    <li class="bl_globalMenuList_item">
+                                        <a class="bl_globalMenuList_item_link" href="<?php echo esc_url(get_term_link($term)); ?>">
+                                            <p class="el_globalMenuList_item_link_text"><?php echo esc_html($term->name); ?></p>
+                                        </a>
+                                    </li>
+                                <?php endforeach;
+                            endif; ?>
                         </ul>
                     </div>
                 </div>
 
-                <div class="bl_header_nav_inner_menu_conatainer">
-                    <div class="bl_header_nav_inner_menu_conatainer_titleWrapper">
-                        <p class="bl_header_nav_inner_menu_conatainer_title">美容皮膚科</p>
-                    </div>
-                    <div class="bl_header_nav_inner_menu_conatainer_listWrapper">
-                        <ul class="bl_globalMenuList">
-                            <li class="bl_globalMenuList_item">
-                                <a class="bl_globalMenuList_item_link" href="#">
-                                    <p class="el_globalMenuList_item_link_text">カスタマイズレーザー治療</p>
-                                </a>
-                            </li>
-                            <li class="bl_globalMenuList_item">
-                                <a class="bl_globalMenuList_item_link" href="#">
-                                    <p class="el_globalMenuList_item_link_text">カスタマイズレーザー治療</p>
-                                </a>
-                            </li>
-                            <li class="bl_globalMenuList_item">
-                                <a class="bl_globalMenuList_item_link" href="#">
-                                    <p class="el_globalMenuList_item_link_text">カスタマイズレーザー治療</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <?php
+                $menuCatList    = get_terms('menu-cat');
+                ?>
 
-                <div class="bl_header_nav_inner_menu_conatainer">
-                    <div class="bl_header_nav_inner_menu_conatainer_titleWrapper">
-                        <p class="bl_header_nav_inner_menu_conatainer_title">美容外科</p>
+                <?php foreach ($menuCatList as $menuCat): ?>
+
+                    <div class="bl_header_nav_inner_menu_conatainer">
+                        <div class="bl_header_nav_inner_menu_conatainer_titleWrapper">
+                            <p class="bl_header_nav_inner_menu_conatainer_title"><?php echo $menuCat->name; ?></p>
+                        </div>
+                        <div class="bl_header_nav_inner_menu_conatainer_listWrapper">
+                            <ul class="bl_globalMenuList">
+                                <li class="bl_globalMenuList_item">
+                                    <a class="bl_globalMenuList_item_link" href="#">
+                                        <p class="el_globalMenuList_item_link_text">カスタマイズレーザー治療</p>
+                                    </a>
+                                    <?php
+                                    $terms = get_terms(array(
+                                        'taxonomy' => 'column-key',
+                                        'hide_empty' => true,
+                                    ));
+                                    if (!empty($terms) && !is_wp_error($terms)) : ?>
+                                        <ul class="bl_globalMenuList_sub">
+                                            <?php foreach ($terms as $term) :
+                                                $args = array(
+                                                    'post_type' => 'column',
+                                                    'posts_per_page' => 5,
+                                                    'tax_query' => array(
+                                                        array(
+                                                            'taxonomy' => 'column-key',
+                                                            'field' => 'term_id',
+                                                            'terms' => $term->term_id,
+                                                        ),
+                                                    ),
+                                                );
+                                                $query = new WP_Query($args);
+                                                if ($query->have_posts()) : ?>
+                                                    <li class="bl_globalMenuList_sub_item">
+                                                        <a href="<?php echo esc_url(get_term_link($term)); ?>" class="bl_globalMenuList_sub_item_link">
+                                                            <p class="el_globalMenuList_sub_item_link_text"><?php echo esc_html($term->name); ?></p>
+                                                        </a>
+                                                        <ul class="bl_globalMenuList_sub_sub">
+                                                            <?php while ($query->have_posts()) : $query->the_post(); ?>
+                                                                <li class="bl_globalMenuList_sub_sub_item">
+                                                                    <a href="<?php the_permalink(); ?>" class="bl_globalMenuList_sub_sub_item_link">
+                                                                        <p class="el_globalMenuList_sub_sub_item_link_text"><?php the_title(); ?></p>
+                                                                    </a>
+                                                                </li>
+                                                            <?php endwhile; ?>
+                                                        </ul>
+                                                    </li>
+                                            <?php endif;
+                                                wp_reset_postdata();
+                                            endforeach; ?>
+                                        </ul>
+                                    <?php endif; ?>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="bl_header_nav_inner_menu_conatainer_listWrapper">
-                        <ul class="bl_globalMenuList">
-                            <li class="bl_globalMenuList_item">
-                                <a class="bl_globalMenuList_item_link" href="#">
-                                    <p class="el_globalMenuList_item_link_text">埋没</p>
-                                </a>
-                            </li>
-                            <li class="bl_globalMenuList_item">
-                                <a class="bl_globalMenuList_item_link" href="#">
-                                    <p class="el_globalMenuList_item_link_text">全切開</p>
-                                </a>
-                            </li>
-                            <li class="bl_globalMenuList_item">
-                                <a class="bl_globalMenuList_item_link" href="#">
-                                    <p class="el_globalMenuList_item_link_text">経結膜脱脂</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
+                <?php endforeach; ?>
 
             </div>
         </div>
