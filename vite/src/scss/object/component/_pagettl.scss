@@ -13,7 +13,7 @@
         padding-bottom: vwmin(9, pc, 9);
         color: var(--lineText);
         font-family: Marcellus;
-        font-size: vwmin(20, pc, 20) ;
+        font-size: vwmin(20, pc, 20);
         width: 100%;
         font-style: normal;
         font-weight: 400;
@@ -45,5 +45,47 @@
         font-weight: 500;
         line-height: 1.5;
         letter-spacing: calc(1.04px / 26);
+    }
+}
+
+
+/* --------------------------------------------
+下層ページタイトル
+--------------------------------------------*/
+
+.bl_commonPageTtlContainer {
+
+    .bl_commonBreadcrumbContainer {
+        margin-bottom: vwmin(40, pc, 40);
+    }
+
+    .bl_commonPageTtlContainer_inner {
+        max-width: vwmin(1000, pc, 1000);
+        margin-inline: auto;
+        box-sizing: border-box;
+
+        .el_commonPageTtlContainer_inner_ttl {
+            color: var(--baseFontColor);
+            font-family: "Shippori Mincho";
+            font-size: vwmin(36, pc, 36);
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: calc(1.44px / 36);
+            width: fit-content;
+            margin-inline: auto;
+            margin-bottom: vwmin(100, pc, 100);
+        }
+
+    }
+
+    .el_commonPageTtlContainer_waveLine {
+        display: block;
+        width: 100%;
+
+        img {
+            display: block;
+            width: 100%;
+        }
     }
 }

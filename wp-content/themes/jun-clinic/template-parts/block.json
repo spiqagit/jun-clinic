@@ -1,0 +1,14 @@
+{
+    "name": "bg-block",
+    "title": "",
+    "description": "背景色がつきます。テキストやリスト等使えます。",
+    "style": [ "file:../../assets/css/acf-block.css" ],
+    "category": "acf-block",
+    "icon": "media-default",
+    "keywords": ["背景色"],
+    "acf": {
+        "mode": "auto",
+        "renderTemplate": "./acf-blocks/bg/bg-block.php"
+    },
+    "align": "full"
+  }

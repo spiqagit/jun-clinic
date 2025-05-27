@@ -2,7 +2,7 @@
 <?php wp_head(); ?>
 </head>
 
-<body class="pg_top ">
+<body class="pg_top">
     <div class="bl_commonBgContainer">
         <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/bg.png" alt="">
     </div>
