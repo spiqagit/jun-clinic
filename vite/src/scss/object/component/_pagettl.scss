@@ -8,6 +8,10 @@
     gap: vwmin(16, pc, 16);
     align-items: center;
 
+    @include underTB {
+        gap: vwmin(12, pc, 12);
+    }
+
     .el_commonSectionTtl_ttl {
         position: relative;
         padding-bottom: vwmin(9, pc, 9);
@@ -20,6 +24,10 @@
         line-height: 1;
         letter-spacing: calc(0.4px / 20);
         text-align: center;
+
+        @include underTB {
+            font-size: vwmin(16, pc, 16);
+        }
 
         &::before {
             content: "";
@@ -45,6 +53,10 @@
         font-weight: 500;
         line-height: 1.5;
         letter-spacing: calc(1.04px / 26);
+
+        @include underTB {
+            font-size: vwmin(22, pc, 22);
+        }
     }
 }
 
@@ -57,12 +69,21 @@
 
     .bl_commonBreadcrumbContainer {
         margin-bottom: vwmin(40, pc, 40);
+
+        @include underTB {
+            margin-bottom: vwmin(60, pc, 60);
+        }
     }
 
     .bl_commonPageTtlContainer_inner {
         max-width: vwmin(1000, pc, 1000);
         margin-inline: auto;
         box-sizing: border-box;
+        margin-bottom: vwmin(100, pc, 100);
+
+        @include underTB {
+            margin-bottom: vwmin(60, pc, 60);
+        }
 
         .el_commonPageTtlContainer_inner_ttl {
             color: var(--baseFontColor);
@@ -74,7 +95,6 @@
             letter-spacing: calc(1.44px / 36);
             width: fit-content;
             margin-inline: auto;
-            margin-bottom: vwmin(100, pc, 100);
         }
 
     }

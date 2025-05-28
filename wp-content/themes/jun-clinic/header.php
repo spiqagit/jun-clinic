@@ -1,9 +1,17 @@
 <header class="ly_header">
     <div class="ly_header_conatiner">
         <div class="ly_header_inner">
-            <h1 class="bl_header_inner_logo">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/jun-clinic.svg" alt="JUN CLINIC">
-            </h1>
+
+            <?php if (is_front_page()): ?>
+                <h1 class="bl_header_inner_logo">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/jun-clinic.svg" alt="JUN CLINIC">
+                </h1>
+            <?php else: ?>
+                <a href="<?php echo esc_url(home_url('/')); ?>" class="bl_header_inner_logo bl_header_inner_logo_link" rel="home">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/jun-clinic.svg" alt="JUN CLINIC">
+                </a>
+            <?php endif; ?>
+
         </div>
     </div>
 
@@ -57,26 +65,14 @@
                     <div class="bl_header_nav_inner_menu_conatainer_listWrapper">
                         <ul class="bl_globalNaviList">
                             <li class="bl_globalNaviList_item">
-                                <a class="bl_globalNaviList_item_link" href="#">
+                                <a class="bl_globalNaviList_item_link" href="<?php echo esc_url(home_url('/')); ?>">
                                     <p class="el_globalNaviList_item_link_text">トップ</p>
                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/line-arrow.svg" alt="">
                                 </a>
                             </li>
                             <li class="bl_globalNaviList_item">
-                                <a class="bl_globalNaviList_item_link" href="#">
-                                    <p class="el_globalNaviList_item_link_text">トップ</p>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/line-arrow.svg" alt="">
-                                </a>
-                            </li>
-                            <li class="bl_globalNaviList_item">
-                                <a class="bl_globalNaviList_item_link" href="#">
-                                    <p class="el_globalNaviList_item_link_text">トップ</p>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/line-arrow.svg" alt="">
-                                </a>
-                            </li>
-                            <li class="bl_globalNaviList_item">
-                                <a class="bl_globalNaviList_item_link" href="#">
-                                    <p class="el_globalNaviList_item_link_text">トップ</p>
+                                <a class="bl_globalNaviList_item_link" href="<?php echo  esc_url(home_url('/price/')); ?>">
+                                    <p class="el_globalNaviList_item_link_text">料金表</p>
                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/line-arrow.svg" alt="">
                                 </a>
                             </li>
@@ -104,70 +100,77 @@
                                             <p class="el_globalMenuList_item_link_text"><?php echo esc_html($term->name); ?></p>
                                         </a>
                                     </li>
-                                <?php endforeach;
+                            <?php endforeach;
                             endif; ?>
                         </ul>
                     </div>
                 </div>
 
                 <?php
-                $menuCatList    = get_terms('menu-cat');
-                ?>
+                $menuCatList = get_terms(array(
+                    'taxonomy' => 'menu-cat',
+                    'parent' => 0,  // 親カテゴリーのみ
+                    'hide_empty' => true  // 投稿がないものは除外
+                ));
+                $termList = array();
 
-                <?php foreach ($menuCatList as $menuCat): ?>
+                foreach ($menuCatList as $menuCat) {
+
+                    $posts = get_posts(array(
+                        'post_type' => 'menu',
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'menu-cat',
+                                'field' => 'term_id',
+                                'terms' => $menuCat->term_id
+                            )
+                        )
+                    ));
+
+                    if (!empty($posts)) {
+                        $termList[] = $menuCat;
+                    }
+                }
+                ?>
+                <?php foreach ($termList as $term): ?>
 
                     <div class="bl_header_nav_inner_menu_conatainer">
                         <div class="bl_header_nav_inner_menu_conatainer_titleWrapper">
-                            <p class="bl_header_nav_inner_menu_conatainer_title"><?php echo $menuCat->name; ?></p>
+                            <p class="bl_header_nav_inner_menu_conatainer_title"><?php echo $term->name; ?></p>
                         </div>
                         <div class="bl_header_nav_inner_menu_conatainer_listWrapper">
-                            <ul class="bl_globalMenuList">
-                                <li class="bl_globalMenuList_item">
-                                    <a class="bl_globalMenuList_item_link" href="#">
-                                        <p class="el_globalMenuList_item_link_text">カスタマイズレーザー治療</p>
-                                    </a>
-                                    <?php
-                                    $terms = get_terms(array(
-                                        'taxonomy' => 'column-key',
-                                        'hide_empty' => true,
-                                    ));
-                                    if (!empty($terms) && !is_wp_error($terms)) : ?>
-                                        <ul class="bl_globalMenuList_sub">
-                                            <?php foreach ($terms as $term) :
-                                                $args = array(
-                                                    'post_type' => 'column',
-                                                    'posts_per_page' => 5,
-                                                    'tax_query' => array(
-                                                        array(
-                                                            'taxonomy' => 'column-key',
-                                                            'field' => 'term_id',
-                                                            'terms' => $term->term_id,
-                                                        ),
-                                                    ),
-                                                );
-                                                $query = new WP_Query($args);
-                                                if ($query->have_posts()) : ?>
-                                                    <li class="bl_globalMenuList_sub_item">
-                                                        <a href="<?php echo esc_url(get_term_link($term)); ?>" class="bl_globalMenuList_sub_item_link">
-                                                            <p class="el_globalMenuList_sub_item_link_text"><?php echo esc_html($term->name); ?></p>
-                                                        </a>
-                                                        <ul class="bl_globalMenuList_sub_sub">
-                                                            <?php while ($query->have_posts()) : $query->the_post(); ?>
-                                                                <li class="bl_globalMenuList_sub_sub_item">
-                                                                    <a href="<?php the_permalink(); ?>" class="bl_globalMenuList_sub_sub_item_link">
-                                                                        <p class="el_globalMenuList_sub_sub_item_link_text"><?php the_title(); ?></p>
-                                                                    </a>
-                                                                </li>
-                                                            <?php endwhile; ?>
-                                                        </ul>
-                                                    </li>
-                                            <?php endif;
-                                                wp_reset_postdata();
-                                            endforeach; ?>
-                                        </ul>
-                                    <?php endif; ?>
-                                </li>
-                            </ul>
+                            <?php
+                            // サブクエリで記事を取得
+                            $args = array(
+                                'post_type' => 'menu',
+                                'posts_per_page' => -1,
+                                'tax_query' => array(
+                                    array(
+                                        'taxonomy' => 'menu-cat',
+                                        'field' => 'term_id',
+                                        'terms' => $term->term_id
+                                    )
+                                ),
+                                'orderby' => 'menu_order',
+                                'order' => 'ASC'
+                            );
+
+                            $sub_query = new WP_Query($args);
+                            ?>
+                            <?php if ($sub_query->have_posts()) : ?>
+                                <ul class="bl_globalMenuList">
+
+                                    <?php while ($sub_query->have_posts()) : $sub_query->the_post(); ?>
+                                        <li class="bl_globalMenuList_item">
+                                            <a class="bl_globalMenuList_item_link" href="<?php the_permalink(); ?>">
+                                                <p class="el_globalMenuList_item_link_text"><?php the_title(); ?></p>
+                                            </a>
+                                        </li>
+                                    <?php endwhile; ?>
+                                    <?php wp_reset_postdata(); ?>
+                                </ul>
+                            <?php endif; ?>
+
                         </div>
                     </div>
 

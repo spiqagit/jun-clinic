@@ -1,5 +1,4 @@
 import Splide from '@splidejs/splide';
-import '@splidejs/splide/css';
 
 document.addEventListener('DOMContentLoaded', () => {
     // FVスライダー

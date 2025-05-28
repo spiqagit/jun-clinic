@@ -7,6 +7,11 @@
     padding-top: vwmin(120, pc, 120);
     padding-bottom: vwmin(140, pc, 140);
 
+    @include underTB {
+        padding-top: vwmin(60, pc, 60);
+        padding-bottom: vwmin(70, pc, 70);
+    }
+
     .bl_priceSec_inner {
         max-width: vwmin(1200, pc, 1200);
         margin-inline: auto;
@@ -15,11 +20,21 @@
         justify-content: space-between;
         gap: vwmin(40, pc, 40);
 
+        @include underTB {
+            flex-flow: column;
+            gap: vwmin(50, pc, 50);
+        }
+
         .bl_priceSec_seideMenuContainer {
             position: sticky;
             top: vwmin(120, pc, 120);
             height: fit-content;
             overflow-y: auto;
+
+            @include underTB {
+                position: relative;
+                top: 0;
+            }
 
             .bl_priceSec_seideMenuContainer_list {
                 display: flex;
@@ -28,6 +43,10 @@
                 margin-bottom: vwmin(16, pc, 16);
                 max-width: vwmin(260, pc, 260);
                 width: 100%;
+
+                @include underTB {
+                    max-width: 100%;
+                }
 
                 .bl_priceSec_seideMenuContainer_item {
 
@@ -101,13 +120,14 @@
             gap: vwmin(60, pc, 60);
             max-width: vwmin(800, pc, 800);
             width: 100%;
-        }
 
-        &.is_priceListContainerActive {
-            display: flex;
+            @include underTB {
+                gap: vwmin(40, pc, 40);
+            }
         }
     }
 }
+
 
 .bl_priceListContainer_clinicBtnList {
     display: grid;
@@ -131,11 +151,13 @@
             padding-block: vwmin(6, pc, 6);
             border: none;
             width: 100%;
+            transition: all 0.3s var(--reverseTransition);
         }
 
-        &.is-active {
+        .is-active {
             background-color: #fff;
             color: var(--baseFontColor);
+            transition: all 0.3s var(--reverseTransition);
         }
     }
 }
@@ -190,10 +212,8 @@
 
 .bl_priceListContainer {
     display: none;
-
-    &.is_priceListContainerActive {
-        display: block;
-    }
+    flex-flow: column;
+    gap: vwmin(30, pc, 30);
 
     .bl_priceTableList {
         display: flex;
@@ -210,6 +230,10 @@
             padding-bottom: vwmin(20, pc, 20);
             border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
 
+            @include underTB {
+                gap: vwmin(8, pc, 8);
+            }
+
             &:last-child {
                 border-bottom: none;
                 padding-bottom: 0;
@@ -219,6 +243,11 @@
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: vwmin(20, pc, 20);
+
+                @include underTB {
+                    grid-template-columns: 1fr;
+                    gap: vwmin(16, pc, 16);
+                }
 
                 .bl_priceTableList_item_innerContainer_left {
 
@@ -241,8 +270,26 @@
                     font-style: normal;
                     font-weight: 400;
                     line-height: 1.5;
+
+                    @include underTB {
+                        grid-template-columns: 1fr minmax(min(vwmin(80, pc, 80), 100%), 1fr) .5fr;
+                        gap: vwmin(8, pc, 8);
+                    }
+
+                    .bl_priceTableList_item_innerContainer_right_txtContainer{
+                        @include underTB {
+                            &:first-child{
+                                text-align: left;
+                            }
+                        }
+                    }
                 }
             }
         }
     }
+}
+
+
+.is_priceListContainerActive {
+    display: flex;
 }

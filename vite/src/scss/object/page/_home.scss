@@ -10,6 +10,11 @@ FV Slide
     padding-bottom: vwmin(140, pc, 140);
     overflow: hidden;
 
+    @include underTB {
+        padding-top: vwmin(92, pc, 92);
+        padding-bottom: vwmin(60, pc, 60);
+    }
+
     &::before {
         content: "";
         position: absolute;
@@ -38,13 +43,18 @@ FV Slide
 
             .bl_fvSlideBanner {
                 filter: drop-shadow(0px 0px 10.182px rgba(64, 37, 14, 0.12));
+
+                @include underTB {
+                    aspect-ratio: 1/1;
+                    height: auto;
+                }
             }
 
             .bl_fvSlideBanner_imgContainer {
                 mask-image: url("img/top/fv-slide-mask.svg");
                 mask-repeat: no-repeat;
                 mask-position: 0 0;
-                max-width: vwmin(1120, pc, 1120);
+                max-width: vwmin(1120, pc);
                 mask-size: 100%;
                 width: 100%;
                 margin-inline: auto;
@@ -53,12 +63,22 @@ FV Slide
                 -webkit-mask-position: 0 0;
                 -webkit-mask-size: 100%;
                 scale: .8;
+                height: auto;
                 transform-origin: bottom;
                 transition: all 0.3s var(--reverseTransition);
+                
 
+                @include underTB {
+                    align-self: 1/1;
+                    height: 100%;
+                    mask-image: url("img/top/fv-slide-mask-sp.svg");
+                    -webkit-mask-image: url("img/top/fv-slide-mask-sp.svg");
+                }
 
                 img {
                     width: 100%;
+                    height: 100%;
+                    object-fit: cover;
                 }
             }
         }
@@ -86,6 +106,7 @@ FV Slide
             opacity: 1 !important;
             width: 100%;
             z-index: 2;
+            padding-inline: vwmin(0, pc, 0) !important;
 
             .splide__arrow {
                 cursor: pointer;
@@ -126,22 +147,42 @@ About
     background-color: var(--white-bg);
     padding-block: vwmin(100, pc, 100);
 
+    @include underTB {
+        padding-block: vwmin(40, pc, 40);
+    }
+
     .bl_topAboutSec_inner {
         display: grid;
-        grid-template-columns: vwmin(336, pc, 336) vwmin(520, pc, 100);
-        gap: vwmin(20, pc, 20);
+        grid-template-columns: vwmin(336, pc, 400) vwmin(520, pc, 300);
         justify-content: space-between;
+
+        @include underTB {
+            grid-template-columns: 1fr;
+            gap: vwmin(40, sp, 40);
+        }
+
     }
 
     // 左側
     .bl_topAboutSec_leftSide {
         display: flex;
         flex-flow: column;
-        gap: vwmin(16, pc, 16);
+        gap: vwmin(12, sp, 12);
+
+        @include underTB {
+            text-align: center;
+            justify-content: center;
+            gap: vwmin(16, sp, 16);
+        }
 
         .bl_topAboutSec_leftSide_ttl {
             max-width: vwmin(72, pc, 72);
             width: 100%;
+
+            @include underTB {
+                max-width: vwmin(72, pc, 72);
+                margin-inline: auto;
+            }
 
             .bl_topAboutSec_leftSide_ttl_ttl {
                 color: var(--lineText);
@@ -153,6 +194,10 @@ About
                 letter-spacing: calc(0.44px / 22);
                 width: fit-content;
                 margin-inline: auto;
+
+                @include underTB {
+                    font-size: vwmin(22, pc, 22);
+                }
             }
 
             .bl_topAboutSec_leftSide_ttl_line {
@@ -176,10 +221,19 @@ About
         flex-flow: column;
         gap: vwmin(60, pc, 60);
 
+        @include underTB {
+            gap: vwmin(40, pc, 40);
+        }
+
         .bl_topAboutSec_rightSide_txtContainer {
             display: flex;
             flex-flow: column;
             gap: vwmin(16, pc, 16);
+
+            @include underTB {
+                gap: vwmin(20, pc, 20);
+            }
+
 
             .el_topAboutSec_rightSide_txtContainer_txt {
                 font-size: vwmin(16, pc, 16);
@@ -211,12 +265,20 @@ Feature
     padding-top: vwmin(120, pc, 120);
     padding-bottom: vwmin(100, pc, 100);
 
+    @include underTB {
+        padding-top: vwmin(60, pc, 60);
+        padding-bottom: vwmin(80, pc, 80);
+    }
 
     .bl_topFeatureSec_inner {
 
         .bl_topFeatureSec_ttl {
             margin-inline: auto;
             margin-bottom: vwmin(60, pc, 60);
+
+            @include underPC {
+                margin-bottom: vwmin(40, pc, 40);
+            }
         }
 
         .el_featuer_boldTxt {
@@ -228,27 +290,48 @@ Feature
             flex-flow: column;
             gap: vwmin(100, pc, 100);
 
+            @include underPC {
+                gap: vwmin(60, pc, 60);
+            }
+
             .bl_topFeatureSec_featureContainer_item {
                 padding-inline: vwmin(20, pc, 20);
+
+                @include underPC {
+                    padding-inline: vwmin(20, pc, 20);
+                }
 
                 &:nth-child(2) {
                     padding-top: vwmin(100, pc, 100);
                     border-top: vwmin(1, pc, 1) solid var(--line);
+
+                    @include underPC {
+                        padding-top: vwmin(60, pc, 60);
+                    }
                 }
 
                 .bl_topFeatureSec_featureContainer_item_inner {
                     display: grid;
-                    grid-template-columns: 1fr vwmin(469, pc, 469);
+                    grid-template-columns: 1fr vwmin(469, pc);
                     justify-content: space-between;
                     align-items: center;
-                    gap: vwmin(60, pc, null, 60);
+                    gap: vwmin(60, pc);
                     max-width: vwmin(1060, pc, 1060);
                     margin-inline: auto;
+
+                    @include underPC {
+                        grid-template-columns: 1fr;
+                        gap: vwmin(40, pc, 40);
+                    }
 
                     .bl_topFeatureSec_featureContainer_item_leftSide {
                         display: flex;
                         flex-flow: column;
                         gap: vwmin(60, pc, 60);
+
+                        @include underPC {
+                            gap: vwmin(40, pc, 40);
+                        }
                     }
 
                     .bl_topFeatureSec_featureContainer_item_ttl_ttlContainer {
@@ -273,6 +356,14 @@ Feature
                             font-weight: 500;
                             line-height: 1.5;
                             letter-spacing: calc(1.44px / 36);
+
+                            @include underPC {
+                                font-size: vwmin(26, pc, 26);
+
+                                br {
+                                    display: none;
+                                }
+                            }
                         }
                     }
 
@@ -338,6 +429,18 @@ Feature
                                 font-weight: 700;
                                 line-height: 1.5;
                                 letter-spacing: calc(0.28px / 14);
+
+                                @include underPC {
+                                    text-align: center;
+                                }
+
+                                br {
+                                    display: none;
+
+                                    @include underPC {
+                                        display: block;
+                                    }
+                                }
                             }
                         }
                     }
@@ -347,18 +450,41 @@ Feature
                         flex-flow: column;
                         gap: vwmin(40, pc, 40);
 
-                        .bl_topFeatureSec_featureContainer_item_rightSide_img {
-                            border-radius: vwmin(12, pc, 12);
-                            overflow: hidden;
+                        .bl_topFeatureSec_featureContainer_item_rightSide_img {                            
+
+                            img{
+                                border-radius: vwmin(12, pc, 12);
+                                overflow: hidden;
+                                width: 100%;
+                            }
                         }
 
                         .bl_topFeatureSec_featureContainer_item_rightSide_img_01 {
-                            max-width: vwmin(380, pc, 380);
+                            max-width: vwmin(380, pc ,380);
+                            width: 100%;
+
+                            @include underPC {
+                                max-width: vwmin(450, pc, 450);
+                            }
+
+                            @include underTB {
+                                max-width: min(vwmin(380, pc, 380), 100%);
+                                padding-right: vwmin(40, pc, 40);
+                            }
                         }
 
                         .bl_topFeatureSec_featureContainer_item_rightSide_img_02 {
                             max-width: vwmin(270, pc, 270);
                             margin-left: auto;
+
+                            @include underPC {
+                                max-width: vwmin(300, pc, 300);
+                            }
+
+                            @include underTB {
+                                max-width: min(vwmin(270, pc, 270), 100%);
+                                padding-left: vwmin(60, pc, 60);
+                            }
                         }
 
                     }
@@ -400,9 +526,19 @@ Seminor
         padding: vwmin(40, pc, 40);
         background-color: var(--white-bg);
 
+        @include underTB {
+            grid-template-columns: 1fr;
+            gap: vwmin(20, pc, 20);
+            padding: vwmin(20, pc, 20);
+        }
+
         .bl_topSeminorContainer_img {
             border-radius: vwmin(12, pc, 12);
             overflow: hidden;
+
+            @include underTB {
+                width: 100%;
+            }
         }
 
         .bl_commonBgContainer_txtContainer_txt {
@@ -412,6 +548,10 @@ Seminor
             line-height: 2;
             letter-spacing: calc(0.32px / 16);
             margin-bottom: vwmin(24, pc, 24);
+
+            @include underTB {
+                margin-bottom: vwmin(20, pc, 20);
+            }
         }
 
         .bl_commonBgContainer_txtContainer_btnContainer {
@@ -431,16 +571,15 @@ Site Info
     background-color: var(--bg02);
     padding-top: vwmin(210, pc, 210);
     padding-bottom: vwmin(140, pc, 140);
-    margin-top: vwmin(-130, pc, -130);
+    margin-top:-130px;
     margin-bottom: vwmin(-40, pc, -40);
 
-    @media (min-width: 1440px) {
-        margin-top: -130px;
+    @include underTB {
+        margin-top:-166px;
+        padding-top: vwmin(224, pc, 224);
     }
 
-    @media (max-width: 1440px) {
-        margin-top: -9vw;
-    }
+
 
     .ly_commonContantsOuter_inner {
         max-width: vwmin(940, pc, 940);
@@ -456,7 +595,7 @@ Site Info
 
     .bl_topSiteInfo_siteList {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(min(vwmin(300, pc, 300), 100%), 1fr));
         gap: vwmin(20, pc, 20);
 
         .bl_topSiteInfo_siteList_item_btn {
@@ -511,6 +650,11 @@ Recommend
     padding-top: vwmin(80, pc, 80);
     padding-bottom: vwmin(100, pc, 100);
 
+    @include underTB {
+        padding-top: vwmin(40, pc, 40);
+        padding-bottom: vwmin(60, pc, 60);
+    }
+
     .bl_topRecommendSec_ttlContainer {
         margin-bottom: vwmin(60, pc, 60);
         width: fit-content;
@@ -527,6 +671,10 @@ Recommend
 .ly_topCaseSec {
     padding-block: vwmin(120, pc, 120);
 
+    @include underTB {
+        padding-block: vwmin(60, pc, 60);
+    }
+
     .bl_topCaseSec_ttlContainer {
         width: fit-content;
         margin-inline: auto;
@@ -540,6 +688,12 @@ Recommend
     .bl_topCaseSec_btnContainer {
         width: fit-content;
         margin-inline: auto;
+    }
+
+    .bl_caseList {
+        @include underTB {
+            grid-template-columns: 1fr;
+        }
     }
 }
 
@@ -582,6 +736,12 @@ Recommend
     overflow: hidden;
     padding-block: vwmin(120, pc, 120);
 
+    @include underTB {
+        padding-block: vwmin(60, pc, 60);
+    }
+
+
+
     .bl_topDoctorSec_ttlContainer {
         width: fit-content;
         margin-inline: auto;
@@ -606,7 +766,7 @@ Recommend
             z-index: 2;
             display: flex;
             justify-content: space-between;
-            padding: 0 vwmin(20, pc, 20);
+            padding-inline: 0;
             pointer-events: none;
         }
 
@@ -672,6 +832,11 @@ Recommend
                 opacity: 1;
                 transition: all 0.3s var(--reverseTransition);
 
+                @include underTB {
+                    grid-template-columns: 1fr;
+                    gap: vwmin(20, pc, 20);
+                }
+
                 &:hover {
                     opacity: 0.9;
                 }
@@ -696,6 +861,10 @@ Recommend
                             line-height: 1.5;
                             letter-spacing: calc(0.28px / 14);
                             margin-bottom: vwmin(4, pc, 4);
+
+                            @include underTB {
+                                font-size: vwmin(12, pc, 12);
+                            }
                         }
 
                         .el_topDoctorCard_txtContainer_ttlContainer_ttl {
@@ -737,16 +906,29 @@ Recommend
     background-color: var(--white-bg);
     padding-top: vwmin(80, pc, 80);
     padding-bottom: vwmin(100, pc, 100);
+    margin-top: vwmin(-2, pc, -2);
 
-    .bl_topNewsSec_inner{
-        display: grid;
-        grid-template-columns: vwmin(143, pc, 143) 1fr;
-        gap: vwmin(177, pc , null ,177);
+    @include underTB {
+        padding-block: vwmin(60, pc, 60);
     }
 
-    .bl_topNewsSec_ttlContainer{
-        justify-content: flex-start;
-        align-items: flex-start;
+    .bl_topNewsSec_btnContainer {
+        @include underTB {
+            order: 3;
+            width: fit-content;
+            margin-inline: auto;
+        }
+    }
+
+    .bl_topNewsSec_inner {
+        display: grid;
+        grid-template-columns: vwmin(143, pc, 143) 1fr;
+        gap: vwmin(177, pc, null, 177);
+
+        @include underTB {
+            grid-template-columns: 1fr;
+            gap: vwmin(40, pc, 40);
+        }
     }
 
     .bl_topNewsSec_ttlContainer {
@@ -754,9 +936,24 @@ Recommend
         flex-flow: column;
         justify-content: space-between;
         align-items: left;
+
+        @include underTB {
+            display: contents;
+        }
+
+        .bl_topNewsSec_ttlContainer_inner {
+            @include underTB {
+                width: fit-content;
+                margin-inline: auto;
+            }
+        }
+
+        .bl_topNewsSec_ttlContainer {
+            order: 1;
+        }
     }
 
-    .bl_topNewsSec_newsListContainer{
+    .bl_topNewsSec_newsListContainer {
         min-height: vwmin(321, pc, 321);
     }
 }
@@ -765,22 +962,30 @@ Recommend
 トピックス
 ------------------------------------------------------------ */
 
-.ly_topTopicSec{
+.ly_topTopicSec {
     padding-top: vwmin(80, pc, 80);
     padding-bottom: vwmin(100, pc, 100);
 
-    .bl_topTopicSec_ttlContainer{
+    .bl_topTopicSec_ttlContainer {
         width: fit-content;
         margin-inline: auto;
         margin-bottom: vwmin(60, pc, 60);
     }
 
-    .bl_topTopicSec_btnContainer{
+    .bl_topTopicSec_btnContainer {
         width: fit-content;
         margin-inline: auto;
     }
 
-    .bl_topTopicSec_topicsContainer{
+    .bl_topTopicSec_topicsContainer {
         margin-bottom: vwmin(60, pc, 60);
+
+        .bl_topicsList {
+            grid-template-columns: repeat(auto-fill, minmax(min(vwmin(280, pc, 280), 100%), 1fr));
+
+            @include underTB {
+                gap: vwmin(30, pc, 30);
+            }
+        }
     }
 }

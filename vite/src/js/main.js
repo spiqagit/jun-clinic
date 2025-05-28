@@ -1,7 +1,9 @@
 import { gsap } from "gsap";
+import Splide from '@splidejs/splide';
+import '@splidejs/splide/css';
+import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
 
 document.addEventListener('DOMContentLoaded', () => {
-
 
   //Navi
   const headerMenuBtn = document.querySelector('#headerMenuBtn');
@@ -47,14 +49,52 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   const tabs = document.querySelectorAll('.bl_menuListContainer_tabContainer_btn');
-  const contents = document.querySelectorAll('.bl_menuListContainer_tabContainer_content');
+  const menuContentList = [...document.querySelectorAll('.bl_menuListContainer_content')];
   tabs.forEach((tab, idx) => {
     tab.addEventListener('click', function () {
+      
+      //ボタン
       tabs.forEach(t => t.classList.remove('is_active'));
-      contents.forEach(c => c.classList.remove('is_active'));
       tab.classList.add('is_active');
-      contents[idx].classList.add('is_active');
+      const tabId = tab.getAttribute('id');
+
+      menuContentList.forEach(menuContent => {
+        menuContent.classList.remove('is_activeTab');
+        const contentId = menuContent.getAttribute('data-menutab');
+        
+        if (tabId == contentId) {
+          menuContent.classList.add('is_activeTab');
+        }
+      });
+
     });
+  });
+
+
+  //料金表タブ
+  const priceClinicBtnList = [...document.querySelectorAll('.el_priceSec_seideMenuContainer_item_select_btn')];
+  const priceClinicContentList = [...document.querySelectorAll('.bl_priceListContainer')];
+
+  priceClinicBtnList.forEach((btn, idx) => {
+
+    btn.addEventListener('click', () => {
+      priceClinicBtnList.forEach(b => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      priceClinicContentList.forEach(contents => {
+
+        const clinicId = contents.getAttribute('data-clinic');
+        const clinicBtnId = btn.getAttribute('id');
+
+        contents.classList.remove('is_priceListContainerActive');
+
+        if (clinicId == clinicBtnId) {
+          contents.classList.toggle('is_priceListContainerActive');
+        }
+      })
+
+    });
+
   });
 
 

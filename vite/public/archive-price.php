@@ -98,7 +98,7 @@
                                             <?php
                                             if (!empty($subMenuTermList) && !is_wp_error($subMenuTermList)) :
                                                 foreach ($subMenuTermList as $subMenuTerm) : ?>
-                                                    <option value="<?php echo esc_url(get_term_link($subMenuTerm)); ?>" <?php selected(get_queried_object_id(), $subMenuTerm->term_id); ?>>
+                                                    <option value="<?php echo esc_url(get_term_link($subMenuTerm) . '?type=price'); ?>" <?php selected(get_queried_object_id(), $subMenuTerm->term_id); ?>>
                                                         <?php echo esc_html($subMenuTerm->name); ?>
                                                     </option>
                                                 <?php endforeach; ?>
@@ -150,11 +150,15 @@
                         <?php if (!empty($clinicTermList) && !is_wp_error($clinicTermList)) : ?>
                             <?php foreach ($clinicTermList as $clinicTerm) : ?>
 
-                                <?php if ($i === 0) {
+                                <?php
+                                if ($i == 0) {
                                     $isActive = 'is-active';
-                                } ?>
+                                } else {
+                                    $isActive = '';
+                                }
+                                ?>
                                 <li class="bl_priceListContainer_clinicBtnList_item">
-                                    <button class="el_priceSec_seideMenuContainer_item_select_btn <?php echo $isActive; ?>" id="clinic-cat-<?php echo esc_attr($clinicTerm->term_id); ?>" type="button">
+                                    <button class="el_priceSec_seideMenuContainer_item_select_btn <?php echo $isActive; ?>" id="<?php echo esc_attr($clinicTerm->slug); ?>" type="button">
                                         <?php echo esc_html($clinicTerm->name); ?>
                                     </button>
                                 </li>
@@ -242,10 +246,10 @@
 
                                                 <?php if ($query->have_posts()) : ?>
                                                     <ul class="bl_priceListContainer_priceList_largeList">
-                                                        <?php while ($query->have_posts()) : $query->the_post(); ?>
-                                                            <li class="bl_priceListContainer_priceList_largeList_item">
-                                                                <h2 class="bl_priceListContainer_priceList_largeList_item_ttl"><?php echo $childTerm->name; ?></h2>
 
+                                                        <li class="bl_priceListContainer_priceList_largeList_item">
+                                                            <h2 class="bl_priceListContainer_priceList_largeList_item_ttl"><?php echo $childTerm->name; ?></h2>
+                                                            <?php while ($query->have_posts()) : $query->the_post(); ?>
                                                                 <ul class="bl_priceListContainer_priceList_smallList">
                                                                     <li class="bl_priceListContainer_priceList_smallist_item">
                                                                         <h3 class="el_priceListContainer_priceList_smallList_post_ttl"><?php the_title(); ?></h3>
@@ -291,8 +295,9 @@
                                                                         <?php endif; ?>
                                                                     </li>
                                                                 </ul>
-                                                            </li>
-                                                        <?php endwhile; ?>
+                                                            <?php endwhile; ?>
+
+                                                        </li>
                                                     </ul>
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
@@ -300,7 +305,7 @@
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>
-                        <?php $c++; ?>
+                            <?php $c++; ?>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </div>

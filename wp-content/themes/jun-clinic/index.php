@@ -133,11 +133,11 @@
                                 <div class="bl_featureSec_featureContainer_item_txtContainer">
                                     <p class="el_featureSec_featureContainer_item_txtContainer_txt">豊富な経験と医学的根拠に基づきあなたに適した治療を提供します。</p>
                                     <div class="bl_featureSec_featureContainer_txtBox">
-                                        <p class="bl_featureSec_featureContainer_txtBox_txt">肌を知り尽くす視点</p>
+                                        <p class="bl_featureSec_featureContainer_txtBox_txt">肌を知り尽くす<br>視点</p>
                                         <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/feature/union.svg" alt="">
-                                        <p class="bl_featureSec_featureContainer_txtBox_txt">悩みに最適な治療設計</p>
+                                        <p class="bl_featureSec_featureContainer_txtBox_txt">悩みに最適な<br>治療設計</p>
                                         <img class="bl_featureSec_featureContainer_txtBox_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/feature/union.svg" alt="">
-                                        <p class="bl_featureSec_featureContainer_txtBox_txt">結果へ導く根拠ある治療</p>
+                                        <p class="bl_featureSec_featureContainer_txtBox_txt">結果へ導く<br>根拠ある治療</p>
                                     </div>
                                     <p class="el_featureSec_featureContainer_item_txtContainer_txt">
                                         JUNCLINICでは、2017年の開院からこれまでシミやくすみ、毛穴などのお悩みに対し、肌状態に合わせて複数の機器を組み合わせる<span class="el_featuer_boldTxt">カスタマイズレーザー治療</span>を軸に、確かな結果を積み重ねてきました。<br>近年ではさらに、<span class="el_featuer_boldTxt">肌育治療や高周波によるたるみ治療</span>といったアプローチも積極的に取り入れ、より効率的に、より自然で美しい素肌へと導く治療体制を整えています。<br>
@@ -147,8 +147,12 @@
                                 </div>
                             </div>
                             <div class="bl_topFeatureSec_featureContainer_item_rightSide">
-                                <img class="bl_topFeatureSec_featureContainer_item_rightSide_img bl_topFeatureSec_featureContainer_item_rightSide_img_01" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/feature/rightSide_img_01.jpg" alt="">
-                                <img class="bl_topFeatureSec_featureContainer_item_rightSide_img bl_topFeatureSec_featureContainer_item_rightSide_img_02" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/feature/rightSide_img_02.jpg" alt="">
+                                <div class="bl_topFeatureSec_featureContainer_item_rightSide_img bl_topFeatureSec_featureContainer_item_rightSide_img_01">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/feature/rightSide_img_01.jpg" alt="">
+                                </div>
+                                <div class="bl_topFeatureSec_featureContainer_item_rightSide_img bl_topFeatureSec_featureContainer_item_rightSide_img_02">
+                                    <img  src="<?php echo get_template_directory_uri(); ?>/assets/img/top/feature/rightSide_img_02.jpg" alt="">
+                                </div>
                             </div>
                         </div>
                     </li>
@@ -447,37 +451,90 @@
                     </div>
                     <div class="bl_menuListContainer">
                         <div class="bl_menuListContainer_tabContainer">
-                            <button class="bl_menuListContainer_tabContainer_btn is_active" type="button">美容皮膚科</button>
-                            <button class="bl_menuListContainer_tabContainer_btn" type="button">美容外科</button>
+                            <button class="bl_menuListContainer_tabContainer_btn is_active" id="dermatology" type="button">美容皮膚科</button>
+                            <button class="bl_menuListContainer_tabContainer_btn" id="surgery" type="button">美容外科</button>
                         </div>
 
-                        <div class="bl_menuListContainer_content">
-                            <?php
-                            $args = array(
+                        <?php
+
+                        // 親カテゴリーを取得
+                        $menuParentCatList = get_terms(array(
+                            'taxonomy' => 'menu-cat',
+                            'parent' => 0,  // 親カテゴリーのみ
+                            'hide_empty' => true  // 投稿がないものは除外
+                        ));
+
+                        $menuTermList = array();
+
+                        foreach ($menuParentCatList as $menuParentCat) {
+                            // 各親カテゴリーに属する投稿を取得
+                            $posts = get_posts(array(
                                 'post_type' => 'menu',
-                                'posts_per_page' => -1,
-                            );
-                            $menuItems = new WP_Query($args);
-                            if ($menuItems->have_posts()) : ?>
-                                <ul class="bl_menuListContainer_menuList">
-                                    <?php while ($menuItems->have_posts()) : $menuItems->the_post(); ?>
-                                        <li class="bl_menuListContainer_menuList_item">
-                                            <a href="<?php the_permalink(); ?>" class="bl_menuListContainer_menuList_item_link">
-                                                <p class="bl_menuListContainer_menuList_item_link_ttl"><?php the_title(); ?></p>
-                                                <div>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 7 10" fill="none">
-                                                        <path d="M0.999999 8.51074L6 4.51074L1 0.510742" stroke="#333333" stroke-linecap="round" />
-                                                    </svg>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    <?php endwhile;
-                                    wp_reset_postdata(); ?>
-                                </ul>
-                            <?php else: ?>
-                                <p>施術メニューはありません</p>
-                            <?php endif; ?>
-                        </div>
+                                'tax_query' => array(
+                                    array(
+                                        'taxonomy' => 'menu-cat',
+                                        'field' => 'term_id',
+                                        'terms' => $menuParentCat->term_id
+                                    )
+                                )
+                            ));
+
+                            // 投稿がある場合のみ配列に追加
+                            if (!empty($posts)) {
+                                $menuTermList[] = $menuParentCat;
+                            }
+                        }
+
+                        $i = 0;
+                        ?>
+
+                        <?php foreach ($menuTermList as $menuTerm) : ?>
+
+                            <?php
+                            $activeTab = '';
+                            if ($i == 0) {
+                                $activeTab = 'is_activeTab';
+                            } else {
+                                $activeTab = '';
+                            }
+                            ?>
+                            <div class="bl_menuListContainer_content <?php echo $activeTab; ?>" data-menutab="<?php echo $menuTerm->slug; ?>">
+                                <?php
+                                $args = array(
+                                    'post_type' => 'menu',
+                                    'posts_per_page' => -1,
+                                    'tax_query' => array(
+                                        array(
+                                            'taxonomy' => 'menu-cat',
+                                            'field' => 'term_id',
+                                            'terms' => $menuTerm->term_id
+                                        )
+                                    )
+                                );
+                                $menuItems = new WP_Query($args);
+                                if ($menuItems->have_posts()) : ?>
+                                    <ul class="bl_menuListContainer_menuList">
+                                        <?php while ($menuItems->have_posts()) : $menuItems->the_post(); ?>
+                                            <li class="bl_menuListContainer_menuList_item">
+                                                <a href="<?php the_permalink(); ?>" class="bl_menuListContainer_menuList_item_link">
+                                                    <p class="bl_menuListContainer_menuList_item_link_ttl"><?php the_title(); ?></p>
+                                                    <div>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 7 10" fill="none">
+                                                            <path d="M0.999999 8.51074L6 4.51074L1 0.510742" stroke="#333333" stroke-linecap="round" />
+                                                        </svg>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        <?php endwhile;
+                                        wp_reset_postdata(); ?>
+                                    </ul>
+                                <?php else: ?>
+                                    <p>施術メニューはありません</p>
+                                <?php endif; ?>
+                            </div>
+
+                        <?php $i++;
+                        endforeach; ?>
 
                         <div class="bl_topMenuSec_btnContainer">
                             <a href="#" class="bl_commonBorderRadialArrowBtn">
@@ -584,13 +641,13 @@
             <section class="ly_commonContantsOuter ly_topNewsSec">
                 <div class="ly_commonContantsOuter_inner bl_topNewsSec_inner">
                     <div class="bl_topNewsSec_ttlContainer">
-                        <div class="bl_topRecommendSec_ttlContainer">
+                        <div class="bl_topNewsSec_ttlContainer_inner">
                             <hgroup class="bl_commonSectionTtl bl_topNewsSec_ttlContainer">
                                 <p class="el_commonSectionTtl_ttl">News</p>
                                 <h2 class="el_commonSectionTtl_ttl_ttl">お知らせ</h2>
                             </hgroup>
                         </div>
-                        <div class="bl_topDoctorSec_btnContainer">
+                        <div class="bl_topNewsSec_btnContainer">
                             <a href="#" class="bl_commonBorderRadialArrowBtn">
                                 <p class="el_commonBorderRadialArrowBtn_txt">お知らせ一覧</p>
                                 <div class="el_commonBorderRadialArrowBtn_arrowContainer">
@@ -637,7 +694,7 @@
                             </ul>
 
                         <?php else: ?>
-                            <div class="bl_topNewsSec_noNewsContainer">
+                            <div class="bl_topNewsSec_noNewsContainer_txt">
                                 <p class="bl_topNewsSec_noNewsContainer_txt">お知らせはありません</p>
                             </div>
                         <?php endif; ?>

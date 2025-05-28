@@ -137,3 +137,28 @@ add_filter('posts_search', 'my_custom_search', 10, 2);
 if (isset($_GET['s'])) $_GET['s'] = mb_convert_kana($_GET['s'], 's', 'UTF-8');
 
 
+function my_custom_taxonomy_template($template) {
+    if (is_tax('menu-cat')) {
+        $type = isset($_GET['type']) ? sanitize_text_field($_GET['type']) : '';
+
+        // typeが空の場合はトップページへリダイレクト
+        if ($type === '') {
+            wp_redirect(home_url('/'));
+            exit;
+        }
+
+        if ($type === 'price') {
+            $new_template = locate_template('taxonomy-menu_price.php');
+            if ($new_template) {
+                return $new_template;
+            }
+        } else {
+            $new_template = locate_template('taxonomy-menu-cat-menu.php');
+            if ($new_template) {
+                return $new_template;
+            }
+        }
+    }
+    return $template;
+}
+add_filter('template_include', 'my_custom_taxonomy_template');

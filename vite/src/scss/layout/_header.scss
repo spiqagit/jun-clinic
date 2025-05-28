@@ -11,8 +11,8 @@ header
         left: 0;
         width: 100%;
         z-index: 100;
-        padding-inline: vwmin(20, pc);
-        padding-top: vwmin(24, pc);
+        padding-inline: vwmin(20, pc, 20);
+        padding-top: vwmin(24, pc, 24);
         box-sizing: border-box;
         z-index: 100;
         background-color: transparent;
@@ -26,7 +26,7 @@ header
             align-items: center;
 
             @include underTB {
-                grid-template-columns: vwmin(155, sp) vwmin(36, sp);
+                grid-template-columns: vwmin(141, pc, 141) vwmin(24, pc, 24);
             }
 
             .bl_header_inner_logo {
@@ -35,6 +35,10 @@ header
                 width: 100%;
                 height: 100%;
                 isolation: isolate; // 追加推奨
+            }
+
+            .bl_header_inner_logo_link {
+                transition: all;
             }
 
 
@@ -50,34 +54,34 @@ header
     .el_header_menu_btn {
         cursor: pointer;
         position: fixed;
-        top: vwmin(24, pc);
-        right: vwmin(20, pc);
+        top: vwmin(24, pc, 24);
+        right: vwmin(20, pc, 20);
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         height: auto;
-        max-width: vwmin(36, pc);
+        max-width: vwmin(36, pc, 36);
         background-color: transparent;
         border: none;
         cursor: pointer;
-        aspect-ratio: 36/46;
+        aspect-ratio: 1/1;
         padding: 0;
         z-index: 120;
         mix-blend-mode: exclusion;
 
         .bl_header_menu_btn_lineContainer {
             position: relative;
-            height: vwmin(6, pc);
+            height: vwmin(6, pc ,6);
             width: 100%;
             display: block;
             width: 100%;
-            min-height: vwmin(6, pc);
+            min-height: vwmin(6, pc ,6);
 
             .el_header_menu_btn_lineContainer_line {
                 position: absolute;
                 display: block;
-                height: vwmin(1, pc);
+                height: vwmin(1, pc ,1);
                 background-color: #fff;
                 transition: transform 0.3s var(--reverseTransition);
 
@@ -90,11 +94,11 @@ header
                 }
 
                 &:nth-child(2) {
-                    top: vwmin(5, pc);
+                    top: vwmin(5, pc ,5);
                     right: 0;
                     left: auto;
                     width: 100%;
-                    max-width: vwmin(24, pc);
+                    max-width: vwmin(24, pc ,24);
                     transition: all 0.3s var(--reverseTransition);
 
                 }
@@ -104,7 +108,7 @@ header
 
     .el_header_menu_btn.is_active {
         .bl_header_menu_btn_lineContainer {
-            height: vwmin(14, pc);
+            height: vwmin(14, pc ,14);
             transition: all 0.3s var(--reverseTransition);
 
 
@@ -138,30 +142,34 @@ header
 
     .bl_header_menu_lineReserveBtn {
         position: fixed;
-        top: vwmin(24, pc);
-        right: vwmin(106, pc);
+        top: vwmin(24, pc ,24);
+        right: vwmin(106, pc ,106);
         width: 100%;
-        max-width: vwmin(168, pc);
+        max-width: vwmin(168, pc ,168);
         display: flex;
-        padding-top: vwmin(10, pc);
-        padding-bottom: vwmin(12, pc);
+        padding-top: vwmin(10, pc ,10);
+        padding-bottom: vwmin(12, pc ,12);
         justify-content: center;
         align-items: center;
         background-color: var(--accentColor);
-        border-radius: vwmin(10, pc);
-        font-size: vwmin(14, pc);
+        border-radius: vwmin(10, pc ,10);
+        font-size: vwmin(14, pc ,14);
         font-weight: 500;
-        font-size: vwmin(16, pc);
+        font-size: vwmin(16, pc ,16);
         font-style: normal;
         color: #fff;
         font-weight: 600;
         line-height: 1.4;
-        border-radius: vwmin(50, pc);
-        border: vwmin(1, pc) solid transparent;
+            border-radius: vwmin(50, pc ,50);
+        border: vwmin(1, pc ,1) solid transparent;
         mix-blend-mode: normal;
         isolation: isolate;
         transition: background-color .3s cubic-bezier(0, 0, 0.46, 1), color .3s cubic-bezier(0, 0, 0.46, 1);
         z-index: 110;
+
+        @include underTB {
+            display: none;
+        }
 
         @media (hover: hover) {
             &:hover {
@@ -189,6 +197,10 @@ navi
     z-index: 110;
     background-color: #EBE9DF;
 
+    @include underTB {
+        overflow-y: auto;
+    }
+
     .bl_header_nav_bg {
         position: absolute;
         top: 0;
@@ -197,6 +209,10 @@ navi
         height: 100%;
         object-fit: cover;
         z-index: -1;
+
+        @include underTB {
+            height: 100lvh;
+        }
     }
 
 
@@ -205,9 +221,18 @@ navi
         grid-template-columns: vwmin(480, pc) 1fr;
         height: 100%;
 
+        @include underTB {
+            grid-template-columns: 1fr;
+        }
+
 
         .bl_header_nav_inner_ctaContainer {
             position: relative;
+            background-color: var(--accentColor);
+
+            @include underTB {
+                min-height: vwmin(590, pc, 590);
+            }
 
             &::before {
                 content: '';
@@ -216,26 +241,27 @@ navi
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-image: url(assets/img/common/bg.png);
+                background-image: url("img/common/bg.png");
                 background-size: cover;
                 background-position: center;
-                z-index: -1;
+                z-index: 0;
             }
 
             .bl_header_nav_inner_ctaContainer_inner {
+                position: relative;
                 display: flex;
                 flex-flow: column;
                 justify-content: center;
                 align-items: center;
-                gap: vwmin(60, pc);
+                gap: vwmin(60, pc, 60);
                 height: 100%;
-                padding-inline: vwmin(60, pc);
-                padding-block: vwmin(60, pc);
-                background-color: var(--accentColor);
+                padding-inline: vwmin(60, pc, 60);
+                padding-block: vwmin(60, pc, 60);
+                z-index: 1;
 
                 .bl_header_nav_inner_ctaContainer_inner_lineReserveBtn {
                     width: 100%;
-                    max-width: vwmin(285, pc);
+                    max-width: vwmin(285, pc, 285);
                 }
             }
         }
@@ -246,21 +272,27 @@ navi
 .bl_header_nav_inner_menu {
     display: flex;
     flex-flow: column;
-    gap: vwmin(80, pc);
+    gap: vwmin(80, pc, 80);
     overflow-y: auto;
-    padding-inline: vwmin(80, pc);
-    padding-top: vwmin(100, pc);
-    padding-bottom: vwmin(80, pc);
+    padding-inline: vwmin(80, pc, 80);
+    padding-top: vwmin(100, pc, 100);
+    padding-bottom: vwmin(80, pc, 80);
+
+    @include underTB {
+        overflow-y: visible;
+        padding-inline: vwmin(20, pc, 20);
+    }
 
     .bl_header_nav_inner_menu_conatainer {
         display: flex;
         flex-flow: column;
-        gap: vwmin(20, pc);
+        gap: vwmin(20, pc, 20);
+
 
         .bl_header_nav_inner_menu_conatainer_titleWrapper {
             display: grid;
             grid-template-columns: auto 1fr;
-            gap: vwmin(16, pc);
+            gap: vwmin(16, pc, 16);
             align-items: center;
 
             &::after {
@@ -274,7 +306,7 @@ navi
             .bl_header_nav_inner_menu_conatainer_title {
                 color: var(--black, #333);
                 font-family: "Shippori Mincho";
-                font-size: vwmin(18, pc);
+                font-size: vwmin(18, pc, 18);
                 font-style: normal;
                 font-weight: 500;
                 line-height: 1.5;
@@ -287,20 +319,27 @@ navi
             .bl_globalNaviList {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                row-gap: vwmin(16, pc);
-                column-gap: vwmin(64, pc);
+                row-gap: vwmin(16, pc, 16);
+                column-gap: vwmin(64, pc, 64);
+
+                @include underTB {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: vwmin(20, pc, 20);
+                }
 
                 .bl_globalNaviList_item_link {
                     display: grid;
-                    grid-template-columns: 1fr vwmin(10, pc);
-                    gap: vwmin(10, pc);
+                    grid-template-columns: 1fr vwmin(10, pc, 10);
+                    gap: vwmin(10, pc, 10);
                     align-items: baseline;
-                    padding-bottom: vwmin(16, pc);
-                    border-bottom: vwmin(1, pc) solid #fff;
-                    border-bottom: vwmin(1, pc) solid #CCC8B9;
+                    padding-bottom: vwmin(16, pc, 16);
+                    border-bottom: vwmin(1, pc, 1) solid #fff;
+                    border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
+
+
 
                     .el_globalNaviList_item_link_text {
-                        font-size: vwmin(16, pc);
+                        font-size: vwmin(16, pc, 16);
                         font-style: normal;
                         font-weight: 400;
                         line-height: 150%;
@@ -313,16 +352,22 @@ navi
             .bl_globalMenuList {
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                row-gap: vwmin(10, pc);
-                column-gap: vwmin(22, pc);
+                row-gap: vwmin(10, pc, 10);
+                column-gap: vwmin(22, pc, 22);
+
+                @include underTB {
+                    grid-template-columns: repeat(2, 1fr);
+                    column-gap: vwmin(20, pc, 20);
+                    row-gap: vwmin(10, pc, 10);
+                }
 
 
                 .bl_globalMenuList_item_link {
                     display: grid;
-                    grid-template-columns: vwmin(10, pc) 1fr;
-                    gap: vwmin(10, pc);
+                    grid-template-columns: vwmin(10, pc, 10) 1fr;
+                    gap: vwmin(10, pc, 10);
                     align-items: flex-start;
-                    font-size: vwmin(14, pc);
+                    font-size: vwmin(14, pc, 14);
                     font-style: normal;
                     font-weight: 400;
                     line-height: 1.5;
@@ -333,9 +378,9 @@ navi
                         position: relative;
                         display: block;
                         width: 100%;
-                        height: vwmin(1, pc);
+                        height: vwmin(1, pc, 1);
                         background-color: #CCC8B9;
-                        margin-top: vwmin(12, pc);
+                        margin-top: vwmin(12, pc, 12);
                     }
 
                 }
