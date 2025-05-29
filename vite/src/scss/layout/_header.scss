@@ -21,7 +21,7 @@ header
         .ly_header_inner {
             position: relative;
             display: grid;
-            grid-template-columns: vwmin(155, pc) vwmin(36, pc);
+            grid-template-columns: vwmin(155, pc , 155) vwmin(36, pc , 36);
             justify-content: space-between;
             align-items: center;
 

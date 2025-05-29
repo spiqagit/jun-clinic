@@ -27,6 +27,7 @@
 
                     <div class="bl_priceSec_seideMenuContainer_list">
                         <?php
+                        $currentTerm = get_queried_object();
                         $menuTermList = get_terms(array(
                             'taxonomy' => 'menu-cat',
                             'hide_empty' => true,
@@ -37,6 +38,7 @@
 
                         // price投稿タイプに関連するタームのみをフィルタリング
                         if (!empty($menuTermList) && !is_wp_error($menuTermList)) {
+
                             $filteredTerms = array();
                             foreach ($menuTermList as $term) {
                                 $posts = get_posts(array(
@@ -45,7 +47,7 @@
                                         array(
                                             'taxonomy' => 'menu-cat',
                                             'field' => 'term_id',
-                                            'terms' => $term->term_id
+                                            'terms' => $term->term_id,
                                         )
                                     )
                                 ));
@@ -98,7 +100,7 @@
                                             <?php
                                             if (!empty($subMenuTermList) && !is_wp_error($subMenuTermList)) :
                                                 foreach ($subMenuTermList as $subMenuTerm) : ?>
-                                                    <option value="<?php echo esc_url( get_term_link($term) . '?type=price' ); ?>" <?php selected(get_queried_object_id(), $subMenuTerm->term_id); ?>>
+                                                    <option value="<?php echo esc_url(get_term_link($subMenuTerm) . '?type=price'); ?>" <?php selected(get_queried_object_id(), $subMenuTerm->term_id); ?>>
                                                         <?php echo esc_html($subMenuTerm->name); ?>
                                                     </option>
                                                 <?php endforeach; ?>
@@ -113,61 +115,145 @@
                     <p class="el_priceSec_seideMenuContainer_txt">※料金はすべて税込価格です。</p>
                 </div>
 
-                <!-- menu-cat（施術）で絞り込みフォーム -->
-                <form method="get" action="">
-                    <select name="menu-cat">
-                        <option value="">すべての施術</option>
-                        <?php
-                        $menu_terms = get_terms(array(
-                            'taxonomy' => 'menu-cat',
-                            'hide_empty' => true,
-                            'parent' => 0,
-                            'orderby' => 'menu_order',
-                            'order' => 'ASC'
-                        ));
-                        foreach ($menu_terms as $term) {
-                            $selected = (isset($_GET['menu-cat']) && $_GET['menu-cat'] == $term->slug) ? 'selected' : '';
-                            echo '<option value="' . esc_attr($term->slug) . '" ' . $selected . '>' . esc_html($term->name) . '</option>';
-                        }
-                        ?>
-                    </select>
-                    <input type="submit" value="絞り込む">
-                    <input type="hidden" name="type" value="price">
-                </form>
-
                 <!-- 料金表 -->
                 <div class="bl_priceContentsContainer">
                     <?php
-                    $tax_query = array();
-                    if (!empty($_GET['menu-cat'])) {
-                        $tax_query[] = array(
-                            'taxonomy' => 'menu-cat',
-                            'field'    => 'slug',
-                            'terms'    => sanitize_text_field($_GET['menu-cat']),
-                        );
-                    } else {
-                        $tax_query[] = array(
-                            'taxonomy' => 'menu-cat',
-                            'field'    => 'slug',
-                            'terms'    => get_queried_object()->slug,
-                        );
+                    $clinicTermList = get_terms(array(
+                        'taxonomy' => 'clinic-cat',
+                        'hide_empty' => false,
+                        'orderby' => 'menu_order',
+                        'order' => 'ASC'
+                    ));
+                    // price投稿タイプに関連するタームのみをフィルタリング
+                    if (!empty($clinicTermList) && !is_wp_error($clinicTermList)) {
+                        $filteredTerms = array();
+                        foreach ($clinicTermList as $term) {
+                            $posts = get_posts(array(
+                                'post_type' => 'price',
+                                'tax_query' => array(
+                                    array(
+                                        'taxonomy' => 'clinic-cat',
+                                        'field' => 'term_id',
+                                        'terms' => $term->term_id,
+                                    ),
+                                    array(
+                                        'taxonomy' => 'menu-cat',
+                                        'field' => 'term_id',
+                                        'terms' => $currentTerm->term_id,
+                                    )
+                                )
+                            ));
+                            if (!empty($posts)) {
+                                $filteredTerms[] = $term;
+                            }
+                        }
+                        $clinicTermList = $filteredTerms;
                     }
-                    $args = array(
-                        'post_type' => 'price',
-                        'tax_query' => $tax_query,
-                    );
-                    $query = new WP_Query($args);
+
+                    $i = 0;
                     ?>
-                    <?php if ($query->have_posts()) : ?>
-                        <?php while ($query->have_posts()) : $query->the_post(); ?>
-                            <!-- 投稿の表示例 -->
-                            <div class="price-item">
-                                <h2><?php the_title(); ?></h2>
-                                <div><?php the_content(); ?></div>
+                    <ul class="bl_priceListContainer_clinicBtnList">
+                        <?php if (!empty($clinicTermList) && !is_wp_error($clinicTermList)) : ?>
+                            <?php foreach ($clinicTermList as $clinicTerm) : ?>
+                                <?php $isActive = ($i === 0) ? 'is-active' : ''; ?>
+                                <li class="bl_priceListContainer_clinicBtnList_item">
+                                    <button class="el_priceSec_seideMenuContainer_item_select_btn <?php echo $isActive; ?>" id="<?php echo esc_attr($clinicTerm->slug); ?>" type="button">
+                                        <?php echo esc_html($clinicTerm->name); ?>
+                                    </button>
+                                </li>
+                                <?php $i++; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </ul>
+
+                    <?php $c = 0; ?>
+                    <?php if (!empty($clinicTermList) && !is_wp_error($clinicTermList)) : ?>
+                        <?php foreach ($clinicTermList as $clinicTerm) : ?>
+                            <?php $isActive = ($c === 0) ? 'is_priceListContainerActive' : ''; ?>
+                            <div class="bl_priceListContainer <?php echo $isActive; ?>" data-clinic="<?php echo esc_attr($clinicTerm->slug); ?>">
+                                <?php
+                                $args = array(
+                                    'post_type' => 'price',
+                                    'posts_per_page' => -1,
+                                    'tax_query' => array(
+                                        'relation' => 'AND',
+                                        array(
+                                            'taxonomy' => 'menu-cat',
+                                            'field' => 'term_id',
+                                            'terms' => $currentTerm->term_id,
+                                        ),
+                                        array(
+                                            'taxonomy' => 'clinic-cat',
+                                            'field' => 'term_id',
+                                            'terms' => $clinicTerm->term_id,
+                                        ),
+                                    ),
+                                );
+                                $query = new WP_Query($args);
+                                ?>
+                                <?php if ($query->have_posts()) : ?>
+                                    <ul class="bl_priceListContainer_priceList_largeList">
+                                        <li class="bl_priceListContainer_priceList_largeList_item">
+                                            <h2 class="bl_priceListContainer_priceList_largeList_item_ttl"><?php echo esc_html($currentTerm->name); ?></h2>
+
+                                            <?php while ($query->have_posts()) : $query->the_post(); ?>
+
+                                                <ul class="bl_priceListContainer_priceList_smallList">
+                                                    <li class="bl_priceListContainer_priceList_smallist_item">
+                                                        <h3 class="el_priceListContainer_priceList_smallList_post_ttl"><?php the_title(); ?></h3>
+                                                        <?php if (have_rows('price_wrap')) : ?>
+                                                            <ul class="bl_priceTableList">
+                                                                <?php while (have_rows('price_wrap')) : the_row(); ?>
+                                                                    <li class="bl_priceTableList_item">
+                                                                        <div class="bl_priceTableList_item_innerContainer">
+
+                                                                            <div class="bl_priceTableList_item_innerContainer_left">
+                                                                                <?php if (get_sub_field('left')) : ?>
+                                                                                    <p class="el_priceTableList_item_innerContainer_left_txt"><?php echo get_sub_field('left'); ?></p>
+                                                                                <?php endif; ?>
+                                                                            </div>
+
+                                                                            <div class="bl_priceTableList_item_innerContainer_right">
+                                                                                <?php if (have_rows('price_table')) : ?>
+                                                                                    <?php while (have_rows('price_table')) : the_row(); ?>
+                                                                                        <div class="bl_priceTableList_item_innerContainer_right_inner">
+                                                                                            <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
+                                                                                                <?php if (get_sub_field('price_txt')) : ?>
+                                                                                                    <p><?php echo get_sub_field('price_txt'); ?></p>
+                                                                                                <?php endif; ?>
+                                                                                            </div>
+
+                                                                                            <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
+                                                                                                <?php if (get_sub_field('price_view')) : ?>
+                                                                                                    <p><?php echo get_sub_field('price_view'); ?></p>
+                                                                                                <?php endif; ?>
+                                                                                            </div>
+
+                                                                                            <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
+                                                                                                <?php if (get_sub_field('right')) : ?>
+                                                                                                    <p class="el_priceTableList_item_innerContainer_right_txt"><?php echo get_sub_field('right'); ?></p>
+                                                                                                <?php endif; ?>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    <?php endwhile; ?>
+                                                                                <?php endif; ?>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                <?php endwhile; ?>
+                                                            </ul>
+                                                        <?php endif; ?>
+                                                    </li>
+                                                </ul>
+                                            <?php endwhile; ?>
+
+                                        </li>
+                                    </ul>
+                                <?php endif; ?>
+                                <?php wp_reset_postdata(); ?>
                             </div>
-                        <?php endwhile; wp_reset_postdata(); ?>
-                    <?php else : ?>
-                        <p>該当する投稿はありません。</p>
+                            <?php $c++; ?>
+                        <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
             </div>

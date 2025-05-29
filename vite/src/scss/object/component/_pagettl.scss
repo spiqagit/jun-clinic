@@ -68,7 +68,7 @@
 .bl_commonPageTtlContainer {
 
     .bl_commonBreadcrumbContainer {
-        margin-bottom: vwmin(40, pc, 40);
+        margin-bottom: vwmin(80, pc, 80);
 
         @include underTB {
             margin-bottom: vwmin(60, pc, 60);
@@ -80,6 +80,7 @@
         margin-inline: auto;
         box-sizing: border-box;
         margin-bottom: vwmin(100, pc, 100);
+         padding-inline: vwmin(20, pc , 20);
 
         @include underTB {
             margin-bottom: vwmin(60, pc, 60);
@@ -95,6 +96,10 @@
             letter-spacing: calc(1.44px / 36);
             width: fit-content;
             margin-inline: auto;
+
+            @include underTB {
+                font-size: vwmin(26, pc, 26);
+            }
         }
 
     }

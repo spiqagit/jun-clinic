@@ -1,0 +1,386 @@
+@use '../../foundation/function/index' as *;
+
+
+.ly_articlePage {
+
+    .bl_articlePage_contents {
+        padding-top: vwmin(120, pc, 120);
+        padding-bottom: vwmin(140, pc, 140);
+        padding-inline: vwmin(20, pc, 20);
+
+        @include underTB {
+            padding-top: vwmin(60, pc, 60);
+            padding-bottom: vwmin(70, pc, 70);
+        }
+
+        .bl_articlePage_inner_inner {
+            max-width: vwmin(880, pc, 880);
+            margin-inline: auto;
+        }
+    }
+}
+
+
+.bl_articlePage_article {
+
+    h2 {
+        position: relative;
+        color: var(--baseFontColor);
+        font-family: "Shippori Mincho";
+        font-size: vwmin(24, pc, 24);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5;
+        letter-spacing: 0.0267em;
+        padding-bottom: vwmin(12, pc, 12);
+        border-bottom: vwmin(2, pc, 2) solid var(--line);
+
+        &::before {
+            content: "";
+            position: absolute;
+            display: block;
+            left: 0;
+            bottom: 0;
+            height: vwmin(2, pc, 2);
+            width: 100%;
+            max-width: vwmin(100, pc, 100);
+            translate: 0 vwmin(2, pc, 2);
+            background-color: var(--lineText);
+        }
+
+        &:not(:first-child) {
+            margin-top: vwmin(48, pc, 48);
+        }
+    }
+
+    h3 {
+        color: var(--baseFontColor);
+        font-family: "Shippori Mincho";
+        font-size: vwmin(20, pc, 20);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5;
+        letter-spacing: calc(0.8px / 20);
+        padding-left: vwmin(13, pc, 13);
+        border-left: vwmin(3, pc, 3) solid var(--lineText);
+
+        &:not(:first-child) {
+            margin-top: vwmin(44, pc, 44);
+        }
+    }
+
+    h4 {
+        font-family: "Shippori Mincho";
+        font-size: vwmin(18, pc, 18);
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5;
+        letter-spacing: calc(18 * 0.0072);
+        background-color: #E0DDD0;
+        border-radius: vwmin(2, pc, 2);
+        padding-inline: vwmin(12, pc, 12);
+        padding-top: vwmin(6, pc, 6);
+        padding-bottom: vwmin(8, pc, 8);
+
+        &:not(:first-child) {
+            margin-top: vwmin(36, pc, 36);
+        }
+    }
+
+    p {
+        font-size: vwmin(16, pc, 16);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.8;
+        letter-spacing: calc(0.32px / 16);
+
+        &:not(:first-child) {
+            margin-top: vwmin(20, pc, 20);
+        }
+    }
+
+    hr {
+
+        &:not(:first-child) {
+            margin-top: vwmin(40, pc, 40);
+        }
+    }
+
+    em {
+        color: var(--baseFontColor);
+        font-size: vwmin(14, pc, 14);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.8;
+        letter-spacing: calc(0.28px / 14);
+
+        &:not(:first-child) {
+            margin-top: vwmin(10, pc, 10);
+        }
+    }
+
+    .wp-block-list {
+        &:not(:first-child) {
+            margin-top: vwmin(20, pc, 20);
+        }
+
+        li {
+            position: relative;
+            padding-left: vwmin(13, pc, 13);
+            color: var(--baseFontColor);
+            font-size: vwmin(16, pc, 16);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.8;
+            letter-spacing: calc(0.32px / 16);
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                display: block;
+                left: 0;
+                top: vwmin(12, pc, 12);
+                width: vwmin(5, pc, 5);
+                height: vwmin(5, pc, 5);
+                background-color: var(--baseFontColor);
+                border-radius: 100%;
+            }
+        }
+    }
+
+    .is-style-checklist {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(vwmin(300, pc, 300), 100%), 1fr));
+        row-gap: vwmin(12, pc, 12);
+        column-gap: vwmin(32, pc, 32);
+
+        &:not(:first-child) {
+            margin-top: vwmin(30, pc, 30);
+        }
+
+        li {
+            position: relative;
+            padding-left: vwmin(24, pc, 24);
+            color: var(--baseFontColor);
+            font-size: vwmin(16, pc, 16);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.8;
+            letter-spacing: calc(0.32px / 16);
+
+
+            &::before {
+                content: "";
+                position: absolute;
+                display: block;
+                left: 0;
+                top: vwmin(5, pc, 5);
+                width: vwmin(18, pc, 18);
+                height: vwmin(18, pc, 18);
+                border-radius: 100%;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 100% 100%;
+                background-image: url("img/common/check-list-icon.svg");
+                background-color: transparent;
+            }
+        }
+    }
+
+    .is-style-image-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(vwmin(200, pc, 200), 100%), 1fr));
+        row-gap: vwmin(20, pc, 20);
+        column-gap: vwmin(32, pc, 32);
+
+        &:not(:first-child) {
+            margin-top: vwmin(36, pc, 36);
+        }
+
+        li {
+            display: grid;
+            grid-template-columns: vwmin(80, pc, 80) 1fr;
+            gap: vwmin(14, pc, 14);
+            align-items: center;
+            padding-left: 0;
+
+            &::before {
+                content: "";
+                display: none;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+                border-radius: vwmin(4, pc, );
+                object-fit: cover;
+            }
+
+            strong {
+                display: block;
+                font-weight: 400;
+            }
+        }
+    }
+
+    figure {
+
+        &:not(:first-child) {
+            margin-top: vwmin(36, pc, 36);
+        }
+
+        img {
+            border-radius: vwmin(4, pc, 4);
+        }
+
+        figcaption {
+            font-size: vwmin(14, pc, 14);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.8;
+            letter-spacing: calc(14 * 0.0072);
+            margin-top: vwmin(10, pc, 10);
+        }
+    }
+
+
+    .wp-block-flexible-table-block-table {
+        font-size: vwmin(16, pc, 16);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5;
+        letter-spacing: calc(16 * 0.0072);
+
+        th {
+            background-color: var(--baseFontColor) !important;
+            width: vwmin(160, pc, 160) !important;
+            color: #fff !important;
+            border-color: #CCC8B9 !important;
+            padding: vwmin(10, pc, 10) !important;
+        }
+
+        td {
+            border-color: #CCC8B9 !important;
+            padding: vwmin(10, pc, 10) !important;
+        }
+    }
+
+    .wp-block-embed__wrapper {
+        iframe {
+            width: 100% !important;
+            height: auto !important;
+            aspect-ratio: 16/9;
+        }
+    }
+
+    a {
+        color: var(--baseFontColor);
+        font-size: vwmin(16, pc, 16);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.8;
+        letter-spacing: calc(16 * 0.0072);
+        text-decoration: underline;
+        text-underline-offset: vwmin(1, pc, 1);
+        text-decoration-thickness: vwmin(1, pc, 1);
+        text-decoration-color: var(--baseFontColor);
+        transition: opacity 0.3s ease-in-out;
+
+
+        @media (hover: hover) {
+            &:hover {
+                opacity: 0.5;
+                transition: opacity 0.3s ease-in-out;
+            }
+        }
+    }
+}
+
+
+
+
+/*  ------------------------------
+監修者
+------------------------------*/
+
+.bl_supervisorProfile {
+    width: 100%;
+    border-radius: vwmin(8, pc, 8);
+    background-color: #FBFAF9;
+    padding: vwmin(30, pc, 30);
+    margin-top: vwmin(36, pc, 36);
+
+    .bl_supervisorProfile_inner {
+        display: flex;
+        flex-flow: column;
+        gap: vwmin(24, pc, 24);
+
+        .bl_supervisorProfile_inner_imgContainer {
+            display: grid;
+            grid-template-columns: vwmin(80, pc, 80) 1fr;
+            gap: vwmin(10, pc, 10);
+            align-items: center;
+
+            img {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+                border-radius: 100%;
+            }
+        }
+
+
+        .bl_supervisorProfile_inner_ttl {
+            display: flex;
+            flex-flow: column;
+            gap: vwmin(6, pc, 6);
+
+            .bl_supervisorProfile_inner_ttl_txt {
+                font-size: vwmin(12, pc, 12);
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.5;
+                letter-spacing: calc(12 * 0.02);
+            }
+
+            .bl_supervisorProfile_inner_ttl_info {
+                display: flex;
+                align-items: flex-end;
+                gap: vwmin(8, pc, 8);
+
+                .el_supervisorProfile_inner_ttl_info_job {
+                    font-size: vwmin(14, pc, 14);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    letter-spacing: calc(14 * 0.02);
+                }
+
+                .el_supervisorProfile_inner_ttl_info_name {
+                    font-family: "Shippori Mincho";
+                    font-size: vwmin(20, pc, 20);
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.4;
+                    letter-spacing: calc(20 * .02);
+                }
+            }
+        }
+
+        .bl_supervisorProfile_inner_txtContainer {
+            font-size: vwmin(16, pc, 16);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.8;
+            letter-spacing: calc(16 * 0.02);
+        }
+
+        .bl_supervisorProfile_inner_linkContainer {
+            width: fit-content;
+            margin-left: auto;
+        }
+    }
+}

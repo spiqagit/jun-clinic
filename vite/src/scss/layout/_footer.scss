@@ -131,7 +131,7 @@
                 font-weight: 600;
                 line-height: 1.5;
                 letter-spacing: calc(0.48px / 24);
-                border-radius: vwmin(50, pc);
+                border-radius: vwmin(50, pc, 50);
                 padding-top: vwmin(12, pc, 12);
                 padding-bottom: vwmin(14, pc, 14);
                 border: vwmin(1, pc, 1) solid transparent;

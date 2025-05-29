@@ -16,4 +16,8 @@
 @use 'object/page/page';
 @use 'object/page/single';
 @use 'object/page/archive';
+@use 'object/page/article';
+
+//専用
 @use 'object/page/price';
+@use 'object/page/menu';

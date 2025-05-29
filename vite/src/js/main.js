@@ -98,4 +98,33 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+  //記事ナビゲーション
+  const article = document.querySelector('.bl_articlePage_article');
+
+  if(article){
+    const h2Elements = [...article.querySelectorAll('h2')];
+
+    h2Elements.forEach((h2, idx) => {
+      h2.setAttribute('id', `article-${idx + 1}`);
+    });
+
+    const articleNavi = document.querySelector('#article-navi');
+    
+    if(articleNavi) {
+      const ul = document.createElement('ul');
+      
+      h2Elements.forEach((h2, idx) => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        
+        a.href = `#article-${idx + 1}`;
+        a.textContent = h2.textContent;
+        
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      
+      articleNavi.appendChild(ul);
+    }
+  }
 });

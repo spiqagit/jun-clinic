@@ -30,4 +30,7 @@
     <!-- js -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/js/splide.min.js"></script>
     <script type="module" src="<?php echo get_template_directory_uri(); ?>/assets/main.js"></script>
-    <script type="module" src="<?php echo get_template_directory_uri(); ?>/assets/top.js"></script>
+
+    <?php if (is_front_page()):?>
+        <script type="module" src="<?php echo get_template_directory_uri(); ?>/assets/top.js"></script>
+    <?php endif;?>

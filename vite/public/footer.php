@@ -72,7 +72,7 @@
                                         <?php if (get_the_post_thumbnail()) : ?>
                                             <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
                                         <?php else : ?>
-                                            <img src="<?php echo get_template_directory_uri(); ?>/img/common/no-post.jpg" alt="<?php the_title(); ?>">
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/no-post.jpg" alt="<?php the_title(); ?>">
                                         <?php endif; ?>
                                     </div>
                                     <div class="bl_clinicList_item_lower_sp_right">

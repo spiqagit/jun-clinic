@@ -844,6 +844,10 @@
                 gap: vwmin(16, pc, 16);
                 align-items: center;
             }
+
+            @media (max-width: 375px) {
+                grid-template-columns: 1fr;
+            }
         }
 
         .bl_clinicList_item_lower_sp_right{

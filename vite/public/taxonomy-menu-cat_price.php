@@ -195,7 +195,7 @@
                                     <ul class="bl_priceListContainer_priceList_largeList">
                                         <li class="bl_priceListContainer_priceList_largeList_item">
                                             <h2 class="bl_priceListContainer_priceList_largeList_item_ttl"><?php echo esc_html($currentTerm->name); ?></h2>
-                                            
+
                                             <?php while ($query->have_posts()) : $query->the_post(); ?>
 
                                                 <ul class="bl_priceListContainer_priceList_smallList">
@@ -205,37 +205,40 @@
                                                             <ul class="bl_priceTableList">
                                                                 <?php while (have_rows('price_wrap')) : the_row(); ?>
                                                                     <li class="bl_priceTableList_item">
-                                                                        <?php if (have_rows('price_table')) : ?>
-                                                                            <?php while (have_rows('price_table')) : the_row(); ?>
-                                                                                <div class="bl_priceTableList_item_innerContainer">
-                                                                                    <div class="bl_priceTableList_item_innerContainer_left">
-                                                                                        <?php if (get_sub_field('left')) : ?>
-                                                                                            <p class="el_priceTableList_item_innerContainer_left_txt"><?php echo get_sub_field('left'); ?></p>
-                                                                                        <?php endif; ?>
-                                                                                    </div>
+                                                                        <div class="bl_priceTableList_item_innerContainer">
 
-                                                                                    <div class="bl_priceTableList_item_innerContainer_right">
-                                                                                        <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
-                                                                                            <?php if (get_sub_field('price_txt')) : ?>
-                                                                                                <p><?php echo get_sub_field('price_txt'); ?></p>
-                                                                                            <?php endif; ?>
-                                                                                        </div>
+                                                                            <div class="bl_priceTableList_item_innerContainer_left">
+                                                                                <?php if (get_sub_field('left')) : ?>
+                                                                                    <p class="el_priceTableList_item_innerContainer_left_txt"><?php echo get_sub_field('left'); ?></p>
+                                                                                <?php endif; ?>
+                                                                            </div>
 
-                                                                                        <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
-                                                                                            <?php if (get_sub_field('price_view')) : ?>
-                                                                                                <p><?php echo get_sub_field('price_view'); ?></p>
-                                                                                            <?php endif; ?>
-                                                                                        </div>
+                                                                            <div class="bl_priceTableList_item_innerContainer_right">
+                                                                                <?php if (have_rows('price_table')) : ?>
+                                                                                    <?php while (have_rows('price_table')) : the_row(); ?>
+                                                                                        <div class="bl_priceTableList_item_innerContainer_right_inner">
+                                                                                            <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
+                                                                                                <?php if (get_sub_field('price_txt')) : ?>
+                                                                                                    <p><?php echo get_sub_field('price_txt'); ?></p>
+                                                                                                <?php endif; ?>
+                                                                                            </div>
 
-                                                                                        <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
-                                                                                            <?php if (get_sub_field('right')) : ?>
-                                                                                                <p class="el_priceTableList_item_innerContainer_right_txt"><?php echo get_sub_field('right'); ?></p>
-                                                                                            <?php endif; ?>
+                                                                                            <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
+                                                                                                <?php if (get_sub_field('price_view')) : ?>
+                                                                                                    <p><?php echo get_sub_field('price_view'); ?></p>
+                                                                                                <?php endif; ?>
+                                                                                            </div>
+
+                                                                                            <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
+                                                                                                <?php if (get_sub_field('right')) : ?>
+                                                                                                    <p class="el_priceTableList_item_innerContainer_right_txt"><?php echo get_sub_field('right'); ?></p>
+                                                                                                <?php endif; ?>
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            <?php endwhile; ?>
-                                                                        <?php endif; ?>
+                                                                                    <?php endwhile; ?>
+                                                                                <?php endif; ?>
+                                                                            </div>
+                                                                        </div>
                                                                     </li>
                                                                 <?php endwhile; ?>
                                                             </ul>

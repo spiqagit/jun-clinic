@@ -20,7 +20,7 @@ add_action('admin_menu', 'remove_menus', 999);
 
 /* ---------- 投稿関連 ---------- */
 // single生成制御
-add_filter('doctor_rewrite_rules', '__return_empty_array');
+
 // アーカイブの表示条件
 function change_posts_per_page($query)
 {
@@ -70,6 +70,7 @@ add_filter('get_the_archive_title', function ($title) {
     return $title;
 });
 
+
 // 一覧・single生成制御
 function disable_faq_pages()
 {
@@ -82,6 +83,8 @@ function disable_faq_pages()
     }
 }
 add_action('template_redirect', 'disable_faq_pages');
+
+
 
 /* ---------- 検索機能 ---------- */
 add_filter('template_include', 'searchform_recruit');
@@ -137,8 +140,11 @@ add_filter('posts_search', 'my_custom_search', 10, 2);
 if (isset($_GET['s'])) $_GET['s'] = mb_convert_kana($_GET['s'], 's', 'UTF-8');
 
 
-function my_custom_taxonomy_template($template) {
+function my_custom_taxonomy_template($template): mixed
+{
     if (is_tax('menu-cat')) {
+
+        
         $type = isset($_GET['type']) ? sanitize_text_field($_GET['type']) : '';
 
         // typeが空の場合はトップページへリダイレクト
@@ -148,7 +154,7 @@ function my_custom_taxonomy_template($template) {
         }
 
         if ($type === 'price') {
-            $new_template = locate_template('taxonomy-menu_price.php');
+            $new_template = locate_template('taxonomy-menu-cat_price.php');
             if ($new_template) {
                 return $new_template;
             }
@@ -162,3 +168,28 @@ function my_custom_taxonomy_template($template) {
     return $template;
 }
 add_filter('template_include', 'my_custom_taxonomy_template');
+
+
+/* ---------- 
+ブロックスタイル 
+---------- */
+function mytheme_register_block_styles()
+{
+
+    register_block_style(
+        'core/list',
+        array(
+            'name'  => 'checklist',
+            'label' => 'チェックリスト',
+        )
+    );
+
+    register_block_style(
+        'core/list',
+        array(
+            'name'  => 'image-list',
+            'label' => '画像付きリスト',
+        )
+    );
+}
+add_action('init', 'mytheme_register_block_styles');

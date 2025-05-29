@@ -662,7 +662,7 @@
                         <?php
                         $args = array(
                             'post_type' => 'news',
-                            'posts_per_page' => -1,
+                            'posts_per_page' => 3,
                         );
                         $newsItems = new WP_Query($args);
                         if ($newsItems->have_posts()) : ?>
