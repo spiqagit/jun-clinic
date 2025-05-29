@@ -82,11 +82,17 @@ export default defineConfig({
                 main: 'src/js/main.js',
                 top: 'src/js/top.js',
                 common: 'src/scss/common.scss',
+                editor: 'src/scss/editor.scss',
             },
             output: {
                 entryFileNames: '[name].js',
                 chunkFileNames: '[name].js',
-                assetFileNames: '[name].css',
+                assetFileNames: (assetInfo) => {
+                    if (assetInfo.name.endsWith('.scss')) {
+                        return '[name].css';
+                    }
+                    return '[name][extname]';
+                },
             },
         },
     },

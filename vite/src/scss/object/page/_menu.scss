@@ -68,6 +68,9 @@
 /* ------------------------------
 記事
 ------------------------------ */
+.bl_menuArticleSec_inner_article {
+    overflow-x: hidden;
+}
 
 .bl_menuArticleSec {
     padding-inline: vwmin(20, pc, 20);
@@ -81,5 +84,10 @@
         grid-template-columns: vwmin(172, pc, 172) 1fr;
         justify-content: space-between;
         gap: vwmin(149, pc);
+
+        @include underTB {
+            grid-template-columns: 1fr;
+            gap: vwmin(100, pc, 100);
+        }
     }
 }

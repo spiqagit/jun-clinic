@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuContentList = [...document.querySelectorAll('.bl_menuListContainer_content')];
   tabs.forEach((tab, idx) => {
     tab.addEventListener('click', function () {
-      
+
       //ボタン
       tabs.forEach(t => t.classList.remove('is_active'));
       tab.classList.add('is_active');
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
       menuContentList.forEach(menuContent => {
         menuContent.classList.remove('is_activeTab');
         const contentId = menuContent.getAttribute('data-menutab');
-        
+
         if (tabId == contentId) {
           menuContent.classList.add('is_activeTab');
         }
@@ -71,7 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  //料金表タブ
+  /* --------------------------------
+  料金表タブ
+  -------------------------------- */
   const priceClinicBtnList = [...document.querySelectorAll('.el_priceSec_seideMenuContainer_item_select_btn')];
   const priceClinicContentList = [...document.querySelectorAll('.bl_priceListContainer')];
 
@@ -98,33 +100,105 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  //記事ナビゲーション
+  /* --------------------------------
+  記事ナビゲーション
+  -------------------------------- */
   const article = document.querySelector('.bl_articlePage_article');
+  const articleNavi = document.getElementById('article-navi');
 
-  if(article){
+  if (articleNavi && article) {
+
+    //ナビゲーションのリストを作成
     const h2Elements = [...article.querySelectorAll('h2')];
 
     h2Elements.forEach((h2, idx) => {
       h2.setAttribute('id', `article-${idx + 1}`);
     });
 
-    const articleNavi = document.querySelector('#article-navi');
-    
-    if(articleNavi) {
+    if (articleNavi) {
       const ul = document.createElement('ul');
-      
+      ul.classList.add('bl_naviContainer_list');
+
       h2Elements.forEach((h2, idx) => {
         const li = document.createElement('li');
         const a = document.createElement('a');
-        
+
+        //先頭
+        if (idx === 0) {
+          a.classList.add('is_naviContainer_list_btn_active');
+        }
+
+        a.classList.add('el_naviContainer_list_btn');
+
         a.href = `#article-${idx + 1}`;
         a.textContent = h2.textContent;
-        
+
         li.appendChild(a);
         ul.appendChild(li);
       });
-      
+
       articleNavi.appendChild(ul);
     }
+
+    //ナビゲーション 位置判定
+    const naviBtnActiveClass = "is_naviContainer_list_btn_active";
+
+    const observer = new IntersectionObserver((entries) => {
+      const navItemList = [...document.querySelectorAll('.el_naviContainer_list_btn')];
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const targetId = entry.target.getAttribute('id');
+
+          navItemList.forEach(navItem => {
+            const navItemId = navItem.getAttribute('href').replace('#', '');
+            navItem.classList.toggle(naviBtnActiveClass, navItemId === targetId);
+          });
+        }
+      });
+    }, {
+      root: null, // 今回はビューポートをルート要素とする
+      rootMargin: "-50% 0px", // ビューポートの中心を判定基準にする
+      threshold: 0 // 閾値は0
+    });
+
+    h2Elements.forEach((h2) => {
+
+      // ウィンドウの幅が768px以下の場合は処理をスキップ
+      if (window.innerWidth <= 768) {
+        return;
+      }
+
+      observer.observe(h2);
+    });
   }
+
+
+
+  /* --------------------------------
+  施術メニュー 症例スライド
+  -------------------------------- */
+  const menuCaseSplide = [...document.querySelectorAll('.bl_menuCaseSec_splide')];
+
+  menuCaseSplide.forEach(splide => {
+    const slidesCount = splide.querySelectorAll('.splide__slide').length;
+
+      new Splide(splide, {
+        type: 'slide',
+        autoWidth: true,
+        gap: 10,
+        breakpoints: {
+          1024: {
+            perPage: 2,
+            autoWidth: false,
+          },
+          768: {
+            perPage: 1,
+            autoWidth: false,
+          }
+        }
+      }).mount();
+
+
+  });
 });

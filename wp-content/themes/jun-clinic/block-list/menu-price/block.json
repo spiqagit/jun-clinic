@@ -1,0 +1,18 @@
+{
+    "name": "acf/menu-price",
+    "title": "施術メニュー 料金",
+    "description": "これは施術メニューの料金表です",
+    "category": "menu",
+    "icon": "smiley",
+    "keywords": [
+        "料金表"
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "block.php"
+    },
+    "supports": {
+        "align": true,
+        "jsx": true
+    }
+}

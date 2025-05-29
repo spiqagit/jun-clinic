@@ -144,7 +144,7 @@ function my_custom_taxonomy_template($template): mixed
 {
     if (is_tax('menu-cat')) {
 
-        
+
         $type = isset($_GET['type']) ? sanitize_text_field($_GET['type']) : '';
 
         // typeが空の場合はトップページへリダイレクト
@@ -191,5 +191,56 @@ function mytheme_register_block_styles()
             'label' => '画像付きリスト',
         )
     );
+
+    register_block_style(
+        'core/group',
+        array(
+            'name'  => 'white-bg-group',
+            'label' => '白背景付きグループ',
+        )
+    );
 }
 add_action('init', 'mytheme_register_block_styles');
+
+/* ---------- 
+エディター用CSS 
+---------- */
+function mytheme_editor_styles()
+{
+    add_theme_support('editor-styles');
+    add_editor_style('assets/editor.css');
+}
+add_action('after_setup_theme', 'mytheme_editor_styles');
+
+
+
+// 1. カテゴリー追加（コメント解除推奨）
+// カテゴリーをまとめて追加
+add_filter('block_categories_all', function ($categories) {
+    $new_categories = [
+        [
+            'slug'  => 'menu-price',
+            'title' => '施術メニュー料金表',
+        ],
+        [
+            'slug'  => 'menu-case',
+            'title' => '施術メニュー 症例',
+        ],
+    ];
+    // 2番目の位置にまとめて挿入
+    array_splice($categories, 1, 0, $new_categories);
+    return $categories;
+});
+
+// ACFブロック登録
+add_action('acf/init', function () {
+    $blocks_dir = get_template_directory() . '/block-list/';
+    $blocks = [
+        'menu-price',
+        'menu-case',
+    ];
+
+    foreach ($blocks as $block_name) {
+        register_block_type(trailingslashit($blocks_dir) . $block_name);
+    }
+});

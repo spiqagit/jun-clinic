@@ -151,7 +151,7 @@
                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/feature/rightSide_img_01.jpg" alt="">
                                 </div>
                                 <div class="bl_topFeatureSec_featureContainer_item_rightSide_img bl_topFeatureSec_featureContainer_item_rightSide_img_02">
-                                    <img  src="<?php echo get_template_directory_uri(); ?>/assets/img/top/feature/rightSide_img_02.jpg" alt="">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/feature/rightSide_img_02.jpg" alt="">
                                 </div>
                             </div>
                         </div>
@@ -318,37 +318,33 @@
                 </div>
                 <div class="bl_caseListContainer bl_topCaseSec_caseListContainer">
                     <?php
-                    $args = array(
+                    $args = [
                         'post_type' => 'case',
                         'posts_per_page' => -1,
                         'orderby' => 'date',
                         'order' => 'DESC',
-                    );
+                    ];
                     $case_query = new WP_Query($args);
+
                     if ($case_query->have_posts()) : ?>
-
                         <ul class="bl_caseList">
-
                             <?php while ($case_query->have_posts()) : $case_query->the_post(); ?>
                                 <li class="bl_caseList_item">
                                     <a href="<?php the_permalink(); ?>" class="bl_caseList_item_btn">
                                         <div class="bl_caseList_item_imgContainer">
                                             <?php if (have_rows('slide')): ?>
-
                                                 <?php
                                                 $i = 0;
-                                                ?>
-                                                <?php while (have_rows('slide')): the_row(); ?>
-                                                    <?php if ($i == 0): ?>
+                                                while (have_rows('slide')): the_row();
+                                                    if ($i === 0): ?>
                                                         <img class="bl_caseList_item_imgContainer_img" src="<?php the_sub_field('img'); ?>" alt="<?php the_title(); ?>">
-                                                    <?php endif; ?>
-                                                    <?php $i++; ?>
-                                                <?php endwhile; ?>
-
-                                            <?php else : ?>
-
+                                                <?php
+                                                    endif;
+                                                    $i++;
+                                                endwhile;
+                                                ?>
+                                            <?php else: ?>
                                                 <img class="bl_caseList_item_imgContainer_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/common/no-post.jpg" alt="<?php the_title(); ?>">
-
                                             <?php endif; ?>
                                         </div>
 
@@ -357,9 +353,10 @@
                                                 <?php
                                                 $menu_select = get_field('menu_select');
                                                 ?>
-                                                <?php if (is_array($menu_select)) : ?>
-                                                    <?php foreach ($menu_select as $menu) : ?>
-                                                        <p class="el_caseList_item_txtContainer_tagList_item">#<?php echo esc_html($menu->post_title); ?></p>
+
+                                                <?php if (!empty($menu_select)) : ?>
+                                                    <?php foreach ($menu_select as $menu_selectPost) : ?>
+                                                        <p class="el_caseList_item_txtContainer_tagList_item">#<?php echo esc_html(get_the_title($menu_selectPost)); ?></p>
                                                     <?php endforeach; ?>
                                                 <?php endif; ?>
                                             </div>
@@ -368,22 +365,25 @@
 
                                         <dl class="bl_caseList_item_caseInfo">
                                             <?php
-                                            $caseInfoSlugList  = ["case-price", "case-time", "case-downtime", "case-makeup", "case-risk"];
+                                            $caseInfoSlugList = ["case-price", "case-time", "case-downtime", "case-makeup", "case-risk"];
+                                            foreach ($caseInfoSlugList as $caseInfoSlug):
+                                                $field_object = get_field_object($caseInfoSlug, get_the_ID());
+                                                $price = get_field($caseInfoSlug, get_the_ID());
+
+                                                if ($price):
                                             ?>
-                                            <?php foreach ($caseInfoSlugList as $caseInfoSlug) : ?>
-                                                <?php
-                                                $field_object = get_field_object($caseInfoSlug);
-                                                $price = get_field($caseInfoSlug);
-                                                ?>
-                                                <div class="bl_caseList_item_caseInfo_item">
-                                                    <dt class="bl_caseList_item_caseInfo_item_dt">
-                                                        <?php echo esc_html($field_object['label']); ?>
-                                                    </dt>
-                                                    <dd class="bl_caseList_item_caseInfo_item_dd">
-                                                        <?php echo esc_html($price); ?>
-                                                    </dd>
-                                                </div>
-                                            <?php endforeach; ?>
+                                                    <div class="bl_caseList_item_caseInfo_item">
+                                                        <dt class="bl_caseList_item_caseInfo_item_dt">
+                                                            <?php echo esc_html($field_object['label']); ?>
+                                                        </dt>
+                                                        <dd class="bl_caseList_item_caseInfo_item_dd">
+                                                            <?php echo esc_html($price); ?>
+                                                        </dd>
+                                                    </div>
+                                            <?php
+                                                endif;
+                                            endforeach;
+                                            ?>
                                         </dl>
                                     </a>
                                 </li>

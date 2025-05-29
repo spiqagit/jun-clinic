@@ -20,9 +20,7 @@
     }
 }
 
-
 .bl_articlePage_article {
-
     h2 {
         position: relative;
         color: var(--baseFontColor);
@@ -233,6 +231,7 @@
 
         img {
             border-radius: vwmin(4, pc, 4);
+            width: 100%;
         }
 
         figcaption {
@@ -296,8 +295,89 @@
             }
         }
     }
-}
 
+
+    .is-style-white-bg-group {
+        position: relative;
+        flex-flow: column;
+        gap: vwmin(20, pc, 20);
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        padding-block: vwmin(20, pc, 20);
+        padding-inline: vwmin(20, pc, 20);
+        border-radius: vwmin(8, pc, 8);
+        margin-top: vwmin(30, pc, 30);
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+            width: calc(100% - vwmin(16, pc, 16));
+            height: calc(100% - vwmin(16, pc, 16));
+            border: vwmin(1, pc, 1) solid #EBE9DF;
+            border-radius: vwmin(6, pc, 6);
+            z-index: 0;
+        }
+
+        mark {
+            font-weight: 700;
+            line-height: 1.8;
+            background: linear-gradient(0deg, #E0DDD0 35%, transparent 0%);
+        }
+
+        a {
+            position: relative;
+            display: grid;
+            grid-template-columns: auto vwmin(5, pc, 5);
+            align-items: center;
+            justify-content: space-between;
+            gap: vwmin(6, pc, 6);
+            color: var(--baseFontColor);
+            font-size: vwmin(14, pc, 14);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.5;
+            letter-spacing: calc(14 * 0.02);
+            border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
+            padding-bottom: vwmin(10, pc, 10);
+            text-decoration: none;
+            width: 100%;
+            max-width: vwmin(230, pc, 230);
+            margin-inline: auto;
+            z-index: 1;
+
+            &:after {
+                content: "";
+                position: relative;
+                width: 100%;
+                min-height: vwmin(8, pc, 8);
+                background-image: url("img/common/open-arrow.svg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                transition: opacity 0.3s var(--reverseTransition);
+
+                @media (hover: hover) {
+                    &:hover {
+                        opacity: .5;
+                        transition: opacity 0.3s var(--reverseTransition);
+                    }
+                }
+            }
+        }
+
+        p {
+            text-align: center;
+            width: 100%;
+            margin-top: 0;
+            position: relative;
+            z-index: 1;
+        }
+    }
+}
 
 
 
@@ -382,5 +462,390 @@
             width: fit-content;
             margin-left: auto;
         }
+    }
+}
+
+
+/*  ------------------------------
+記事ナビゲーション
+------------------------------*/
+.bl_naviContainer {
+    position: sticky;
+    top: vwmin(120, pc, 120);
+    height: fit-content;
+
+    @include underTB {
+        position: relative;
+        top: 0;
+    }
+
+    .bl_naviContainer_ttlContainer {
+        display: none;
+
+        @include underTB {
+            display: block;
+            margin-bottom: vwmin(32, pc, 32);
+
+            .bl_naviContainer_ttlContainer_ttl {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                align-items: center;
+                gap: vwmin(6, pc, 6);
+                color: var(--baseFontColor);
+                font-family: Marcellus;
+                font-size: vwmin(24, pc, 24);
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.5;
+                letter-spacing: 0.0267em;
+
+                &::after {
+                    content: "";
+                    position: relative;
+                    display: block;
+                    height: vwmin(1, pc, 1);
+                    width: 100%;
+                    background-color: var(--baseFontColor);
+                }
+            }
+        }
+    }
+
+    .bl_naviContainer_list {
+        display: flex;
+        flex-flow: column;
+        gap: vwmin(10, pc, 10);
+
+        @include underTB {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(vwmin(180, pc, 180), 100%), 1fr));
+            gap: vwmin(20, pc, 20);
+        }
+
+        .el_naviContainer_list_btn {
+            display: grid;
+            grid-template-columns: vwmin(6, pc, 6) auto;
+            gap: vwmin(6, pc, 6);
+            align-items: baseline;
+            color: #999;
+            font-size: vwmin(12, pc, 12);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.5;
+            letter-spacing: calc(12 * 0.02);
+            transition: color 0.3s var(--reverseTransition);
+
+            @include underTB {
+                display: grid;
+                grid-template-columns: auto vwmin(6, pc, 6);
+                align-items: center;
+                color: var(--baseFontColor);
+                font-family: "Noto Sans JP";
+                font-size: vwmin(12, pc, 12);
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.5;
+                letter-spacing: calc(12 * 0.02);
+                padding-bottom: vwmin(6, pc, 6);
+                border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
+
+                &::after {
+                    content: "";
+                    position: relative;
+                    width: 100%;
+                    min-height: vwmin(4, pc, 4);
+                    background-image: url("img/common/red-arrow.svg");
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: 100% 100%;
+                }
+            }
+
+            &::before {
+                content: "";
+                display: block;
+                width: vwmin(6, pc, 6);
+                height: vwmin(6, pc, 6);
+                background-color: var(--lineText);
+                border-radius: 100%;
+                opacity: 0;
+                transition: opacity 0.3s var(--reverseTransition);
+
+                @include underTB {
+                    display: none;
+                }
+            }
+        }
+
+        .is_naviContainer_list_btn_active {
+            color: var(--baseFontColor);
+            transition: color 0.3s var(--reverseTransition);
+
+            &::before {
+                opacity: 1;
+                transition: opacity 0.3s var(--reverseTransition);
+
+            }
+        }
+    }
+}
+
+
+
+
+:where(.bl_articlePage_article) {
+
+    .bl_menuPostPriceSec {
+        display: flex;
+        flex-flow: column;
+        gap: vwmin(36, pc, 36);
+        margin-top: vwmin(32, pc, 32);
+    }
+
+    .bl_priceListContainer_priceList_smallList {
+        display: flex;
+        flex-flow: column;
+        gap: vwmin(30, pc, 30);
+
+
+        .bl_priceListContainer_priceList_smallist_item {
+
+            .el_priceListContainer_priceList_smallList_post_ttl {
+                border-left: vwmin(1, pc, 1) solid #9E586C;
+                padding-left: vwmin(16, pc, 16);
+                color: var(--baseFontColor);
+                font-family: "Shippori Mincho";
+                font-size: vwmin(20, pc, 20);
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.5;
+                letter-spacing: calc(0.8 / 20 * 1em);
+                margin-bottom: vwmin(20, pc, 20);
+            }
+        }
+    }
+
+
+    /*  ------------------------------
+    価格表
+    ------------------------------*/
+    .bl_priceTableList {
+        display: flex;
+        flex-flow: column;
+        gap: vwmin(20, pc, 20);
+        background-color: #fff;
+        padding: vwmin(20, pc, 20);
+        border-radius: vwmin(8, pc, 8);
+
+        .bl_priceTableList_item {
+            display: flex;
+            flex-flow: column;
+            gap: vwmin(20, pc, 20);
+            padding-bottom: vwmin(20, pc, 20);
+            border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
+
+            @include underTB {
+                gap: vwmin(8, pc, 8);
+            }
+
+            &:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+
+            .bl_priceTableList_item_innerContainer {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: vwmin(20, pc, 20);
+
+                @include underTB {
+                    display: flex;
+                    flex-flow: column;
+                    gap: vwmin(16, pc, 16);
+                }
+
+                .bl_priceTableList_item_innerContainer_left {
+
+                    .el_priceTableList_item_innerContainer_left_txt {
+                        color: var(--baseFontColor);
+                        font-size: vwmin(16, pc, 16);
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 1.5;
+                    }
+                }
+
+                .bl_priceTableList_item_innerContainer_right {
+                    display: flex;
+                    flex-flow: column;
+                    gap: vwmin(8, pc, 8);
+                    color: var(--baseFontColor);
+                    text-align: right;
+                    font-size: vwmin(16, pc, 16);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    order: 2;
+
+
+
+                    .bl_priceTableList_item_innerContainer_right_container {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        gap: vwmin(8, pc, 8);
+                    }
+
+                    .bl_priceTableList_item_innerContainer_right_container_table {
+                        display: grid;
+                        grid-template-columns: vwmin(80, pc, 80) 1fr;
+                        gap: vwmin(8, pc, 8);
+
+                        @include underTB {
+                            display: flex;
+                            justify-content: flex-end;
+                        }
+
+                        .el_priceTableList_item_innerContainer_right_txtContainer_view {
+                            @include underTB {
+                                min-width: vwmin(80, pc, 80);
+                                width: 100%;
+                                text-align: right;
+                            }
+                        }
+
+                        .bl_priceTableList_item_innerContainer_right_txtContainer_num {
+                            @include underTB {
+                                max-width: vwmin(80, pc, 80);
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    .bl_priceTableList_item_innerContainer_right_txtContainer {
+                        @include underTB {
+                            &:first-child {
+                                text-align: left;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /*  ------------------------------
+    症例
+    ------------------------------*/
+    .bl_menuCaseSec {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        /* 横はみ出し防止 */
+
+        .splide__slide {
+            max-width: vwmin(340, pc, 340) !important;
+        }
+
+        .bl_caseList_item_btn {
+            display: grid;
+            grid-template-rows: subgrid;
+            max-width: vwmin(340, pc, 340);
+            grid-row: span 3;
+            grid-template-columns: 1fr;
+            gap: vwmin(20, pc, 20);
+            border-radius: vwmin(16, pc, 16);
+            overflow: hidden;
+            padding: vwmin(20, pc, 20);
+            background-color: var(--white-bg);
+            box-shadow: 0px 0px vwmin(6, pc, 6) 0px rgba(41, 25, 10, 0.10);
+            border: vwmin(3, pc, 3) solid transparent;
+            transition: all 0.3s var(--reverseTransition);
+
+            @media (hover :hover) {
+                &:hover {
+                    transition: all 0.3s var(--reverseTransition);
+                    border: vwmin(3, pc, 3) solid var(--accentColor);
+                }
+            }
+
+            //画像
+            .bl_caseList_item_imgContainer {
+                width: 100%;
+                aspect-ratio: 1/1;
+
+                .bl_caseList_item_imgContainer_img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            //タイトル
+            .bl_caseList_item_txtContainer {
+
+                .bl_bl_caseList_item_txtContainer_tagList {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: vwmin(8, pc, 8);
+                    margin-bottom: vwmin(4, pc, 4);
+
+                    .el_caseList_item_txtContainer_tagList_item {
+                        color: #999;
+                        font-size: vwmin(12, pc, 12);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.24px / 12);
+                    }
+                }
+
+                .bl_caseList_item_txtContainer_ttl {
+                    font-family: "Shippori Mincho";
+                    font-size: vwmin(20, pc, 20);
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5;
+                    letter-spacing: calc(0.8px / 20);
+                }
+            }
+
+            //症例情報
+            .bl_caseList_item_caseInfo {
+                display: flex;
+                flex-flow: column;
+                gap: vwmin(10, pc, 10);
+
+                .bl_caseList_item_caseInfo_item {
+                    display: grid;
+                    grid-template-columns: vwmin(100, pc, 100) 1fr;
+                    gap: vwmin(10, pc, 10);
+                    align-items: baseline;
+
+                    .bl_caseList_item_caseInfo_item_dt {
+                        color: #333;
+                        font-size: vwmin(12, pc, 12);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.24px / 12);
+                        padding-block: vwmin(3, pc, 3);
+                        padding-inline: vwmin(3, pc, 3);
+                        border-radius: vwmin(2, pc, 2);
+                        background-color: #EBE9DF;
+                        text-align: center;
+                    }
+
+                    .bl_caseList_item_caseInfo_item_dd {
+                        font-size: vwmin(12, pc, 12);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                        letter-spacing: calc(0.28px / 14);
+                    }
+                }
+            }
+        }
+
+
     }
 }

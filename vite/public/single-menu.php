@@ -58,9 +58,13 @@
 
         <div class="bl_menuArticleSec">
             <div class="bl_menuArticleSec_inner">
+                
                 <!-- ナビ -->
-                <div>
-                    <nav class="bl_menuArticleSec_inner_navi" id="article-navi">
+                <div class="bl_naviContainer">
+                    <div class="bl_naviContainer_ttlContainer">
+                        <h2 class="bl_naviContainer_ttlContainer_ttl">Index</h2>
+                    </div>
+                    <nav class="bl_naviContainer" id="article-navi">
                     </nav>
                 </div>
 

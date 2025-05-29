@@ -37,7 +37,7 @@
 
                         // price投稿タイプに関連するタームのみをフィルタリング
                         if (!empty($menuTermList) && !is_wp_error($menuTermList)) {
-                            
+
                             $filteredTerms = array();
 
                             foreach ($menuTermList as $term) {
@@ -239,9 +239,6 @@
                                             ?>
 
                                             <?php if ($query->have_posts()) : ?>
-
-
-
 
 
                                                 <?php while ($query->have_posts()) : $query->the_post(); ?>
