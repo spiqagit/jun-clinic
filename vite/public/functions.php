@@ -226,6 +226,14 @@ add_filter('block_categories_all', function ($categories) {
             'slug'  => 'menu-case',
             'title' => '施術メニュー 症例',
         ],
+        [
+            'slug'  => 'menu-faq',
+            'title' => 'よくある質問',
+        ],
+        [
+            'slug'  => 'menu-img-details',
+            'title' => '使用機器紹介リスト',
+        ],
     ];
     // 2番目の位置にまとめて挿入
     array_splice($categories, 1, 0, $new_categories);
@@ -238,6 +246,8 @@ add_action('acf/init', function () {
     $blocks = [
         'menu-price',
         'menu-case',
+        'menu-faq',
+        'menu-img-details',
     ];
 
     foreach ($blocks as $block_name) {

@@ -585,7 +585,7 @@
                                 ?>
                                         <li class="splide__slide">
                                             <a href="<?php the_permalink(); ?>" class="bl_topDoctorCard">
-                                                <img class="el_topDoctorCard_img" src="<?php echo get_field('img'); ?>" alt="<?php the_title(); ?>">
+                                                <img class="el_topDoctorCard_img" src="<?php echo get_field('doctor_mini_img'); ?>" alt="<?php the_title(); ?>">
                                                 <div class="bl_topDoctorCard_txtContainer">
                                                     <div class="bl_topDoctorCard_txtContainer_ttlContainer">
                                                         <p class="el_topDoctorCard_txtContainer_ttlContainer_job"><?php echo get_field('job'); ?></p>

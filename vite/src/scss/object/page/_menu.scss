@@ -10,6 +10,14 @@
     mask-position: center;
     min-height: vwmin(620, pc, 620);
 
+    @include underSP {
+        min-height: 45vh;
+        mask-position: 0 0;
+        -webkit-mask-image: url("img/menu/rich-menu-sp.svg");
+        mask-image: url("img/menu/rich-menu-sp.svg");
+        mask-size: cover;
+    }
+
     /* 背景画像 */
     .bl_richMenuTtlSec_bg {
         position: absolute;
@@ -35,6 +43,12 @@
             grid-template-columns: 1fr vwmin(200, pc, 200);
             max-width: vwmin(1162, pc, 1162);
             margin-inline: auto;
+
+            @include underTB {
+                position: absolute;
+                bottom: vwmin(60, pc, 60);
+                grid-template-columns: 1fr;
+            }
         }
 
 
@@ -51,6 +65,10 @@
                 letter-spacing: calc(20 * 0.008);
                 text-transform: uppercase;
                 font-family: Marcellus;
+
+                @include underSP {
+                    font-size: vwmin(16, pc, 16);
+                }
             }
 
             .el_richMenuTtlWrapper_ttl {
@@ -59,6 +77,10 @@
                 font-weight: 500;
                 line-height: 1.5;
                 letter-spacing: calc(42 * 0.0168);
+
+                @include underSP {
+                    font-size: vwmin(28, pc, 28);
+                }
             }
         }
     }

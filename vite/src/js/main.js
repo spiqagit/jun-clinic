@@ -176,6 +176,82 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* --------------------------------
+  アコーディオン
+  -------------------------------- */
+  const accordionItems = document.querySelectorAll('.bl_commonfaqList_item_details');
+
+  accordionItems.forEach(item => {
+    const summary = item.querySelector('.bl_commonfaqList_item_details_summary');
+    const panel = item.querySelector('.bl_commonfaqList_item_details_panel');
+    const panelInner = item.querySelector('.bl_commonfaqList_item_details_panel_inner');
+    const icon = item.querySelector('.el_commonfaqList_item_details_summary_icon');
+
+    // 初期状態を設定
+    gsap.set(panel, { 
+      height: 0, 
+      opacity: 0,
+      marginTop: 0
+    });
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const isOpen = item.hasAttribute('open');
+      
+      // 現在のアコーディオンの開閉
+      if (isOpen) {
+        // 閉じる前の高さを取得
+        const startHeight = panel.scrollHeight;
+        
+        gsap.to(panel, {
+          height: 0,
+          opacity: 0,
+          duration: 0.4,
+          ease: "power3.out",
+          onStart: () => {
+            // アニメーション開始時に高さを固定
+            gsap.set(panel, { 
+              height: startHeight,
+            });
+          },
+          onComplete: () => {
+            item.removeAttribute('open');
+            // アニメーション完了後に高さを0に設定
+            gsap.set(panel, { 
+              height: 0,
+              marginTop: 0
+            });
+          }
+        });
+        
+        icon.classList.remove('is_open');
+      } else {
+        item.setAttribute('open', '');
+        
+        // 開く前の高さを取得
+        const endHeight = panel.scrollHeight;
+        
+        gsap.to(panel, {
+          height: endHeight,
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out",
+          onComplete: () => {
+            // アニメーション完了後に高さをautoに設定
+            gsap.set(panel, { 
+              height: 'auto',
+            });
+          }
+        });
+        
+        icon.classList.add('is_open');
+      }
+    });
+  });
+
+
+
+  /* --------------------------------
   施術メニュー 症例スライド
   -------------------------------- */
   const menuCaseSplide = [...document.querySelectorAll('.bl_menuCaseSec_splide')];
@@ -186,7 +262,9 @@ document.addEventListener('DOMContentLoaded', () => {
       new Splide(splide, {
         type: 'slide',
         autoWidth: true,
-        gap: 10,
+        gap: 20,
+        pagination: true,
+        autoHeight: true,
         breakpoints: {
           1024: {
             perPage: 2,
@@ -201,4 +279,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   });
+
+
+
+
+  
 });
