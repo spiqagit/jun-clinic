@@ -66,6 +66,7 @@
                                     <div class="bl_priceSec_seideMenuContainer_item_selectContainer">
                                         <select name="menu-cat" id="menu-cat-select" onchange="if(this.value) window.location.href=this.value" class="bl_priceSec_seideMenuContainer_item_select">
                                             <option value="" class="el_priceSec_seideMenuContainer_item_select_first">施術を選ぶ</option>
+                                            <option value="<?php echo home_url('/price/'); ?>" class="el_priceSec_seideMenuContainer_item_select_first">すべて</option>
 
                                             <?php
                                             $subMenuTermList = get_terms(array(
@@ -191,54 +192,80 @@
                                 );
                                 $query = new WP_Query($args);
                                 ?>
-                                <?php if ($query->have_posts()) : ?>
-                                    <ul class="bl_priceListContainer_priceList_largeList">
-                                        <li class="bl_priceListContainer_priceList_largeList_item">
-                                            <h2 class="bl_priceListContainer_priceList_largeList_item_ttl"><?php echo esc_html($currentTerm->name); ?></h2>
 
-                                            <?php while ($query->have_posts()) : $query->the_post(); ?>
+                                <?php if ($query->have_posts()) : ?>
+
+                                    <ul class="bl_priceListContainer_priceList_largeList">
+                                        <?php while ($query->have_posts()) : $query->the_post(); ?>
+
+                                            <li class="bl_priceListContainer_priceList_largeList_item">
+                                                <h2 class="bl_priceListContainer_priceList_largeList_item_ttl"><?php echo the_title(); ?></h2>
 
                                                 <ul class="bl_priceListContainer_priceList_smallList">
                                                     <li class="bl_priceListContainer_priceList_smallist_item">
-                                                        <h3 class="el_priceListContainer_priceList_smallList_post_ttl"><?php the_title(); ?></h3>
                                                         <?php if (have_rows('price_wrap')) : ?>
-                                                            <ul class="bl_priceTableList">
+                                                            <ul class="bl_priceListContainer_priceList_smallList">
+
                                                                 <?php while (have_rows('price_wrap')) : the_row(); ?>
-                                                                    <li class="bl_priceTableList_item">
-                                                                        <div class="bl_priceTableList_item_innerContainer">
 
-                                                                            <div class="bl_priceTableList_item_innerContainer_left">
-                                                                                <?php if (get_sub_field('left')) : ?>
-                                                                                    <p class="el_priceTableList_item_innerContainer_left_txt"><?php echo get_sub_field('left'); ?></p>
-                                                                                <?php endif; ?>
-                                                                            </div>
+                                                                    <li class="bl_priceListContainer_priceList_smallist_item">
 
-                                                                            <div class="bl_priceTableList_item_innerContainer_right">
-                                                                                <?php if (have_rows('price_table')) : ?>
-                                                                                    <?php while (have_rows('price_table')) : the_row(); ?>
-                                                                                        <div class="bl_priceTableList_item_innerContainer_right_inner">
-                                                                                            <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
-                                                                                                <?php if (get_sub_field('price_txt')) : ?>
-                                                                                                    <p><?php echo get_sub_field('price_txt'); ?></p>
+                                                                        <h3 class="el_priceListContainer_priceList_smallList_post_ttl"><?php echo get_sub_field('left'); ?></h3>
+
+                                                                        <?php if (have_rows('price_table')) : ?>
+
+                                                                            <ul class="bl_priceTableList">
+
+                                                                                <?php while (have_rows('price_table')) : the_row(); ?>
+
+                                                                                    <li class="bl_priceTableList_item">
+                                                                                        <div class="bl_priceTableList_item_innerContainer">
+
+                                                                                            <div class="bl_priceTableList_item_innerContainer_left">
+                                                                                                <?php if (get_sub_field('price_table-ttl')) : ?>
+                                                                                                    <p class="el_priceTableList_item_innerContainer_left_txt"><?php echo get_sub_field('price_table-ttl'); ?></p>
                                                                                                 <?php endif; ?>
                                                                                             </div>
 
-                                                                                            <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
-                                                                                                <?php if (get_sub_field('price_view')) : ?>
-                                                                                                    <p><?php echo get_sub_field('price_view'); ?></p>
-                                                                                                <?php endif; ?>
-                                                                                            </div>
+                                                                                            <div class="bl_priceTableList_item_innerContainer_right">
+                                                                                                <?php if (have_rows('amount-table')) : ?>
+                                                                                                    <?php while (have_rows('amount-table')) : the_row(); ?>
 
-                                                                                            <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
-                                                                                                <?php if (get_sub_field('right')) : ?>
-                                                                                                    <p class="el_priceTableList_item_innerContainer_right_txt"><?php echo get_sub_field('right'); ?></p>
+                                                                                                        <div class="bl_priceTableList_item_innerContainer_right_container">
+                                                                                                            <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
+                                                                                                                <?php if (get_sub_field('amount-table_txt')) : ?>
+                                                                                                                    <p><?php echo get_sub_field('amount-table_txt'); ?></p>
+                                                                                                                <?php endif; ?>
+                                                                                                            </div>
+
+                                                                                                            <div class="bl_priceTableList_item_innerContainer_right_container_table">
+                                                                                                                <div class="bl_priceTableList_item_innerContainer_right_txtContainer">
+                                                                                                                    <?php if (get_sub_field('amount-table_view')) : ?>
+                                                                                                                        <p class="el_priceTableList_item_innerContainer_right_txtContainer_view"><?php echo get_sub_field('amount-table_view'); ?></p>
+                                                                                                                    <?php endif; ?>
+                                                                                                                </div>
+
+                                                                                                                <div class="bl_priceTableList_item_innerContainer_right_txtContainer bl_priceTableList_item_innerContainer_right_txtContainer_num">
+                                                                                                                    <?php if (get_sub_field('amount-table_num')) : ?>
+                                                                                                                        <p class="el_priceTableList_item_innerContainer_right_txt"><?php echo get_sub_field('amount-table_num'); ?></p>
+                                                                                                                    <?php endif; ?>
+                                                                                                                </div>
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    <?php endwhile; ?>
                                                                                                 <?php endif; ?>
                                                                                             </div>
                                                                                         </div>
-                                                                                    <?php endwhile; ?>
-                                                                                <?php endif; ?>
-                                                                            </div>
-                                                                        </div>
+                                                                                    </li>
+                                                                                <?php endwhile; ?>
+                                                                            </ul>
+                                                                        <?php endif; ?>
+
+
+                                                                        <?php if (get_sub_field('price-caption')) : ?>
+                                                                            <p class="el_priceListContainer_priceList_smallList_post_caption"><?php echo get_sub_field('price-caption'); ?></p>
+                                                                        <?php endif; ?>
                                                                     </li>
                                                                 <?php endwhile; ?>
                                                             </ul>
@@ -247,10 +274,11 @@
                                                 </ul>
                                             <?php endwhile; ?>
 
-                                        </li>
+                                            </li>
+
+                                        <?php endif; ?>
                                     </ul>
-                                <?php endif; ?>
-                                <?php wp_reset_postdata(); ?>
+                                    <?php wp_reset_postdata(); ?>
                             </div>
                             <?php $c++; ?>
                         <?php endforeach; ?>

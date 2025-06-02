@@ -7,7 +7,36 @@
                 <h2 class="el_footer_reserveContainer_ttl">ご予約はこちら</h2>
             </hgroup>
             <div class="bl_footer_reserveContainer_btnContainer">
-                <button type="button" class="el_footer_reserveContainer_btn">LINE予約</button>
+                <button type="button" class="el_footer_reserveContainer_btn" id="footerLineReserveBtn">LINE予約</button>
+
+                <div class="bl_lineReserveModal bl_footer_lineReserve_modal" id="footerLineReserveModal">
+                    <div class="bl_lineReserveModal_inner">
+                        <button type="button" class="el_lineReserveModal_inner_closeBtn">
+                            <img class="el_lineReserveModal_inner_closeBtn_icon" src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/close-icon.svg" alt="">
+                        </button>
+                        <p class="el_lineReserveModal_inner_title">予約する</p>
+                        <?php
+
+                        $arg = array(
+                            'post_type' => 'clinic',
+                            'posts_per_page' => -1,
+                        );
+                        $query = new WP_Query($arg);
+                        ?>
+                        <?php if ($query->have_posts()) : ?>
+                            <ul class="bl_lineReserveModal_inner_list">
+                                <?php while ($query->have_posts()) : $query->the_post(); ?>
+                                    <li class="bl_lineReserveModal_inner_list_item">
+                                        <a href="<?php the_field('line_reserveUrl'); ?>" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                                            <p class="el_lineReserveModal_inner_list_item_link_txt"><?php echo get_term(get_field('news_topics_place'), 'clinic-cat')->name; ?></p>
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                                        </a>
+                                    </li>
+                                <?php endwhile; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -163,8 +192,8 @@
 
     <div class="ly_footerBg_inner">
         <picture class="ly_commonContantsBgItemContainer_item">
-            <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/common/footer-wave-sp.svg" media="(max-width: 768px)">
-            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/footer-wave.svg" alt="">
+            <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/common/footer-wave-sp.png" media="(max-width: 768px)">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/footer-wave.png" alt="">
         </picture>
         <footer class="ly_footer">
             <div class="ly_footer_upper">
@@ -176,22 +205,31 @@
                                 <p class="bl_header_nav_inner_menu_conatainer_title">お悩みから探す</p>
                             </div>
                             <div class="bl_header_nav_inner_menu_conatainer_listWrapper">
-                                <ul class="bl_globalMenuList">
-                                    <?php
-                                    $terms = get_terms(array(
-                                        'taxonomy' => 'menu-problem',
-                                        'hide_empty' => true,
-                                    ));
-                                    if (!empty($terms) && !is_wp_error($terms)) :
-                                        foreach ($terms as $term) : ?>
-                                            <li class="bl_globalMenuList_item">
-                                                <a class="bl_globalMenuList_item_link" href="<?php echo esc_url(get_term_link($term)); ?>">
-                                                    <p class="el_globalMenuList_item_link_text"><?php echo esc_html($term->name); ?></p>
-                                                </a>
-                                            </li>
-                                    <?php endforeach;
-                                    endif; ?>
-                                </ul>
+                                <?php
+                                $problemFlag = false;
+                                if ($problemFlag) :
+                                ?>
+                                    <ul class="bl_globalMenuList">
+                                        <?php
+                                        $terms = get_terms(array(
+                                            'taxonomy' => 'menu-problem',
+                                            'hide_empty' => true,
+                                        ));
+                                        if (!empty($terms) && !is_wp_error($terms)) :
+                                            foreach ($terms as $term) : ?>
+                                                <li class="bl_globalMenuList_item">
+                                                    <a class="bl_globalMenuList_item_link" href="<?php echo esc_url(get_term_link($term)); ?>">
+                                                        <p class="el_globalMenuList_item_link_text"><?php echo esc_html($term->name); ?></p>
+                                                    </a>
+                                                </li>
+                                        <?php endforeach;
+                                        endif; ?>
+                                    </ul>
+                                <?php else: ?>
+                                    <div class="bl_commonComingSoonTxtContainer">
+                                        <p class="el_commonComingSoonTxt">coming soon</p>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
 
@@ -282,57 +320,22 @@
                                 </a>
                             </li>
                             <li class="bl_footerGlobalNavi_list_item">
-                                <a href="<?php echo home_url(); ?>" class="bl_footerGlobalNavi_list_item_link">
-                                    <p class="el_footer_lower_inner_link_txt">施術メニュー</p>
-                                </a>
-                            </li>
-                            <li class="bl_footerGlobalNavi_list_item">
-                                <a href="<?php echo home_url(); ?>" class="bl_footerGlobalNavi_list_item_link">
-                                    <p class="el_footer_lower_inner_link_txt">ドクター一覧</p>
-                                </a>
-                            </li>
-                            <li class="bl_footerGlobalNavi_list_item">
-                                <a href="<?php echo home_url(); ?>" class="bl_footerGlobalNavi_list_item_link">
-                                    <p class="el_footer_lower_inner_link_txt">症例</p>
-                                </a>
-                            </li>
-                            <li class="bl_footerGlobalNavi_list_item">
-                                <a href="<?php echo home_url(); ?>" class="bl_footerGlobalNavi_list_item_link">
-                                    <p class="el_footer_lower_inner_link_txt">よくある質問</p>
-                                </a>
-                            </li>
-                            <li class="bl_footerGlobalNavi_list_item">
-                                <a href="<?php echo home_url(); ?>" class="bl_footerGlobalNavi_list_item_link">
-                                    <p class="el_footer_lower_inner_link_txt">セミナー・学会報告</p>
-                                </a>
-                            </li>
-                            <li class="bl_footerGlobalNavi_list_item">
-                                <a href="<?php echo home_url(); ?>" class="bl_footerGlobalNavi_list_item_link">
-                                    <p class="el_footer_lower_inner_link_txt">初めての方へ</p>
-                                </a>
-                            </li>
-                            <li class="bl_footerGlobalNavi_list_item">
-                                <a href="<?php echo  esc_url(home_url('/price/')); ?>" class="bl_footerGlobalNavi_list_item_link">
+                                <a href="<?php echo home_url('/price/'); ?>" class="bl_footerGlobalNavi_list_item_link">
                                     <p class="el_footer_lower_inner_link_txt">料金表</p>
                                 </a>
                             </li>
                             <li class="bl_footerGlobalNavi_list_item">
-                                <a href="<?php echo home_url(); ?>" class="bl_footerGlobalNavi_list_item_link">
-                                    <p class="el_footer_lower_inner_link_txt">お知らせ</p>
-                                </a>
-                            </li>
-                            <li class="bl_footerGlobalNavi_list_item">
-                                <a href="<?php echo home_url(); ?>" class="bl_footerGlobalNavi_list_item_link">
-                                    <p class="el_footer_lower_inner_link_txt">採用情報</p>
+                                <a href="<?php echo home_url('/doctor/'); ?>" class="bl_footerGlobalNavi_list_item_link">
+                                    <p class="el_footer_lower_inner_link_txt">ドクター一覧</p>
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="bl_footerGlobalNavi_copyContainer">
                         <div class="bl_footerGlobalNavi_copyContainer_list">
-                            <a href="#" class="bl_footerGlobalNavi_copyContainer_list_item">当院の肌治療・肌診断について</a>
-                            <a href="#" class="bl_footerGlobalNavi_copyContainer_list_item">予約・キャンセル・お子様の同伴について</a>
-                            <a href="#" class="bl_footerGlobalNavi_copyContainer_list_item">プライバシーポリシー</a>
+                            <a href="<?php echo home_url('/skin-care-pilcy/'); ?>" class="bl_footerGlobalNavi_copyContainer_list_item">当院の肌治療・肌診断について</a>
+                            <a href="<?php echo home_url('/cancel-policy/'); ?>" class="bl_footerGlobalNavi_copyContainer_list_item">予約・キャンセル・お子様の同伴について</a>
+                            <a href="#" style="display: none;" class="bl_footerGlobalNavi_copyContainer_list_item">プライバシーポリシー</a>
                         </div>
                         <p class="el_footerGlobalNavi_copyright_txt">&copy; 2025 JUN CLINIC</p>
                     </div>

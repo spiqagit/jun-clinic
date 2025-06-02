@@ -11,17 +11,22 @@ header
         left: 0;
         width: 100%;
         z-index: 100;
-        padding-inline: vwmin(20, pc, 20);
-        padding-top: vwmin(24, pc, 24);
+        padding-inline: vwmin(40, pc, 40);
+        padding-top: vwmin(28, pc, 28);
         box-sizing: border-box;
         z-index: 100;
         background-color: transparent;
         mix-blend-mode: exclusion;
 
+        @include underTB {
+            padding-inline: vwmin(20, pc, 20);
+            padding-top: vwmin(16, pc, 16);
+        }
+
         .ly_header_inner {
             position: relative;
             display: grid;
-            grid-template-columns: vwmin(155, pc , 155) vwmin(36, pc , 36);
+            grid-template-columns: vwmin(155, pc, 155) vwmin(36, pc, 36);
             justify-content: space-between;
             align-items: center;
 
@@ -35,6 +40,10 @@ header
                 width: 100%;
                 height: 100%;
                 isolation: isolate; // 追加推奨
+
+                img {
+                    width: 100%;
+                }
             }
 
             .bl_header_inner_logo_link {
@@ -54,8 +63,8 @@ header
     .el_header_menu_btn {
         cursor: pointer;
         position: fixed;
-        top: vwmin(24, pc, 24);
-        right: vwmin(20, pc, 20);
+        top: vwmin(27, pc, 27);
+        right: vwmin(40, pc, 40);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -70,18 +79,23 @@ header
         z-index: 120;
         mix-blend-mode: exclusion;
 
+        @include underTB {
+            top: vwmin(16, pc, 16);
+            right: vwmin(20, pc, 20);
+        }
+
         .bl_header_menu_btn_lineContainer {
             position: relative;
-            height: vwmin(6, pc ,6);
+            height: vwmin(6, pc, 6);
             width: 100%;
             display: block;
             width: 100%;
-            min-height: vwmin(6, pc ,6);
+            min-height: vwmin(6, pc, 6);
 
             .el_header_menu_btn_lineContainer_line {
                 position: absolute;
                 display: block;
-                height: vwmin(1, pc ,1);
+                height: vwmin(1, pc, 1);
                 background-color: #fff;
                 transition: transform 0.3s var(--reverseTransition);
 
@@ -94,11 +108,11 @@ header
                 }
 
                 &:nth-child(2) {
-                    top: vwmin(5, pc ,5);
+                    top: vwmin(5, pc, 5);
                     right: 0;
                     left: auto;
                     width: 100%;
-                    max-width: vwmin(24, pc ,24);
+                    max-width: vwmin(24, pc, 24);
                     transition: all 0.3s var(--reverseTransition);
 
                 }
@@ -108,7 +122,7 @@ header
 
     .el_header_menu_btn.is_active {
         .bl_header_menu_btn_lineContainer {
-            height: vwmin(14, pc ,14);
+            height: vwmin(14, pc, 14);
             transition: all 0.3s var(--reverseTransition);
 
 
@@ -142,33 +156,41 @@ header
 
     .bl_header_menu_lineReserveBtn {
         position: fixed;
-        top: vwmin(24, pc ,24);
-        right: vwmin(106, pc ,106);
+        top: vwmin(24, pc, 24);
+        right: vwmin(106, pc, 106);
         width: 100%;
-        max-width: vwmin(168, pc ,168);
+        max-width: vwmin(168, pc, 168);
         display: flex;
-        padding-top: vwmin(10, pc ,10);
-        padding-bottom: vwmin(12, pc ,12);
+        padding-top: vwmin(10, pc, 10);
+        padding-bottom: vwmin(12, pc, 12);
         justify-content: center;
         align-items: center;
         background-color: var(--accentColor);
-        border-radius: vwmin(10, pc ,10);
-        font-size: vwmin(14, pc ,14);
+        border-radius: vwmin(10, pc, 10);
+        font-size: vwmin(14, pc, 14);
         font-weight: 500;
-        font-size: vwmin(16, pc ,16);
+        font-size: vwmin(16, pc, 16);
         font-style: normal;
         color: #fff;
         font-weight: 600;
         line-height: 1.4;
-            border-radius: vwmin(50, pc ,50);
-        border: vwmin(1, pc ,1) solid transparent;
+        border-radius: vwmin(50, pc, 50);
+        border: vwmin(1, pc, 1) solid transparent;
         mix-blend-mode: normal;
         isolation: isolate;
         transition: background-color .3s cubic-bezier(0, 0, 0.46, 1), color .3s cubic-bezier(0, 0, 0.46, 1);
         z-index: 110;
 
         @include underTB {
-            display: none;
+            width: 100%;
+            max-width: 100%;
+            border-radius: vwmin(8, pc, 8) vwmin(8, pc, 8) 0 0;
+            left: 0;
+            bottom: env(safe-area-inset-bottom);
+            height: fit-content;
+            translate: 0;
+            right: auto;
+            top: auto;
         }
 
         @media (hover: hover) {
@@ -180,6 +202,24 @@ header
             }
         }
     }
+
+    .bl_header_menu_lineReserve_modal{
+        position: fixed;
+        top: vwmin(95, pc, 95);
+        right: vwmin(106, pc, 106);
+
+        @include underTB {
+            bottom: vwmin(60, pc, 60);
+            left: 50%;
+            translate: -50% 0;
+            right: auto;
+            top: auto;
+            padding-top: vwmin(16, pc, 16);
+            padding-bottom: vwmin(14, pc, 14);
+        }
+    }
+
+
 }
 
 
@@ -230,10 +270,6 @@ navi
             position: relative;
             background-color: var(--accentColor);
 
-            @include underTB {
-                min-height: vwmin(590, pc, 590);
-            }
-
             &::before {
                 content: '';
                 position: absolute;
@@ -259,9 +295,33 @@ navi
                 padding-block: vwmin(60, pc, 60);
                 z-index: 1;
 
+
+
+
                 .bl_header_nav_inner_ctaContainer_inner_lineReserveBtn {
                     width: 100%;
                     max-width: vwmin(285, pc, 285);
+                }
+
+                .bl_header_lineReserve_modal {
+                    left: 50%;
+                    top: 52%;
+                    translate: -50% -52%;
+                    bottom: auto;
+                }
+
+            }
+
+            .bl_header_nav_inner_ctaContainer_inner_banner{
+                max-width: vwmin(285, pc, 285);
+                width: 100%;
+                transition: all 0.3s var(--reverseTransition);
+
+                @media (hover :hover) {
+                    &:hover {
+                        opacity: .5;
+                        transition: all 0.3s var(--reverseTransition);
+                    }
                 }
             }
         }
@@ -270,6 +330,7 @@ navi
 
 
 .bl_header_nav_inner_menu {
+    position: relative;
     display: flex;
     flex-flow: column;
     gap: vwmin(80, pc, 80);
@@ -278,10 +339,26 @@ navi
     padding-top: vwmin(100, pc, 100);
     padding-bottom: vwmin(80, pc, 80);
 
+
+    &::after{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("img/common/bg.png");
+        background-position: center;
+        background-size: 100% 100%;
+        z-index: -1;
+    }
+
+
     @include underTB {
         overflow-y: visible;
         padding-inline: vwmin(20, pc, 20);
     }
+
 
     .bl_header_nav_inner_menu_conatainer {
         display: flex;
@@ -335,6 +412,13 @@ navi
                     padding-bottom: vwmin(16, pc, 16);
                     border-bottom: vwmin(1, pc, 1) solid #fff;
                     border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
+                    transition: all 0.3s var(--reverseTransition);
+                    @media (hover: hover) {
+                        &:hover {
+                            opacity: .5;
+                            transition: all 0.3s var(--reverseTransition);
+                        }
+                    }
 
 
 
@@ -372,6 +456,14 @@ navi
                     font-weight: 400;
                     line-height: 1.5;
                     letter-spacing: calc(0.28px / 14px);
+                    transition: all 0.3s var(--reverseTransition);
+
+                    @media (hover: hover) {
+                        &:hover {
+                            opacity: .5;
+                            transition: all 0.3s var(--reverseTransition);
+                        }
+                    }
 
                     &::before {
                         content: '';

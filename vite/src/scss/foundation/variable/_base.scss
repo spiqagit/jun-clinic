@@ -10,6 +10,10 @@ html {
   }
 }
 
+.is_noScroll {
+  overflow: hidden;
+}
+
 .bl_commonBgContainer {
   position: fixed;
   top: 0;
@@ -74,6 +78,9 @@ body {
   .ly_commonContantsBgItemContainer_item {
     display: block;
     width: 100%;
+    height: auto;
+    background-position: center;
+    background-size: 100% auto;
 
     img {
       width: 100%;

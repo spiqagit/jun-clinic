@@ -1015,6 +1015,10 @@
             .bl_commonfaqList_item {
                 border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
 
+                summary::-webkit-details-marker {
+                    display: none;
+                }
+
                 .bl_commonfaqList_item_details {
                     padding-bottom: vwmin(20, pc, 20);
                     padding-inline: vwmin(20, pc, 20);

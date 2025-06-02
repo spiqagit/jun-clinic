@@ -10,7 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const headerNav = document.querySelector('.bl_header_nav');
 
   headerMenuBtn.addEventListener('click', () => {
+
     if (headerMenuBtn.classList.contains('animating')) return; // 連打防止
+
+    document.body.classList.toggle('is_noScroll');
 
     const isActive = headerNav.classList.contains('is_active');
     headerMenuBtn.classList.add('animating');
@@ -48,12 +51,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const tabs = document.querySelectorAll('.bl_menuListContainer_tabContainer_btn');
+  /* --------------------------------
+  メニュータブ
+  -------------------------------- */
+  const tabs = document.querySelectorAll('#dermatology, #surgery');
   const menuContentList = [...document.querySelectorAll('.bl_menuListContainer_content')];
-  tabs.forEach((tab, idx) => {
+  
+  tabs.forEach((tab) => {
     tab.addEventListener('click', function () {
-
-      //ボタン
+      // ボタン
       tabs.forEach(t => t.classList.remove('is_active'));
       tab.classList.add('is_active');
       const tabId = tab.getAttribute('id');
@@ -62,14 +68,132 @@ document.addEventListener('DOMContentLoaded', () => {
         menuContent.classList.remove('is_activeTab');
         const contentId = menuContent.getAttribute('data-menutab');
 
-        if (tabId == contentId) {
+        if (tabId === contentId) {
           menuContent.classList.add('is_activeTab');
         }
       });
-
     });
   });
 
+
+
+  /* --------------------------------
+  ポップアップ制御
+  -------------------------------- */
+  const createPopup = (triggerId, modalId, options = {}) => {
+    const {
+      closeBtnClass = '.el_lineReserveModal_inner_closeBtn',
+      duration = 0.5,
+      ease = "power1.out",
+      activeClass = 'is_active' // アクティブクラス名
+    } = options;
+
+    const trigger = document.getElementById(triggerId);
+    const modal = document.getElementById(modalId);
+    const closeBtn = modal.querySelector(closeBtnClass) || null;
+
+    if (!trigger || !modal) return;
+
+    let isAnimating = false;
+    let isOpen = false;
+
+    // ポップアップを開く
+    const open = () => {
+      if (isAnimating) return;
+      
+      isAnimating = true;
+      isOpen = true;
+
+      // アニメーション前に表示
+      modal.style.display = 'block';
+      
+      gsap.fromTo(modal,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration,
+          ease,
+          onStart: () => {
+            modal.classList.add(activeClass);
+          },
+          onComplete: () => {
+            isAnimating = false;
+          }
+        }
+      );
+    };
+
+    // ポップアップを閉じる
+    const close = () => {
+      if (isAnimating) return;
+      
+      isAnimating = true;
+      isOpen = false;
+
+      gsap.to(modal, {
+        opacity: 0,
+        duration,
+        ease,
+        onComplete: () => {
+          modal.classList.remove(activeClass);
+          // アニメーション後に非表示
+          modal.style.display = 'none';
+          isAnimating = false;
+        }
+      });
+    };
+
+    // トグル
+    const toggle = () => {
+      if (isOpen) {
+        close();
+      } else {
+        open();
+      }
+    };
+
+    // イベントリスナーの設定
+    trigger.addEventListener('click', toggle);
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', close);
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        close();
+      }
+    });
+
+    // 外部から操作できるように関数を返す
+    return {
+      open,
+      close,
+      toggle
+    };
+  };
+
+
+  // LINE予約モーダルの初期化
+  const naviReserve = createPopup('naviLineReserveBtn', 'naviLineReserveModal', {
+    closeBtnClass: '.el_lineReserveModal_inner_closeBtn',
+    duration: 0.5,
+    activeClass: 'is_lineReserveModal_active'
+  });
+
+  const menuReserve = createPopup('menuLineReserveBtn', 'menuLineReserveModal', {
+    closeBtnClass: '.el_lineReserveModal_inner_closeBtn',
+    duration: 0.5,
+    activeClass: 'is_lineReserveModal_active'
+  });
+
+  const footerReserve = createPopup('footerLineReserveBtn', 'footerLineReserveModal', {
+    closeBtnClass: '.el_lineReserveModal_inner_closeBtn',
+    duration: 0.5,
+    activeClass: 'is_lineReserveModal_active'
+  });
+
+  
 
   /* --------------------------------
   料金表タブ
@@ -91,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contents.classList.remove('is_priceListContainerActive');
 
         if (clinicId == clinicBtnId) {
-          contents.classList.toggle('is_priceListContainerActive');
+          contents.classList.add('is_priceListContainerActive');
         }
       })
 
@@ -187,22 +311,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const icon = item.querySelector('.el_commonfaqList_item_details_summary_icon');
 
     // 初期状態を設定
-    gsap.set(panel, { 
-      height: 0, 
+    gsap.set(panel, {
+      height: 0,
       opacity: 0,
       marginTop: 0
     });
 
     summary.addEventListener('click', (e) => {
       e.preventDefault();
-      
+
       const isOpen = item.hasAttribute('open');
-      
+
       // 現在のアコーディオンの開閉
       if (isOpen) {
         // 閉じる前の高さを取得
         const startHeight = panel.scrollHeight;
-        
+
         gsap.to(panel, {
           height: 0,
           opacity: 0,
@@ -210,27 +334,27 @@ document.addEventListener('DOMContentLoaded', () => {
           ease: "power3.out",
           onStart: () => {
             // アニメーション開始時に高さを固定
-            gsap.set(panel, { 
+            gsap.set(panel, {
               height: startHeight,
             });
           },
           onComplete: () => {
             item.removeAttribute('open');
             // アニメーション完了後に高さを0に設定
-            gsap.set(panel, { 
+            gsap.set(panel, {
               height: 0,
               marginTop: 0
             });
           }
         });
-        
+
         icon.classList.remove('is_open');
       } else {
         item.setAttribute('open', '');
-        
+
         // 開く前の高さを取得
         const endHeight = panel.scrollHeight;
-        
+
         gsap.to(panel, {
           height: endHeight,
           opacity: 1,
@@ -238,12 +362,12 @@ document.addEventListener('DOMContentLoaded', () => {
           ease: "power2.out",
           onComplete: () => {
             // アニメーション完了後に高さをautoに設定
-            gsap.set(panel, { 
+            gsap.set(panel, {
               height: 'auto',
             });
           }
         });
-        
+
         icon.classList.add('is_open');
       }
     });
@@ -259,23 +383,23 @@ document.addEventListener('DOMContentLoaded', () => {
   menuCaseSplide.forEach(splide => {
     const slidesCount = splide.querySelectorAll('.splide__slide').length;
 
-      new Splide(splide, {
-        type: 'slide',
-        autoWidth: true,
-        gap: 20,
-        pagination: true,
-        autoHeight: true,
-        breakpoints: {
-          1024: {
-            perPage: 2,
-            autoWidth: false,
-          },
-          768: {
-            perPage: 1,
-            autoWidth: false,
-          }
+    new Splide(splide, {
+      type: 'slide',
+      autoWidth: true,
+      gap: 20,
+      pagination: true,
+      autoHeight: true,
+      breakpoints: {
+        1024: {
+          perPage: 2,
+          autoWidth: false,
+        },
+        768: {
+          perPage: 1,
+          autoWidth: false,
         }
-      }).mount();
+      }
+    }).mount();
 
 
   });
@@ -283,5 +407,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  
+
 });

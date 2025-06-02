@@ -1,12 +1,28 @@
 @use '../../foundation/function/index' as *;
 
 
+.bl_commonComingSoonTxtContainer {
+    width: fit-content;
+    margin-inline: auto;
+    padding-block: vwmin(48, pc, 48);
+
+    .el_commonComingSoonTxt {
+        color: #9E586C;
+        font-family: Marcellus;
+        font-size: vwmin(38, pc, 38);
+        font-style: normal;
+        font-weight: 400;
+        line-height: 100%;
+        letter-spacing: calc(0.76px / 38);
+    }
+}
+
 /* ------------------------------------------------------------
 FV Slide
 ------------------------------------------------------------ */
 .bl_fvSlideContainer {
     position: relative;
-    padding-top: vwmin(144, pc, 144);
+    padding-top: vwmin(112, pc, 112);
     padding-bottom: vwmin(140, pc, 140);
     overflow: hidden;
 
@@ -27,6 +43,10 @@ FV Slide
         z-index: 0;
     }
 
+    .splide{
+        overflow: visible !important;
+    }
+
     .fvSlide {
         background-color: transparent;
         max-width: vwmin(1120, pc, 1120);
@@ -36,10 +56,12 @@ FV Slide
 
 
         .splide__track {
-            overflow: visible;
+            overflow: visible !important;
         }
 
         .splide__slide {
+            overflow: visible;
+            backface-visibility: visible;
 
             .bl_fvSlideBanner {
                 filter: drop-shadow(0px 0px 10.182px rgba(64, 37, 14, 0.12));
@@ -47,6 +69,7 @@ FV Slide
                 @include underTB {
                     aspect-ratio: 1/1;
                     height: auto;
+                    padding-top: vwmin(18, pc, 18);
                 }
             }
 
@@ -59,6 +82,10 @@ FV Slide
                 width: 100%;
                 margin-inline: auto;
                 -webkit-mask-image: url("img/top/fv-slide-mask.svg");
+                -webkit-mask-image: url("img/top/fv-slide-mask.svg");
+                -webkit-mask-repeat: no-repeat;
+                -webkit-mask-position: 0 0;
+                -webkit-mask-size: 100%;
                 -webkit-mask-repeat: no-repeat;
                 -webkit-mask-position: 0 0;
                 -webkit-mask-size: 100%;
@@ -66,11 +93,12 @@ FV Slide
                 height: auto;
                 transform-origin: bottom;
                 transition: all 0.3s var(--reverseTransition);
-                
+
 
                 @include underTB {
                     align-self: 1/1;
                     height: 100%;
+                max-width: vwmin(338, sp);
                     mask-image: url("img/top/fv-slide-mask-sp.svg");
                     -webkit-mask-image: url("img/top/fv-slide-mask-sp.svg");
                 }
@@ -167,7 +195,7 @@ About
     .bl_topAboutSec_leftSide {
         display: flex;
         flex-flow: column;
-        gap: vwmin(12, sp, 12);
+        gap: vwmin(16, pc, 16);
 
         @include underTB {
             text-align: center;
@@ -212,6 +240,10 @@ About
             font-weight: 500;
             line-height: 1.5;
             letter-spacing: calc(1.44px / 36);
+
+            @include underTB {
+                font-size: vwmin(26, pc, 26);
+            }
         }
     }
 
@@ -423,6 +455,12 @@ Feature
                             padding-inline: vwmin(20, pc, 20);
                             margin-bottom: vwmin(calc(30 - 16), pc, calc(30 - 16));
 
+                            @include underTB {
+                                padding-top: vwmin(14, pc, 14);
+                                padding-bottom: vwmin(16, pc, 16);
+                                padding-inline: vwmin(16, pc, 16);
+                            }
+
                             .bl_featureSec_featureContainer_txtBox_txt {
                                 font-size: vwmin(14, pc, 14);
                                 font-style: normal;
@@ -450,9 +488,9 @@ Feature
                         flex-flow: column;
                         gap: vwmin(40, pc, 40);
 
-                        .bl_topFeatureSec_featureContainer_item_rightSide_img {                            
+                        .bl_topFeatureSec_featureContainer_item_rightSide_img {
 
-                            img{
+                            img {
                                 border-radius: vwmin(12, pc, 12);
                                 overflow: hidden;
                                 width: 100%;
@@ -460,7 +498,7 @@ Feature
                         }
 
                         .bl_topFeatureSec_featureContainer_item_rightSide_img_01 {
-                            max-width: vwmin(380, pc ,380);
+                            max-width: vwmin(380, pc, 380);
                             width: 100%;
 
                             @include underPC {
@@ -571,11 +609,11 @@ Site Info
     background-color: var(--bg02);
     padding-top: vwmin(210, pc, 210);
     padding-bottom: vwmin(140, pc, 140);
-    margin-top:-130px;
+    margin-top: -130px;
     margin-bottom: vwmin(-40, pc, -40);
 
     @include underTB {
-        margin-top:-166px;
+        margin-top: -166px;
         padding-top: vwmin(224, pc, 224);
     }
 
@@ -645,6 +683,8 @@ Site Info
 Recommend
 ------------------------------------------------------------ */
 
+
+
 .ly_topRecommendSec {
     background-color: var(--white-bg);
     padding-top: vwmin(80, pc, 80);
@@ -661,6 +701,9 @@ Recommend
         margin-inline: auto;
     }
 }
+
+
+
 
 
 
@@ -727,6 +770,7 @@ Recommend
         margin-inline: auto;
     }
 }
+
 
 
 /* ------------------------------------------------------------
@@ -832,14 +876,18 @@ Recommend
                 opacity: 1;
                 transition: all 0.3s var(--reverseTransition);
 
+                @media (hover: hover) {
+                    &:hover {
+                        opacity: 0.5;
+                        transition: all 0.3s var(--reverseTransition);
+                    }
+                }
+
                 @include underTB {
                     grid-template-columns: 1fr;
                     gap: vwmin(20, pc, 20);
                 }
 
-                &:hover {
-                    opacity: 0.9;
-                }
 
                 .el_topDoctorCard_img {
                     width: 100%;
@@ -954,7 +1002,7 @@ Recommend
     }
 
     .bl_topNewsSec_newsListContainer {
-        min-height: vwmin(321, pc, 321);
+        // min-height: vwmin(321, pc, 321);
     }
 }
 

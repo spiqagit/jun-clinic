@@ -66,6 +66,7 @@
                                     <div class="bl_priceSec_seideMenuContainer_item_selectContainer">
                                         <select name="menu-cat" id="menu-cat-select" onchange="if(this.value) window.location.href=this.value" class="bl_priceSec_seideMenuContainer_item_select">
                                             <option value="" class="el_priceSec_seideMenuContainer_item_select_first">施術を選ぶ</option>
+                                            <option value="<?php echo home_url('/price/'); ?>" class="el_priceSec_seideMenuContainer_item_select_first">すべて</option>
 
                                             <?php
                                             $subMenuTermList = get_terms(array(
@@ -249,6 +250,7 @@
                                                             <ul class="bl_priceListContainer_priceList_smallList">
 
                                                                 <?php while (have_rows('price_wrap')) : the_row(); ?>
+
                                                                     <li class="bl_priceListContainer_priceList_smallist_item">
 
                                                                         <h3 class="el_priceListContainer_priceList_smallList_post_ttl"><?php echo get_sub_field('left'); ?></h3>
@@ -304,8 +306,8 @@
                                                                         <?php endif; ?>
 
 
-                                                                        <?php if (get_field('price-caption')) : ?>
-                                                                            <p class="el_priceListContainer_priceList_smallList_post_caption"><?php echo get_field('price-caption'); ?></p>
+                                                                        <?php if (get_sub_field('price-caption')) : ?>
+                                                                            <p class="el_priceListContainer_priceList_smallList_post_caption"><?php echo get_sub_field('price-caption'); ?></p>
                                                                         <?php endif; ?>
                                                                     </li>
                                                                 <?php endwhile; ?>
@@ -314,6 +316,7 @@
                                                     </li>
                                                 <?php endwhile; ?>
                                             <?php endif; ?>
+                                            <?php wp_reset_postdata(); ?>
                                         <?php endforeach; ?>
                                     </ul>
                                 <?php endif; ?>

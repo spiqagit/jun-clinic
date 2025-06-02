@@ -17,12 +17,17 @@
                             <?php while (have_rows('fvSlideImg-list', 'option')): the_row(); ?>
                                 <?php
                                 $fvSlideImg = get_sub_field('fvSlideImg-list-img');
+                                $fvSlideImgSp = get_sub_field('fvSlideImg-list-img-sp');
                                 ?>
                                 <li class="splide__slide">
                                     <div class="bl_fvSlideBanner">
                                         <div class="bl_fvSlideBanner_imgContainer">
-
-                                            <img src="<?php echo $fvSlideImg["url"]; ?>" alt="<?php echo $fvSlideImg["alt"]; ?>">
+                                            <picture>
+                                                <?php if ($fvSlideImgSp) : ?>
+                                                    <source srcset="<?php echo $fvSlideImgSp["url"]; ?>" media="(max-width: 768px)">
+                                                <?php endif; ?>
+                                                <img src="<?php echo $fvSlideImg["url"]; ?>" alt="<?php echo $fvSlideImg["alt"]; ?>">
+                                            </picture>
                                         </div>
                                     </div>
                                 </li>
@@ -65,7 +70,7 @@
                             <p class="el_topAboutSec_rightSide_txtContainer_txt">JUNCLINICは今だけでなく5年後、10年後も自然な美しさでいるためのご提案を大切にしています。</p>
                             <p class="el_topAboutSec_rightSide_txtContainer_txt">ただ肌治療をするだけでなく、調律をするかのようにお顔のバランスを保つご提案をしていきます。</p>
                         </div>
-                        <div class="bl_topAboutSec_rightSide_btnContainer">
+                        <div class="bl_topAboutSec_rightSide_btnContainer" style="display: none;">
                             <a href="#" class="bl_commonBorderRadialArrowBtn">
                                 <p class="el_commonBorderRadialArrowBtn_txt">初めての方へ</p>
                                 <div class="el_commonBorderRadialArrowBtn_arrowContainer">
@@ -165,7 +170,7 @@
                 <img class="bl_topSeminorContainer_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/top-seminor.jpg" alt="">
                 <div class="bl_commonBgContainer_txtContainer">
                     <p class="bl_commonBgContainer_txtContainer_txt">JUNCLINICでは皆様のお肌を治療し綺麗にするだけでなく、今までの症例を経て経験した新たな治験や知識、照射方法などを学会や勉強会、セミナーを通じて発表しています。</p>
-                    <div class="bl_commonBgContainer_txtContainer_btnContainer">
+                    <div class="bl_commonBgContainer_txtContainer_btnContainer" style="display: none;">
                         <a href="#" class="bl_commonBorderRadialArrowBtn">
                             <p class="el_commonBorderRadialArrowBtn_txt">セミナー・学会報告一覧</p>
                             <div class="el_commonBorderRadialArrowBtn_arrowContainer">
@@ -183,8 +188,8 @@
             <div class="ly_commonContantsOuter_inner">
                 <div class="bl_topSiteInfo_ttlContainer">
                     <hgroup class="bl_commonSectionTtl bl_topFeatureSec_ttl">
-                        <p class="el_commonSectionTtl_ttl">Feature</p>
-                        <h2 class="el_commonSectionTtl_ttl_ttl">JUN CLINICの特徴</h2>
+                        <p class="el_commonSectionTtl_ttl">Site Information</p>
+                        <h2 class="el_commonSectionTtl_ttl_ttl">クリニックサイトのご案内</h2>
                     </hgroup>
                 </div>
                 <ul class="bl_topSiteInfo_siteList">
@@ -247,10 +252,10 @@
             </div>
         </section>
 
-        <div class="ly_commonContantsBgItemContainer">
+        <div class="ly_commonContantsBgItemContainer ">
             <picture class="ly_commonContantsBgItemContainer_item">
-                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave-sp.svg" media="(max-width: 768px)">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave.svg" alt="">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave-sp.png" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave.png" alt="">
             </picture>
             <section class="ly_commonContantsOuter ly_topRecommendSec">
                 <div class="ly_commonContantsOuter_inner">
@@ -260,49 +265,30 @@
                             <h2 class="el_commonSectionTtl_ttl_ttl">おすすめ治療</h2>
                         </hgroup>
                     </div>
-                    <ul class="bl_recommendBannerList">
-                        <li class="bl_recommendBannerList_item">
-                            <a href="" class="bl_recommendBannerList_item_btn">
-                                <img class="bl_recommendBannerList_item_bg" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/banner-item.jpg" alt="カスタマイズレーザー治療">
-                                <div class="bl_recommendBannerList_item_txtContainer">
-                                    <p class="bl_recommendBannerList_item_txtContainer_ttl">カスタマイズレーザー治療</p>
-                                    <p class="bl_recommendBannerList_item_txtContainer_txt">様々な悩みに同時にアプローチするオーダーメイドなレーザー治療です。</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="bl_recommendBannerList_item">
-                            <a href="" class="bl_recommendBannerList_item_btn">
-                                <img class="bl_recommendBannerList_item_bg" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/banner-item.jpg" alt="カスタマイズレーザー治療">
-                                <div class="bl_recommendBannerList_item_txtContainer">
-                                    <p class="bl_recommendBannerList_item_txtContainer_ttl">カスタマイズレーザー治療</p>
-                                    <p class="bl_recommendBannerList_item_txtContainer_txt">様々な悩みに同時にアプローチするオーダーメイドなレーザー治療です。</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="bl_recommendBannerList_item">
-                            <a href="" class="bl_recommendBannerList_item_btn">
-                                <img class="bl_recommendBannerList_item_bg" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/banner-item.jpg" alt="カスタマイズレーザー治療">
-                                <div class="bl_recommendBannerList_item_txtContainer">
-                                    <p class="bl_recommendBannerList_item_txtContainer_ttl">カスタマイズレーザー治療</p>
-                                    <p class="bl_recommendBannerList_item_txtContainer_txt">様々な悩みに同時にアプローチするオーダーメイドなレーザー治療です。</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="bl_recommendBannerList_item">
-                            <a href="" class="bl_recommendBannerList_item_btn">
-                                <img class="bl_recommendBannerList_item_bg" src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/banner-item.jpg" alt="カスタマイズレーザー治療">
-                                <div class="bl_recommendBannerList_item_txtContainer">
-                                    <p class="bl_recommendBannerList_item_txtContainer_ttl">カスタマイズレーザー治療</p>
-                                    <p class="bl_recommendBannerList_item_txtContainer_txt">様々な悩みに同時にアプローチするオーダーメイドなレーザー治療です。</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
+                    <?php
+                    $topFavoMenuIdList = get_field("top-favomenu", "option");
+                    if (!empty($topFavoMenuIdList)) :
+                    ?>
+                        <ul class="bl_recommendBannerList">
+                            <?php foreach ($topFavoMenuIdList as $menuId) : ?>
+                                <li class="bl_recommendBannerList_item">
+                                    <a href="<?php echo get_permalink($menuId); ?>" class="bl_recommendBannerList_item_btn">
+                                        <img class="bl_recommendBannerList_item_bg" src="<?php echo esc_url(get_field("favo-menuBtn-Img", $menuId)); ?>" alt="<?php echo esc_attr(get_the_title($menuId)); ?>">
+                                        <div class="bl_recommendBannerList_item_txtContainer">
+                                            <p class="bl_recommendBannerList_item_txtContainer_ttl"><?php echo esc_html(get_the_title($menuId)); ?></p>
+                                            <p class="bl_recommendBannerList_item_txtContainer_txt"><?php echo esc_html(get_field("favo-menubtn-txt", $menuId)); ?></p>
+                                        </div>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+
                 </div>
             </section>
             <picture class="ly_commonContantsBgItemContainer_item">
-                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave-bottom-sp.svg" media="(max-width: 768px)">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave-bottom.svg" alt="">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave-bottom-sp.png" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/recommend/rec-top-wave-bottom.png" alt="">
             </picture>
         </div>
 
@@ -318,78 +304,86 @@
                 </div>
                 <div class="bl_caseListContainer bl_topCaseSec_caseListContainer">
                     <?php
-                    $args = [
-                        'post_type' => 'case',
-                        'posts_per_page' => -1,
-                        'orderby' => 'date',
-                        'order' => 'DESC',
-                    ];
-                    $case_query = new WP_Query($args);
-
-                    if ($case_query->have_posts()) : ?>
-                        <ul class="bl_caseList">
-                            <?php while ($case_query->have_posts()) : $case_query->the_post(); ?>
-                                <li class="bl_caseList_item">
-                                    <a href="<?php the_permalink(); ?>" class="bl_caseList_item_btn">
-                                        <div class="bl_caseList_item_imgContainer">
-                                            <?php if (have_rows('slide')): ?>
-                                                <?php
-                                                $i = 0;
-                                                while (have_rows('slide')): the_row();
-                                                    if ($i === 0): ?>
-                                                        <img class="bl_caseList_item_imgContainer_img" src="<?php the_sub_field('img'); ?>" alt="<?php the_title(); ?>">
-                                                <?php
-                                                    endif;
-                                                    $i++;
-                                                endwhile;
-                                                ?>
-                                            <?php else: ?>
-                                                <img class="bl_caseList_item_imgContainer_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/common/no-post.jpg" alt="<?php the_title(); ?>">
-                                            <?php endif; ?>
-                                        </div>
-
-                                        <div class="bl_caseList_item_txtContainer">
-                                            <div class="bl_bl_caseList_item_txtContainer_tagList">
-                                                <?php
-                                                $menu_select = get_field('menu_select');
-                                                ?>
-
-                                                <?php if (!empty($menu_select)) : ?>
-                                                    <?php foreach ($menu_select as $menu_selectPost) : ?>
-                                                        <p class="el_caseList_item_txtContainer_tagList_item">#<?php echo esc_html(get_the_title($menu_selectPost)); ?></p>
-                                                    <?php endforeach; ?>
+                    $caseFlag = false;
+                    if ($caseFlag) :
+                    ?>
+                        <?php
+                        $args = [
+                            'post_type' => 'case',
+                            'posts_per_page' => -1,
+                            'orderby' => 'date',
+                            'order' => 'DESC',
+                        ];
+                        $case_query = new WP_Query($args);
+                        if ($case_query->have_posts()) : ?>
+                            <ul class="bl_caseList">
+                                <?php while ($case_query->have_posts()) : $case_query->the_post(); ?>
+                                    <li class="bl_caseList_item">
+                                        <a href="<?php the_permalink(); ?>" class="bl_caseList_item_btn">
+                                            <div class="bl_caseList_item_imgContainer">
+                                                <?php if (have_rows('slide')): ?>
+                                                    <?php
+                                                    $i = 0;
+                                                    while (have_rows('slide')): the_row();
+                                                        if ($i === 0): ?>
+                                                            <img class="bl_caseList_item_imgContainer_img" src="<?php the_sub_field('img'); ?>" alt="<?php the_title(); ?>">
+                                                    <?php
+                                                        endif;
+                                                        $i++;
+                                                    endwhile;
+                                                    ?>
+                                                <?php else: ?>
+                                                    <img class="bl_caseList_item_imgContainer_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/common/no-post.jpg" alt="<?php the_title(); ?>">
                                                 <?php endif; ?>
                                             </div>
-                                            <p class="bl_caseList_item_txtContainer_ttl"><?php the_title(); ?></p>
-                                        </div>
 
-                                        <dl class="bl_caseList_item_caseInfo">
-                                            <?php
-                                            $caseInfoSlugList = ["case-price", "case-time", "case-downtime", "case-makeup", "case-risk"];
-                                            foreach ($caseInfoSlugList as $caseInfoSlug):
-                                                $field_object = get_field_object($caseInfoSlug, get_the_ID());
-                                                $price = get_field($caseInfoSlug, get_the_ID());
+                                            <div class="bl_caseList_item_txtContainer">
+                                                <div class="bl_bl_caseList_item_txtContainer_tagList">
+                                                    <?php
+                                                    $menu_select = get_field('menu_select');
+                                                    ?>
 
-                                                if ($price):
-                                            ?>
-                                                    <div class="bl_caseList_item_caseInfo_item">
-                                                        <dt class="bl_caseList_item_caseInfo_item_dt">
-                                                            <?php echo esc_html($field_object['label']); ?>
-                                                        </dt>
-                                                        <dd class="bl_caseList_item_caseInfo_item_dd">
-                                                            <?php echo esc_html($price); ?>
-                                                        </dd>
-                                                    </div>
-                                            <?php
-                                                endif;
-                                            endforeach;
-                                            ?>
-                                        </dl>
-                                    </a>
-                                </li>
-                            <?php endwhile; ?>
-                            <?php wp_reset_postdata(); ?>
-                        </ul>
+                                                    <?php if (!empty($menu_select)) : ?>
+                                                        <?php foreach ($menu_select as $menu_selectPost) : ?>
+                                                            <p class="el_caseList_item_txtContainer_tagList_item">#<?php echo esc_html(get_the_title($menu_selectPost)); ?></p>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <p class="bl_caseList_item_txtContainer_ttl"><?php the_title(); ?></p>
+                                            </div>
+
+                                            <dl class="bl_caseList_item_caseInfo">
+                                                <?php
+                                                $caseInfoSlugList = ["case-price", "case-time", "case-downtime", "case-makeup", "case-risk"];
+                                                foreach ($caseInfoSlugList as $caseInfoSlug):
+                                                    $field_object = get_field_object($caseInfoSlug, get_the_ID());
+                                                    $price = get_field($caseInfoSlug, get_the_ID());
+
+                                                    if ($price):
+                                                ?>
+                                                        <div class="bl_caseList_item_caseInfo_item">
+                                                            <dt class="bl_caseList_item_caseInfo_item_dt">
+                                                                <?php echo esc_html($field_object['label']); ?>
+                                                            </dt>
+                                                            <dd class="bl_caseList_item_caseInfo_item_dd">
+                                                                <?php echo esc_html($price); ?>
+                                                            </dd>
+                                                        </div>
+                                                <?php
+                                                    endif;
+                                                endforeach;
+                                                ?>
+                                            </dl>
+                                        </a>
+                                    </li>
+                                <?php endwhile; ?>
+                                <?php wp_reset_postdata(); ?>
+                            </ul>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <div class="bl_commonComingSoonTxtContainer">
+                            <p class="el_commonComingSoonTxt">coming soon</p>
+                        </div>
                     <?php endif; ?>
                 </div>
                 <div class="bl_topCaseSec_btnContainer">
@@ -408,8 +402,8 @@
         <!-- 施術メニュー -->
         <div class="ly_commonContantsBgItemContainer">
             <picture class="ly_commonContantsBgItemContainer_item">
-                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-sp.svg" media="(max-width: 768px)">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave.svg" alt="">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-sp.png" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave.png" alt="">
             </picture>
             <section class="ly_commonContantsOuter ly_topMenuSec">
                 <div class="ly_commonContantsOuter_inner">
@@ -426,28 +420,37 @@
                             <h3 class="el_topMenuSec_problemContainer_ttl">お悩みから探す</h3>
                         </div>
                         <?php
-                        $problems = get_terms(array(
-                            'taxonomy' => 'menu-problem',
-                            'hide_empty' => true,
-                        )); ?>
-                        <ul class="bl_topMenuSec_problemContainer_problemList">
-                            <?php foreach ($problems as $problem) : ?>
-                                <li class="bl_topMenuSec_problemContainer_problemList_item">
-                                    <a href="#<?php echo $problem->slug; ?>" class="bl_topMenuSec_problemContainer_problemList_item_btn">
-                                        <div class="bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer">
-                                            <?php $problemCatImg = get_field('problemCat-img', $problem); ?>
-                                            <?php if ($problemCatImg) : ?>
-                                                <img class="bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer_img" src="<?php echo $problemCatImg; ?>" alt="<?php echo $problem->name; ?>">
-                                            <?php endif; ?>
-                                            <p class="bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer_ttl"><?php echo $problem->name; ?></p>
-                                        </div>
-                                        <p class="bl_topMenuSec_problemContainer_problemList_item_btn_txt">
-                                            <?php echo $problem->description; ?>
-                                        </p>
-                                    </a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                        $problemFlag = false;
+                        if ($problemFlag) :
+                        ?>
+                            <?php
+                            $problems = get_terms(array(
+                                'taxonomy' => 'menu-problem',
+                                'hide_empty' => true,
+                            )); ?>
+                            <ul class="bl_topMenuSec_problemContainer_problemList">
+                                <?php foreach ($problems as $problem) : ?>
+                                    <li class="bl_topMenuSec_problemContainer_problemList_item">
+                                        <a href="#<?php echo $problem->slug; ?>" class="bl_topMenuSec_problemContainer_problemList_item_btn">
+                                            <div class="bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer">
+                                                <?php $problemCatImg = get_field('problemCat-img', $problem); ?>
+                                                <?php if ($problemCatImg) : ?>
+                                                    <img class="bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer_img" src="<?php echo $problemCatImg; ?>" alt="<?php echo $problem->name; ?>">
+                                                <?php endif; ?>
+                                                <p class="bl_topMenuSec_problemContainer_problemList_item_btn_imgContainer_ttl"><?php echo $problem->name; ?></p>
+                                            </div>
+                                            <p class="bl_topMenuSec_problemContainer_problemList_item_btn_txt">
+                                                <?php echo $problem->description; ?>
+                                            </p>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else: ?>
+                            <div class="bl_commonComingSoonTxtContainer">
+                                <p class="el_commonComingSoonTxt">coming soon</p>
+                            </div>
+                        <?php endif; ?>
                     </div>
                     <div class="bl_menuListContainer">
                         <div class="bl_menuListContainer_tabContainer">
@@ -537,7 +540,7 @@
                         endforeach; ?>
 
                         <div class="bl_topMenuSec_btnContainer">
-                            <a href="#" class="bl_commonBorderRadialArrowBtn">
+                            <a href="<?php echo home_url('/price/'); ?>" class="bl_commonBorderRadialArrowBtn">
                                 <p class="el_commonBorderRadialArrowBtn_txt">料金表を見る</p>
                                 <div class="el_commonBorderRadialArrowBtn_arrowContainer">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8">
@@ -550,8 +553,8 @@
                 </div>
             </section>
             <picture class="ly_commonContantsBgItemContainer_item">
-                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-bottom-sp.svg" media="(max-width: 768px)">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-bottom.svg" alt="">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-bottom-sp.png" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-bottom.png" preserveAspectRatio="none"  alt="">
             </picture>
         </div>
 
@@ -618,7 +621,7 @@
                         </div>
                     </div>
                     <div class="bl_topDoctorSec_btnContainer">
-                        <a href="#" class="bl_commonBorderRadialArrowBtn">
+                        <a href="<?php echo home_url('/doctor/'); ?>" class="bl_commonBorderRadialArrowBtn">
                             <p class="el_commonBorderRadialArrowBtn_txt">ドクター一覧</p>
                             <div class="el_commonBorderRadialArrowBtn_arrowContainer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8">
@@ -635,8 +638,8 @@
         <!-- お知らせ -->
         <div class="ly_commonContantsBgItemContainer">
             <picture class="ly_commonContantsBgItemContainer_item">
-                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-wave-sp.svg" media="(max-width: 768px)">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-wave.svg" alt="">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-wave-sp.png" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-wave.png" alt="">
             </picture>
             <section class="ly_commonContantsOuter ly_topNewsSec">
                 <div class="ly_commonContantsOuter_inner bl_topNewsSec_inner">
@@ -647,7 +650,7 @@
                                 <h2 class="el_commonSectionTtl_ttl_ttl">お知らせ</h2>
                             </hgroup>
                         </div>
-                        <div class="bl_topNewsSec_btnContainer">
+                        <div class="bl_topNewsSec_btnContainer" style="display: none;">
                             <a href="#" class="bl_commonBorderRadialArrowBtn">
                                 <p class="el_commonBorderRadialArrowBtn_txt">お知らせ一覧</p>
                                 <div class="el_commonBorderRadialArrowBtn_arrowContainer">
@@ -660,50 +663,59 @@
                     </div>
                     <div class="bl_topNewsSec_newsListContainer">
                         <?php
-                        $args = array(
-                            'post_type' => 'news',
-                            'posts_per_page' => 3,
-                        );
-                        $newsItems = new WP_Query($args);
-                        if ($newsItems->have_posts()) : ?>
-                            <ul class="bl_newsList">
-                                <?php while ($newsItems->have_posts()) : $newsItems->the_post(); ?>
+                        $newsFlag = false;
+                        if ($newsFlag) :
+                        ?>
+                            <?php
+                            $args = array(
+                                'post_type' => 'news',
+                                'posts_per_page' => 3,
+                            );
+                            $newsItems = new WP_Query($args);
+                            if ($newsItems->have_posts()) : ?>
+                                <ul class="bl_newsList">
+                                    <?php while ($newsItems->have_posts()) : $newsItems->the_post(); ?>
 
-                                    <?php
-                                    $terms = get_the_terms(get_the_ID(), 'clinic-cat');
-                                    $clinic_name = '';
-                                    if ($terms && !is_wp_error($terms) && !empty($terms)) {
-                                        $clinic_name = $terms[0]->name;
-                                    }
-                                    ?>
+                                        <?php
+                                        $terms = get_the_terms(get_the_ID(), 'clinic-cat');
+                                        $clinic_name = '';
+                                        if ($terms && !is_wp_error($terms) && !empty($terms)) {
+                                            $clinic_name = $terms[0]->name;
+                                        }
+                                        ?>
 
-                                    <li class="bl_newsList_item">
-                                        <a href="<?php the_permalink(); ?>" class="bl_newsList_item_link">
-                                            <div class="bl_newsList_item_link_infoContainer">
-                                                <p class="bl_newsList_item_link_infoContainer_date"><?php the_date('Y.m.d'); ?></p>
-                                                <?php if (!empty($clinic_name)) : ?>
-                                                    <p class="bl_newsList_item_link_infoContainer_clinic"><?php echo esc_html($clinic_name); ?></p>
-                                                <?php endif; ?>
-                                            </div>
-                                            <p class="bl_newsList_item_link_ttl"><?php the_title(); ?></p>
-                                        </a>
-                                    </li>
+                                        <li class="bl_newsList_item">
+                                            <a href="<?php the_permalink(); ?>" class="bl_newsList_item_link">
+                                                <div class="bl_newsList_item_link_infoContainer">
+                                                    <p class="bl_newsList_item_link_infoContainer_date"><?php the_date('Y.m.d'); ?></p>
+                                                    <?php if (!empty($clinic_name)) : ?>
+                                                        <p class="bl_newsList_item_link_infoContainer_clinic"><?php echo esc_html($clinic_name); ?></p>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <p class="bl_newsList_item_link_ttl"><?php the_title(); ?></p>
+                                            </a>
+                                        </li>
 
-                                <?php endwhile;
-                                wp_reset_postdata(); ?>
-                            </ul>
+                                    <?php endwhile;
+                                    wp_reset_postdata(); ?>
+                                </ul>
 
+                            <?php else: ?>
+                                <div class="bl_topNewsSec_noNewsContainer_txt">
+                                    <p class="bl_topNewsSec_noNewsContainer_txt">お知らせはありません</p>
+                                </div>
+                            <?php endif; ?>
                         <?php else: ?>
-                            <div class="bl_topNewsSec_noNewsContainer_txt">
-                                <p class="bl_topNewsSec_noNewsContainer_txt">お知らせはありません</p>
+                            <div class="bl_commonComingSoonTxtContainer">
+                                <p class="el_commonComingSoonTxt">coming soon</p>
                             </div>
                         <?php endif; ?>
                     </div>
                 </div>
             </section>
             <picture class="ly_commonContantsBgItemContainer_item">
-                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-wave-bottom-sp.svg" media="(max-width: 768px)">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-bottom.svg" alt="">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-wave-bottom-sp.png" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/news/top-news-wave-bottom.png" alt="">
             </picture>
         </div>
 
@@ -718,54 +730,63 @@
                 </div>
                 <div class="bl_topTopicSec_topicsContainer">
                     <?php
-                    $subLoop = new WP_Query(array(
-                        'post_type' => 'topics',
-                        'posts_per_page' => 3,
-                    ));
-                    if ($subLoop->have_posts()) : ?>
+                    $topicFlag = false;
+                    if ($topicFlag) :
+                    ?>
+                        <?php
+                        $subLoop = new WP_Query(array(
+                            'post_type' => 'topics',
+                            'posts_per_page' => 3,
+                        ));
+                        if ($subLoop->have_posts()) : ?>
 
-                        <ul class="bl_topicsList">
-                            <?php while ($subLoop->have_posts()) : $subLoop->the_post(); ?>
-                                <li class="bl_topicsList_item">
-                                    <a href="<?php the_permalink(); ?>" class="bl_topicsList_item_link">
-                                        <div class="bl_topicsList_item_link_imgContainer">
-                                            <?php if (has_post_thumbnail()) : ?>
-                                                <img class="bl_topicsList_item_link_img" src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
-                                            <?php else: ?>
-                                                <img class="bl_topicsList_item_link_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/common/no-post.jpg" alt="<?php the_title(); ?>">
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="bl_topicsList_item_link_infoContainer">
-                                            <div class="bl_topicsList_item_link_info">
-                                                <p class="bl_topicsList_item_link_info_date"><?php the_date('Y.m.d'); ?></p>
-                                                <?php
-                                                $taxonomies = array('clinic-cat',  'topics-cat');
-                                                $terms_list = array();
-                                                foreach ($taxonomies as $taxonomy) {
-                                                    $terms = get_the_terms(get_the_ID(), $taxonomy);
-                                                    if ($terms && !is_wp_error($terms)) {
-                                                        foreach ($terms as $term) {
-                                                            $terms_list[] = $term->name;
-                                                        }
-                                                    }
-                                                }
-                                                if (!empty($terms_list)) : ?>
-                                                    <div class="bl_topicsList_item_link_info_termContainer">
-                                                        <?php foreach ($terms_list as $term): ?>
-                                                            <p class="bl_topicsList_item_link_info_term"><?php echo esc_html($term); ?></p>
-                                                        <?php endforeach; ?>
-                                                    </div>
+                            <ul class="bl_topicsList">
+                                <?php while ($subLoop->have_posts()) : $subLoop->the_post(); ?>
+                                    <li class="bl_topicsList_item">
+                                        <a href="<?php the_permalink(); ?>" class="bl_topicsList_item_link">
+                                            <div class="bl_topicsList_item_link_imgContainer">
+                                                <?php if (has_post_thumbnail()) : ?>
+                                                    <img class="bl_topicsList_item_link_img" src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>">
+                                                <?php else: ?>
+                                                    <img class="bl_topicsList_item_link_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/common/no-post.jpg" alt="<?php the_title(); ?>">
                                                 <?php endif; ?>
                                             </div>
-                                            <p class="el_topicsList_item_link_ttl"><?php the_title(); ?></p>
-                                        </div>
-                                    </a>
-                                </li>
-                            <?php endwhile; ?>
-                        </ul>
+                                            <div class="bl_topicsList_item_link_infoContainer">
+                                                <div class="bl_topicsList_item_link_info">
+                                                    <p class="bl_topicsList_item_link_info_date"><?php the_date('Y.m.d'); ?></p>
+                                                    <?php
+                                                    $taxonomies = array('clinic-cat',  'topics-cat');
+                                                    $terms_list = array();
+                                                    foreach ($taxonomies as $taxonomy) {
+                                                        $terms = get_the_terms(get_the_ID(), $taxonomy);
+                                                        if ($terms && !is_wp_error($terms)) {
+                                                            foreach ($terms as $term) {
+                                                                $terms_list[] = $term->name;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (!empty($terms_list)) : ?>
+                                                        <div class="bl_topicsList_item_link_info_termContainer">
+                                                            <?php foreach ($terms_list as $term): ?>
+                                                                <p class="bl_topicsList_item_link_info_term"><?php echo esc_html($term); ?></p>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
+                                                <p class="el_topicsList_item_link_ttl"><?php the_title(); ?></p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                <?php endwhile; ?>
+                            </ul>
 
-                    <?php endif;
-                    wp_reset_postdata(); ?>
+                        <?php endif;
+                        wp_reset_postdata(); ?>
+                    <?php else: ?>
+                        <div class="bl_commonComingSoonTxtContainer">
+                            <p class="el_commonComingSoonTxt">coming soon</p>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="bl_topTopicSec_btnContainer">
                     <a href="#" class="bl_commonBorderRadialArrowBtn">

@@ -9,7 +9,7 @@
         position: relative;
         width: 100%;
         background-color: var(--accentColor);
-        padding-block: vwmin(60, pc, 60);
+        padding-block: vwmin(94, pc, 94);
         border-radius: vwmin(50, pc, 50);
         max-width: vwmin(1060, pc, 1060);
         margin-inline: auto;
@@ -66,6 +66,11 @@
             width: fit-content;
             order: 1;
             margin-inline: auto;
+            padding-left: vwmin(18, pc, 18);
+
+            @include underTB {
+                padding-left: 0;
+            }
 
             .el_footer_reserveContainer_ttl_sub {
                 width: fit-content;
@@ -115,10 +120,16 @@
         }
 
         .bl_footer_reserveContainer_btnContainer {
+            position: relative;
             width: 100%;
-            max-width: vwmin(302, pc, 302);
+            max-width: vwmin(338, pc, 338);
             order: 3;
+            padding-right: vwmin(38, pc, 38);
             margin-inline: auto;
+
+            @include underTB {
+                padding-right: 0;
+            }
 
             .el_footer_reserveContainer_btn {
                 cursor: pointer;
@@ -150,6 +161,12 @@
                     }
                 }
             }
+
+            .bl_footer_lineReserve_modal{
+                bottom: -200%;
+                left: 51%;
+                transform: translate(-50%, 0);
+            }
         }
     }
 }
@@ -169,7 +186,7 @@
     z-index: 0;
     padding-top: vwmin(230, pc, 230);
     padding-bottom: vwmin(100, pc, 100);
-    margin-top: -120px;
+    margin-top: vwmin(-150, pc, -150);
 
     @include underTB {
         margin-top: -150px;
@@ -217,6 +234,14 @@
     position: relative;
     z-index: 0;
 
+    .bl_commonComingSoonTxtContainer {
+
+        .el_commonComingSoonTxt {
+            color: #fff;
+        }
+    }
+
+
     .ly_footer_upper {
         position: relative;
         background-color: var(--baseFontColor);
@@ -253,6 +278,7 @@
     .ly_footer_lower_inner {
         max-width: vwmin(1060, pc, 1060);
         margin-inline: auto;
+        padding-bottom: vwmin(60, pc, 60);
     }
 
 
@@ -279,7 +305,7 @@
             }
 
             @include underTB {
-                max-width: vwmin(388, pc, 388);
+                max-width: vwmin(220, pc, 220);
                 width: 100%;
                 margin-inline: auto;
             }
