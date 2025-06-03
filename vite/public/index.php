@@ -116,11 +116,11 @@
                                 <div class="bl_featureSec_featureContainer_item_txtContainer">
                                     <p class="el_featureSec_featureContainer_item_txtContainer_txt">シミやたるみ、毛穴などお肌の悩みは多岐にわたります。</p>
                                     <ol class="el_featureSec_featureContainer_item_txtContainer_ol">
-                                        <li>お一人おひとりの悩みに応じてレーザーの組み合わせやフルエンスを調整して行うオーダーメイド型の<span class="el_featuer_boldTxt">"カスタマイズレーザー治療"</span></li>
-                                        <li>肌の再生力を上げ、レーザーの効果をさらに高める<span class="el_featuer_boldTxt">"肌育治療"</span></li>
-                                        <li>骨格・脂肪・筋膜まで考慮した<span class="el_featuer_boldTxt">"たるみ治療"</span></li>
+                                        <li>お一人おひとりの悩みに応じてレーザーの組み合わせやフルエンスを調整して行うオーダーメイド型の<span class="el_featuer_boldTxt">“カスタマイズレーザー治療”</span></li>
+                                        <li>肌の再生力を上げ、レーザーの効果をさらに高める<span class="el_featuer_boldTxt">“肌育治療”</span></li>
+                                        <li>骨格・脂肪・筋膜まで考慮した<span class="el_featuer_boldTxt">“たるみ治療”</span></li>
                                     </ol>
-                                    <p class="el_featureSec_featureContainer_item_txtContainer_txt">顔を構造的にとらえ、<span class="el_featuer_boldTxt">皮から真皮、脂肪層、筋膜まで</span>表顔の全層にアプローチ。<br>外側からの照射や注入だけでなく、自らの再生力も引き出すことで、<span class="el_featuer_boldTxt">より自然に、そして効率よく結果へと導くための治療</span>を提供しています。</p>
+                                    <p class="el_featureSec_featureContainer_item_txtContainer_txt">顔を構造的にとらえ、<span class="el_featuer_boldTxt">表皮から真皮、脂肪層、筋膜まで</span>表顔の全層にアプローチ。<br>外側からの照射や注入だけでなく、自らの再生力も引き出すことで、<span class="el_featuer_boldTxt">より自然に、そして効率よく結果へと導くための治療</span>を提供しています。</p>
                                 </div>
                             </div>
                             <div class="bl_topFeatureSec_featureContainer_item_rightSide">
@@ -146,7 +146,7 @@
                                     </div>
                                     <p class="el_featureSec_featureContainer_item_txtContainer_txt">
                                         JUNCLINICでは、2017年の開院からこれまでシミやくすみ、毛穴などのお悩みに対し、肌状態に合わせて複数の機器を組み合わせる<span class="el_featuer_boldTxt">カスタマイズレーザー治療</span>を軸に、確かな結果を積み重ねてきました。<br>近年ではさらに、<span class="el_featuer_boldTxt">肌育治療や高周波によるたるみ治療</span>といったアプローチも積極的に取り入れ、より効率的に、より自然で美しい素肌へと導く治療体制を整えています。<br>
-                                        一人ひとりの肌と丁寧に向き合い、<span class="el_featuer_boldTxt">"あなたの肌"に必要なものだけを見極めて</span>ご提案する。<br>
+                                        一人ひとりの肌と丁寧に向き合い、<span class="el_featuer_boldTxt">“あなたの肌”に必要なものだけを見極めて</span>ご提案する。<br>
                                         そのために私たちは、効果を裏づけるデータや症例をもとに、常に検証と改良を重ねています。
                                     </p>
                                 </div>
@@ -386,7 +386,7 @@
                         </div>
                     <?php endif; ?>
                 </div>
-                <div class="bl_topCaseSec_btnContainer">
+                <div class="bl_topCaseSec_btnContainer" style="display: none;">
                     <a href="#" class="bl_commonBorderRadialArrowBtn">
                         <p class="el_commonBorderRadialArrowBtn_txt">症例一覧</p>
                         <div class="el_commonBorderRadialArrowBtn_arrowContainer">
@@ -554,7 +554,7 @@
             </section>
             <picture class="ly_commonContantsBgItemContainer_item">
                 <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-bottom-sp.png" media="(max-width: 768px)">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-bottom.png" preserveAspectRatio="none"  alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/top/menu/top-menu-wave-bottom.png" alt="">
             </picture>
         </div>
 
@@ -587,17 +587,18 @@
                                         $doctors->the_post();
                                 ?>
                                         <li class="splide__slide">
-                                            <a href="<?php the_permalink(); ?>" class="bl_topDoctorCard">
-                                                <img class="el_topDoctorCard_img" src="<?php echo get_field('doctor_mini_img'); ?>" alt="<?php the_title(); ?>">
-                                                <div class="bl_topDoctorCard_txtContainer">
-                                                    <div class="bl_topDoctorCard_txtContainer_ttlContainer">
-                                                        <p class="el_topDoctorCard_txtContainer_ttlContainer_job"><?php echo get_field('job'); ?></p>
-                                                        <p class="el_topDoctorCard_txtContainer_ttlContainer_ttl"><?php the_title(); ?></p>
+                                            <div class="bl_topDoctorCard_container">
+                                                <a href="<?php the_permalink(); ?>" class="bl_topDoctorCard">
+                                                    <img class="el_topDoctorCard_img" src="<?php echo get_field('doctor_mini_img'); ?>" alt="<?php the_title(); ?>">
+                                                    <div class="bl_topDoctorCard_txtContainer">
+                                                        <div class="bl_topDoctorCard_txtContainer_ttlContainer">
+                                                            <p class="el_topDoctorCard_txtContainer_ttlContainer_job"><?php echo get_field('job'); ?></p>
+                                                            <p class="el_topDoctorCard_txtContainer_ttlContainer_ttl"><?php the_title(); ?></p>
+                                                        </div>
+                                                        <p class="bl_topDoctorCard_txtContainer_txt"><?php echo get_field('doctor-top-message'); ?></p>
                                                     </div>
-                                                    <p class="bl_topDoctorCard_txtContainer_txt"><?php echo get_field('doctor-top-message'); ?></p>
-                                                </div>
-                                            </a>
-
+                                                </a>
+                                            </div>
                                         </li>
                                     <?php
                                     }
@@ -788,7 +789,7 @@
                         </div>
                     <?php endif; ?>
                 </div>
-                <div class="bl_topTopicSec_btnContainer">
+                <div class="bl_topTopicSec_btnContainer" style="display: none;">
                     <a href="#" class="bl_commonBorderRadialArrowBtn">
                         <p class="el_commonBorderRadialArrowBtn_txt">トピックス一覧</p>
                         <div class="el_commonBorderRadialArrowBtn_arrowContainer">

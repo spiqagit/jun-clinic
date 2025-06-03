@@ -68,33 +68,34 @@
 
                     <div class="bl_header_nav_inner_ctaContainer_inner_lineReserveBtn">
                         <button type="button" class="bl_commonlineReserveBtn" id="naviLineReserveBtn">LINE予約</button>
-                    </div>
-                    <div class="bl_lineReserveModal bl_header_lineReserve_modal" id="naviLineReserveModal">
-                        <div class="bl_lineReserveModal_inner">
-                            <button type="button" class="el_lineReserveModal_inner_closeBtn">
-                                <img class="el_lineReserveModal_inner_closeBtn_icon" src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/close-icon.svg" alt="">
-                            </button>
-                            <p class="el_lineReserveModal_inner_title">予約する</p>
-                            <?php
 
-                            $arg = array(
-                                'post_type' => 'clinic',
-                                'posts_per_page' => -1,
-                            );
-                            $query = new WP_Query($arg);
-                            ?>
-                            <?php if ($query->have_posts()) : ?>
-                                <ul class="bl_lineReserveModal_inner_list">
-                                    <?php while ($query->have_posts()) : $query->the_post(); ?>
-                                        <li class="bl_lineReserveModal_inner_list_item">
-                                            <a href="<?php the_field('line_reserveUrl'); ?>" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
-                                                <p class="el_lineReserveModal_inner_list_item_link_txt"><?php echo get_term(get_field('news_topics_place'), 'clinic-cat')->name; ?></p>
-                                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
-                                            </a>
-                                        </li>
-                                    <?php endwhile; ?>
-                                </ul>
-                            <?php endif; ?>
+                        <div class="bl_lineReserveModal bl_header_lineReserve_modal" id="naviLineReserveModal">
+                            <div class="bl_lineReserveModal_inner">
+                                <button type="button" class="el_lineReserveModal_inner_closeBtn">
+                                    <img class="el_lineReserveModal_inner_closeBtn_icon" src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/close-icon.svg" alt="">
+                                </button>
+                                <p class="el_lineReserveModal_inner_title">予約する</p>
+                                <?php
+
+                                $arg = array(
+                                    'post_type' => 'clinic',
+                                    'posts_per_page' => -1,
+                                );
+                                $query = new WP_Query($arg);
+                                ?>
+                                <?php if ($query->have_posts()) : ?>
+                                    <ul class="bl_lineReserveModal_inner_list">
+                                        <?php while ($query->have_posts()) : $query->the_post(); ?>
+                                            <li class="bl_lineReserveModal_inner_list_item">
+                                                <a href="<?php the_field('line_reserveUrl'); ?>" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                                                    <p class="el_lineReserveModal_inner_list_item_link_txt"><?php echo get_term(get_field('news_topics_place'), 'clinic-cat')->name; ?></p>
+                                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                                                </a>
+                                            </li>
+                                        <?php endwhile; ?>
+                                    </ul>
+                                <?php endif; ?>
+                            </div>
                         </div>
                     </div>
 

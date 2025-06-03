@@ -14,10 +14,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Sans+JP:wght@100..900&family=Shippori+Mincho:wght@500;600&display=swap" rel="stylesheet">
 
-    <!-- ファビコンなど -->
-    <link rel="icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/logo/favicon.png" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="128x128" href="<?php echo get_template_directory_uri(); ?>/assets/img/logo/favicon.png">
-    <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/img/logo/favicon.ico">
 
     <!-- css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">

@@ -333,8 +333,8 @@
                     </div>
                     <div class="bl_footerGlobalNavi_copyContainer">
                         <div class="bl_footerGlobalNavi_copyContainer_list">
-                            <a href="<?php echo home_url('/skin-care-pilcy/'); ?>" class="bl_footerGlobalNavi_copyContainer_list_item">当院の肌治療・肌診断について</a>
-                            <a href="<?php echo home_url('/cancel-policy/'); ?>" class="bl_footerGlobalNavi_copyContainer_list_item">予約・キャンセル・お子様の同伴について</a>
+                            <a href="<?php echo home_url('/skin-care-policy/'); ?>" class="bl_footerGlobalNavi_copyContainer_list_item">当院の肌治療・肌診断について</a>
+                            <a href="<?php echo home_url('/cancel-policy/'); ?>" class="bl_footerGlobalNavi_copyContainer_list_item">当院へご予約頂く皆様へ</a>
                             <a href="#" style="display: none;" class="bl_footerGlobalNavi_copyContainer_list_item">プライバシーポリシー</a>
                         </div>
                         <p class="el_footerGlobalNavi_copyright_txt">&copy; 2025 JUN CLINIC</p>

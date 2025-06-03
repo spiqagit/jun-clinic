@@ -237,7 +237,7 @@
             top: 0;
             width: vwmin(1, pc, 1);
             height: 87%;
-            border-left: 2px dashed var(--baseFontColor);
+            border-left: 1px dashed var(--baseFontColor);
             z-index: 1;
             translate: 0px 0;
             z-index: -1;
@@ -327,6 +327,10 @@
             color: #fff !important;
             border-color: #CCC8B9 !important;
             padding: vwmin(10, pc, 10) !important;
+
+            @include underTB {
+                width: vwmin(140, pc, 140) !important;
+            }
         }
 
         td {
@@ -422,7 +426,9 @@
                 content: "";
                 position: relative;
                 width: 100%;
-                min-height: vwmin(8, pc, 8);
+                min-width: vwmin(8, pc, 8);
+                height: auto;
+                aspect-ratio: 1/1;
                 background-image: url("img/common/open-arrow.svg");
                 background-position: center;
                 background-repeat: no-repeat;
@@ -606,7 +612,7 @@
 
             @include underTB {
                 display: grid;
-                grid-template-columns: auto vwmin(6, pc, 6);
+                grid-template-columns: auto vwmin(8, pc, 8);
                 align-items: center;
                 color: var(--baseFontColor);
                 font-family: "Noto Sans JP";
@@ -1023,6 +1029,10 @@
                     padding-bottom: vwmin(20, pc, 20);
                     padding-inline: vwmin(20, pc, 20);
 
+                    @include underTB {
+                        padding-inline: vwmin(8, pc, 8);
+                    }
+
                 }
             }
         }
@@ -1130,6 +1140,12 @@
                 display: flex;
                 align-items: flex-start;
                 gap: vwmin(20, pc, 20);
+
+                @include underTB {
+                    flex-flow: column;
+                    justify-content: center;
+                    align-items: center;
+                }
 
                 .bl_commonfaqList_item_details_panel_imgBlock {
                     width: 100%;

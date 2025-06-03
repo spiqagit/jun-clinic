@@ -22,7 +22,7 @@
 
         @include underTB {
             flex-flow: column;
-            gap: vwmin(50, pc, 50);
+            gap: vwmin(60, pc, 60);
         }
 
         .bl_priceSec_seideMenuContainer {
@@ -37,6 +37,8 @@
                 position: relative;
                 top: 0;
                 max-width: 100%;
+                padding-bottom: vwmin(50, pc, 50);
+                border-bottom: vwmin(1, pc, 1) solid #FBFAF9;
             }
 
             .bl_priceSec_seideMenuContainer_list {
@@ -132,7 +134,7 @@
 
 .bl_priceListContainer_clinicBtnList {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(vwmin(107, pc, 107), 100%), 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(vwmin(126, pc, 126), 100%), 1fr));
     gap: vwmin(8, pc, 8);
 
     .bl_priceListContainer_clinicBtnList_item {
@@ -140,7 +142,7 @@
             display: block;
             cursor: pointer;
             width: 100%;
-            color: var(--baseFontColor);
+            color: #999;
             font-size: vwmin(14, pc, 14);
             font-style: normal;
             font-weight: 400;
@@ -150,6 +152,7 @@
             border-radius: vwmin(50, pc, 50);
             padding-inline: vwmin(10, pc, 10);
             padding-block: vwmin(6, pc, 6);
+            padding-bottom: vwmin(4, pc, 4);
             border: none;
             width: 100%;
             transition: all 0.3s var(--reverseTransition);
@@ -158,6 +161,7 @@
         .is-active {
             background-color: #fff;
             color: var(--baseFontColor);
+            font-weight: 600;
             transition: all 0.3s var(--reverseTransition);
         }
     }
@@ -200,8 +204,8 @@
     .bl_priceListContainer_priceList_smallist_item {
 
         .el_priceListContainer_priceList_smallList_post_ttl {
-            border-left: vwmin(1, pc, 1) solid #9E586C;
-            padding-left: vwmin(16, pc, 16);
+            border-left: vwmin(3, pc, 3) solid #9E586C;
+            padding-left: vwmin(13, pc, 13);
             color: var(--baseFontColor);
             font-family: "Shippori Mincho";
             font-size: vwmin(20, pc, 20);

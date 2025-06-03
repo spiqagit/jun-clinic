@@ -7,10 +7,11 @@
 
 
 .bl_commonBreadcrumbContainer {
-    padding-inline: vwmin(20, pc, 20);
+    padding-inline: vwmin(40, pc, 40);
     padding-top: vwmin(100, pc, 100);
 
     @include underTB {
+        padding-inline: vwmin(20, pc, 20);
         padding-top: vwmin(68, pc, 68);
     }
 }
@@ -21,8 +22,8 @@
     width: 100%;
     display: flex;
     border-radius: vwmin(50, pc, 50);
-    padding-top: vwmin(12, pc, 12);
-    padding-bottom: vwmin(14, pc, 14);
+    padding-top: vwmin(13, pc, 13);
+    padding-bottom: vwmin(12, pc, 12);
     justify-content: center;
     align-items: center;
     color: var(--accentColor);
@@ -81,7 +82,6 @@
         background-color: var(--baseFontColor);
         border: vwmin(1, pc, 1) solid transparent;
 
-
         svg {
             width: 100%;
             height: auto;
@@ -131,14 +131,14 @@
             position: relative;
             display: grid;
             grid-template-columns: vwmin(290, pc, 290) 1fr;
-            align-items: center;
+            align-items: flex-start;
             padding-inline: vwmin(30, pc, 30);
             padding-block: vwmin(48, pc, 48);
             border-radius: vwmin(10, pc, 10);
             overflow: hidden;
             box-shadow: 0px 0px vwmin(6, pc, 6) 0px rgba(41, 25, 10, 0.10);
             transition: all 0.3s var(--reverseTransition);
-            height: auto;
+            height: 100%;
 
             @include underTB {
                 padding-block: vwmin(32, pc, 32);
@@ -440,6 +440,10 @@
         border-radius: vwmin(8, pc, 8);
         margin-bottom: vwmin(56, pc, 56);
 
+        @include underTB {
+            margin-bottom: vwmin(30, pc, 30);
+        }
+
         .bl_menuListContainer_tabContainer_btn {
             cursor: pointer;
             color: var(--gray-txt, #999);
@@ -460,6 +464,11 @@
             padding-top: vwmin(14, pc, 14);
             padding-bottom: vwmin(16, pc, 16);
             border-radius: vwmin(6, pc, 6);
+
+            @include underTB {
+                padding-top: vwmin(10, pc, 10);
+                padding-bottom: vwmin(12, pc, 12);
+            }
         }
 
         .is_active {
@@ -483,6 +492,7 @@
     }
 
     .bl_menuListContainer_content {
+        width: 100%;
         display: none;
     }
 
@@ -492,6 +502,7 @@
 
 
     .bl_menuListContainer_menuList {
+        width: 100%;
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(min(vwmin(235, pc, 235), 100%), 1fr));
         column-gap: vwmin(40, pc, 40);
@@ -1088,13 +1099,15 @@ LINE予約
 .bl_lineReserveModal {
     position: absolute;
     padding: vwmin(18, pc, 18);
-    background-color: #fff;
+    background-color: #FBFAF9;
     border-radius: vwmin(6, pc, 6);
     z-index: 100;
     max-width: vwmin(380, pc, 380);
-    width: 95%;
+    width: 100%;
     opacity: 0;
     display: none;
+    box-shadow: 0px 0px 6px 0px rgba(41, 25, 10, 0.10);
+
 
     .bl_lineReserveModal_inner {
         position: relative;
@@ -1118,7 +1131,8 @@ LINE予約
             aspect-ratio: 1/1;
             background-color: var(--baseFontColor);
             transition: all 0.3s var(--reverseTransition);
-
+            top: vwmin(-10, pc, -10);
+            right: vwmin(-10, pc, -10);
 
             @media (hover: hover) {
                 &:hover {
@@ -1180,7 +1194,7 @@ LINE予約
     }
 }
 
-.is_lineReserveModal_active{
+.is_lineReserveModal_active {
     opacity: 1;
     display: none;
 }

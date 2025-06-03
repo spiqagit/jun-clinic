@@ -57,19 +57,43 @@ document.addEventListener('DOMContentLoaded', () => {
   const tabs = document.querySelectorAll('#dermatology, #surgery');
   const menuContentList = [...document.querySelectorAll('.bl_menuListContainer_content')];
   
+  // 初期状態の設定
+  menuContentList.forEach(menuContent => {
+    menuContent.style.display = 'none';
+  });
+  
+  // 最初のタブをアクティブに
+  const firstTab = tabs[0];
+  const firstContent = menuContentList.find(content => 
+    content.getAttribute('data-menutab') === firstTab.getAttribute('id')
+  );
+  if (firstContent) {
+    firstContent.style.display = 'block';
+    firstContent.classList.add('is_activeTab');
+    firstTab.classList.add('is_active');
+  }
+  
   tabs.forEach((tab) => {
     tab.addEventListener('click', function () {
+      // 現在のタブがアクティブな場合は何もしない
+      if (tab.classList.contains('is_active')) return;
+      
       // ボタン
       tabs.forEach(t => t.classList.remove('is_active'));
       tab.classList.add('is_active');
       const tabId = tab.getAttribute('id');
 
       menuContentList.forEach(menuContent => {
-        menuContent.classList.remove('is_activeTab');
         const contentId = menuContent.getAttribute('data-menutab');
-
+        
         if (tabId === contentId) {
+          // 表示するコンテンツ
+          menuContent.style.display = 'block';
           menuContent.classList.add('is_activeTab');
+        } else {
+          // 非表示にするコンテンツ
+          menuContent.style.display = 'none';
+          menuContent.classList.remove('is_activeTab');
         }
       });
     });

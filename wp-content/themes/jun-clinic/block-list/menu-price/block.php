@@ -150,9 +150,9 @@ $priceClnincTermList = array_merge(...array_merge($priceClnincTermList));
                                                         </ul>
                                                     <?php endif; ?>
 
-                                                    <?php if (get_field('price-caption' ,$price_post_id)) : ?>
+                                                    <?php if (get_sub_field('price-caption' ,$price_post_id)) : ?>
                                                         <p class="el_priceListContainer_priceList_smallList_post_caption">
-                                                            <?php echo get_field('price-caption' ,$price_post_id); ?>
+                                                            <?php echo get_sub_field('price-caption' ,$price_post_id); ?>
                                                         </p>
                                                     <?php endif; ?>
                                                 </li>

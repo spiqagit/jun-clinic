@@ -129,89 +129,72 @@
 }
 
 
-/* 404 */
+/*
+404
+*/
 .bl_page404Main {
-    padding-inline: vwmin(20, pc, 20) ;
-    padding-top: vwmin(130, pc, 130);
+    padding-top: vwmin(120, pc, 120);
+    padding-bottom: vwmin(140, pc, 140);
+    padding-inline: vwmin(20, pc, 20);
 
     @include underTB {
-        padding-top: vwmin(80, sp);
-        padding-inline: vwmin(20, sp);
+        padding-top: vwmin(60, pc, 60);
+        padding-bottom: vwmin(60, pc, 60);
     }
 
     .bl_page404Main_inner {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        justify-content: center;
-        gap: vwmin(48, pc, 48);
-        height: 80lvh;
+        max-width: vwmin(880, pc, 880);
+        margin-inline: auto;
+    }
 
-        @include underTB {
-            gap: vwmin(24, sp);
+    .bl_page404Main_txtContainer {
+        margin-bottom: vwmin(80, pc, 80);
+
+        .el_page404Main_txtContainer_ttl {
+            width: fit-content;
+            margin-inline: auto;
+            color: var(--lineText);
+            font-family: Marcellus;
+            font-size: vwmin(32, pc, 32);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: calc(vwmin(32, pc, 32) * 0.02);
+            margin-bottom: vwmin(20, pc, 20);
         }
 
-        .bl_page404Main_inner_ttl {
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-
-            h1 {
-                font-size: vwmin(100, pc, 100);
-                margin-block: 0;
-
-                @include underTB {
-                    font-size: vwmin(80, sp);
-                }
-            }
-
-            .bl_page404Main_inner_ttl_sub {
-                margin-block: 0;
-                font-size: vwmin(16, pc, 16);
-
-                @include underTB {
-                    font-size: vwmin(14, sp);
-                }
-            }
-        }
-
-        .bl_page404Main_inner_txt {
-            margin-block: 0;
-            padding-top: vwmin(24, pc, 24);
-            font-size: vwmin(16, pc, 16);
+        .el_page404Main_txtContainer_txt {
+            color: var(--baseFontColor);
             text-align: center;
-
-            br {
-                @include underTB {
-                    display: none;
-                }   
-            }
-
-            @include underTB {
-                font-size: vwmin(14, sp);
-                text-align: left;
-            }
+            font-size: vwmin(16, pc, 16);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.8;
+            letter-spacing: calc(vwmin(16, pc, 16) * 0.02);
         }
+    }
 
-        .bl_page404Main_inner_btn {
-            display: inline-block;
-            padding: vwmin(16, pc, 16) vwmin(24, pc, 24);
-            background-color: var(--baseFontColor);
-            color: #fff;
-            border-radius: vwmin(100, pc, 100);
-            text-decoration: none;
-            transition: opacity 0.3s ease-in-out;
+    .el_page404Main_btn {
+        display: block;
+        width: fit-content;
+        font-family: "Shippori Mincho";
+        margin-inline: auto;
+        color: var(--baseFontColor);
+        font-size: vwmin(16, pc, 16);
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.5;
+        letter-spacing: calc(vwmin(16, pc, 16) * 0.04);
+        border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
+        padding-bottom: vwmin(8, pc, 8);
+        transition: all .3s var(--reverseTransition);
 
-            @include underTB {
-                padding: vwmin(16, sp) vwmin(24, sp);
-                border-radius: vwmin(100, sp);
-            }
 
-            @media (hover: hover) {
-                &:hover {
-                    opacity: 0.5;
-                    transition: opacity 0.3s ease-in-out;
-                }
+        @media (hover: hover) {
+            &:hover {
+                color: var(--accentColor);
+                border-color: var(--accentColor);
+                transition: all .3s var(--reverseTransition);
             }
         }
     }

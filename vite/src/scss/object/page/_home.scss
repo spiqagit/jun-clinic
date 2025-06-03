@@ -1,6 +1,5 @@
 @use '../../foundation/function/index' as *;
 
-
 .bl_commonComingSoonTxtContainer {
     width: fit-content;
     margin-inline: auto;
@@ -43,62 +42,72 @@ FV Slide
         z-index: 0;
     }
 
-    .splide{
+    .splide {
         overflow: visible !important;
     }
 
     .fvSlide {
-        background-color: transparent;
+        width: 100%;
         max-width: vwmin(1120, pc, 1120);
+        background-color: transparent;
         overflow: visible;
         margin-inline: auto;
         padding-bottom: vwmin(30, pc, 30);
+        padding-inline: vwmin(40, pc, 40);
+
 
 
         .splide__track {
             overflow: visible !important;
+            max-width: vwmin(1120, pc, 1120);
+            margin-inline: auto;
+            padding: 0 vwmin(100, pc, 100);
+
+            @include underTB {
+                padding: 0 vwmin(20, pc, 20);
+            }
         }
 
         .splide__slide {
-            overflow: visible;
-            backface-visibility: visible;
+            width: fit-content;
 
             .bl_fvSlideBanner {
                 filter: drop-shadow(0px 0px 10.182px rgba(64, 37, 14, 0.12));
+                width: 100%;
+                max-width: vwmin(1120, pc, 1120);
+                transform: scale(.8);
+                overflow: visible;
+                backface-visibility: visible;
+                transform-origin: bottom;
+                transition: all 0.3s var(--reverseTransition);
+                opacity: 0.5;
 
                 @include underTB {
+                    max-width: 100%;
                     aspect-ratio: 1/1;
                     height: auto;
-                    padding-top: vwmin(18, pc, 18);
+                    padding-top: vwmin(18, sp, 18);
                 }
             }
 
             .bl_fvSlideBanner_imgContainer {
+                transition: all 0.3s var(--reverseTransition);
                 mask-image: url("img/top/fv-slide-mask.svg");
                 mask-repeat: no-repeat;
                 mask-position: 0 0;
-                max-width: vwmin(1120, pc);
-                mask-size: 100%;
-                width: 100%;
                 margin-inline: auto;
                 -webkit-mask-image: url("img/top/fv-slide-mask.svg");
                 -webkit-mask-image: url("img/top/fv-slide-mask.svg");
                 -webkit-mask-repeat: no-repeat;
                 -webkit-mask-position: 0 0;
-                -webkit-mask-size: 100%;
+                -webkit-mask-size: 100% 100%;
                 -webkit-mask-repeat: no-repeat;
                 -webkit-mask-position: 0 0;
-                -webkit-mask-size: 100%;
-                scale: .8;
+                -webkit-mask-size: 100% 100%;
                 height: auto;
-                transform-origin: bottom;
-                transition: all 0.3s var(--reverseTransition);
-
 
                 @include underTB {
-                    align-self: 1/1;
                     height: 100%;
-                max-width: vwmin(338, sp);
                     mask-image: url("img/top/fv-slide-mask-sp.svg");
                     -webkit-mask-image: url("img/top/fv-slide-mask-sp.svg");
                 }
@@ -113,12 +122,26 @@ FV Slide
 
         .is-active {
             .bl_fvSlideBanner {
-                .bl_fvSlideBanner_imgContainer {
-                    scale: 1;
-                    transition: all 0.3s var(--reverseTransition);
-                }
+                transform: scale(1) !important;
+                opacity: 1 !important;
+                transition: all 0.3s var(--reverseTransition);
+                z-index: 1;
             }
         }
+
+        .is-prev {
+            .bl_fvSlideBanner {
+                transform-origin: right bottom;
+            }
+        }
+
+        .is-next {
+            .bl_fvSlideBanner {
+                transform-origin: left bottom;
+            }
+        }
+
+
 
 
         .splide__arrows {
@@ -153,6 +176,25 @@ FV Slide
                 border-radius: vwmin(50, pc, 50);
                 transform: translate(0, 0) !important;
                 box-sizing: border-box;
+                border: vwmin(1, pc, 1) solid transparent;
+                transition: all 0.3s var(--reverseTransition);
+
+                @media (hover: hover) {
+                    &:hover {
+                        background-color: #fff;
+                        border: vwmin(1, pc, 1) solid var(--lineText);
+                        transition: all 0.3s var(--reverseTransition);
+                        background-color: #fff !important;
+
+                        svg {
+                            path {
+                                fill: var(--lineText);
+                                transition: all 0.3s var(--reverseTransition);
+                            }
+                        }
+                    }
+                }
+
 
                 img {
                     width: vwmin(14, pc, 14);
@@ -461,6 +503,10 @@ Feature
                                 padding-inline: vwmin(16, pc, 16);
                             }
 
+                            @media (max-width: 363px) {
+                                flex-flow: column;
+                            }
+
                             .bl_featureSec_featureContainer_txtBox_txt {
                                 font-size: vwmin(14, pc, 14);
                                 font-style: normal;
@@ -470,6 +516,10 @@ Feature
 
                                 @include underPC {
                                     text-align: center;
+                                }
+
+                                @include underTB {
+                                    font-size: vwmin(12, pc, 12);
                                 }
 
                                 br {
@@ -579,22 +629,28 @@ Seminor
             }
         }
 
-        .bl_commonBgContainer_txtContainer_txt {
-            font-size: vwmin(16, pc, 16);
-            font-style: normal;
-            font-weight: 400;
-            line-height: 2;
-            letter-spacing: calc(0.32px / 16);
-            margin-bottom: vwmin(24, pc, 24);
+
+        .bl_commonBgContainer_txtContainer {
+            display: flex;
+            flex-flow: column;
+            gap: vwmin(24, pc, 24);
 
             @include underTB {
-                margin-bottom: vwmin(20, pc, 20);
+                gap: vwmin(20, pc, 20);
             }
-        }
 
-        .bl_commonBgContainer_txtContainer_btnContainer {
-            width: fit-content;
-            margin-left: auto;
+            .bl_commonBgContainer_txtContainer_txt {
+                font-size: vwmin(16, pc, 16);
+                font-style: normal;
+                font-weight: 400;
+                line-height: 2;
+                letter-spacing: calc(0.32px / 16);
+            }
+
+            .bl_commonBgContainer_txtContainer_btnContainer {
+                width: fit-content;
+                margin-left: auto;
+            }
         }
     }
 }
@@ -661,6 +717,9 @@ Site Info
 
                     .bl_topSiteInfo_siteList_item_btn_icon {
                         svg {
+                            width: 100%;
+                            height: auto;
+
                             path {
                                 stroke: var(--accentColor);
                             }
@@ -797,6 +856,8 @@ Recommend
         margin-bottom: vwmin(60, pc, 60);
 
         .splide__track {
+            margin-inline: auto;
+            max-width: vwmin(800, pc, 800);
             overflow: visible !important;
         }
 
@@ -818,8 +879,8 @@ Recommend
             position: relative;
             background: var(--baseFontColor);
             border-radius: 50%;
-            width: vwmin(40, pc, 40);
-            height: vwmin(40, pc, 40);
+            width: vwmin(50, pc, 50);
+            height: vwmin(50, pc, 50);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -832,6 +893,10 @@ Recommend
             font-size: vwmin(14, pc, 14);
             transform: none !important;
             border: vwmin(1, pc, 1) solid transparent;
+
+            @include underTB {
+                display: none;
+            }
 
             @media (hover: hover) {
                 &:hover {
@@ -862,6 +927,8 @@ Recommend
         .splide__slide {
             max-width: vwmin(800, pc, 800);
             width: 100%;
+            opacity: .5;
+            transition: all 0.3s var(--reverseTransition);
 
             .bl_topDoctorCard {
                 width: 100%;
@@ -937,6 +1004,11 @@ Recommend
                     letter-spacing: calc(0.28px / 14);
                 }
             }
+        }
+
+        .is-active {
+            opacity: 1;
+            transition: all 0.3s var(--reverseTransition);
         }
     }
 

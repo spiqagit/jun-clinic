@@ -22,8 +22,8 @@ Template Name: 通常テンプレート
                 <h1 class="el_commonPageTtlContainer_inner_ttl"><?php the_title(); ?></h1>
             </div>
             <picture class="el_commonPageTtlContainer_waveLine">
-                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/common/page-wave-line-sp.svg" media="(max-width: 768px)">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/page-wave-line.svg" alt="">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/common/page-wave-line-sp.png" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/page-wave-line.png" alt="">
             </picture>
         </div>
 

@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: 通常テンプレート
+Template Name: スキンケアポリシー
 */
 ?>
 
@@ -19,7 +19,7 @@ Template Name: 通常テンプレート
         <div class="bl_commonPageTtlContainer">
             <?php get_template_part('inc/breadcrumbs'); ?>
             <div class="bl_commonPageTtlContainer_inner">
-                <h1 class="el_commonPageTtlContainer_inner_ttl"><?php the_title(); ?></h1>
+                <h1 class="el_commonPageTtlContainer_inner_ttl">当院の肌治療・<br class="is_sp">肌診断について</h1>
             </div>
             <picture class="el_commonPageTtlContainer_waveLine">
                 <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/common/page-wave-line-sp.png" media="(max-width: 768px)">

@@ -1,29 +1,38 @@
 <?php get_header('meta'); ?>
 <?php wp_head(); ?>
 </head>
-<body class="pg_404">
-<?php get_header(); ?>
 
-<main class="ly_main">
-
-<div class="ly_pageTtl02">
-    <div class="ly_pageTtl02_inner">
-        <h1 class="el_pageTtl02_ja">ページが見つかりませんでした</h1>    
+<body>
+    <div class="bl_commonBgContainer">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/bg.png" alt="">
     </div>
-</div><!-- /ly_pageTtl -->
+    <?php get_header(); ?>
 
-<div class="ly_inner ly_edit un_news">
-    <div class="el_edit">
-        <p>お探しのページが見つかりません。<br>
-        一時的にアクセスできない状況にあるか、移動もしくは削除された可能性があります。</p>
-    </div>
-    <a href="<?php echo home_url(); ?>" class="el_btnNormal">TOP</a>
-</div><!-- /ly_inner -->
+    <main class="ly_overBg ly_articlePage">
 
-</main><!-- /ly_main -->
+        <div class="bl_commonPageTtlContainer">
+            <?php get_template_part('inc/breadcrumbs'); ?>
+            <div class="bl_commonPageTtlContainer_inner">
+                <h1 class="el_commonPageTtlContainer_inner_ttl">ページが見つかりません</h1>
+            </div>
+            <picture class="el_commonPageTtlContainer_waveLine">
+                <source srcset="<?php echo get_template_directory_uri(); ?>/assets/img/common/page-wave-line-sp.png" media="(max-width: 768px)">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/page-wave-line.png" alt="">
+            </picture>
+        </div>
+        <div class="bl_page404Main">
+            <div class="bl_page404Main_inner">
+                <div class="bl_page404Main_txtContainer">
+                    <p class="el_page404Main_txtContainer_ttl">SORRY..</p>
+                    <p class="el_page404Main_txtContainer_txt">お探しのページが見つかりません。 <br>一時的にアクセスできない状況にあるか、移動もしくは削除された可能性があります。</p>
+                </div>
+                <a href="<?php echo home_url(); ?>" class="el_page404Main_btn">TOPへ戻る</a>
+            </div>
+        </div>
+    </main>
 
-<?php get_footer(); ?>
-<?php get_footer('meta'); ?>
-
+    <?php get_footer(); ?>
 </body>
+
+
 </html>

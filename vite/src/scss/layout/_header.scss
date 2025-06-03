@@ -29,6 +29,7 @@ header
             grid-template-columns: vwmin(155, pc, 155) vwmin(36, pc, 36);
             justify-content: space-between;
             align-items: center;
+            pointer-events: none;
 
             @include underTB {
                 grid-template-columns: vwmin(141, pc, 141) vwmin(24, pc, 24);
@@ -39,17 +40,25 @@ header
                 display: block;
                 width: 100%;
                 height: 100%;
-                isolation: isolate; // 追加推奨
+                isolation: isolate;
 
                 img {
                     width: 100%;
+                    filter: brightness(0) invert(1);
                 }
             }
 
             .bl_header_inner_logo_link {
                 transition: all;
-            }
+                pointer-events: auto;
 
+                @media (hover: hover) {
+                    &:hover {
+                        opacity: .5;
+                        transition: all 0.3s var(--reverseTransition);
+                    }
+                }
+            }
 
             .bl_header_menu {
                 @include underTB {
@@ -104,7 +113,6 @@ header
                     left: 0;
                     width: 100%;
                     transition: all 0.3s var(--reverseTransition);
-
                 }
 
                 &:nth-child(2) {
@@ -127,25 +135,25 @@ header
 
 
             .el_header_menu_btn_lineContainer_line {
-                transition: transform 0.3s var(--reverseTransition);
+                transition: all 0.3s var(--reverseTransition);
 
                 &:nth-child(1) {
                     top: 50%;
                     left: 50%;
-                    rotate: -20deg;
-                    translate: -50% -50%;
+                    transform: translate(-50%, -50%) rotate(-20deg);
                     max-width: 100%;
-                    transition: all .3s var(--reverseTransition);
+                    transition: transform .3s var(--reverseTransition);
+                    will-change: transform;
                 }
 
                 &:nth-child(2) {
                     top: 50%;
-                    rotate: 20deg;
                     right: -50%;
                     left: auto;
-                    translate: -50% -50%;
+                    transform: translate(-50%, -50%) rotate(20deg);
                     max-width: 100%;
-                    transition: all .3s var(--reverseTransition);
+                    transition: transform .3s var(--reverseTransition);
+                    will-change: transform;
                 }
             }
         }
@@ -161,13 +169,12 @@ header
         width: 100%;
         max-width: vwmin(168, pc, 168);
         display: flex;
-        padding-top: vwmin(10, pc, 10);
-        padding-bottom: vwmin(12, pc, 12);
+        padding-top: vwmin(12, pc, 12);
+        padding-bottom: vwmin(10, pc, 10);
         justify-content: center;
         align-items: center;
         background-color: var(--accentColor);
         border-radius: vwmin(10, pc, 10);
-        font-size: vwmin(14, pc, 14);
         font-weight: 500;
         font-size: vwmin(16, pc, 16);
         font-style: normal;
@@ -203,7 +210,7 @@ header
         }
     }
 
-    .bl_header_menu_lineReserve_modal{
+    .bl_header_menu_lineReserve_modal {
         position: fixed;
         top: vwmin(95, pc, 95);
         right: vwmin(106, pc, 106);
@@ -217,6 +224,7 @@ header
             padding-top: vwmin(16, pc, 16);
             padding-bottom: vwmin(14, pc, 14);
         }
+
     }
 
 
@@ -236,10 +244,6 @@ navi
     height: 100lvh;
     z-index: 110;
     background-color: #EBE9DF;
-
-    @include underTB {
-        overflow-y: auto;
-    }
 
     .bl_header_nav_bg {
         position: absolute;
@@ -261,8 +265,10 @@ navi
         grid-template-columns: vwmin(480, pc) 1fr;
         height: 100%;
 
-        @include underTB {
+        @include underPC {
+            overflow-y: auto;
             grid-template-columns: 1fr;
+            padding-bottom: vwmin(100, pc, 100);
         }
 
 
@@ -296,23 +302,29 @@ navi
                 z-index: 1;
 
 
-
-
                 .bl_header_nav_inner_ctaContainer_inner_lineReserveBtn {
+                    position: relative;
                     width: 100%;
-                    max-width: vwmin(285, pc, 285);
+
+                    .bl_commonlineReserveBtn {
+                        max-width: vwmin(285, pc, 285);
+                        margin-inline: auto;
+                    }
                 }
 
                 .bl_header_lineReserve_modal {
                     left: 50%;
-                    top: 52%;
-                    translate: -50% -52%;
-                    bottom: auto;
+                    translate: -50% vwmin(18, pc, 18);
+
+                    .el_lineReserveModal_inner_closeBtn {
+                        top: vwmin(-10, pc, -10);
+                        right: vwmin(-10, pc, -10);
+                    }
                 }
 
             }
 
-            .bl_header_nav_inner_ctaContainer_inner_banner{
+            .bl_header_nav_inner_ctaContainer_inner_banner {
                 max-width: vwmin(285, pc, 285);
                 width: 100%;
                 transition: all 0.3s var(--reverseTransition);
@@ -339,8 +351,12 @@ navi
     padding-top: vwmin(100, pc, 100);
     padding-bottom: vwmin(80, pc, 80);
 
+    @include underPC {
+        overflow-y: visible;
+    }
 
-    &::after{
+
+    &::after {
         content: '';
         position: absolute;
         top: 0;
@@ -395,7 +411,7 @@ navi
 
             .bl_globalNaviList {
                 display: grid;
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(auto-fill, minmax(min(vwmin(180, pc, 180), 100%), 1fr));
                 row-gap: vwmin(16, pc, 16);
                 column-gap: vwmin(64, pc, 64);
 
@@ -408,11 +424,12 @@ navi
                     display: grid;
                     grid-template-columns: 1fr vwmin(10, pc, 10);
                     gap: vwmin(10, pc, 10);
-                    align-items: baseline;
+                    align-items: center;
                     padding-bottom: vwmin(16, pc, 16);
                     border-bottom: vwmin(1, pc, 1) solid #fff;
                     border-bottom: vwmin(1, pc, 1) solid #CCC8B9;
                     transition: all 0.3s var(--reverseTransition);
+
                     @media (hover: hover) {
                         &:hover {
                             opacity: .5;
