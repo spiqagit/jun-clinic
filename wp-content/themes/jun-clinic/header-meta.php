@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/main.css?<?php echo date_i18n("YmdHis"); ?>" type="text/css" />
     <?php if ((is_post_type_archive('doctor') || is_singular('doctor') || is_singular('clinic'))): ?>
-        <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/common_02.css?<?php echo date_i18n("YmdHis"); ?>" type="text/css" />
+        <!-- <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/common_02.css?<?php echo date_i18n("YmdHis"); ?>" type="text/css" /> -->
     <?php endif; ?>
     <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/common.css?<?php echo date_i18n("YmdHis"); ?>" type="text/css" />
 

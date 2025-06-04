@@ -233,7 +233,7 @@
                                                         'taxonomy' => 'clinic-cat',
                                                         'field' => 'term_id',
                                                         'terms' => $clinicTerm->term_id
-                                                    )
+                                                    ),
                                                 )
                                             );
                                             $query = new WP_Query($args);

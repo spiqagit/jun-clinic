@@ -17,6 +17,7 @@ header
         z-index: 100;
         background-color: transparent;
         mix-blend-mode: exclusion;
+        pointer-events: none;
 
         @include underTB {
             padding-inline: vwmin(20, pc, 20);
@@ -29,7 +30,6 @@ header
             grid-template-columns: vwmin(155, pc, 155) vwmin(36, pc, 36);
             justify-content: space-between;
             align-items: center;
-            pointer-events: none;
 
             @include underTB {
                 grid-template-columns: vwmin(141, pc, 141) vwmin(24, pc, 24);
@@ -164,6 +164,8 @@ header
 
     .bl_header_menu_lineReserveBtn {
         position: fixed;
+        cursor: pointer;
+        pointer-events: auto;
         top: vwmin(24, pc, 24);
         right: vwmin(106, pc, 106);
         width: 100%;
@@ -268,7 +270,6 @@ navi
         @include underPC {
             overflow-y: auto;
             grid-template-columns: 1fr;
-            padding-bottom: vwmin(100, pc, 100);
         }
 
 
@@ -353,6 +354,7 @@ navi
 
     @include underPC {
         overflow-y: visible;
+        padding-bottom: vwmin(100, pc, 100);
     }
 
 

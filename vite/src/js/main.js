@@ -56,15 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
   -------------------------------- */
   const tabs = document.querySelectorAll('#dermatology, #surgery');
   const menuContentList = [...document.querySelectorAll('.bl_menuListContainer_content')];
-  
+
   // 初期状態の設定
   menuContentList.forEach(menuContent => {
     menuContent.style.display = 'none';
   });
-  
+
   // 最初のタブをアクティブに
   const firstTab = tabs[0];
-  const firstContent = menuContentList.find(content => 
+  const firstContent = menuContentList.find(content =>
     content.getAttribute('data-menutab') === firstTab.getAttribute('id')
   );
   if (firstContent) {
@@ -72,12 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
     firstContent.classList.add('is_activeTab');
     firstTab.classList.add('is_active');
   }
-  
+
   tabs.forEach((tab) => {
     tab.addEventListener('click', function () {
       // 現在のタブがアクティブな場合は何もしない
       if (tab.classList.contains('is_active')) return;
-      
+
       // ボタン
       tabs.forEach(t => t.classList.remove('is_active'));
       tab.classList.add('is_active');
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       menuContentList.forEach(menuContent => {
         const contentId = menuContent.getAttribute('data-menutab');
-        
+
         if (tabId === contentId) {
           // 表示するコンテンツ
           menuContent.style.display = 'block';
@@ -124,13 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ポップアップを開く
     const open = () => {
       if (isAnimating) return;
-      
+
       isAnimating = true;
       isOpen = true;
 
       // アニメーション前に表示
       modal.style.display = 'block';
-      
+
       gsap.fromTo(modal,
         { opacity: 0 },
         {
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ポップアップを閉じる
     const close = () => {
       if (isAnimating) return;
-      
+
       isAnimating = true;
       isOpen = false;
 
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
     activeClass: 'is_lineReserveModal_active'
   });
 
-  
+
 
   /* --------------------------------
   料金表タブ
@@ -431,5 +431,142 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+});
+
+
+/* --------------------------------
+ドクター
+-------------------------------- */
+document.addEventListener('DOMContentLoaded', function () {
+
+  const details = document.querySelectorAll('.bl_accordion details');
+  details.forEach((detail) => {
+    const summary = detail.querySelector('summary');
+    const content = detail.querySelector('.content');
+    const icon = summary.querySelector('.js-icon');
+    const iconVertical = icon.querySelector('::before');
+
+    summary.addEventListener('click', (e) => {
+      e.preventDefault(); // デフォルトの動作を防ぐ
+
+      if (detail.open) {
+        // アコーディオンを閉じる
+        content.animate([
+          { maxHeight: content.scrollHeight + 'px', opacity: 1 },
+          { maxHeight: '0', opacity: 0 }
+        ], {
+          duration: 300,
+          easing: 'ease-out'
+        }).onfinish = () => {
+          detail.removeAttribute('open');
+          // アニメーション後、maxHeightを解除
+          content.style.maxHeight = '';
+        };
+
+        // アイコンのアニメーション
+        icon.animate([
+          { transform: 'rotate(0deg)' }
+        ], {
+          duration: 300,
+          easing: 'ease-out'
+        });
+
+        iconVertical.animate([
+          { transform: 'scaleY(0)' },
+          { transform: 'scaleY(1)' }
+        ], {
+          duration: 300,
+          easing: 'ease-out'
+        });
+      } else {
+        // アコーディオンを開く
+        detail.setAttribute('open', '');
+        content.animate([
+          { maxHeight: '0', opacity: 0 },
+          { maxHeight: content.scrollHeight + 'px', opacity: 1 }
+        ], {
+          duration: 300,
+          easing: 'ease-out'
+        }).onfinish = () => {
+          // アニメーション後、maxHeightを解除
+          content.style.maxHeight = '';
+        };
+
+        // アイコンのアニメーション
+        icon.animate([
+          { transform: 'rotate(0deg)' }
+        ], {
+          duration: 300,
+          easing: 'ease-out'
+        });
+
+        iconVertical.animate([
+          { transform: 'scaleY(1)' },
+          { transform: 'scaleY(0)' }
+        ], {
+          duration: 300,
+          easing: 'ease-out'
+        });
+      }
+    });
+  });
+
+});
+
+/* --------------------------------
+クリニック
+-------------------------------- */
+document.addEventListener('DOMContentLoaded', function () {
+
+  const options = {
+    type: "loop", // ループさせる
+    arrows: false, // 矢印ボタンを非表示
+    pagination: false, // ページネーションを非表示
+    drag: false, // ドラッグ無効
+    gap: 20, // スライド間の余白
+    autoWidth: true,
+    height: 'auto',
+    breakpoints: {
+      767: {
+        height: 'auto',
+      },
+      500: {
+        gap: 15,
+      },
+    },
+    autoScroll: {
+      speed: 1, // スクロール速度
+      pauseOnHover: false, // カーソルが乗ってもスクロールを停止させない
+    },
+  };
+
+  const clinicSlider = document.querySelector(".clinic-slider");
+  if (clinicSlider) {
+    const splide = new Splide(clinicSlider, options);
+    splide.mount({ AutoScroll });
+  }
+
+  const scheduleSlider = document.querySelector(".schedule-slider_01");
+  if (scheduleSlider) {
+    new Splide(scheduleSlider).mount();
+  }
+
+  const topicsSplide = document.querySelector('.splide_topics');
+  if (topicsSplide) {
+    new Splide(topicsSplide, {
+      type: 'loop',      // or 'loop'
+      perPage: 1,            // 1ページに表示するスライド数
+      perMove: 1,            // 1回の移動でスライドする数
+      gap: '1rem',       // スライド間の余白
+      pagination: true,      // ページネーションを非表示
+      arrows: true,           // ナビゲーション矢印（必要に応じて）
+      breakpoints: {
+        768: {
+          perPage: 1         // スマホでは1枚にするなどレスポンシブ対応
+        }
+      }
+    }).mount();
+  }
 
 });
