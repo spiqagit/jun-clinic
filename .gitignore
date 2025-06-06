@@ -1,3 +1,21 @@
+# Ignore everything
+*
+!vite/
+!wp-content/
+!.gitignore
+
+# Ignore node_modules
+node_modules/
+
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
 # WordPress backup files
 *.wpress
 
@@ -8,18 +26,6 @@ wp-content/upgrade/
 wp-content/backup-db/
 wp-content/cache/
 wp-content/backups/
-
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Node modules
-node_modules/
 
 # IDE files
 .idea/
