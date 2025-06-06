@@ -1,8 +1,12 @@
-# WordPress backup files
-*.wpress
+# Ignore everything
+*
 
-# WordPress core files
-wp-config.php
+# But not these files/folders...
+!.gitignore
+!vite/
+!wp-content/
+
+# Ignore specific files in wp-content
 wp-content/uploads/
 wp-content/upgrade/
 wp-content/backup-db/
