@@ -140,6 +140,7 @@ class Addons {
 		}
 
 		// Convert the addons array to objects using JSON. This is essential because we have lots of addons that rely on this to be an object, and changing it to an array would break them.
+
 		$addons = json_decode( wp_json_encode( $addons ) );
 
 		$installedPlugins = array_keys( get_plugins() );
@@ -203,6 +204,10 @@ class Addons {
 	 * @return array         The sorted addons.
 	 */
 	protected function sortAddons( $addons ) {
+		if ( ! is_array( $addons ) ) {
+			return $addons;
+		}
+
 		// Sort the addons by moving the featured ones to the top.
 		usort( $addons, function( $a, $b ) {
 			// Sort by featured value. It can be false, or numerical. If it's false, it will be moved to the bottom.
@@ -330,7 +335,7 @@ class Addons {
 
 		$keys = array_keys( $plugins );
 		foreach ( $keys as $key ) {
-			if ( preg_match( '|^' . $sku . '|', $key ) ) {
+			if ( preg_match( '|^' . $sku . '|', (string) $key ) ) {
 				return $key;
 			}
 		}

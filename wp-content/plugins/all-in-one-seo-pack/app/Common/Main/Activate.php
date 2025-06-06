@@ -110,7 +110,7 @@ class Activate {
 			return;
 		}
 
-		if ( isset( $_GET['activate-multi'] ) ) { // phpcs:ignore HM.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Recommended	
+		if ( isset( $_GET['activate-multi'] ) ) { // phpcs:ignore HM.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Recommended
 			return;
 		}
 
@@ -121,6 +121,8 @@ class Activate {
 	/**
 	 * Adds our capabilities to all roles on the next request and the installing user on the current request after upgrading to Pro.
 	 *
+
+
 	 *
 	 * @since 4.1.4.4
 	 *

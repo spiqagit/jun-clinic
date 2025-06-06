@@ -1,3 +1,11 @@
+# Ignore everything
+*
+
+# But not these files/folders...
+!vite/
+!wp-content/
+!.gitignore
+
 # WordPress backup files
 *.wpress
 
@@ -25,4 +33,9 @@ node_modules/
 .idea/
 .vscode/
 *.sublime-project
-*.sublime-workspace 
+*.sublime-workspace
+
+# Vite specific
+vite/dist/
+vite/.vite/
+vite/node_modules/ 

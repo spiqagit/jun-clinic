@@ -252,7 +252,7 @@ trait Arrays {
 	/**
 	 * Sorts an array of arrays by a specific key.
 	 *
-	 * @since {next}
+	 * @since 4.7.4
 	 *
 	 * @param  array  $arr   The input array.
 	 * @param  string $key   The key to sort by.
@@ -267,5 +267,22 @@ trait Arrays {
 		usort( $arr, function ( $a, $b ) use ( $key, $order ) {
 			return 'asc' === $order ? $a[ $key ] <=> $b[ $key ] : $b[ $key ] <=> $a[ $key ];
 		} );
+	}
+
+	/**
+	 * Flattens a multidimensional array.
+	 *
+	 * @since 4.7.6
+	 *
+	 * @param  array $arr The input array.
+	 * @return array      The flattened array.
+	 */
+	public function flatten( $arr ) {
+		$result = [];
+		array_walk_recursive( $arr, function ( $value ) use ( &$result ) {
+			$result[] = $value;
+		} );
+
+		return $result;
 	}
 }

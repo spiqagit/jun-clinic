@@ -1,12 +1,13 @@
 <?php
 namespace AIOSEO\Plugin\Common\Main;
 
-use AIOSEO\Plugin\Common\Models;
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+use AIOSEO\Plugin\Common\Models;
+use AIOSEO\Plugin\Common\Integrations\BuddyPress as BuddyPressIntegration;
 
 /**
  * Abstract class that Pro and Lite both extend.
@@ -54,11 +55,11 @@ abstract class Filters {
 		add_filter( 'genesis_detect_seo_plugins', [ $this, 'genesisTheme' ] );
 
 		// WeGlot compatibility.
-		if ( isset( $_SERVER['REQUEST_URI'] ) && preg_match( '#(/default-sitemap\.xsl)$#i', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) ) {
+		if ( isset( $_SERVER['REQUEST_URI'] ) && preg_match( '#(/default-sitemap\.xsl)$#i', (string) sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) ) {
 			add_filter( 'weglot_active_translation_before_treat_page', '__return_false' );
 		}
 
-		if ( isset( $_SERVER['REQUEST_URI'] ) && preg_match( '#(\.xml)$#i', sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) ) {
+		if ( isset( $_SERVER['REQUEST_URI'] ) && preg_match( '#(\.xml)$#i', (string) sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) ) ) {
 			add_filter( 'jetpack_boost_should_defer_js', '__return_false' );
 		}
 
@@ -112,8 +113,9 @@ abstract class Filters {
 			if ( empty( $addon->installed ) || empty( $addon->basename ) ) {
 				continue;
 			}
-
-			add_filter( 'wp_consent_api_registered_' . $addon->basename, '__return_true' );
+			if ( isset( $addon->basename ) ) {
+				add_filter( 'wp_consent_api_registered_' . $addon->basename, '__return_true' );
+			}
 		}
 	}
 
@@ -125,8 +127,8 @@ abstract class Filters {
 	 * @return void
 	 */
 	public function removeEmojiDetectionScripts() {
-		global $wp_version;
-		if ( version_compare( $wp_version, '6.2', '>=' ) ) {
+		global $wp_version; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+		if ( version_compare( $wp_version, '6.2', '>=' ) ) { // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 			remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 		}
 	}
@@ -135,6 +137,7 @@ abstract class Filters {
 	 * Resets the current user if bbPress is active.
 	 * We have to do this because our calls to wp_get_current_user() set the current user early and this breaks core functionality in bbPress.
 	 *
+
 	 *
 	 * @since 4.1.5
 	 *
@@ -142,14 +145,15 @@ abstract class Filters {
 	 */
 	public function resetUserBBPress() {
 		if ( function_exists( 'bbpress' ) ) {
-			global $current_user;
-			$current_user = null;
+			global $current_user; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+			$current_user = null; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 		}
 	}
 
 	/**
 	 * Removes the bbPress title filter when adding a new reply with empty title to avoid fatal error.
 	 *
+
 	 *
 	 * @since 4.3.1
 	 *
@@ -401,7 +405,37 @@ abstract class Filters {
 			'elementor_library',
 			'redirect_rule', // Safe Redirect Manager
 			'seedprod',
-			'tcb_lightbox'
+			'tcb_lightbox',
+
+			// Thrive Themes internal post types.
+			'tva_module',
+			'tvo_display',
+			'tvo_capture',
+			'tva_module',
+			'tve_lead_1c_signup',
+			'tve_form_type',
+			'tvd_login_edit',
+			'tve_global_cond_set',
+			'tve_cond_display',
+			'tve_lead_2s_lightbox',
+			'tcb_symbol',
+			'td_nm_notification',
+			'tvd_content_set',
+			'tve_saved_lp',
+			'tve_notifications',
+			'tve_user_template',
+			'tve_video_data',
+			'tva_course_type',
+			'tva-acc-restriction',
+			'tva_course_overview',
+			'tve_ult_schedule',
+			'tqb_optin',
+			'tqb_splash',
+			'tva_certificate',
+			'tva_course_overview',
+
+			// BuddyPress post types.
+			BuddyPressIntegration::getEmailCptSlug()
 		];
 
 		foreach ( $postTypes as $index => $postType ) {
@@ -427,15 +461,13 @@ abstract class Filters {
 	 * @return array[object]|array[string]             The filtered taxonomies.
 	 */
 	public function removeInvalidPublicTaxonomies( $taxonomies ) {
-		// Check if the Avada Builder plugin is enabled.
-		if ( ! defined( 'FUSION_BUILDER_VERSION' ) ) {
-			return $taxonomies;
-		}
-
 		$taxonomiesToRemove = [
 			'fusion_tb_category',
 			'element_category',
-			'template_category'
+			'template_category',
+
+			// Thrive Themes internal taxonomies.
+			'tcb_symbols_tax'
 		];
 
 		foreach ( $taxonomies as $index => $taxonomy ) {

@@ -223,6 +223,14 @@ class Wizard {
 					if ( ! empty( $urls['wordPressUrl'] ) ) {
 						$options->social->profiles->urls->wordPressUrl = $urls['wordPressUrl'];
 					}
+
+					if ( ! empty( $urls['blueskyUrl'] ) ) {
+						$options->social->profiles->urls->blueskyUrl = $urls['blueskyUrl'];
+					}
+
+					if ( ! empty( $urls['threadsUrl'] ) ) {
+						$options->social->profiles->urls->threadsUrl = $urls['threadsUrl'];
+					}
 				}
 			}
 
@@ -234,6 +242,10 @@ class Wizard {
 		// Save the features section.
 		if ( 'features' === $section && ! empty( $wizard['features'] ) ) {
 			self::installPlugins( $wizard['features'], $network );
+
+			if ( in_array( 'email-reports', $wizard['features'], true ) ) {
+				$options->advanced->emailSummary->enable = true;
+			}
 		}
 
 		// Save the search appearance section.
@@ -291,6 +303,10 @@ class Wizard {
 
 			if ( isset( $searchAppearance['redirectAttachmentPages'] ) && $dynamicOptions->searchAppearance->postTypes->has( 'attachment' ) ) {
 				$dynamicOptions->searchAppearance->postTypes->attachment->redirectAttachmentUrls = $searchAppearance['redirectAttachmentPages'] ? 'attachment' : 'disabled';
+			}
+
+			if ( isset( $searchAppearance['emailReports'] ) ) {
+				$options->advanced->emailSummary->enable = $searchAppearance['emailReports'];
 			}
 		}
 

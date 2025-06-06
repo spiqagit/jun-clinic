@@ -49,13 +49,20 @@ trait WpContext {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @return int|null The home page ID.
+	 * @return int|false The home page ID.
 	 */
 	public function getHomePageId() {
+		static $homeId = null;
+		if ( null !== $homeId ) {
+			return $homeId;
+		}
+
 		$pageShowOnFront = ( 'page' === get_option( 'show_on_front' ) );
 		$pageOnFrontId   = get_option( 'page_on_front' );
 
-		return $pageShowOnFront && $pageOnFrontId ? (int) $pageOnFrontId : null;
+		$homeId = $pageShowOnFront && $pageOnFrontId ? (int) $pageOnFrontId : false;
+
+		return $homeId;
 	}
 
 	/**
@@ -215,6 +222,7 @@ trait WpContext {
 		$postId = apply_filters( 'aioseo_get_post_id', $postId );
 
 		// We need to check these conditions and cannot always return get_post() because we'll return the first post on archive pages (dynamic homepage, term pages, etc.).
+
 		if (
 			$this->isScreenBase( 'post' ) ||
 			$postId ||
@@ -224,6 +232,33 @@ trait WpContext {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Returns the term object for the given ID or the one from the main query.
+	 *
+	 * @since 4.7.8
+	 *
+	 * @param  int    $termId   The term ID.
+	 * @param  string $taxonomy The taxonomy.
+	 * @return \WP_Term         The term object.
+	 */
+	public function getTerm( $termId = 0, $taxonomy = '' ) {
+		$term = null;
+		if ( $termId ) {
+			$term = get_term( $termId, $taxonomy );
+		} else {
+			$term = get_queried_object();
+		}
+
+		// If the term is a Product Attribute, set its parent taxonomy to our fake
+		// "product_attributes" taxonomy so we can use the default settings.
+		if ( is_a( $term, 'WP_Term' ) && $this->isWooCommerceProductAttribute( $term->taxonomy ) ) {
+			$term           = clone $term;
+			$term->taxonomy = 'product_attributes';
+		}
+
+		return $term;
 	}
 
 	/**
@@ -315,8 +350,8 @@ trait WpContext {
 
 		// Because do_blocks() and do_shortcodes() can trigger conflicts, we need to clone these objects and restore them afterwards.
 		// We need to clone deep to sever pointers/references because these have nested object properties.
-		global $wp_query, $post;
-		$this->originalQuery = $this->deepClone( $wp_query );
+		global $wp_query, $post; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+		$this->originalQuery = $this->deepClone( $wp_query ); // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 		$this->originalPost  = is_a( $post, 'WP_Post' ) ? $this->deepClone( $post ) : null;
 
 		// The order of the function calls below is intentional and should NOT change.
@@ -378,7 +413,7 @@ trait WpContext {
 		$acfFields = $this->getAcfContent( $post );
 		foreach ( $keys as $key ) {
 			// Try ACF.
-			if ( isset( $acfFields[ $key ] ) ) {
+			if ( isset( $acfFields[ $key ] ) && is_scalar( $acfFields[ $key ] ) ) {
 				$customFieldContent .= "$acfFields[$key] ";
 				continue;
 			}
@@ -490,7 +525,7 @@ trait WpContext {
 	 */
 	public function getTruSeoEligiblePostTypes() {
 		$allowedPostTypes  = aioseo()->helpers->getPublicPostTypes( true );
-		$excludedPostTypes = [ 'attachment', 'aioseo-location' ];
+		$excludedPostTypes = [ 'attachment', 'aioseo-location', 'web-story' ];
 		if ( class_exists( 'bbPress' ) ) {
 			$excludedPostTypes = array_merge( $excludedPostTypes, [ 'forum', 'topic', 'reply' ] );
 		}
@@ -548,11 +583,11 @@ trait WpContext {
 	public function getCommentPageNumber() {
 		$cpage = get_query_var( 'cpage', null );
 		if ( $this->isBlockTheme() ) {
-			global $wp_query;
+			global $wp_query; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 
 			// For block themes we can't rely on `get_query_var()` because of {@see build_comment_query_vars_from_block()},
 			// so we need to check the query directly.
-			$cpage = $wp_query->query['cpage'] ?? null;
+			$cpage = $wp_query->query['cpage'] ?? null; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 		}
 
 		return isset( $cpage ) ? (int) $cpage : false;
@@ -611,7 +646,7 @@ trait WpContext {
 	public function isValidAttachment( $url ) {
 		$uploadDirUrl = aioseo()->helpers->escapeRegex( $this->getWpContentUrl() );
 
-		return preg_match( "/$uploadDirUrl.*/", $url );
+		return preg_match( "/$uploadDirUrl.*/", (string) $url );
 	}
 
 	/**
@@ -685,9 +720,9 @@ trait WpContext {
 			return true;
 		}
 
-		global $wp_rewrite;
+		global $wp_rewrite; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 
-		if ( empty( $wp_rewrite ) ) {
+		if ( empty( $wp_rewrite ) ) { // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 			return false;
 		}
 
@@ -708,7 +743,7 @@ trait WpContext {
 	 *
 	 * @since 4.1.3
 	 *
-	 * @return bool Wether the request is an AJAX, CRON or REST request.
+	 * @return bool Whether the request is an AJAX, CRON or REST request.
 	 */
 	public function isAjaxCronRestRequest() {
 		return wp_doing_ajax() || wp_doing_cron() || $this->isRestApiRequest();
@@ -853,7 +888,7 @@ trait WpContext {
 	public function isWpLoginPage() {
 		// We can't sanitize the filename using sanitize_file_name() here because it will cause issues with custom login pages and certain plugins/themes where this function is not defined.
 		$self = ! empty( $_SERVER['PHP_SELF'] ) ? sanitize_text_field( wp_unslash( $_SERVER['PHP_SELF'] ) ) : ''; // phpcs:ignore HM.Security.ValidatedSanitizedInput.InputNotSanitized
-		if ( preg_match( '/wp-login\.php$|wp-register\.php$/', $self ) ) {
+		if ( preg_match( '/wp-login\.php$|wp-register\.php$/', (string) $self ) ) {
 			return true;
 		}
 
@@ -918,7 +953,7 @@ trait WpContext {
 	 */
 	public function setWpQueryPost( $wpPost ) {
 		$wpPost = is_a( $wpPost, 'WP_Post' ) ? $wpPost : get_post( $wpPost );
-
+		// phpcs:disable Squiz.NamingConventions.ValidVariableName
 		global $wp_query, $post;
 		$this->originalQuery = $this->deepClone( $wp_query );
 		$this->originalPost  = is_a( $post, 'WP_Post' ) ? $this->deepClone( $post ) : null;
@@ -934,6 +969,7 @@ trait WpContext {
 		if ( 'page' === $wpPost->post_type ) {
 			$wp_query->is_page = true;
 		}
+		// phpcs:enable Squiz.NamingConventions.ValidVariableName
 
 		$post = $wpPost;
 	}
@@ -946,13 +982,13 @@ trait WpContext {
 	 * @return void
 	 */
 	public function restoreWpQuery() {
-		global $wp_query, $post;
+		global $wp_query, $post; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 		if ( is_a( $this->originalQuery, 'WP_Query' ) ) {
 			// Loop over all properties and replace the ones that have changed.
 			// We want to avoid replacing the entire object because it can cause issues with other plugins.
 			foreach ( $this->originalQuery as $key => $value ) {
-				if ( $value !== $wp_query->{$key} ) {
-					$wp_query->{$key} = $value;
+				if ( $value !== $wp_query->{$key} ) { // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+					$wp_query->{$key} = $value; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 				}
 			}
 		}
@@ -977,9 +1013,9 @@ trait WpContext {
 	 * @return array List of theme features.
 	 */
 	public function getThemeFeatures() {
-		global $_wp_theme_features;
+		global $_wp_theme_features; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 
-		return isset( $_wp_theme_features ) && is_array( $_wp_theme_features ) ? $_wp_theme_features : [];
+		return isset( $_wp_theme_features ) && is_array( $_wp_theme_features ) ? $_wp_theme_features : []; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 	}
 
 	/**

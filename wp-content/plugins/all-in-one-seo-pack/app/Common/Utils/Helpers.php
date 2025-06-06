@@ -16,6 +16,7 @@ use AIOSEO\Plugin\Common\Traits\Helpers as TraitHelpers;
 class Helpers {
 	use TraitHelpers\Api;
 	use TraitHelpers\Arrays;
+	use TraitHelpers\Buffer;
 	use TraitHelpers\Constants;
 	use TraitHelpers\Deprecated;
 	use TraitHelpers\DateTime;
@@ -387,5 +388,18 @@ class Helpers {
 		aioseo()->core->networkCache->update( 'rss_feed', $cached, 24 * HOUR_IN_SECONDS );
 
 		return $cached;
+	}
+
+	/**
+	 * Returns if the admin bar is enabled.
+	 *
+	 * @since 4.8.1
+	 *
+	 * @return bool Whether the admin bar is enabled.
+	 */
+	public function isAdminBarEnabled() {
+		$showAdminBarMenu = aioseo()->options->advanced->adminBarMenu;
+
+		return is_admin_bar_showing() && ( $showAdminBarMenu ?? true );
 	}
 }

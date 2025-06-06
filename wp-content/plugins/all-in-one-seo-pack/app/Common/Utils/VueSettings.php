@@ -86,6 +86,7 @@ class VueSettings {
 			'searchMediaAttachments'       => true,
 			'searchAdvanced'               => true,
 			'searchAdvancedCrawlCleanup'   => true,
+			'searchCleanup'                => true,
 			'authorArchives'               => true,
 			'dateArchives'                 => true,
 			'searchArchives'               => true,
@@ -98,7 +99,6 @@ class VueSettings {
 			'localBusinessMapsApiKey'      => true,
 			'localBusinessMapsSettings'    => true,
 			'robotsEditor'                 => true,
-			'badBotBlocker'                => true,
 			'databaseTools'                => true,
 			'htaccessEditor'               => true,
 			'databaseToolsLogs'            => true,
@@ -118,6 +118,8 @@ class VueSettings {
 			'404Settings'                  => true,
 			'userProfiles'                 => true,
 			'queryArgLogs'                 => true,
+			'writingAssistantSettings'     => true,
+			'writingAssistantCta'          => true
 		],
 		'toggledRadio'    => [
 			'breadcrumbsShowMoreSeparators' => false,
@@ -136,21 +138,25 @@ class VueSettings {
 			'seoAuditChecklist' => 'all-items'
 		],
 		'tablePagination' => [
-			'networkDomains'                     => 20,
-			'redirects'                          => 20,
-			'redirectLogs'                       => 20,
-			'redirect404Logs'                    => 20,
-			'sitemapAdditionalPages'             => 20,
-			'linkAssistantLinksReport'           => 20,
-			'linkAssistantPostsReport'           => 20,
-			'linkAssistantDomainsReport'         => 20,
-			'searchStatisticsSeoStatistics'      => 20,
-			'searchStatisticsKeywordRankings'    => 20,
-			'searchStatisticsContentRankings'    => 20,
-			'searchStatisticsPostDetailKeywords' => 20,
-			'searchStatisticsKeywordRankTracker' => 20,
-			'queryArgs'                          => 20
-		]
+			'networkDomains'                         => 20,
+			'redirects'                              => 20,
+			'redirectLogs'                           => 20,
+			'redirect404Logs'                        => 20,
+			'sitemapAdditionalPages'                 => 20,
+			'linkAssistantLinksReport'               => 20,
+			'linkAssistantPostsReport'               => 20,
+			'linkAssistantDomainsReport'             => 20,
+			'searchStatisticsSeoStatistics'          => 20,
+			'searchStatisticsKeywordRankings'        => 20,
+			'searchStatisticsContentRankings'        => 20,
+			'searchStatisticsPostDetailKeywords'     => 20,
+			'searchStatisticsKrtKeywords'            => 20,
+			'searchStatisticsKrtGroups'              => 20,
+			'searchStatisticsKrtGroupsTableKeywords' => 10,
+			'searchStatisticsIndexStatus'            => 20,
+			'queryArgs'                              => 20
+		],
+		'semrushCountry'  => 'US'
 	];
 
 	/**
@@ -179,7 +185,7 @@ class VueSettings {
 	 * @return void
 	 */
 	private function addDynamicDefaults() {
-		$postTypes = aioseo()->helpers->getPublicPostTypes( false, false, true );
+		$postTypes = aioseo()->helpers->getPublicPostTypes( false, false, true, [ 'include' => [ 'buddypress' ] ] );
 		foreach ( $postTypes as $postType ) {
 			$this->defaults['toggledCards'][ $postType['name'] . 'SA' ] = true;
 			$this->defaults['internalTabs'][ $postType['name'] . 'SA' ] = 'title-description';
@@ -191,7 +197,7 @@ class VueSettings {
 			$this->defaults['internalTabs'][ $taxonomy['name'] . 'SA' ] = 'title-description';
 		}
 
-		$postTypes = aioseo()->helpers->getPublicPostTypes( false, true, true );
+		$postTypes = aioseo()->helpers->getPublicPostTypes( false, true, true, [ 'include' => [ 'buddypress' ] ] );
 		foreach ( $postTypes as $postType ) {
 			$this->defaults['toggledCards'][ $postType['name'] . 'ArchiveArchives' ] = true;
 			$this->defaults['internalTabs'][ $postType['name'] . 'ArchiveArchives' ] = 'title-description';

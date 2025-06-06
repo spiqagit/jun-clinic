@@ -56,6 +56,15 @@ namespace AIOSEO\Plugin\Common\Breadcrumbs {
 		public $breadcrumbs;
 
 		/**
+		 * Array of options to override.
+		 *
+		 * @since 4.8.3
+		 *
+		 * @var array An array of options to override.
+		 */
+		protected $override = [];
+
+		/**
 		 * Breadcrumbs constructor.
 		 *
 		 * @since 4.1.1
@@ -101,11 +110,11 @@ namespace AIOSEO\Plugin\Common\Breadcrumbs {
 		 *
 		 * @since 4.1.1
 		 *
-		 * @param  string $type       The type of breadcrumb ( post, single, page, category, tag, taxonomy, postTypeArchive, date,
-		 *                            author, search, notFound, blog ).
-		 * @param  mixed  $reference  The reference can be an object ( WP_Post | WP_Term | WP_Post_Type | WP_User ), an array, an int or a string.
-		 * @param  array  $paged      A reference for a paged crumb.
-		 * @return array              An array of breadcrumbs with their label, link, type and reference.
+		 * @param  string $type      The type of breadcrumb ( post, single, page, category, tag, taxonomy, postTypeArchive, date,
+		 *                           author, search, notFound, blog ).
+		 * @param  mixed  $reference The reference can be an object ( WP_Post | WP_Term | WP_Post_Type | WP_User ), an array, an int or a string.
+		 * @param  array  $paged     A reference for a paged crumb.
+		 * @return array             An array of breadcrumbs with their label, link, type and reference.
 		 */
 		public function buildBreadcrumbs( $type, $reference, $paged = [] ) {
 			// Clear the breadcrumb array and build a new one.
@@ -171,6 +180,9 @@ namespace AIOSEO\Plugin\Common\Breadcrumbs {
 					$this->addCrumbs( $this->getPostTaxonomyCrumbs( $reference ) );
 					$this->addCrumbs( $this->getPostParentCrumbs( $reference ) );
 					$this->addCrumbs( $this->getPostCrumb( $reference ) );
+					break;
+				case 'buddypress':
+					$this->addCrumbs( aioseo()->standalone->buddyPress->component->getCrumbs() );
 					break;
 			}
 
@@ -363,7 +375,7 @@ namespace AIOSEO\Plugin\Common\Breadcrumbs {
 			$termHierarchy = $this->getTermHierarchy( $term->term_id, $term->taxonomy );
 			if ( ! empty( $termHierarchy ) ) {
 				foreach ( $termHierarchy as $parentTermId ) {
-					$parentTerm = get_term( $parentTermId, $term->taxonomy );
+					$parentTerm = aioseo()->helpers->getTerm( $parentTermId, $term->taxonomy );
 					$crumbs[]   = $this->getTermTaxonomyCrumb( $parentTerm, 'parent' );
 				}
 			}
@@ -422,6 +434,11 @@ namespace AIOSEO\Plugin\Common\Breadcrumbs {
 		public function getPostTaxonomyCrumbs( $post, $taxonomy = null ) {
 			$crumbs = [];
 
+			$overrideTaxonomy = $this->getOverride( 'taxonomy' );
+			if ( ! empty( $overrideTaxonomy ) ) {
+				$taxonomy = $overrideTaxonomy;
+			}
+
 			if ( $taxonomy && ! is_array( $taxonomy ) ) {
 				$taxonomy = [ $taxonomy ];
 			}
@@ -429,7 +446,7 @@ namespace AIOSEO\Plugin\Common\Breadcrumbs {
 			$termHierarchy = $this->getPostTaxTermHierarchy( $post, $taxonomy );
 			if ( ! empty( $termHierarchy['terms'] ) ) {
 				foreach ( $termHierarchy['terms'] as $termId ) {
-					$term     = get_term( $termId, $termHierarchy['taxonomy'] );
+					$term     = aioseo()->helpers->getTerm( $termId, $termHierarchy['taxonomy'] );
 					$crumbs[] = $this->makeCrumb( $term->name, get_term_link( $term, $termHierarchy['taxonomy'] ), 'taxonomy', $term, 'parent' );
 				}
 			}
@@ -459,6 +476,7 @@ namespace AIOSEO\Plugin\Common\Breadcrumbs {
 					if ( aioseo()->helpers->getHomePageId() === $parentID ) {
 						continue;
 					}
+
 					$crumbs[] = $this->getPostCrumb( get_post( $parentID ), $type, 'parent' );
 				}
 			}
@@ -611,8 +629,16 @@ namespace AIOSEO\Plugin\Common\Breadcrumbs {
 			}
 
 			foreach ( $taxonomies as $taxonomy ) {
-				$primaryTerm = aioseo()->standalone->primaryTerm->getPrimaryTerm( $post->ID, $taxonomy );
-				$terms       = wp_get_object_terms( $post->ID, $taxonomy );
+				$primaryTerm         = aioseo()->standalone->primaryTerm->getPrimaryTerm( $post->ID, $taxonomy );
+				$overridePrimaryTerm = $this->getOverride( 'primaryTerm' );
+				if ( ! empty( $overridePrimaryTerm ) ) {
+					$primaryTerm = ! is_a( $overridePrimaryTerm, 'WP_Term' ) ? get_term( $overridePrimaryTerm, $taxonomy ) : $overridePrimaryTerm;
+				}
+
+				$terms = wp_get_object_terms( $post->ID, $taxonomy, [
+					'orderby' => 'term_id',
+					'order'   => 'ASC',
+				] );
 				// Use the first taxonomy with terms.
 				if ( empty( $terms ) || is_wp_error( $terms ) ) {
 					continue;
@@ -712,6 +738,36 @@ namespace AIOSEO\Plugin\Common\Breadcrumbs {
 			if ( aioseo()->helpers->canRegisterLegacyWidget( 'aioseo-breadcrumb-widget' ) ) {
 				register_widget( 'AIOSEO\Plugin\Common\Breadcrumbs\Widget' );
 			}
+		}
+
+		/**
+		 * Setter for the override property.
+		 *
+		 * @since 4.8.3
+		 *
+		 * @param  array $toOverride Array containing data to override.
+		 * @return void
+		 */
+		public function setOverride( $toOverride = [] ) {
+			$this->override = $toOverride;
+		}
+
+		/**
+		 * Getter for the override property.
+		 *
+		 * @since 4.8.3
+		 *
+		 * @param  string $optionName Optional. The specific option name to retrieve.
+		 * @return array              Array containing data to override.
+		 */
+		public function getOverride( $optionName = null ) {
+			if ( empty( $this->override ) ) {
+				return $optionName ? null : [];
+			}
+
+			$value = $this->override[ $optionName ] ?? null;
+
+			return $optionName ? $value : $this->override;
 		}
 	}
 }

@@ -27,22 +27,22 @@ if ( class_exists( 'ActionScheduler_QueueRunner' ) ) {
 	ActionScheduler_QueueRunner::instance()->unhook_dispatch_async_request();
 }
 
-// Drop our custom tables.
-aioseo()->core->uninstallDb();
+// Drop our custom tables and data.
+aioseo()->uninstall->dropData();
 
 // Remove translation files.
-global $wp_filesystem;
-$languages_directory = defined( 'WP_LANG_DIR' ) ? trailingslashit( WP_LANG_DIR ) : trailingslashit( WP_CONTENT_DIR ) . 'languages/';
-$translations        = glob( wp_normalize_path( $languages_directory . 'plugins/aioseo-*' ) );
+global $wp_filesystem; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+$languages_directory = defined( 'WP_LANG_DIR' ) ? trailingslashit( WP_LANG_DIR ) : trailingslashit( WP_CONTENT_DIR ) . 'languages/'; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
+$translations        = glob( wp_normalize_path( $languages_directory . 'plugins/aioseo-*' ) ); // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 if ( ! empty( $translations ) ) {
 	foreach ( $translations as $file ) {
-		$wp_filesystem->delete( $file );
+		$wp_filesystem->delete( $file ); // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 	}
 }
 
-$translations = glob( wp_normalize_path( $languages_directory . 'plugins/all-in-one-seo-*' ) );
+$translations = glob( wp_normalize_path( $languages_directory . 'plugins/all-in-one-seo-*' ) ); // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 if ( ! empty( $translations ) ) {
 	foreach ( $translations as $file ) {
-		$wp_filesystem->delete( $file );
+		$wp_filesystem->delete( $file ); // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 	}
 }

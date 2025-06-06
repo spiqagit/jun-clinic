@@ -62,7 +62,6 @@ class GeneralSettings {
 			'aiosp_schema_person_manual_name'  => [ 'type' => 'string', 'newOption' => [ 'searchAppearance', 'global', 'schema', 'personName' ] ],
 			'aiosp_schema_organization_logo'   => [ 'type' => 'string', 'newOption' => [ 'searchAppearance', 'global', 'schema', 'organizationLogo' ] ],
 			'aiosp_schema_person_manual_image' => [ 'type' => 'string', 'newOption' => [ 'searchAppearance', 'global', 'schema', 'personLogo' ] ],
-			'aiosp_schema_search_results_page' => [ 'type' => 'boolean', 'newOption' => [ 'searchAppearance', 'advanced', 'sitelinks' ] ],
 			'aiosp_togglekeywords'             => [ 'type' => 'boolean', 'newOption' => [ 'searchAppearance', 'advanced', 'useKeywords' ] ],
 			'aiosp_use_categories'             => [ 'type' => 'boolean', 'newOption' => [ 'searchAppearance', 'advanced', 'useCategoriesForMetaKeywords' ] ],
 			'aiosp_use_tags_as_keywords'       => [ 'type' => 'boolean', 'newOption' => [ 'searchAppearance', 'advanced', 'useTagsForMetaKeywords' ] ],
@@ -397,7 +396,7 @@ class GeneralSettings {
 		foreach ( $this->oldOptions as $name => $value ) {
 			if (
 				! in_array( $name, array_keys( $settings ), true ) &&
-				preg_match( '#aiosp_(.*)_title_format#', $name, $slug )
+				preg_match( '#aiosp_(.*)_title_format#', (string) $name, $slug )
 			) {
 				if ( empty( $slug[1] ) ) {
 					continue;
@@ -475,7 +474,7 @@ class GeneralSettings {
 			empty( $this->oldOptions['aiosp_skip_excerpt'] )
 		) {
 			foreach ( aioseo()->helpers->getPublicPostTypes() as $postType ) {
-				if ( empty( $postType['hasExcerpt'] ) ) {
+				if ( empty( $postType['supports']['excerpt'] ) ) {
 					continue;
 				}
 
@@ -650,13 +649,15 @@ class GeneralSettings {
 			'wikipedia.org'  => 'wikipediaUrl',
 			'myspace.com'    => 'myspaceUrl',
 			'wordpress.org'  => 'wordpressUrl',
+			'bsky.app'       => 'blueskyUrl',
+			'threads.net'    => 'threadsUrl'
 		];
 
 		$found = false;
 		foreach ( $supportedNetworks as $url => $settingName ) {
 			$url = aioseo()->helpers->escapeRegex( $url );
 			foreach ( $socialUrls as $socialUrl ) {
-				if ( preg_match( "/.*$url.*/", $socialUrl ) ) {
+				if ( preg_match( "/.*$url.*/", (string) $socialUrl ) ) {
 					aioseo()->options->social->profiles->urls->$settingName = esc_url( wp_strip_all_tags( $socialUrl ) );
 					$found = true;
 				}
@@ -710,7 +711,7 @@ class GeneralSettings {
 		}
 
 		$phoneNumber = aioseo()->helpers->sanitizeOption( $this->oldOptions['aiosp_schema_phone_number'] );
-		if ( ! preg_match( '#\+\d+#', $phoneNumber ) ) {
+		if ( ! preg_match( '#\+\d+#', (string) $phoneNumber ) ) {
 			$notification = Models\Notification::getNotificationByName( 'v3-migration-schema-number' );
 			if ( $notification->notification_name ) {
 				return;

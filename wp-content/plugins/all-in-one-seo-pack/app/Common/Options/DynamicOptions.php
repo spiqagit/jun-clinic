@@ -1,12 +1,12 @@
 <?php
 namespace AIOSEO\Plugin\Common\Options;
 
-use AIOSEO\Plugin\Common\Traits;
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+use AIOSEO\Plugin\Common\Traits;
 
 /**
  * Handles the dynamic options.
@@ -92,10 +92,6 @@ class DynamicOptions {
 			$this->addValueToValuesArray( $this->defaultsMerged, $dbOptions )
 		);
 
-		// Remove any post types/taxonomies that are stored in the DB but that aren't active currently.
-		// We only have to do this for the dynamic options.
-		$dbOptions = $this->filterOptions( $this->defaultsMerged, $dbOptions );
-
 		aioseo()->core->optionsCache->setOptions( $this->optionsName, $dbOptions );
 
 		// Get the localized options.
@@ -170,14 +166,20 @@ class DynamicOptions {
 	 * @return void
 	 */
 	protected function addDynamicPostTypeDefaults() {
-		$postTypes = aioseo()->helpers->getPublicPostTypes();
+		$postTypes = aioseo()->helpers->getPublicPostTypes( false, false, false, [ 'include' => [ 'buddypress' ] ] );
 		foreach ( $postTypes as $postType ) {
 			if ( 'type' === $postType['name'] ) {
 				$postType['name'] = '_aioseo_type';
 			}
 
-			$defaultTitle       = '#post_title #separator_sa #site_title';
-			$defaultDescription = $postType['hasExcerpt'] ? '#post_excerpt' : '#post_content';
+			$defaultTitle = '#post_title #separator_sa #site_title';
+			if ( ! empty( $postType['defaultTitle'] ) ) {
+				$defaultTitle = $postType['defaultTitle'];
+			}
+			$defaultDescription = ! empty( $postType['supports']['excerpt'] ) ? '#post_excerpt' : '#post_content';
+			if ( ! empty( $postType['defaultDescription'] ) ) {
+				$defaultDescription = $postType['defaultDescription'];
+			}
 			$defaultSchemaType  = 'WebPage';
 			$defaultWebPageType = 'WebPage';
 			$defaultArticleType = 'BlogPosting';
@@ -197,6 +199,10 @@ class DynamicOptions {
 					break;
 				case 'news':
 					$defaultArticleType = 'NewsArticle';
+					break;
+				case 'web-story':
+					$defaultWebPageType = 'WebPage';
+					$defaultSchemaType  = 'WebPage';
 					break;
 				default:
 					break;
@@ -294,7 +300,7 @@ class DynamicOptions {
 	 * @return void
 	 */
 	protected function addDynamicArchiveDefaults() {
-		$postTypes = aioseo()->helpers->getPublicPostTypes( false, true );
+		$postTypes = aioseo()->helpers->getPublicPostTypes( false, true, false, [ 'include' => [ 'buddypress' ] ] );
 		foreach ( $postTypes as $postType ) {
 			if ( 'type' === $postType['name'] ) {
 				$postType['name'] = '_aioseo_type';
