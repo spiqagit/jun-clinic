@@ -27,6 +27,14 @@ wp-content/backup-db/
 wp-content/cache/
 wp-content/backups/
 
+# WordPress plugins
+wp-content/plugins/akismet/
+wp-content/plugins/all-in-one-seo-pack/
+wp-content/plugins/all-in-one-wp-migration/
+wp-content/plugins/easy-table-of-contents/
+wp-content/plugins/ewww-image-optimizer/
+wp-content/plugins/advanced-custom-fields-pro/
+
 # IDE files
 .idea/
 .vscode/
