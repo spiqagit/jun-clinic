@@ -40,6 +40,7 @@ class Post extends Model {
 		'options',
 		'local_seo',
 		'primary_term',
+		'breadcrumb_settings',
 		'og_article_tags'
 	];
 
@@ -246,12 +247,21 @@ class Post extends Model {
 			// If the graph has an old rating value, we need to migrate it to the review.
 			if (
 				property_exists( $graph, 'id' ) &&
-				preg_match( '/(movie|software-application)/', $graph->id ) &&
+				preg_match( '/(movie|software-application)/', (string) $graph->id ) &&
 				property_exists( $graph->properties, 'rating' ) &&
 				property_exists( $graph->properties->rating, 'value' )
 			) {
 				$graph->properties->review->rating = $graph->properties->rating->value;
 				unset( $graph->properties->rating->value );
+			}
+
+			// If the graph has audience data, we need to migrate it to the correct one.
+			if (
+				property_exists( $graph, 'id' ) &&
+				preg_match( '/(product|product-review)/', $graph->id ) &&
+				property_exists( $graph->properties, 'audience' )
+			) {
+				$graph->properties->audience = self::migratePostAudienceAgeSchema( $graph->properties->audience );
 			}
 		}
 
@@ -335,8 +345,8 @@ class Post extends Model {
 	 * @return array          The data.
 	 */
 	private static function checkForDefaultFormat( $postId, $thePost, $data ) {
-		$data['title']       = trim( $data['title'] );
-		$data['description'] = trim( $data['description'] );
+		$data['title']       = trim( (string) $data['title'] );
+		$data['description'] = trim( (string) $data['description'] );
 
 		$post                     = aioseo()->helpers->getPost( $postId );
 		$defaultTitleFormat       = trim( aioseo()->meta->title->getPostTypeTitle( $post->post_type ) );
@@ -438,7 +448,7 @@ class Post extends Model {
 		$thePost->post_id                     = $postId;
 		$thePost->title                       = ! empty( $data['title'] ) ? sanitize_text_field( $data['title'] ) : null;
 		$thePost->description                 = ! empty( $data['description'] ) ? sanitize_text_field( $data['description'] ) : null;
-		$thePost->canonical_url               = ! empty( $data['canonicalUrl'] ) ? esc_url_raw( $data['canonicalUrl'] ) : null;
+		$thePost->canonical_url               = ! empty( $data['canonicalUrl'] ) ? sanitize_text_field( $data['canonicalUrl'] ) : null;
 		$thePost->keywords                    = ! empty( $data['keywords'] ) ? aioseo()->helpers->sanitize( $data['keywords'] ) : null;
 		$thePost->pillar_content              = isset( $data['pillar_content'] ) ? rest_sanitize_boolean( $data['pillar_content'] ) : 0;
 		// TruSEO
@@ -489,6 +499,7 @@ class Post extends Model {
 		$thePost->open_ai                     = ! empty( $data['open_ai'] ) ? self::getDefaultOpenAiOptions( $data['open_ai'] ) : null;
 		$thePost->updated                     = gmdate( 'Y-m-d H:i:s' );
 		$thePost->primary_term                = ! empty( $data['primary_term'] ) ? $data['primary_term'] : null;
+		$thePost->breadcrumb_settings         = isset( $data['breadcrumb_settings']['default'] ) && false === $data['breadcrumb_settings']['default'] ? $data['breadcrumb_settings'] : null;
 
 		// Before we determine the OG/Twitter image, we need to set the meta data cache manually because the changes haven't been saved yet.
 		aioseo()->meta->metaData->bustPostCache( $thePost->post_id, $thePost );
@@ -576,7 +587,7 @@ class Post extends Model {
 	 * @param  array $data   The data.
 	 * @return void
 	 */
-	private static function updatePostMeta( $postId, $data ) {
+	public static function updatePostMeta( $postId, $data ) {
 		// Update the post meta as well for localization.
 		$keywords      = ! empty( $data['keywords'] ) ? aioseo()->helpers->jsonTagsToCommaSeparatedList( $data['keywords'] ) : [];
 		$ogArticleTags = ! empty( $data['og_article_tags'] ) ? aioseo()->helpers->jsonTagsToCommaSeparatedList( $data['og_article_tags'] ) : [];
@@ -795,7 +806,97 @@ class Post extends Model {
 		return json_decode( wp_json_encode( $existingOptions ) );
 	}
 
-		/**
+	/**
+	 * Returns the default breadcrumb settings options.
+	 *
+	 * @since 4.8.3
+	 *
+	 * @param  array  $postType        The post type.
+	 * @param  array  $existingOptions The existing options.
+	 * @return object                  The default options.
+	 */
+	public static function getDefaultBreadcrumbSettingsOptions( $postType, $existingOptions = [] ) {
+		$default       = aioseo()->dynamicOptions->breadcrumbs->postTypes->$postType->useDefaultTemplate ?? true;
+		$showHomeCrumb = $default ? aioseo()->options->breadcrumbs->homepageLink : aioseo()->dynamicOptions->breadcrumbs->postTypes->$postType->showHomeCrumb ?? true;
+
+		$defaults = [
+			'default'            => true,
+			'separator'          => aioseo()->options->breadcrumbs->separator,
+			'showHomeCrumb'      => $showHomeCrumb ?? true,
+			'showTaxonomyCrumbs' => aioseo()->dynamicOptions->breadcrumbs->postTypes->$postType->showTaxonomyCrumbs ?? true,
+			'showParentCrumbs'   => aioseo()->dynamicOptions->breadcrumbs->postTypes->$postType->showParentCrumbs ?? true,
+			'template'           => aioseo()->helpers->encodeOutputHtml( aioseo()->breadcrumbs->frontend->getDefaultTemplate( 'single' ) ),
+			'parentTemplate'     => aioseo()->helpers->encodeOutputHtml( aioseo()->breadcrumbs->frontend->getDefaultTemplate( 'single' ) ),
+			'taxonomy'           => aioseo()->dynamicOptions->breadcrumbs->postTypes->$postType->taxonomy ?? '',
+			'primaryTerm'        => null
+		];
+
+		if ( empty( $existingOptions ) ) {
+			return json_decode( wp_json_encode( $defaults ) );
+		}
+
+		$existingOptions = json_decode( wp_json_encode( $existingOptions ), true );
+		$existingOptions = array_replace_recursive( $defaults, $existingOptions );
+
+		return json_decode( wp_json_encode( $existingOptions ) );
+	}
+
+	/**
+	 * Migrates the post's audience age schema data when it is loaded.
+	 * Min age: [0 => newborns, 0.25 => infants, 1 => toddlers, 5 => kids, 13 => adults]
+	 * Max age: [0.25 => newborns, 1 => infants, 5 => toddlers, 13 => kids]
+	 *
+	 * @since 4.7.9
+	 *
+	 * @param  object $audience The audience data.
+	 * @return object
+	 */
+	public static function migratePostAudienceAgeSchema( $audience ) {
+		$ages = [ 0, 0.25, 1, 5, 13 ];
+
+		// converts variable to integer if it's a number otherwise is null.
+		$parsedMinAge = filter_var( $audience->minimumAge, FILTER_VALIDATE_FLOAT, FILTER_NULL_ON_FAILURE );
+		$parsedMaxAge = filter_var( $audience->maximumAge, FILTER_VALIDATE_FLOAT, FILTER_NULL_ON_FAILURE );
+
+		if ( null === $parsedMinAge && null === $parsedMaxAge ) {
+			return $audience;
+		}
+
+		$minAge = is_numeric( $parsedMinAge ) ? $parsedMinAge : 0;
+		$maxAge = is_numeric( $parsedMaxAge ) ? $parsedMaxAge : null;
+
+		// get the minimumAge if available or the nearest bigger one.
+		foreach ( $ages as $age ) {
+			if ( $age >= $minAge ) {
+				$audience->minimumAge = $age;
+				break;
+			}
+		}
+
+		// get the maximumAge if available or the nearest bigger one.
+		foreach ( $ages as $age ) {
+			if ( $age >= $maxAge ) {
+				$maxAge = $age;
+				break;
+			}
+		}
+
+		// makes sure the maximumAge is 13 below
+		if ( null !== $maxAge ) {
+			$audience->maximumAge = 13 < $maxAge ? 13 : $maxAge;
+		}
+
+		// Minimum age 13 is for adults.
+		// If minimumAge is still higher or equal 13 then it's for adults and maximumAge should be empty.
+		if ( 13 <= $audience->minimumAge ) {
+			$audience->minimumAge = 13;
+			$audience->maximumAge = null;
+		}
+
+		return $audience;
+	}
+
+	/**
 	 * Migrates update Korea country code for Person, Product, Event, and JobsPosting schemas.
 	 *
 	 * @since 4.7.1

@@ -78,7 +78,7 @@ class SeedProd extends Base {
 	public function isBuilderScreen() {
 		$currentScreen = aioseo()->helpers->getCurrentScreen();
 
-		return $currentScreen && preg_match( '/seedprod.*?_builder$/i', $currentScreen->base );
+		return $currentScreen && preg_match( '/seedprod.*?_builder$/i', (string) $currentScreen->base );
 	}
 
 	/**

@@ -142,6 +142,21 @@ class Root {
 			$indexes[] = $this->buildIndex( 'date', $result[0]->amountOfUrls );
 		}
 
+		if (
+			aioseo()->helpers->isWooCommerceActive() &&
+			in_array( 'product_attributes', aioseo()->sitemap->helpers->includedTaxonomies(), true )
+		) {
+			$productAttributes = aioseo()->sitemap->content->productAttributes( true );
+
+			if ( ! empty( $productAttributes ) ) {
+				$indexes[] = $this->buildIndex( 'product_attributes', $productAttributes );
+			}
+		}
+
+		if ( isset( aioseo()->standalone->buddyPress->sitemap ) ) {
+			$indexes = array_merge( $indexes, aioseo()->standalone->buddyPress->sitemap->indexes() );
+		}
+
 		return apply_filters( 'aioseo_sitemap_indexes', array_filter( $indexes ) );
 	}
 
@@ -333,6 +348,14 @@ class Root {
 			}, $excludedPostIds );
 		}
 
+		if ( 'page' === $postType ) {
+			$isStaticHomepage = 'page' === get_option( 'show_on_front' );
+			if ( $isStaticHomepage ) {
+				$blogPageId = (int) get_option( 'page_for_posts' );
+				$excludedPostIds[] = $blogPageId;
+			}
+		}
+
 		$whereClause         = '';
 		$excludedPostsString = aioseo()->sitemap->helpers->excludedPosts();
 		if ( ! empty( $excludedPostsString ) ) {
@@ -358,6 +381,16 @@ class Root {
 			)";
 		}
 
+		// Include the blog page in the posts post type unless manually excluded.
+		$blogPageId = (int) get_option( 'page_for_posts' );
+		if (
+			$blogPageId &&
+			! in_array( $blogPageId, $excludedPostIds, true ) &&
+			'post' === $postType
+		) {
+			$whereClause .= " OR `p`.`ID` = $blogPageId ";
+		}
+
 		$posts = aioseo()->core->db->execute(
 			aioseo()->core->db->db->prepare(
 				"SELECT ID, post_modified_gmt
@@ -367,7 +400,7 @@ class Root {
 						SELECT p.ID, ap.priority, p.post_modified_gmt
 						FROM {$postsTable} AS p
 						LEFT JOIN {$aioseoPostsTable} AS ap ON p.ID = ap.post_id
-						WHERE p.post_status IN ( 'publish', 'inherit' )
+						WHERE p.post_status = %s
 							AND p.post_type = %s
 							AND p.post_password = ''
 							AND (ap.robots_noindex IS NULL OR ap.robots_default = 1 OR ap.robots_noindex = 0)
@@ -379,6 +412,7 @@ class Root {
 				) AS y
 				WHERE rownum = 1 OR rownum % %d = 1;",
 				[
+					'attachment' === $postType ? 'inherit' : 'publish',
 					$postType,
 					$linksPerIndex
 				]
@@ -391,13 +425,14 @@ class Root {
 				"SELECT COUNT(*) as count
 				FROM {$postsTable} as p
 				LEFT JOIN {$aioseoPostsTable} as ap ON p.ID = ap.post_id
-				WHERE p.post_status IN ( 'publish', 'inherit' )
+				WHERE p.post_status = %s
 					AND p.post_type = %s
 					AND p.post_password = ''
 					AND (ap.robots_noindex IS NULL OR ap.robots_default = 1 OR ap.robots_noindex = 0)
 					{$whereClause}
 				",
 				[
+					'attachment' === $postType ? 'inherit' : 'publish',
 					$postType
 				]
 			),

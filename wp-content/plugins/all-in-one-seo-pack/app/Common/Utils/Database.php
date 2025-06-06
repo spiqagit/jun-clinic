@@ -401,12 +401,12 @@ class Database {
 	 * @return array         An array of custom AIOSEO tables.
 	 */
 	public function getColumns( $table ) {
-		$installedTables = json_decode( aioseo()->internalOptions->database->installedTables, true );
-		$table           = $this->prefix . $table;
-
-		if ( ! isset( $installedTables[ $table ] ) ) {
+		if ( ! $this->tableExists( $table ) ) {
 			return [];
 		}
+
+		$table           = $this->prefix . $table;
+		$installedTables = json_decode( aioseo()->internalOptions->database->installedTables, true );
 
 		if ( empty( $installedTables[ $table ] ) ) {
 			$installedTables[ $table ]                           = $this->db->get_col( 'SHOW COLUMNS FROM `' . $table . '`' );
@@ -426,7 +426,7 @@ class Database {
 	 */
 	public function tableExists( $table ) {
 		$table           = $this->prefix . $table;
-		$installedTables = json_decode( aioseo()->internalOptions->database->installedTables, true ) ?: [];
+		$installedTables = json_decode( aioseo()->internalOptions->database->installedTables ?? '[]', true ) ?: [];
 		if ( isset( $installedTables[ $table ] ) ) {
 			return true;
 		}
@@ -520,12 +520,13 @@ class Database {
 				if ( count( $this->join ) > 0 ) {
 					foreach ( (array) $this->join as $join ) {
 						if ( is_array( $join[1] ) ) {
-							$join_on = [];
+							$join_on = []; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 							foreach ( (array) $join[1] as $left => $right ) {
-								$join_on[] = "$this->table.`$left` = `{$join[0]}`.`$right`";
+								$join_on[] = "$this->table.`$left` = `{$join[0]}`.`$right`"; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 							}
-
+							// phpcs:disable Squiz.NamingConventions.ValidVariableName
 							$clauses[] = "\t" . ( ( 'LEFT' === $join[2] || 'RIGHT' === $join[2] ) ? $join[2] . ' JOIN ' : 'JOIN ' ) . $join[0] . ' ON ' . implode( ' AND ', $join_on );
+							// phpcs:enable Squiz.NamingConventions.ValidVariableName
 						} else {
 							$clauses[] = "\t" . ( ( 'LEFT' === $join[2] || 'RIGHT' === $join[2] ) ? $join[2] . ' JOIN ' : 'JOIN ' ) . "{$join[0]} ON {$join[1]}";
 						}
@@ -586,12 +587,13 @@ class Database {
 				if ( ! empty( $this->join ) && count( $this->join ) > 0 ) {
 					foreach ( (array) $this->join as $join ) {
 						if ( is_array( $join[1] ) ) {
-							$join_on = [];
+							$join_on = []; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 							foreach ( (array) $join[1] as $left => $right ) {
-								$join_on[] = "$this->table.`$left` = `{$join[0]}`.`$right`";
+								$join_on[] = "$this->table.`$left` = `{$join[0]}`.`$right`"; // phpcs:ignore Squiz.NamingConventions.ValidVariableName
 							}
-
+							// phpcs:disable Squiz.NamingConventions.ValidVariableName
 							$clauses[] = "\t" . ( ( 'LEFT' === $join[2] || 'RIGHT' === $join[2] ) ? $join[2] . ' JOIN ' : 'JOIN ' ) . $join[0] . ' ON ' . implode( ' AND ', $join_on );
+							// phpcs:enable Squiz.NamingConventions.ValidVariableName
 						} else {
 							$clauses[] = "\t" . ( ( 'LEFT' === $join[2] || 'RIGHT' === $join[2] ) ? $join[2] . ' JOIN ' : 'JOIN ' ) . "{$join[0]} ON {$join[1]}";
 						}
@@ -622,7 +624,7 @@ class Database {
 				if ( count( $this->order ) > 0 ) {
 					$orderFragments = [];
 					foreach ( $this->escapeColNames( $this->order ) as $col ) {
-						$orderFragments[] = ( preg_match( '/ (ASC|DESC|RAND\(\))$/i', $col ) ) ? $col : "$col $this->orderDirection";
+						$orderFragments[] = ( preg_match( '/ (ASC|DESC|RAND\(\))$/i', (string) $col ) ) ? $col : "$col $this->orderDirection";
 					}
 
 					$clauses[] = 'ORDER BY ' . implode( ', ', $orderFragments );
@@ -642,11 +644,13 @@ class Database {
 		$this->query = str_replace( '%%d = %%d', '%d = %d', str_replace( '%', '%%', implode( "\n", $clauses ) ) );
 
 		// Flag queries with double quotes down, but not if the double quotes are contained within a string value (like JSON).
-		if ( aioseo()->isDev && preg_match( '/\{[^}]*\}(*SKIP)(*FAIL)|\[[^]]*\](*SKIP)(*FAIL)|\'[^\']*\'(*SKIP)(*FAIL)|\\"(*SKIP)(*FAIL)|"/i', $this->query ) ) {
+		if ( aioseo()->isDev && preg_match( '/\{[^}]*\}(*SKIP)(*FAIL)|\[[^]]*\](*SKIP)(*FAIL)|\'[^\']*\'(*SKIP)(*FAIL)|\\"(*SKIP)(*FAIL)|"/i', (string) $this->query ) ) {
+			// phpcs:disable WordPress.PHP.DevelopmentFunctions
 			error_log(
 				"Query with double quotes detected - this may cause isues when ANSI_QUOTES is enabled:\r\n" .
 				$this->query . "\r\n" . wp_debug_backtrace_summary()
 			);
+			// phpcs:enable WordPress.PHP.DevelopmentFunctions
 		}
 
 		$this->lastQuery = $this->query;
@@ -793,7 +797,7 @@ class Database {
 		$criteria = $this->prepArgs( func_get_args() );
 
 		foreach ( (array) $criteria as $field => $value ) {
-			if ( ! preg_match( '/[\(\)<=>!]+/', $field ) && false === stripos( $field, ' IS ' ) ) {
+			if ( ! preg_match( '/[\(\)<=>!]+/', (string) $field ) && false === stripos( $field, ' IS ' ) ) {
 				$operator = ( is_null( $value ) ) ? 'IS' : '=';
 				$escaped  = $this->escapeColNames( $field );
 				$field    = array_pop( $escaped ) . ' ' . $operator;
@@ -857,7 +861,7 @@ class Database {
 
 		$or = [];
 		foreach ( (array) $criteria as $field => $value ) {
-			if ( ! preg_match( '/[\(\)<=>!]+/', $field ) && false === stripos( $field, ' IS ' ) ) {
+			if ( ! preg_match( '/[\(\)<=>!]+/', (string) $field ) && false === stripos( $field, ' IS ' ) ) {
 				$operator = ( is_null( $value ) ) ? 'IS' : '=';
 				$field    = $this->escapeColNames( $field );
 				$field    = array_pop( $field ) . ' ' . $operator;
@@ -1072,11 +1076,11 @@ class Database {
 		return $this;
 	}
 
-
 	/**
 	 * Adds am ORDER BY clause.
 	 *
-	 * @since 4.0.0
+	 * @since   4.0.0
+	 * @version 4.8.2 Hardened against SQL injection.
 	 *
 	 * @return Database Returns the Database class which can be method chained for more query building.
 	 */
@@ -1087,16 +1091,56 @@ class Database {
 			$args = $args[0];
 		}
 
-		// Escape the order by clause.
-		$args = array_map( 'esc_sql', $args );
-
-		if ( ! empty( $args[0] ) && true !== $args[0] ) {
-			$this->order = array_merge( $this->order, $args );
-		} else {
-			// This allows for overwriting a preexisting order-by setting.
-			array_shift( $args );
-			$this->order = $args;
+		$orderBy = [];
+		// Separate commas to account for multiple orders.
+		foreach ( $args as $argComma ) {
+			$orderBy = array_map( 'trim', array_merge( $orderBy, explode( ',', $argComma ) ) );
 		}
+
+		// Validate and sanitize column names and sort directions.
+		$sanitizedOrderBy = [];
+		foreach ( $orderBy as $ordBy ) {
+			$parts     = explode( ' ', $ordBy );
+			$column    = str_replace( '`', '', $parts[0] ); // Strip existing ticks first.
+			$column    = preg_replace( '/[^a-zA-Z0-9_.]/', '', $column ); // Strip invalid characters from the column name.
+			$column    = $this->escapeColNames( $column )[0];
+			$direction = isset( $parts[1] ) ? strtoupper( $parts[1] ) : 'ASC';
+
+			// Validate the order direction.
+			if ( ! in_array( $direction, [ 'ASC', 'DESC' ], true ) ) {
+				$direction = 'ASC';
+			}
+
+			$sanitizedOrderBy[] = "$column $direction";
+		}
+
+		if ( ! empty( $sanitizedOrderBy ) ) {
+			if ( ! empty( $args[0] ) && true !== $args[0] ) {
+				$this->order = array_merge( $this->order, $sanitizedOrderBy );
+			} else {
+				// This allows for overwriting a preexisting order-by setting.
+				array_shift( $sanitizedOrderBy );
+				$this->order = $sanitizedOrderBy;
+			}
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Adds a raw ORDER BY clause.
+	 *
+	 * @since 4.8.2
+	 *
+	 * @return Database Returns the Database class which can be method chained for more query building.
+	 */
+	public function orderByRaw() {
+		$args = (array) func_get_args();
+		if ( count( $args ) === 1 && is_array( $args[0] ) ) {
+			$args = $args[0];
+		}
+
+		$this->order = array_merge( $this->order, $args );
 
 		return $this;
 	}
@@ -1124,12 +1168,18 @@ class Database {
 	 * @param  int      $offset The amount of rows the result of the query should be ofset with.
 	 * @return Database         Returns the Database class which can be method chained for more query building.
 	 */
-	public function limit( $limit = 0, $offset = -1 ) {
-		if ( ! $limit ) {
+	public function limit( $limit, $offset = -1 ) {
+		if ( ! is_numeric( $limit ) || $limit <= 0 ) {
 			return $this;
 		}
 
-		$this->limit = ( -1 === $offset ) ? $limit : "$offset, $limit";
+		if ( ! is_numeric( $offset ) ) {
+			$offset = -1;
+		}
+
+		$this->limit = ( -1 === $offset )
+			? intval( $limit )
+			: intval( $offset ) . ', ' . intval( $limit );
 
 		return $this;
 	}
@@ -1796,5 +1846,42 @@ class Database {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Acquires a database lock with the given name.
+	 *
+	 * @since 4.8.3
+	 *
+	 * @param  string  $lockName The name of the lock to acquire.
+	 * @param  integer $timeout  The timeout in seconds. Default is 0 which means it will return immediately if the lock cannot be acquired.
+	 * @return boolean           Whether the lock was acquired.
+	 */
+	public function acquireLock( $lockName, $timeout = 0 ) {
+		$lockResult = $this->db->get_var( $this->db->prepare( 'SELECT GET_LOCK(%s, %d)', $lockName, $timeout ) );
+		$acquired   = '1' === $lockResult;
+
+		if ( $acquired ) {
+			// Register a shutdown function to always release the lock even if a fatal error occurs.
+			register_shutdown_function( function () use ( $lockName ) {
+				$this->releaseLock( $lockName );
+			} );
+		}
+
+		return $acquired;
+	}
+
+	/**
+	 * Releases a database lock with the given name.
+	 *
+	 * @since 4.8.3
+	 *
+	 * @param  string  $lockName The name of the lock to release.
+	 * @return boolean           Whether the lock was released.
+	 */
+	public function releaseLock( $lockName ) {
+		$releaseResult = $this->db->query( $this->db->prepare( 'SELECT RELEASE_LOCK(%s)', $lockName ) );
+
+		return false !== $releaseResult;
 	}
 }

@@ -102,10 +102,13 @@ trait ThirdParty {
 			return is_shop();
 		}
 
+		// Prevent non-numeric id.
+		$id = is_numeric( $id ) ? (int) $id : 0;
+
 		// phpcs:disable HM.Security.ValidatedSanitizedInput, HM.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Recommended
 		$id = ! $id && ! empty( $_GET['post'] )
 			? (int) sanitize_text_field( wp_unslash( $_GET['post'] ) )
-			: (int) $id;
+			: $id;
 		// phpcs:enable
 
 		return $id && wc_get_page_id( 'shop' ) === $id;
@@ -289,12 +292,12 @@ trait ThirdParty {
 		$url = apply_filters( 'wpml_home_url', home_url( '/' ) );
 
 		// Remove URL parameters.
-		preg_match_all( '/\?[\s\S]+/', $url, $matches );
+		preg_match_all( '/\?[\s\S]+/', (string) $url, $matches );
 
 		// Get the base URL.
-		$url  = preg_replace( '/\?[\s\S]+/', '', $url );
+		$url  = preg_replace( '/\?[\s\S]+/', '', (string) $url );
 		$url  = trailingslashit( $url );
-		$url .= preg_replace( '/\//', '', $path, 1 );
+		$url .= preg_replace( '/\//', '', (string) $path, 1 );
 
 		// Readd URL parameters.
 		if ( $matches && $matches[0] ) {
@@ -391,7 +394,6 @@ trait ThirdParty {
 			'image',
 			'gallery',
 			'link',
-			// 'taxonomy',
 		];
 
 		$types        = wp_parse_args( $types, $allowedTypes );
@@ -418,7 +420,7 @@ trait ThirdParty {
 					$imageUrl = is_array( $field['value'] ) ? $field['value']['url'] : $field['value'];
 					$imageUrl = is_numeric( $imageUrl ) ? wp_get_attachment_image_url( $imageUrl ) : $imageUrl;
 
-					$value = "<img src='$imageUrl' />";
+					$value = "<img src='$imageUrl' />"; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
 					break;
 				case 'gallery':
 					$imageUrl = $field['value'];
@@ -435,7 +437,7 @@ trait ThirdParty {
 					// Image ID format.
 					$imageUrl = is_numeric( $imageUrl ) ? wp_get_attachment_image_url( $imageUrl ) : $imageUrl;
 
-					$value = ! empty( $imageUrl ) ? "<img src='{$imageUrl}' />" : '';
+					$value = ! empty( $imageUrl ) ? "<img src='{$imageUrl}' />" : ''; // phpcs:ignore PluginCheck.CodeAnalysis.ImageFunctions.NonEnqueuedImage
 					break;
 				case 'link':
 					$value = make_clickable( $field['value']['url'] ?? $field['value'] ?? '' );
@@ -451,6 +453,58 @@ trait ThirdParty {
 		}
 
 		return $acfFields;
+	}
+
+	/**
+	 * Retrieves the ACF Flexible Content field value for a given post.
+	 *
+	 * @since 4.7.9
+	 *
+	 * @param  string     $name The name of the field.
+	 * @param  int|object $post The post ID or object.
+	 * @return string           The field value.
+	 */
+	public function getAcfFlexibleContentField( $name, $post ) {
+		$output = '';
+		if ( ! function_exists( 'acf_get_raw_field' ) || ! function_exists( 'acf_get_field' ) ) {
+			return $output;
+		}
+
+		$parentTrace = [];
+		$field       = acf_get_raw_field( $name ) ?? [];
+		while ( ! empty( $field['parent'] ) && ! empty( $field['parent_layout'] ) ) {
+			$parentField   = acf_get_field( $field['parent'] );
+			$parentTrace[] = $parentField['name'] ?? '';
+			$field         = $parentField;
+		}
+
+		$parentTrace = array_filter( $parentTrace );
+		if ( empty( $parentTrace ) ) {
+			return $output;
+		}
+
+		$parentTrace        = array_reverse( $parentTrace );
+		$parentName         = array_shift( $parentTrace );
+		$highestParentField = get_field( $parentName, $post );
+
+		for ( $i = 0; $i <= count( $parentTrace ); $i++ ) {
+			$values = array_filter( array_column( $highestParentField, $name ), 'is_scalar' );
+			if ( $values ) {
+				return implode( ' ', $values );
+			}
+
+			$highestParentField = $highestParentField[0] ?? '';
+			if (
+				! is_array( $highestParentField ) ||
+				! isset( $parentTrace[ $i ] )
+			) {
+				break;
+			}
+
+			$highestParentField = $highestParentField[ $parentTrace[ $i ] ];
+		}
+
+		return $output;
 	}
 
 	/**
@@ -682,7 +736,7 @@ trait ThirdParty {
 		}
 
 		// AMP plugin requires the `wp` action to be called to function properly, otherwise, it will throw warnings.
-		// https://github.com/awesomemotive/aioseo/issues/6056
+
 		if ( did_action( 'wp' ) ) {
 			// Check for the "AMP" plugin.
 			if ( function_exists( 'amp_is_request' ) ) {
@@ -716,10 +770,12 @@ trait ThirdParty {
 	 * @return int|false
 	 */
 	public function getLearnPressLesson() {
+		// phpcs:disable Squiz.NamingConventions.ValidVariableName
 		global $lp_course_item;
 		if ( $lp_course_item && method_exists( $lp_course_item, 'get_id' ) ) {
 			return $lp_course_item->get_id();
 		}
+		// phpcs:enable Squiz.NamingConventions.ValidVariableName
 
 		return false;
 	}
@@ -736,11 +792,12 @@ trait ThirdParty {
 		if ( ! defined( 'ET_BUILDER_VERSION' ) ) {
 			return null;
 		}
-
+		// phpcs:disable Squiz.NamingConventions.ValidVariableName
 		global $et_pb_rendering_column_content;
 
 		$originalValue                  = $et_pb_rendering_column_content;
 		$et_pb_rendering_column_content = $flag;
+		// phpcs:enable Squiz.NamingConventions.ValidVariableName
 
 		return $originalValue;
 	}
@@ -757,6 +814,52 @@ trait ThirdParty {
 			return false;
 		}
 
-		return preg_match( '#.*Yandex.*#', sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) );
+		return preg_match( '#.*Yandex.*#', (string) sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) );
+	}
+
+	/**
+	 * Checks whether the taxonomy is a WooCommerce product attribute.
+	 *
+	 * @since 4.7.8
+	 *
+	 * @param  mixed $taxonomy The taxonomy.
+	 * @return bool            Whether the taxonomy is a WooCommerce product attribute.
+	 */
+	public function isWooCommerceProductAttribute( $taxonomy ) {
+		$name = is_object( $taxonomy )
+			? $taxonomy->name
+			: (
+				is_array( $taxonomy )
+					? $taxonomy['name']
+					: $taxonomy
+			);
+
+		return ! empty( $name ) && 'pa_' === substr( $name, 0, 3 );
+	}
+
+	/**
+	 * Returns whether a plugin is active or not using abstraction.
+	 *
+	 * @since 4.8.1
+	 *
+	 * @param  string $slug The plugin slug.
+	 * @return bool         Whether the plugin is active.
+	 */
+	public function isPluginActive( $slug ) {
+		$mapped = [
+			'buddypress' => 'buddypress/bp-loader.php',
+			'bbpress'    => 'bbpress/bbpress.php',
+			'weglot'     => 'weglot/weglot.php'
+		];
+
+		static $output = [];
+		if ( isset( $output[ $slug ] ) ) {
+			return $output[ $slug ];
+		}
+
+		$mapped[ $slug ] = $mapped[ $slug ] ?? $slug;
+		$output[ $slug ] = function_exists( 'is_plugin_active' ) && is_plugin_active( $mapped[ $slug ] );
+
+		return $output[ $slug ];
 	}
 }

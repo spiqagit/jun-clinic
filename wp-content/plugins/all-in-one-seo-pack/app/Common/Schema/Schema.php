@@ -6,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use AIOSEO\Plugin\Common\Integrations\BuddyPress as BuddyPressIntegration;
+use AIOSEO\Plugin\Common\Integrations\BbPress as BbPressIntegration;
+
 /**
  * Builds our schema.
  *
@@ -81,11 +84,12 @@ class Schema {
 	 * @var array
 	 */
 	public $nullableFields = [
-		'price',       // Needs to be 0 if free for Software Application.
-		'ratingValue', // Needs to be 0 for 0 star ratings.
-		'value',       // Needs to be 0 if free for product shipping details.
-		'minValue',    // Needs to be 0 for product delivery time.
-		'maxValue'     // Needs to be 0 for product delivery time.
+		'price',          // Needs to be 0 if free for Software Application.
+		'ratingValue',    // Needs to be 0 for 0 star ratings.
+		'value',          // Needs to be 0 if free for product shipping details.
+		'minValue',       // Needs to be 0 for product delivery time.
+		'maxValue',       // Needs to be 0 for product delivery time.
+		'suggestedMinAge' // Needs to be 0 for PeopleAudience minimum age.
 	];
 
 	/**
@@ -180,6 +184,7 @@ class Schema {
 
 		// By determining the length of the array after every iteration, we are able to add additional graphs during runtime.
 		// e.g. The Article graph may require a Person graph to be output for the author.
+		$this->graphs = array_values( $this->graphs );
 		for ( $i = 0; $i < count( $this->graphs ); $i++ ) {
 			$namespace = $this->getGraphNamespace( $this->graphs[ $i ] );
 			if ( $namespace ) {
@@ -228,6 +233,18 @@ class Schema {
 		$contextInstance = new Context();
 		$this->context   = $contextInstance->defaults();
 
+		if ( BuddyPressIntegration::isComponentPage() ) {
+			aioseo()->standalone->buddyPress->component->determineSchemaGraphsAndContext( $contextInstance );
+
+			return;
+		}
+
+		if ( BbPressIntegration::isComponentPage() ) {
+			aioseo()->standalone->bbPress->component->determineSchemaGraphsAndContext();
+
+			return;
+		}
+
 		if ( aioseo()->helpers->isDynamicHomePage() ) {
 			$this->graphs[] = 'CollectionPage';
 			$this->context  = $contextInstance->home();
@@ -244,6 +261,10 @@ class Schema {
 
 		if ( is_singular() ) {
 			$this->determineContextSingular( $contextInstance );
+
+			if ( is_singular( 'web-story' ) ) {
+				$this->graphs[] = 'AmpStory';
+			}
 		}
 
 		if ( is_category() || is_tag() || is_tax() ) {
@@ -294,11 +315,6 @@ class Schema {
 	 * @return void
 	 */
 	protected function determineContextSingular( $contextInstance ) {
-		// Check if we're on a BuddyPress member page.
-		if ( function_exists( 'bp_is_user' ) && bp_is_user() ) {
-			$this->graphs[] = 'ProfilePage';
-		}
-
 		// If the current request is for the validator, we can't include the default graph here.
 		// We need to include the default graph that the validator sent.
 		// Don't do this if we're in Pro since we then need to get it from the post meta.

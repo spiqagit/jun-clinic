@@ -326,15 +326,19 @@ add_filter('eztoc_wordpress_final_output', function($content){
    //Device Eligibility
   //@since 2.0.60
 function ez_toc_auto_device_target_status(){
-        $status = true;      
-        if(ezTOC_Option::get( 'device_target' ) == 'mobile'){
+        global $post;
+        $status = true;
+        $global_target = ezTOC_Option::get( 'device_target' );
+        $post_target = get_post_meta( $post->ID, '_ez-toc-device-target', true );
+        $target = $post_target ? $post_target : $global_target;   
+        if($target == 'mobile'){
             if(function_exists('wp_is_mobile') && wp_is_mobile()){                
                 $status = true;      
             }else{                
                 $status = false;      
             }
         }
-        if(ezTOC_Option::get( 'device_target' ) == 'desktop'){
+        if($target == 'desktop'){
             if(function_exists('wp_is_mobile') && wp_is_mobile()){                
                 $status = false;      			
             }else{                
@@ -685,3 +689,29 @@ function ez_toc_link_allow_br_tag( $tags ) {
     return $tags;
     
 }
+
+/**
+ * Truncate headings as per settings
+ * @since 2.0.71
+ * @param $heading
+ * @return string
+ */
+add_filter( 'ez_toc_title', function( $heading ) {
+    $truncate_headings = ezTOC_Option::get( 'truncate_headings' );
+    $truncate_headings_words = ezTOC_Option::get( 'truncate_headings_words' );
+    $truncate_headings_special = ezTOC_Option::get( 'truncate_headings_special' );
+    if ( $truncate_headings ) {
+        if ( $truncate_headings == 'words' && $truncate_headings_words ) {
+            $heading = wp_trim_words( $heading, intval($truncate_headings_words));
+        }else if ( $truncate_headings == 'special' && $truncate_headings_special ) {
+            if ( strpos( $heading, $truncate_headings_special ) !== false ) {
+                $parts = explode( $truncate_headings_special, $heading, 2 );
+                if ( isset( $parts[0] ) && strlen( $parts[0] ) > 0 ) {
+                    $heading = trim( $parts[0] );
+                }
+            }
+        } 
+        
+    }
+    return $heading;
+} );

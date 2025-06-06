@@ -1,12 +1,13 @@
 <?php
 namespace AIOSEO\Plugin\Common\Standalone;
 
-use AIOSEO\Plugin\Common\Models;
-
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
+use AIOSEO\Plugin\Common\Models;
+use AIOSEO\Plugin\Common\Integrations\BuddyPress as BuddyPressIntegration;
 
 /**
  * Handles the SEO Preview feature on the front-end.
@@ -38,6 +39,11 @@ class SeoPreview {
 	 * @since 4.2.8
 	 */
 	public function __construct() {
+		// Allow users to disable SEO Preview.
+		if ( apply_filters( 'aioseo_seo_preview_disable', false ) ) {
+			return;
+		}
+
 		// Hook into `wp` in order to have access to the WP queried object.
 		add_action( 'wp', [ $this, 'init' ], 20 );
 	}
@@ -53,7 +59,7 @@ class SeoPreview {
 	public function init() {
 		if (
 			is_admin() ||
-			! is_admin_bar_showing() ||
+			! aioseo()->helpers->isAdminBarEnabled() ||
 			// If we're seeing the Divi theme Visual Builder.
 			( function_exists( 'et_core_is_fb_enabled' ) && et_core_is_fb_enabled() ) ||
 			aioseo()->helpers->isAmpPage()
@@ -109,9 +115,33 @@ class SeoPreview {
 	 * @return array The data.
 	 */
 	private function getVueData() {
-		$queriedObject = get_queried_object();
-		$templateType  = aioseo()->helpers->getTemplateType();
+		$data = [
+			'editGoogleSnippetUrl'   => '',
+			'editFacebookSnippetUrl' => '',
+			'editTwitterSnippetUrl'  => '',
+			'editObjectBtnText'      => '',
+			'editObjectUrl'          => '',
+			'keyphrases'             => '',
+			'page_analysis'          => '',
+			'urls'                   => [
+				'home'        => home_url(),
+				'domain'      => aioseo()->helpers->getSiteDomain(),
+				'mainSiteUrl' => aioseo()->helpers->getSiteUrl(),
+			],
+			'mainAssetCssQueue'      => aioseo()->core->assets->getJsAssetCssQueue( $this->mainAssetRelativeFilename ),
+			'data'                   => [
+				'isDev'           => aioseo()->helpers->isDev(),
+				'siteName'        => aioseo()->helpers->getWebsiteName(),
+				'usingPermalinks' => aioseo()->helpers->usingPermalinks()
+			]
+		];
 
+		if ( BuddyPressIntegration::isComponentPage() ) {
+			return array_merge( $data, aioseo()->standalone->buddyPress->getVueDataSeoPreview() );
+		}
+
+		$queriedObject = get_queried_object(); // Don't use the getTerm helper here.
+		$templateType  = aioseo()->helpers->getTemplateType();
 		if (
 			'taxonomy' === $templateType ||
 			'single' === $templateType ||
@@ -121,23 +151,23 @@ class SeoPreview {
 			$labels = null;
 
 			if ( is_a( $queriedObject, 'WP_Term' ) ) {
-				$wpObject      = $queriedObject;
-				$labels        = get_taxonomy_labels( get_taxonomy( $queriedObject->taxonomy ) );
-				$editObjectUrl = get_edit_term_link( $queriedObject, $queriedObject->taxonomy );
+				$wpObject              = $queriedObject;
+				$labels                = get_taxonomy_labels( get_taxonomy( $queriedObject->taxonomy ) );
+				$data['editObjectUrl'] = get_edit_term_link( $queriedObject, $queriedObject->taxonomy );
 			} else {
 				$wpObject = aioseo()->helpers->getPost();
 
 				if ( is_a( $wpObject, 'WP_Post' ) ) {
-					$labels        = get_post_type_labels( get_post_type_object( $wpObject->post_type ) );
-					$editObjectUrl = get_edit_post_link( $wpObject, 'url' );
+					$labels                = get_post_type_labels( get_post_type_object( $wpObject->post_type ) );
+					$data['editObjectUrl'] = get_edit_post_link( $wpObject, 'url' );
 
 					if (
 						! aioseo()->helpers->isSpecialPage( $wpObject->ID ) &&
 						'attachment' !== $templateType
 					) {
-						$aioseoPost   = Models\Post::getPost( $wpObject->ID );
-						$pageAnalysis = Models\Post::getPageAnalysisDefaults( $aioseoPost->page_analysis );
-						$keyphrases   = Models\Post::getKeyphrasesDefaults( $aioseoPost->keyphrases );
+						$aioseoPost            = Models\Post::getPost( $wpObject->ID );
+						$data['page_analysis'] = Models\Post::getPageAnalysisDefaults( $aioseoPost->page_analysis );
+						$data['keyphrases']    = Models\Post::getKeyphrasesDefaults( $aioseoPost->keyphrases );
 					}
 				}
 			}
@@ -147,52 +177,38 @@ class SeoPreview {
 				is_object( $wpObject ) &&
 				is_object( $labels )
 			) {
-				$editObjectBtnText = sprintf(
+				$data['editObjectBtnText'] = sprintf(
 					// Translators: 1 - A noun for something that's being edited ("Post", "Page", "Article", "Product", etc.).
 					esc_html__( 'Edit %1$s', 'all-in-one-seo-pack' ),
 					$labels->singular_name
 				);
-				$editGoogleSnippetUrl   = $this->getEditSnippetUrl( $templateType, 'google', $wpObject );
-				$editFacebookSnippetUrl = $this->getEditSnippetUrl( $templateType, 'facebook', $wpObject );
-				$editTwitterSnippetUrl  = $this->getEditSnippetUrl( $templateType, 'twitter', $wpObject );
+				$data['editGoogleSnippetUrl']   = $this->getEditSnippetUrl( $templateType, 'google', $wpObject );
+				$data['editFacebookSnippetUrl'] = $this->getEditSnippetUrl( $templateType, 'facebook', $wpObject );
+				$data['editTwitterSnippetUrl']  = $this->getEditSnippetUrl( $templateType, 'twitter', $wpObject );
 			}
-		} elseif (
+		}
+
+		if (
 			'archive' === $templateType ||
 			'author' === $templateType ||
 			'date' === $templateType ||
 			'search' === $templateType
 		) {
 			if ( is_a( $queriedObject, 'WP_User' ) ) {
-				$editObjectUrl     = get_edit_user_link( $queriedObject->ID );
-				$editObjectBtnText = esc_html__( 'Edit User', 'all-in-one-seo-pack' );
+				$data['editObjectUrl']     = get_edit_user_link( $queriedObject->ID );
+				$data['editObjectBtnText'] = esc_html__( 'Edit User', 'all-in-one-seo-pack' );
 			}
 
-			$editGoogleSnippetUrl = $this->getEditSnippetUrl( $templateType, 'google' );
-		} elseif ( 'dynamic_home' === $templateType ) {
-			$editGoogleSnippetUrl   = $this->getEditSnippetUrl( $templateType, 'google' );
-			$editFacebookSnippetUrl = $this->getEditSnippetUrl( $templateType, 'facebook' );
-			$editTwitterSnippetUrl  = $this->getEditSnippetUrl( $templateType, 'twitter' );
+			$data['editGoogleSnippetUrl'] = $this->getEditSnippetUrl( $templateType, 'google' );
 		}
 
-		return [
-			'editGoogleSnippetUrl'   => $editGoogleSnippetUrl ?? '',
-			'editFacebookSnippetUrl' => $editFacebookSnippetUrl ?? '',
-			'editTwitterSnippetUrl'  => $editTwitterSnippetUrl ?? '',
-			'editObjectBtnText'      => $editObjectBtnText ?? '',
-			'editObjectUrl'          => $editObjectUrl ?? '',
-			'keyphrases'             => $keyphrases ?? '',
-			'page_analysis'          => $pageAnalysis ?? '',
-			'urls'                   => [
-				'home'        => home_url(),
-				'domain'      => aioseo()->helpers->getSiteDomain(),
-				'mainSiteUrl' => aioseo()->helpers->getSiteUrl(),
-			],
-			'mainAssetCssQueue'      => aioseo()->core->assets->getJsAssetCssQueue( $this->mainAssetRelativeFilename ),
-			'data'                   => [
-				'isDev'    => aioseo()->helpers->isDev(),
-				'siteName' => aioseo()->helpers->getWebsiteName()
-			]
-		];
+		if ( 'dynamic_home' === $templateType ) {
+			$data['editGoogleSnippetUrl']   = $this->getEditSnippetUrl( $templateType, 'google' );
+			$data['editFacebookSnippetUrl'] = $this->getEditSnippetUrl( $templateType, 'facebook' );
+			$data['editTwitterSnippetUrl']  = $this->getEditSnippetUrl( $templateType, 'twitter' );
+		}
+
+		return $data;
 	}
 
 	/**

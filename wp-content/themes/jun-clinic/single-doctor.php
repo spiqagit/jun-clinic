@@ -28,7 +28,7 @@
                                         <?php while (have_rows('sns_list')):
                                             the_row();
                                             $sns_type = get_sub_field('type');
-                                            $sns_url = get_sub_field('url');
+                                            $sns_url = get_sub_field('clinic_instagram_url');
                                             $sns_text = get_sub_field('text');
                                             $sns_class = strtolower($sns_type); // instagram / x / tiktok / youtube
                                         
