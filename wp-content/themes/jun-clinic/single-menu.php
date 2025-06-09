@@ -55,9 +55,11 @@
                     <div class="bl_commonSingleTtlContainer_breadcrumbs">
                         <?php get_template_part('inc/breadcrumbs'); ?>
                     </div>
-                    <h1 class="bl_commonSingleTtlContainer_ttl">
-                        <?php the_title(); ?>
-                    </h1>
+                    <div class="bl_commonSingleTtlContainer_ttlContainer">
+                        <h1 class="bl_commonSingleTtlContainer_ttl">
+                            <?php the_title(); ?>
+                        </h1>
+                    </div>
                 </div>
             </div>
 
@@ -65,7 +67,7 @@
 
         <div class="bl_menuArticleSec">
             <div class="bl_menuArticleSec_inner">
-                
+
                 <!-- ナビ -->
                 <div class="bl_naviContainer">
                     <div class="bl_naviContainer_ttlContainer">

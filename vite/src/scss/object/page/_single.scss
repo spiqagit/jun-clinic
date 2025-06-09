@@ -29,19 +29,60 @@
             }
         }
 
-        .bl_commonSingleTtlContainer_ttl {
+        .bl_commonSingleTtlContainer_ttlContainer {
+            display: flex;
+            flex-direction: column;
+            gap: vwmin(10, pc, 10);
             max-width: vwmin(1060, pc, 1060);
             margin-inline: auto;
-            font-family: "Shippori Mincho";
-            font-size: vwmin(32, pc, 32);
-            font-style: normal;
-            font-weight: 500;
-            line-height: 1.5;
-            letter-spacing: calc(1.28 / 32 * 1em);
 
-            @include underTB {
-                font-size: vwmin(26, pc, 26);
-                letter-spacing: calc(1.04 / 26 * 1em);
+            .bl_commonSingleTtlContainer_ttlContainer_info {
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: vwmin(12, pc, 12);
+
+                .bl_commonSingleTtlContainer_ttlContainer_info_txt {
+                    font-family: "Shippori Mincho";
+                    font-size: vwmin(16, pc, 16);
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.50;
+                    letter-spacing: calc(0.64 / 16 * 1em);
+                }
+
+                .bl_commonSingleTtlContainer_info_tagContainer{
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: vwmin(6, pc, 6);
+
+                    .el_commonSingleTtlContainer_info_tagContainer_txt{
+                        background-color: #fff;
+                        padding-top: vwmin(2 , pc, 2);
+                        padding-bottom: vwmin(3, pc, 3);
+                        padding-inline: vwmin(8, pc, 8);
+                        border-radius: vwmin(2, pc, 2);
+                        font-size: vwmin(12, pc, 12);
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 1.5;
+                    }
+                }
+            }
+
+            .bl_commonSingleTtlContainer_ttl {
+                font-family: "Shippori Mincho";
+                font-size: vwmin(32, pc, 32);
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.5;
+                letter-spacing: calc(1.28 / 32 * 1em);
+
+                @include underTB {
+                    font-size: vwmin(26, pc, 26);
+                    letter-spacing: calc(1.04 / 26 * 1em);
+                }
             }
         }
     }
