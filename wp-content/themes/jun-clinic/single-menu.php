@@ -50,9 +50,16 @@
 
         <?php else: ?>
 
-            <h1>
-                <?php the_title(); ?>
-            </h1>
+            <div class="bl_commonSingleTtlContainer">
+                <div class="bl_commonSingleTtlContainer_inner">
+                    <div class="bl_commonSingleTtlContainer_breadcrumbs">
+                        <?php get_template_part('inc/breadcrumbs'); ?>
+                    </div>
+                    <h1 class="bl_commonSingleTtlContainer_ttl">
+                        <?php the_title(); ?>
+                    </h1>
+                </div>
+            </div>
 
         <?php endif; ?>
 

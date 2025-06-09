@@ -1,1 +1,49 @@
 @use '../../foundation/function/index' as *;
+
+//見出し
+
+.bl_commonSingleTtlContainer {
+    padding-top: vwmin(102, pc, 102);
+    padding-inline: vwmin(40, pc, 40);
+    padding-bottom: vwmin(64, pc, 64);
+    border-bottom: 1px solid #CCC8B9;
+
+    @include underTB {
+        padding-top: vwmin(68, pc, 68);
+        padding-inline: vwmin(20, pc, 20);
+    }
+
+
+    .bl_commonSingleTtlContainer_inner {
+
+        .bl_commonSingleTtlContainer_breadcrumbs {
+            margin-bottom: vwmin(80, pc, 80);
+
+            @include underTB {
+                margin-bottom: vwmin(60, pc, 60);
+            }
+
+            .bl_commonBreadcrumbContainer {
+                padding-inline: 0;
+                padding-top: 0;
+            }
+        }
+
+        .bl_commonSingleTtlContainer_ttl {
+            max-width: vwmin(1060, pc, 1060);
+            margin-inline: auto;
+            font-family: "Shippori Mincho";
+            font-size: vwmin(32, pc, 32);
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5;
+            letter-spacing: calc(1.28 / 32 * 1em);
+
+            @include underTB {
+                font-size: vwmin(26, pc, 26);
+                letter-spacing: calc(1.04 / 26 * 1em);
+            }
+        }
+    }
+
+}

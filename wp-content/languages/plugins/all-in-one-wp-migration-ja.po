@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - All-in-One WP Migration and Backup - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2025-05-16 13:38:06+0000\n"
+"PO-Revision-Date: 2025-06-07 10:42:09+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,11 +42,6 @@ msgstr "データベースオプション"
 #: lib/view/export/advanced-settings.php:41
 msgid "Security Options"
 msgstr "セキュリティオプション"
-
-#. translators: 1: Number of files, 2: Progress.
-#: lib/model/export/class-ai1wm-export-themes.php:83
-msgid "Archiving %1$d theme files...<br />%1$d%% complete"
-msgstr "%1$d個のテーマファイルをアーカイブしています ...<br />%1$d%% 完了しました"
 
 #. translators: 1: Link to archive, 2: Archive title, 3: File name, 4: Archive
 #. title, 5: File size.
@@ -106,7 +101,7 @@ msgstr "<strong>%s</strong> フォルダーを作成できませんでした。�
 msgid "Could not create <strong>%s</strong> file. Please ensure the parent folder has read/write permissions."
 msgstr "<strong>%s</strong> ファイルを作成できませんでした。親フォルダーに読み取り / 書き込み権限があることを確認してください。"
 
-#. translators: Url
+#. translators: Max upload file size
 #: lib/view/import/pro.php:38
 msgid "Your host restricts uploads to <strong>%s</strong>."
 msgstr "ホストはアップロードを <strong>%s</strong> に制限しています。"
@@ -308,7 +303,7 @@ msgstr "WordPress ファイルを収集しています ..."
 msgid "Database restored."
 msgstr "データベースを復元しました。"
 
-#. translators: Unlimited extension url.
+#. translators: Link to Unlimited Extension
 #: lib/model/import/class-ai1wm-import-confirm.php:63
 msgid ""
 "Importing this file will only replace matching content. Other items stay unchanged.\n"
@@ -319,7 +314,7 @@ msgstr ""
 "\t\t\t\t\tまずは完全なリセットが必要ですか ? <a href=\"%s\" target=\"_blank\">Unlimited Extension</a>の Reset Hub をお試しください。<br />\n"
 "\t\t\t\t\t最新のバックアップがあることを確認してください。続行しますか ?"
 
-#. translators: Unlimited extension url.
+#. translators: Link to Unlimited Extension
 #: lib/model/import/class-ai1wm-import-confirm.php:52
 msgid ""
 "Importing this file will only replace matching content. Other items stay unchanged.\n"
@@ -471,7 +466,7 @@ msgstr "バックアップコンテンツを読み取れませんでした"
 msgid "Not enough disk space.<br /> Free up %s before restoring."
 msgstr "ディスク容量が不足しています。<br />復元する前に %s を解放してください。"
 
-#. translators: 1: Link to Unlimited extension.
+#. translators: 1: Link to Unlimited Extension
 #: lib/controller/class-ai1wm-main-controller.php:832
 msgid "\"Restore\" functionality is available in our <a href=\"%s\" target=\"_blank\">Unlimited Extension</a>.<br /> If you would rather go the manual route, you can still restore by downloading your backup and using \"Import from file\"."
 msgstr "「復元」機能は、<a href=\"%s\" target=\"_blank\">Unlimited Extension</a> でご利用いただけます。<br />手動で復元したい場合は、バックアップをダウンロードして「ファイルからインポート」を使用して復元することもできます。"
@@ -484,7 +479,7 @@ msgstr ""
 "無効なファイルタイプです。All-in-One WP Migration で作成された<strong>.wpress</strong>ファイルであることを確認してください。\n"
 " \t\t\t\t\t<a href=\"https://help.servmask.com/knowledgebase/invalid-backup-file/\" target=\"_blank\">技術詳細</a>"
 
-#. translators: 1: Link to Unlimited extension, 2: Link to how to article.
+#. translators: 1: Link to Unlimited Extension, 2: Link to how to article
 #: lib/controller/class-ai1wm-main-controller.php:804
 msgid "Your file exceeds the upload limit set by your host web server.<br />%1$s<br />%2$s"
 msgstr "ファイルはホスティングサービスの Web サーバーで設定されたアップロード制限を超えています。<br />%1$s<br />%2$s"
@@ -525,23 +520,21 @@ msgstr "インポートを開始できませんでした。更新してもう一
 msgid "Are you sure you want to stop the import?"
 msgstr "本当にインポートを停止してもよろしいですか ?"
 
-#. translators: Link to how to article.
-#. translators: Url
+#. translators: Link to how to article
 #: lib/controller/class-ai1wm-main-controller.php:742
 #: lib/controller/class-ai1wm-main-controller.php:815
-#: lib/view/import/pro.php:59
+#: lib/view/import/pro.php:61
 msgid "If you prefer a manual fix, follow our step-by-step guide on <a href=\"%s\" target=\"_blank\">raising your upload limit</a>."
 msgstr "手動で修正したい場合は、<a href=\"%s\" target=\"_blank\">アップロード制限の引き上げ</a>に関するステップバイステップのガイドに従ってください。"
 
-#. translators: Link to Unlimited extension.
-#. translators: Url
+#. translators: Link to Unlimited Extension
 #: lib/controller/class-ai1wm-main-controller.php:737
 #: lib/controller/class-ai1wm-main-controller.php:810
-#: lib/view/import/pro.php:47
+#: lib/view/import/pro.php:49
 msgid "Our <a href=\"%s\" target=\"_blank\">Unlimited Extension</a> bypasses this!"
 msgstr "私たちの <a href=\"%s\" target=\"_blank\">Unlimited Extension</a> はこれを回避します !"
 
-#. translators: 1: Max upload file size.
+#. translators: 1: Max upload file size
 #: lib/controller/class-ai1wm-main-controller.php:730
 msgid "Your file exceeds the <strong>%1$s</strong> upload limit set by your host.<br />%2$s<br />%3$s"
 msgstr "ファイルはホストによって設定された <strong>%1$s</strong> アップロード制限を超えています。<br />%2$s<br />%3$s"
@@ -920,6 +913,7 @@ msgid "Error: %s"
 msgstr "エラー: %s"
 
 #. translators: 1: Number of files, 2: Progress.
+#: lib/model/export/class-ai1wm-export-themes.php:83
 #: lib/model/export/class-ai1wm-export-themes.php:123
 msgid "Archiving %1$d theme files...<br />%2$d%% complete"
 msgstr "%1$dテーマファイルをアーカイブ中...<br />%2$d%%完了"
@@ -1052,7 +1046,7 @@ msgid "Exporting database...<br />%1$d%% complete<br />%2$s records saved"
 msgstr "データベースをエクスポート中...<br />%1$d%% 完了<br />%2$s件保存済み"
 
 #: lib/controller/class-ai1wm-main-controller.php:829
-msgid "Backup restore requires the Unlimited extension. <a href=\"https://servmask.com/products/unlimited-extension\" target=\"_blank\">Get it here</a>"
+msgid "Backup restore requires the Unlimited Extension. <a href=\"https://servmask.com/products/unlimited-extension\" target=\"_blank\">Get it here</a>"
 msgstr "バックアップのリストアには、アンリミテッド拡張機能にて対応しています。<a href=\"https://servmask.com/products/unlimited-extension\" target=\"_blank\">ここから入手</a>"
 
 #: lib/controller/class-ai1wm-main-controller.php:274
@@ -1060,7 +1054,7 @@ msgid "All-in-One WP Migration Command"
 msgstr "All-in-One WP Migration コマンド"
 
 #: lib/controller/class-ai1wm-main-controller.php:760
-#: lib/model/export/class-ai1wm-export-init.php:45
+#: lib/model/export/class-ai1wm-export-init.php:47
 msgid "Preparing to export..."
 msgstr "エクスポートを準備中..."
 
