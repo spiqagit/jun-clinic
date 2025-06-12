@@ -26,6 +26,28 @@ if ($query->have_posts()) {
     wp_reset_postdata(); // ポストデータをリセット
 }
 $priceClnincTermList = array_merge(...array_merge($priceClnincTermList));
+// 重複を削除
+$priceClnincTermList = array_unique($priceClnincTermList, SORT_REGULAR);
+
+// 指定した順序で並び替え
+$custom_order = array(
+    'shirokane',  // スラッグを指定
+    'ginza',
+    'yokohama',
+    'tamaplaza',
+    'nagano',
+    'nagoya',
+);
+
+usort($priceClnincTermList, function($a, $b) use ($custom_order) {
+    $pos_a = array_search($a->slug, $custom_order);
+    $pos_b = array_search($b->slug, $custom_order);
+    
+    if ($pos_a === false) return 1;  // 順序にないものは後ろに
+    if ($pos_b === false) return -1;
+    
+    return $pos_a - $pos_b;
+});
 ?>
 
 <?php if (!empty($priceClnincTermList)) : ?>

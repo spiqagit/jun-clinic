@@ -23,7 +23,7 @@
                         <div class="bl_profileCnt">
                             <div class="bl_profileCnt_item">
                                 <div class="bl_profile_l">
-                                    <img class="profile-img" src="<?php the_field('doctor_img'); ?>" alt="">
+                                    <img class="profile-img" src="<?php the_field('doctor_img'); ?>" alt="<?php the_title(); ?>">
                                     <div class="sns-button-group">
                                         <?php while (have_rows('sns_list')):
                                             the_row();
@@ -210,7 +210,7 @@
                                                     <div class="el_doctorCard_img">
                                                         <?php if (get_field('doctor_mini_img')): ?>
                                                             <img src="<?php the_field('doctor_mini_img'); ?>"
-                                                                alt="<?php the_title(); ?>" alt="">
+                                                                alt="<?php the_title(); ?>">
                                                         <?php endif; ?>
                                                     </div>
                                                     <div class="el_doctorCard_txt">

@@ -213,7 +213,7 @@
                             </div>
                         </div>
                         <div class="bl_instagram_post">
-                            <?php echo do_shortcode('[instagram-feed feed=3]'); ?>
+                            <?php echo do_shortcode('[instagram-feed feed=5]'); ?>
                         </div>
                     </div>
                 </section>

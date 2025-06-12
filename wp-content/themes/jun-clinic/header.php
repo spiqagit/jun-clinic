@@ -33,7 +33,6 @@
             </button>
             <p class="el_lineReserveModal_inner_title">予約する</p>
             <?php
-
             $arg = array(
                 'post_type' => 'clinic',
                 'posts_per_page' => -1,
@@ -41,17 +40,60 @@
             $query = new WP_Query($arg);
             ?>
             <?php if ($query->have_posts()) : ?>
-                <ul class="bl_lineReserveModal_inner_list">
+                <!-- <ul class="bl_lineReserveModal_inner_list">
                     <?php while ($query->have_posts()) : $query->the_post(); ?>
                         <li class="bl_lineReserveModal_inner_list_item">
                             <a href="<?php the_field('line_reserveUrl'); ?>" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
-                                <p class="el_lineReserveModal_inner_list_item_link_txt"><?php echo get_term(get_field('news_topics_place'), 'clinic-cat')->name; ?></p>
+                                <p class="el_lineReserveModal_inner_list_item_link_txt"><?php
+                                                                                        $term = get_term(get_field('news_topics_place'), 'clinic-cat');
+                                                                                        if (!is_wp_error($term)) {
+                                                                                            echo $term->name;
+                                                                                        }
+                                                                                        ?></p>
                                 <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
                             </a>
                         </li>
                     <?php endwhile; ?>
-                </ul>
+                </ul> -->
             <?php endif; ?>
+            <ul class="bl_lineReserveModal_inner_list">
+                <li class="bl_lineReserveModal_inner_list_item">
+                    <a href="https://lin.ee/b5aPOxd" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                        <p class="el_lineReserveModal_inner_list_item_link_txt">名古屋</p>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                    </a>
+                </li>
+                <li class="bl_lineReserveModal_inner_list_item">
+                    <a href="https://lin.ee/W51cKOH" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                        <p class="el_lineReserveModal_inner_list_item_link_txt">たまプラーザ</p>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                    </a>
+                </li>
+                <li class="bl_lineReserveModal_inner_list_item">
+                    <a href="https://lin.ee/7a5AEGn" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                        <p class="el_lineReserveModal_inner_list_item_link_txt">銀座</p>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                    </a>
+                </li>
+                <li class="bl_lineReserveModal_inner_list_item">
+                    <a href="https://lin.ee/ypb1QiP" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                        <p class="el_lineReserveModal_inner_list_item_link_txt">横浜</p>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                    </a>
+                </li>
+                <li class="bl_lineReserveModal_inner_list_item">
+                    <a href="https://lin.ee/V73rJy1" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                        <p class="el_lineReserveModal_inner_list_item_link_txt">白金</p>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                    </a>
+                </li>
+                <li class="bl_lineReserveModal_inner_list_item">
+                    <a href="https://lin.ee/2HvFUZu" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                        <p class="el_lineReserveModal_inner_list_item_link_txt">長野</p>
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -76,7 +118,6 @@
                                 </button>
                                 <p class="el_lineReserveModal_inner_title">予約する</p>
                                 <?php
-
                                 $arg = array(
                                     'post_type' => 'clinic',
                                     'posts_per_page' => -1,
@@ -84,17 +125,60 @@
                                 $query = new WP_Query($arg);
                                 ?>
                                 <?php if ($query->have_posts()) : ?>
-                                    <ul class="bl_lineReserveModal_inner_list">
+                                    <!-- <ul class="bl_lineReserveModal_inner_list">
                                         <?php while ($query->have_posts()) : $query->the_post(); ?>
                                             <li class="bl_lineReserveModal_inner_list_item">
                                                 <a href="<?php the_field('line_reserveUrl'); ?>" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
-                                                    <p class="el_lineReserveModal_inner_list_item_link_txt"><?php echo get_term(get_field('news_topics_place'), 'clinic-cat')->name; ?></p>
+                                                    <p class="el_lineReserveModal_inner_list_item_link_txt"><?php
+                                                                                                            $term = get_term(get_field('news_topics_place'), 'clinic-cat');
+                                                                                                            if (!is_wp_error($term)) {
+                                                                                                                echo $term->name;
+                                                                                                            }
+                                                                                                            ?></p>
                                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
                                                 </a>
                                             </li>
                                         <?php endwhile; ?>
-                                    </ul>
+                                    </ul> -->
                                 <?php endif; ?>
+                                <ul class="bl_lineReserveModal_inner_list">
+                                    <li class="bl_lineReserveModal_inner_list_item">
+                                        <a href="https://lin.ee/b5aPOxd" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                                            <p class="el_lineReserveModal_inner_list_item_link_txt">名古屋</p>
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="bl_lineReserveModal_inner_list_item">
+                                        <a href="https://lin.ee/W51cKOH" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                                            <p class="el_lineReserveModal_inner_list_item_link_txt">たまプラーザ</p>
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="bl_lineReserveModal_inner_list_item">
+                                        <a href="https://lin.ee/7a5AEGn" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                                            <p class="el_lineReserveModal_inner_list_item_link_txt">銀座</p>
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="bl_lineReserveModal_inner_list_item">
+                                        <a href="https://lin.ee/ypb1QiP" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                                            <p class="el_lineReserveModal_inner_list_item_link_txt">横浜</p>
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="bl_lineReserveModal_inner_list_item">
+                                        <a href="https://lin.ee/V73rJy1" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                                            <p class="el_lineReserveModal_inner_list_item_link_txt">白金</p>
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                                        </a>
+                                    </li>
+                                    <li class="bl_lineReserveModal_inner_list_item">
+                                        <a href="https://lin.ee/2HvFUZu" target="_blank" class="bl_lineReserveModal_inner_list_item_link">
+                                            <p class="el_lineReserveModal_inner_list_item_link_txt">長野</p>
+                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/img/ico/tab-icon.svg" alt="">
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>

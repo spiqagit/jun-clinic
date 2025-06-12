@@ -25,14 +25,14 @@
         <!-- 医師紹介 -->
         <?php if (is_post_type_archive('doctor')): ?>
             <li class="bl_commonBreadcrumbItem">
-                <span class="el_commonBreadcrumbItem_txt">医師紹介</span>
+                <span class="el_commonBreadcrumbItem_txt">ドクター一覧</span>
             </li>
         <?php endif; ?>
 
         <!-- 医師紹介詳細 -->
         <?php if (is_singular('doctor')) : ?>
             <li class="bl_commonBreadcrumbItem">
-                <a href="<?php echo get_post_type_archive_link('clinic'); ?>" class="el_commonBreadcrumbItem_link">ドクター一覧</a>
+                <a href="<?php echo home_url('doctor'); ?>" class="el_commonBreadcrumbItem_link">ドクター一覧</a>
             </li>
             <li class="bl_commonBreadcrumbItem">
                 <img class="el_commonBreadcrumbItem_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/common/bread-line.svg" alt="">
@@ -44,12 +44,6 @@
 
         <!-- クリニック紹介詳細 -->
         <?php if (is_singular('clinic')) : ?>
-            <li class="bl_commonBreadcrumbItem">
-                <a href="<?php echo get_post_type_archive_link('clinic'); ?>" class="el_commonBreadcrumbItem_link">クリニック一覧</a>
-            </li>
-            <li class="bl_commonBreadcrumbItem">
-                <img class="el_commonBreadcrumbItem_img" src="<?php echo get_template_directory_uri(); ?>/assets/img/common/bread-line.svg" alt="">
-            </li>
             <li class="bl_commonBreadcrumbItem">
                 <span class="el_commonBreadcrumbItem_txt"><?php the_title(); ?></span>
             </li>
