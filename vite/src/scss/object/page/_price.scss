@@ -41,68 +41,7 @@
                 border-bottom: vwmin(1, pc, 1) solid #FBFAF9;
             }
 
-            .bl_priceSec_seideMenuContainer_list {
-                display: flex;
-                flex-flow: column;
-                gap: vwmin(40, pc, 40);
-                margin-bottom: vwmin(16, pc, 16);
-
-                @include underTB {
-                    max-width: 100%;
-                }
-
-                .bl_priceSec_seideMenuContainer_item {
-
-                    .el_priceSec_seideMenuContainer_item_ttl {
-                        color: var(--baseFontColor);
-                        font-size: vwmin(16, pc, 16);
-                        font-style: normal;
-                        font-weight: 600;
-                        line-height: 1.5;
-                        margin-bottom: vwmin(16, pc, 16);
-                    }
-
-                    .bl_priceSec_seideMenuContainer_item_selectContainer {
-                        position: relative;
-
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            top: 50%;
-                            right: vwmin(16, pc, 16);
-                            transform: translateY(-50%);
-                            background-image: url('../img/common/under-arrow.svg');
-                            background-position: center;
-                            background-repeat: no-repeat;
-                            width: vwmin(10, pc, 10);
-                            height: vwmin(5, pc, 5);
-                            background-size: 100% 100%;
-                            background-size: contain;
-                        }
-                    }
-
-                    .bl_priceSec_seideMenuContainer_item_select {
-                        display: block;
-                        width: 100%;
-                        background-color: #fff;
-                        border-radius: vwmin(2, pc, 2);
-                        padding-inline: vwmin(16, pc, 16);
-                        padding-block: vwmin(10, pc, 10);
-                        font-size: vwmin(16, pc, 16);
-                        font-style: normal;
-                        font-weight: 400;
-                        line-height: 150%;
-                        color: var(--baseFontColor);
-                        border: none;
-                        border-bottom: vwmin(1, pc, 1) solid #68192F;
-
-
-                        .el_priceSec_seideMenuContainer_item_select_first {
-                            color: #999;
-                        }
-                    }
-                }
-            }
+            
 
             .el_priceSec_seideMenuContainer_txt {
                 color: var(--black, #333);
@@ -131,6 +70,69 @@
     }
 }
 
+
+.bl_priceSec_seideMenuContainer_list {
+    display: flex;
+    flex-flow: column;
+    gap: vwmin(40, pc, 40);
+    margin-bottom: vwmin(16, pc, 16);
+
+    @include underTB {
+        max-width: 100%;
+    }
+
+    .bl_priceSec_seideMenuContainer_item {
+
+        .el_priceSec_seideMenuContainer_item_ttl {
+            color: var(--baseFontColor);
+            font-size: vwmin(16, pc, 16);
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: vwmin(16, pc, 16);
+        }
+
+        .bl_priceSec_seideMenuContainer_item_selectContainer {
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: vwmin(16, pc, 16);
+                transform: translateY(-50%);
+                background-image: url('../img/common/under-arrow.svg');
+                background-position: center;
+                background-repeat: no-repeat;
+                width: vwmin(10, pc, 10);
+                height: vwmin(5, pc, 5);
+                background-size: 100% 100%;
+                background-size: contain;
+            }
+        }
+
+        .bl_priceSec_seideMenuContainer_item_select {
+            display: block;
+            width: 100%;
+            background-color: #fff;
+            border-radius: vwmin(2, pc, 2);
+            padding-inline: vwmin(16, pc, 16);
+            padding-block: vwmin(10, pc, 10);
+            font-size: vwmin(16, pc, 16);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 150%;
+            color: var(--baseFontColor);
+            border: none;
+            border-bottom: vwmin(1, pc, 1) solid #68192F;
+
+
+            .el_priceSec_seideMenuContainer_item_select_first {
+                color: #999;
+            }
+        }
+    }
+}
 
 .bl_priceListContainer_clinicBtnList {
     display: grid;

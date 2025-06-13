@@ -1,2 +1,94 @@
 @use '../../foundation/function/index' as *;
 
+
+.bl_commonPaginationContainer {
+    display: grid;
+    grid-template-columns: vwmin(40, pc, 40) max-content vwmin(40, pc, 40);
+    gap: vwmin(24, pc, 24);
+    max-width: vwmin(300, pc, 300);
+    margin-inline: auto;
+    width: fit-content;
+    margin-top: vwmin(80, pc, 80);
+
+    @include underTB {
+        margin-top: vwmin(60, pc, 60);
+    }
+
+    @media (max-width: 380px) {
+        grid-template-columns: vwmin(32 , pc, 32) max-content vwmin(32, pc, 32);
+        gap: vwmin(16, pc, 16);
+    }
+
+    .bl_commonPaginationContainer_btn {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--baseFontColor);
+        border-radius: 50%;
+        border: 1px solid transparent;
+        transition: all .3s var(--reverseTransition);
+
+        @media (max-width: 380px) {
+            svg{
+                max-width: vwmin(12, pc, 12);
+            }
+        }
+
+
+        @media (hover: hover) {
+            &:hover {
+                border: 1px solid var(--accentColor);
+                background-color: #fff;
+                transition: all .3s var(--reverseTransition);
+
+                svg {
+                    path {
+                        fill: var(--accentColor);
+                        transition: all .3s var(--reverseTransition);
+                    }
+                }
+            }
+        }
+    }
+
+    .bl_commonPaginationContainer_list {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: vwmin(16, pc, 16);
+
+
+        .bl_commonPaginationContainer_list_item {
+            font-family: "Shippori Mincho";
+            font-size: vwmin(16, pc, 16);
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: calc(.64px / 16px * 1em);
+
+            .page-numbers {
+                color: #999;
+                transition: color .3s var(--reverseTransition);
+
+
+                @media (hover: hover) {
+                    &:hover {
+                        color: #333;
+                        transition: color .3s var(--reverseTransition);
+                    }
+                }
+            }
+
+            .current {
+                color: #333;
+            }
+
+            .dots {
+                pointer-events: none;
+            }
+        }
+    }
+}
