@@ -1,3 +1,76 @@
 @use '../../foundation/function/index' as *;
 
 
+.ly_caseSec {
+    padding-inline: vwmin(20, pc, 20);
+    padding-top: vwmin(120, pc, 120);
+    padding-bottom: vwmin(140, pc, 140);
+
+    @include underTB {
+        padding-top: vwmin(60, pc, 60);
+        padding-bottom: vwmin(70, pc, 70);
+    }
+
+    .bl_caseSec_inner {
+        width: 100%;
+        max-width: vwmin(1060, pc, 1060);
+        margin-inline: auto;
+    }
+
+    .bl_caseSideMenuContainer {
+        display: flex;
+        flex-direction: column;
+        gap: vwmin(16, pc, 16);
+        margin-bottom: vwmin(80, pc, 80);
+
+        @include underTB {
+            margin-inline: vwmin(20, pc, 20);
+            margin-bottom: vwmin(60, pc, 60);
+        }
+
+        .bl_priceSec_seideMenuContainer_list {
+            display: grid;
+            grid-template-columns: repeat(2, max-content);
+            gap: vwmin(40, pc, 40);
+            margin-bottom: 0;
+
+            @media (max-width: 780px) {
+                grid-template-columns: 1fr;
+            }
+
+            .bl_priceSec_seideMenuContainer_item {
+                display: grid;
+                align-items: center;
+                grid-template-columns: max-content vwmin(260, pc, 260);
+                gap: vwmin(16, pc, 16);
+
+                @media (max-width: 780px) {
+                    grid-template-columns: 1fr;
+                }
+
+                .el_priceSec_seideMenuContainer_item_ttl {
+                    width: fit-content;
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        .el_caseSideMenuContainer_txt {
+            font-size: vwmin(14, pc, 14);
+            font-style: normal;
+            font-weight: 400;
+            line-height: 1.8; 
+            letter-spacing: calc(.28px / 14px * 1em);
+        }
+    }
+
+    .bl_caseList_item_list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(vwmin(325, pc, 325), 100%), 1fr));
+        gap: vwmin(42, pc, 42);
+
+        @include underTB {
+            gap: vwmin(20, pc, 20);
+        }
+    }
+}
